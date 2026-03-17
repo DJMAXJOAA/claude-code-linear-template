@@ -190,7 +190,18 @@ created: {YYYY-MM-DD}
 {feature-close 시 lazy-creation}
 ```
 
-> research type은 설계 결정이 없으므로 `## Decisions` 섹션 불필요.
+> **type별 _index.md 변형 원칙**:
+> - `feature` / `improvement`: `## Decisions` + `## Task Log` 포함. 설계 결정과 태스크 진행 추적 필요.
+> - `bug`: `## Decisions` 불필요. `## Notes > ### Root Cause` 섹션 포함. 태스크 없이 직접 수정하므로 `## Task Log` 불필요.
+> - `research`: `## Decisions` 불필요 (설계 결정 없음). `## Task Log` 불필요. `## Documents` 테이블에 조사 보고서 행 포함.
+
+---
+
+## OMC 에이전트 연동
+
+> gen-hub 자체는 에이전트 연동 없음.
+
+> OMC 비활성 시 pipeline.md §9 참조.
 
 ---
 
