@@ -40,6 +40,10 @@ created: 2026-03-17
 | 2 | NF-7: Guides 작성 | **done** (2/2) | `framework.md`, `context.md` |
 | 3 | NF-5: 보조 Skills (5개) | **done** (5/5) | triage, feedback, investigation, verify, test |
 | 3 | NF-6: Commands (9개) | **done** (9/9) | 등록, 활성화, 점검, 커밋, 피드백, 조사, 검증, 병합, 현황 |
+| 3.5 | Phase A: Critical 해소 (7건) | **done** | MCP 도구명, 상태 전이, 라우팅 정비 |
+| 3.5 | Phase B: 구조 변경 (4건) | **done** | type별 폴더, 문서 통합, RPT 제거, 직접 참조 제거 |
+| 3.5 | Phase C: High 해소 (10건) | **done** | gen-plan 축소, verify→close 명확화, 커맨드 보강 |
+| 3.5 | Phase D: Medium/Low 보강 (16건) | **done** | 게이트 라벨, 현행 대비 삭제, OMC fallback, 상호 참조 |
 | 4 | NF-8: 초기 설정 가이드 | pending | 설정 가이드 문서 |
 | 4 | NF-9: 통합 검증 | pending | 검증 보고서 |
 
@@ -113,6 +117,6 @@ NF-1 (MCP 검증)  ←── Gate: 실패 시 중단
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 작업 | T-NF6-09 (현황.md 작성) |
+| 마지막 완료 작업 | Phase 3.5-D (Medium/Low 보강 16건) |
 | 다음 작업 | T-NF8-01 (초기 설정 가이드 작성) |
-| 비고 | Phase 3 완료. 보조 Skills 5개 + Commands 9개 |
+| 비고 | Phase 3.5 완료. 리뷰 35건 반영 (7C+10H+11M+7L). Phase 4 진행 준비 |

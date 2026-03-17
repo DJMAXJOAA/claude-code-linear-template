@@ -122,7 +122,7 @@ created: 2026-03-17
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 태스크 | T-NF6-09 (현황.md 작성) |
+| 마지막 완료 태스크 | Phase 3.5-D (Medium/Low 보강) |
 | 다음 태스크 | T-NF8-01 (초기 설정 가이드 작성) |
-| 비고 | Phase 3 완료. 보조 Skills 5개 + Commands 9개. 현행 차용+Linear 연동 변경 반영 |
+| 비고 | Phase 3.5 완료 (리뷰 35건 전체 반영). Phase 4(NF-8 설정 가이드 + NF-9 통합 검증) 준비 |
 | 재개 방법 | `docs/migration/_index.md` + `docs/migration/cl.md` 읽고 Handoff 섹션 확인 |
