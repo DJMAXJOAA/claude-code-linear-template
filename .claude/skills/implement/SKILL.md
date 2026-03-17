@@ -132,5 +132,5 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| 태스크 완료마다 | `linear_update_issue` | Sub-issue State → Done |
-| 전체 완료 시 | `linear_update_issue` | parent Issue State 전이 (In Progress → Testing/Verifying) |
+| 태스크 완료마다 | `save_issue` (id 지정) | Sub-issue State → Done |
+| 전체 완료 시 | `save_issue` (id 지정) | parent Issue State 전이 (In Progress → Testing/Verifying) |

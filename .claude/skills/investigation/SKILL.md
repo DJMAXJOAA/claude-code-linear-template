@@ -80,5 +80,5 @@ created: {YYYY-MM-DD}
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| Issue 정보 조회 | `linear_search_issues` | description (Scope, Deliverables) 읽기 |
-| 상태 전이 | `linear_update_issue` | State → In Progress (조사 시작 시) |
+| Issue 정보 조회 | `get_issue` | description (Scope, Deliverables) 읽기 (단일 Issue) |
+| 상태 전이 | `save_issue` (id 지정) | State → In Progress (조사 시작 시) |

@@ -61,4 +61,4 @@
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| backlog Issue 생성 | `linear_create_issue` | 새 Issue 생성 (gen-hub 경유) |
+| backlog Issue 생성 | `save_issue` (id 미지정, gen-hub 경유) | 새 Issue 생성 |

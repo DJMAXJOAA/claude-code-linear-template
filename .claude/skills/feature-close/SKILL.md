@@ -105,7 +105,7 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| 상태 전이 | `linear_update_issue` | State → Done |
-| 완료 요약 기록 | `linear_create_comment` | 구현 결과 요약 comment |
-| 후행 Issue 탐색 | `linear_search_issues` (relation 필터) | blocked-by 역참조 Issue 조회 |
-| 후행 Issue 알림 | `linear_create_comment` | 환류 알림 comment |
+| 상태 전이 | `save_issue` (id 지정) | State → Done |
+| 완료 요약 기록 | `save_comment` | 구현 결과 요약 comment |
+| 후행 Issue 탐색 | `list_issues` (relation 필터) | blocked-by 역참조 Issue 조회 (다수 검색) |
+| 후행 Issue 알림 | `save_comment` | 환류 알림 comment |

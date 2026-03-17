@@ -146,6 +146,6 @@ created: {YYYY-MM-DD}
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| Team/Label 캐시 확인 | `linear_get_teams` | stateId, labelId 사전 조회 (세션 캐시) |
-| Issue 생성 | `linear_create_issue` | title, description, labels, project, state 지정 |
-| description 갱신 | `linear_update_issue` | Git Documents 경로 삽입 |
+| Team/Label 캐시 확인 | `list_teams` | stateId, labelId 사전 조회 (세션 캐시) |
+| Issue 생성 | `save_issue` (id 미지정) | title, description, labels, project, state 지정 |
+| description 갱신 | `save_issue` (id 지정) | Git Documents 경로 삽입 |

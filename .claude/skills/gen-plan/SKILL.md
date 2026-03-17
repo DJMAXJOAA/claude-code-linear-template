@@ -168,6 +168,6 @@ created: {YYYY-MM-DD}
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| Issue 정보 조회 | `linear_search_issues` | description, type, relations 읽기 |
-| 상태 전이 | `linear_update_issue` | State → Planning |
-| Sub-issue 생성 (best-effort) | `linear_create_issue` (parent 지정) | CL S1 태스크를 Linear Sub-issue로 미러링. 실패 시 진행 중단 안 함 |
+| Issue 정보 조회 | `get_issue` | description, type, relations 읽기 (단일 Issue) |
+| 상태 전이 | `save_issue` (id 지정) | State → Planning |
+| Sub-issue 생성 (best-effort) | `save_issue` (parentId 지정) | CL S1 태스크를 Linear Sub-issue로 미러링. 실패 시 진행 중단 안 함 |

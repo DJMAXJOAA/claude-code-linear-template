@@ -62,4 +62,4 @@
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| SC 조회 | `linear_search_issues` | Issue description에서 SC 추출 |
+| SC 조회 | `get_issue` | Issue description에서 SC 추출 (단일 Issue) |
