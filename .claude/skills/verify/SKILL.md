@@ -20,13 +20,13 @@
 
 | 단계 | 행위 |
 |------|------|
-| 1 | **Linear SC 조회**: Issue description에서 Success Criteria 추출 |
-| 2 | **CL S3 검증 조건 읽기**: cl.md S3 테이블의 각 항목 확인 |
-| 3 | **검증 실행**: 각 SC/S3 항목에 대해 테스트 실행, 코드 확인, 빌드 검증 |
-| 4 | **검증 결과 정리**: PASS/FAIL 판정 + 근거 |
-| 5 | **사용자에게 결과 제시**: `AskUserQuestion`으로 G2 검토 |
-| 6a | **PASS**: 검증 결과(PASS)를 반환. dev-pipeline이 feature-close 후속 결정 |
-| 6b | **FAIL**: 실패 항목 목록 + 수정 방안 제시. 검증 결과(FAIL)를 반환. dev-pipeline이 implement 복귀 후속 결정 |
+| 1 (G1) | **Linear SC 조회**: Issue description에서 Success Criteria 추출 |
+| 2 (G1) | **CL S3 검증 조건 읽기**: cl.md S3 테이블의 각 항목 확인 |
+| 3 (G1) | **검증 실행**: 각 SC/S3 항목에 대해 테스트 실행, 코드 확인, 빌드 검증 |
+| 4 (G1) | **검증 결과 정리**: PASS/FAIL 판정 + 근거 |
+| 5 (G2) | **사용자에게 결과 제시**: `AskUserQuestion`으로 검토 |
+| 6a (G4) | **PASS**: 검증 결과(PASS)를 반환. dev-pipeline이 feature-close 후속 결정 |
+| 6b (G4) | **FAIL**: 실패 항목 목록 + 수정 방안 제시. 검증 결과(FAIL)를 반환. dev-pipeline이 implement 복귀 후속 결정 |
 
 ## Output
 
