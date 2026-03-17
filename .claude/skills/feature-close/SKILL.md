@@ -42,27 +42,7 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 
 ## 구현 결과 섹션 템플릿
 
-`_index.md`의 `## 구현 결과` 섹션에 삽입:
-
-```markdown
-## 구현 결과
-
-| 항목 | 내용 |
-|------|------|
-| 실제 구현 인터페이스 | {요약} |
-| 설계 대비 차이점 | {차이점 또는 "없음"} |
-| 미해결 이슈 | {이슈 목록 또는 "없음"} |
-| 완료일 | {YYYY-MM-DD} |
-```
-
-### type별 구현 결과 내용
-
-| type | 구현 결과 기록 내용 |
-|------|------------------|
-| feature | 실제 인터페이스, 설계 이탈, 미해결 이슈 |
-| improvement | 변경 범위 요약, 설계 이탈 |
-| bug | Root Cause, 수정 방법, 영향 범위 |
-| research | 조사 결과 요약, 핵심 발견사항, 후속 작업 제안 |
+> 구현 결과 템플릿 + type별 기록 내용: [templates/implementation-result.md](templates/implementation-result.md)
 
 ---
 

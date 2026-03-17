@@ -47,6 +47,27 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 
 ---
 
+## 의존성 기반 실행
+
+| 항목 | 내용 |
+|------|------|
+| 의존성 소스 | CL S1의 `depends` 속성 (태스크 간 선후 관계) |
+| 병렬 실행 | 의존성 없는 태스크는 병렬 실행 가능 |
+| 순차 실행 | 의존성 있는 태스크는 선행 태스크 완료 후 실행 |
+
+## Linear sub-issue 동기화
+
+| 트리거 | 행동 |
+|--------|------|
+| Plan+CL 생성 시 | CL S1 태스크별 Linear sub-issue 생성 (best-effort. 실패 시 CL S1이 SSOT이므로 진행에 영향 없음) |
+| 태스크 시작 | sub-issue state → In Progress |
+| 태스크 완료 | sub-issue state → Done |
+| CL S1 태스크 변경 시 | 추가된 태스크: 새 sub-issue 생성. 삭제/변경: 기존 sub-issue는 수동 정리 (자동 삭제 안 함) |
+| 동기화 방향 | CL S1 → Linear (단방향). CL이 SSOT, Linear sub-issue는 가시화 미러 |
+| 장애 시 | pipeline.md §4 fallback 적용. sub-issue 갱신 실패해도 태스크 진행은 중단하지 않음 |
+
+---
+
 ## 태스크 선택 규칙
 
 | 조건 | 선택 방식 |

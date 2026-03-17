@@ -33,7 +33,7 @@ created: 2026-03-17
 | 11 | T-NF2-03 | CLAUDE.md 200줄 이내 확인 + 토큰 효율 검토 | T-NF2-02 | **done** |
 | 12 | T-NF3-01 | pipeline.md 작성 — §1 type별 워크플로우, §2 4단계 게이트, §3 Micro-tasking, §4 Linear sync, §5 Pre-Compaction, §6 Pre/Post-Plan Q/A, §7 피드백, §8 금지사항, §9 에이전트 라우팅, §10 커밋, §11 인터뷰 원칙 | T-NF2-03 | **done** |
 | 13 | T-NF3-02 | docs-writing.md 작성 — §1 Frontmatter, §2 _index.md 템플릿, §3 Lazy-creation, §4 링킹, §5 문서 네이밍, §6 SSOT, §7 스타일, §8 보고서 | T-NF2-03 | **done** |
-| 14 | T-NF3-03 | Rules paths 조건 설정 확인 (pipeline: `docs/issue/**`, `.claude/skills/**` / docs-writing: `docs/**`) | T-NF3-01, T-NF3-02 | **done** |
+| 14 | T-NF3-03 | Rules paths 조건 설정 확인 (pipeline: `docs/{type}/**`, `.claude/skills/**` / docs-writing: `docs/**`) | T-NF3-01, T-NF3-02 | **done** |
 
 ### Phase 2: 핵심 Skills (NF-4) + Guides (NF-7)
 
@@ -41,7 +41,7 @@ created: 2026-03-17
 |---|-----|------|-------------|--------|
 | 15 | T-NF4-01 | dev-pipeline SKILL.md 작성 — 통합 라우터, type별 분기, Linear MCP 패턴. 설계: 09b §1 | T-NF3-03 | **done** |
 | 16 | T-NF4-02 | gen-hub SKILL.md 작성 — Linear Issue + _index.md 생성, type별 description 템플릿. 설계: 09b §2 | T-NF3-03 | **done** |
-| 17 | T-NF4-03 | gen-plan SKILL.md 작성 — plan.md + cl.md, `docs/issue/{ID}/` 경로. 설계: 09b §3 | T-NF3-03 | **done** |
+| 17 | T-NF4-03 | gen-plan SKILL.md 작성 — plan.md + cl.md, `docs/{type}/{ID}/` 경로. 설계: 09b §3 | T-NF3-03 | **done** |
 | 18 | T-NF4-04 | implement SKILL.md 작성 — CL S1 Micro-tasking + Linear sub-issue. 설계: 09b §4 | T-NF3-03 | **done** |
 | 19 | T-NF4-05 | feature-close SKILL.md 작성 — 구현 결과 + Linear Done + 후행 환류. 설계: 09b §5 | T-NF3-03 | **done** |
 | 20 | T-NF7-01 | framework.md 작성 — 핵심 원칙 (3영역 SSOT, type별 파이프라인, Micro-tasking, 4단계 게이트, Linear-first). 설계: 09 §6-7, 08 부록A | T-NF3-03 | **done** |
@@ -53,7 +53,7 @@ created: 2026-03-17
 |---|-----|------|-------------|--------|
 | 22 | T-NF5-01 | triage SKILL.md 작성 — 7유형 분류 + Git notes.md + Linear comment | T-NF4-01 | **done** |
 | 23 | T-NF5-02 | feedback SKILL.md 작성 — directive→rules, limitation→notes.md, backlog→Linear Issue | T-NF4-01 | **done** |
-| 24 | T-NF5-03 | investigation SKILL.md 작성 — 조사 결과 `docs/issue/{ID}/` 저장 | T-NF4-01 | **done** |
+| 24 | T-NF5-03 | investigation SKILL.md 작성 — 조사 결과 `docs/research/{ID}/` 저장 | T-NF4-01 | **done** |
 | 25 | T-NF5-04 | verify SKILL.md 작성 — 구현 완전성 검증 + Linear Verifying | T-NF4-01 | **done** |
 | 26 | T-NF5-05 | test SKILL.md 작성 — 테스트 전략 + Linear Testing | T-NF4-01 | **done** |
 | 27 | T-NF6-01 | 등록.md 작성 — `/등록` → gen-hub 호출 (type 지정) | T-NF5-01 | **done** |

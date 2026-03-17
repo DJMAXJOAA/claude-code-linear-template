@@ -33,63 +33,17 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 ## §2 _index.md 템플릿
 
-### 2-1. 표준 구조
+> _index.md 템플릿 SSOT: [gen-hub templates/index-templates.md](../.claude/skills/gen-hub/templates/index-templates.md)
 
-```markdown
----
-linear_id: PRJ-47
-title: 이모티콘 핑 시스템
-type: index
-issue_type: feature
-created: 2026-03-17
----
-
-> [Linear Issue](https://linear.app/{workspace-slug}/issue/PRJ-47)
-
-## Documents
-
-| 문서 | 경로 | 상태 |
-|------|------|------|
-| Plan | [plan.md](plan.md) | ✅ |
-| Checklist | [cl.md](cl.md) | ✅ |
-
-## Decisions
-
-{Pre-Plan Q/A Phase 1에서 확정된 설계 결정 사항}
-
-## Notes
-
-{피드백, Known Limitations, 기타 메모}
-
-## Task Log
-
-{태스크 완료 시 간략 로그}
-
-## 구현 결과
-
-{feature-close 시 lazy-creation — 실제 인터페이스, 설계 이탈, 미해결 이슈}
-```
-
-### 2-2. 템플릿 규칙
+### 2-1. 핵심 규칙 (요약)
 
 | 항목 | 규칙 |
 |------|------|
-| 생성 시점 | `/등록` 시 항상 생성 |
-| Linear Issue 링크 | gen-hub 스킬이 Linear API 응답의 URL을 직접 삽입. 수동 URL 조합 금지 |
-| Documents 테이블 | 존재하는 파일은 상대경로 링크 + ✅. 미생성 파일은 `—` + `미생성` |
-| 구현 결과 섹션 | feature-close 시 lazy-creation. 최초 생성 시 빈 placeholder |
-| 상태 컬럼 갱신 | 파일 생성/삭제 시 Documents 테이블 갱신 |
-| Decisions 섹션 | Pre-Plan Q/A Phase 1에서 Decisions 항목 확정 시 기록. 구현 중 설계 결정 발생 시 추가 |
-| Notes 섹션 | 피드백(limitation), triage log, Known Limitations 발생 시 기록 |
-| Task Log 섹션 | implement 스킬에서 태스크 완료 시 간략 로그 기록 |
+| 생성 시점 | `/등록` 시 항상 생성 (gen-hub) |
+| Linear Issue 링크 | gen-hub이 Linear API 응답 URL 직접 삽입. 수동 URL 조합 금지 |
+| 구현 결과 섹션 | feature-close 시 lazy-creation |
 
-### 2-3. research type _index.md 변형
-
-Documents 테이블에서 Plan/Checklist 행 생략. 조사 보고서 행만 표시:
-
-| 문서 | 경로 | 상태 |
-|------|------|------|
-| 조사 보고서 | — | 미생성 |
+> 전체 템플릿 규칙 + type별 변형: [gen-hub templates/index-templates.md](../.claude/skills/gen-hub/templates/index-templates.md) 참조
 
 ---
 
@@ -209,8 +163,6 @@ Documents 테이블에서 Plan/Checklist 행 생략. 조사 보고서 행만 표
 
 | 규칙 | 내용 |
 |------|------|
-| 보고서 대상 | research 조사 보고서만 해당 (태스크별 L2 보고서는 `_index.md > ## Task Log`로 대체) |
-| 보고서 경로 | `docs/research/{LINEAR-ID}/RPT-*.md` (research type 폴더 내) |
-| 보고서 frontmatter | `linear_id`, `title`, `type: report`, `created` |
-| 보고서 링킹 | 보고서 → _index.md 역참조 Nav Link 필수 |
 | 보고서 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 |
+
+> 보고서 생성 규칙 상세: [investigation SKILL.md](../.claude/skills/investigation/SKILL.md) 참조
