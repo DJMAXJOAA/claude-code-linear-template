@@ -51,20 +51,20 @@ created: 2026-03-17
 
 | # | ID | Task | Dependencies | Status |
 |---|-----|------|-------------|--------|
-| 22 | T-NF5-01 | triage SKILL.md 작성 — 7유형 분류 + Git notes.md + Linear comment | T-NF4-01 | pending |
-| 23 | T-NF5-02 | feedback SKILL.md 작성 — directive→rules, limitation→notes.md, backlog→Linear Issue | T-NF4-01 | pending |
-| 24 | T-NF5-03 | investigation SKILL.md 작성 — 조사 결과 `docs/issue/{ID}/` 저장 | T-NF4-01 | pending |
-| 25 | T-NF5-04 | verify SKILL.md 작성 — 구현 완전성 검증 + Linear Verifying | T-NF4-01 | pending |
-| 26 | T-NF5-05 | test SKILL.md 작성 — 테스트 전략 + Linear Testing | T-NF4-01 | pending |
-| 27 | T-NF6-01 | 등록.md 작성 — `/등록` → gen-hub 호출 (type 지정) | T-NF5-01 | pending |
-| 28 | T-NF6-02 | 활성화.md 작성 — `/활성화` → dev-pipeline 호출 | T-NF5-01 | pending |
-| 29 | T-NF6-03 | 점검.md 작성 — `/점검` → triage 호출 | T-NF5-01 | pending |
-| 30 | T-NF6-04 | 커밋.md 작성 — Conventional Commits | T-NF5-01 | pending |
-| 31 | T-NF6-05 | 피드백.md 작성 — `/피드백` → feedback 호출 | T-NF5-01 | pending |
-| 32 | T-NF6-06 | 조사.md 작성 — `/조사` → investigation 호출 | T-NF5-01 | pending |
-| 33 | T-NF6-07 | 검증.md 작성 — `/검증` → 프레임워크 무결성 검증 | T-NF5-01 | pending |
-| 34 | T-NF6-08 | 병합.md 작성 — 브랜치 병합 | T-NF5-01 | pending |
-| 35 | T-NF6-09 | 현황.md 작성 — `/현황` → Linear MCP 활성 Issue 조회 | T-NF5-01 | pending |
+| 22 | T-NF5-01 | triage SKILL.md 작성 — 7유형 분류 + Git notes.md + Linear comment | T-NF4-01 | **done** |
+| 23 | T-NF5-02 | feedback SKILL.md 작성 — directive→rules, limitation→notes.md, backlog→Linear Issue | T-NF4-01 | **done** |
+| 24 | T-NF5-03 | investigation SKILL.md 작성 — 조사 결과 `docs/issue/{ID}/` 저장 | T-NF4-01 | **done** |
+| 25 | T-NF5-04 | verify SKILL.md 작성 — 구현 완전성 검증 + Linear Verifying | T-NF4-01 | **done** |
+| 26 | T-NF5-05 | test SKILL.md 작성 — 테스트 전략 + Linear Testing | T-NF4-01 | **done** |
+| 27 | T-NF6-01 | 등록.md 작성 — `/등록` → gen-hub 호출 (type 지정) | T-NF5-01 | **done** |
+| 28 | T-NF6-02 | 활성화.md 작성 — `/활성화` → dev-pipeline 호출 | T-NF5-01 | **done** |
+| 29 | T-NF6-03 | 점검.md 작성 — `/점검` → triage 호출 | T-NF5-01 | **done** |
+| 30 | T-NF6-04 | 커밋.md 작성 — Conventional Commits | T-NF5-01 | **done** |
+| 31 | T-NF6-05 | 피드백.md 작성 — `/피드백` → feedback 호출 | T-NF5-01 | **done** |
+| 32 | T-NF6-06 | 조사.md 작성 — `/조사` → investigation 호출 | T-NF5-01 | **done** |
+| 33 | T-NF6-07 | 검증.md 작성 — `/검증` → 프레임워크 무결성 검증 | T-NF5-01 | **done** |
+| 34 | T-NF6-08 | 병합.md 작성 — 브랜치 병합 | T-NF5-01 | **done** |
+| 35 | T-NF6-09 | 현황.md 작성 — `/현황` → Linear MCP 활성 Issue 조회 | T-NF5-01 | **done** |
 
 ### Phase 4: 설정 가이드 (NF-8) + 검증 (NF-9)
 
@@ -122,7 +122,7 @@ created: 2026-03-17
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 태스크 | T-NF7-02 (context.md 작성) |
-| 다음 태스크 | T-NF5-01 (triage SKILL.md 작성) |
-| 비고 | Phase 2 완료. 핵심 Skills 5개(09b §1-§5) + Guides 2개(framework.md, context.md). 09b/09 §6-7/08 §4 스펙 반영 |
+| 마지막 완료 태스크 | T-NF6-09 (현황.md 작성) |
+| 다음 태스크 | T-NF8-01 (초기 설정 가이드 작성) |
+| 비고 | Phase 3 완료. 보조 Skills 5개 + Commands 9개. 현행 차용+Linear 연동 변경 반영 |
 | 재개 방법 | `docs/migration/_index.md` + `docs/migration/cl.md` 읽고 Handoff 섹션 확인 |

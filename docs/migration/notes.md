@@ -82,3 +82,5 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 2026-03-17 | T-NF3-01~03 | pipeline.md + docs-writing.md 작성 완료 | pipeline 312줄(§1-§11), docs-writing 211줄(§1-§8). 09a 스펙 전체 반영. MCP 도구명 하드코딩 0건 |
 | 2026-03-17 | T-NF4-01~05 | 핵심 Skills 5개 작성 완료 | dev-pipeline, gen-hub, gen-plan, implement, feature-close. 09b §1-§5 스펙 반영. MCP 도구명은 ### Linear MCP 섹션에만 |
 | 2026-03-17 | T-NF7-01~02 | Guides 2개 작성 완료 | framework.md(10대 원칙 + 3영역 SSOT + 차용/변형/제거), context.md(4대 실패 모드 + PD + 50% + /clear + Linear 로딩) |
+| 2026-03-17 | T-NF5-01~05 | 보조 Skills 5개 작성 완료 | triage(7유형 분류), feedback(3유형), investigation(research 전체 라이프사이클), verify(SC+S3 검증), test(전략+실행) |
+| 2026-03-17 | T-NF6-01~09 | Commands 9개 작성 완료 | 등록/활성화/점검/커밋/피드백/조사/검증/병합/현황. 간결한 스킬 호출+인자 매핑 패턴 |
