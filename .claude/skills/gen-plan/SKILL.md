@@ -21,13 +21,14 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/{type}/{LINEAR
 
 | 단계 | 행위 |
 |------|------|
-| 1 | **Linear Issue 정보 읽기**: Linear MCP로 description(Overview, SC), type, relations 조회 |
-| 2 | **Related Issue Known Limitations 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/{type}/{ID}/_index.md`에서 `## 구현 결과` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
-| 3 | **plan.md 작성**: 아래 §plan.md 구조에 따라 작성. type에 따라 작성 범위 결정 |
-| 4 | **cl.md 작성**: 아래 §cl.md 구조에 따라 작성. Plan의 접근 방식에서 태스크 추출 |
-| 5 | **_index.md Documents 테이블 갱신**: Plan, Checklist 행의 경로와 상태를 갱신 |
-| 6 | **Linear 상태 전이**: Linear MCP로 State → Planning |
-| 7 | **Plan 리뷰 게이트**: feature → `oh-my-claudecode:critic` 에이전트로 구조화 리뷰. improvement → 간략 리뷰 (사용자에게 Plan 요약 제시 + 확인) |
+| 1 (G1) | **Linear Issue 정보 읽기**: Linear MCP로 description(Overview, SC), type, relations 조회 |
+| 2 (G1) | **Related Issue Known Limitations 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/{type}/{ID}/_index.md`에서 `## 구현 결과` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
+| 3 (G1) | **plan.md 작성**: 아래 §plan.md 구조에 따라 작성. type에 따라 작성 범위 결정 |
+| 4 (G1) | **cl.md 작성**: 아래 §cl.md 구조에 따라 작성. Plan의 접근 방식에서 태스크 추출 |
+| 5 (G2) | **Plan+CL 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
+| 6 (G3) | **_index.md Documents 테이블 갱신**: Plan, Checklist 행의 경로와 상태를 갱신 |
+| 7 (G3) | **Linear 상태 전이**: Linear MCP로 State → Planning |
+| 8 (G4) | **완료 반환**: plan.md + cl.md 생성 완료. 리뷰는 dev-pipeline의 Post-Plan Q/A에서 처리 |
 
 ## Output
 
@@ -145,22 +146,9 @@ created: {YYYY-MM-DD}
 
 ## OMC 에이전트 연동
 
-| 단계 | 에이전트 | 용도 |
-|------|---------|------|
-| Plan 리뷰 (feature) | `oh-my-claudecode:critic` (opus) | 구조화 리뷰 |
-| Plan 리뷰 (improvement) | 사용자 직접 확인 | 간략 리뷰 |
+> gen-plan 자체는 에이전트 연동 없음. Plan 리뷰는 dev-pipeline의 Post-Plan Q/A에서 `oh-my-claudecode:critic` 사용.
 
----
-
-## 현행 대비 주요 변경
-
-| 항목 | 현행 | 신규 |
-|------|------|------|
-| 파일 경로 | `docs/plans/PLAN-F-NNN.md`, `CL-F-NNN.md` | `docs/{type}/{LINEAR-ID}/plan.md`, `cl.md` |
-| SC 참조 | Hub `## Success Criteria` 링크 | Linear Issue description SC 참조 |
-| KL 교차 참조 | Hub frontmatter `depends`/`related` → Hub KL 섹션 | Linear relations → 관련 Issue `_index.md` 구현 결과 |
-| 태스크 ID | `T-F-NNN-NN` | `T-{LINEAR-ID}-NN` |
-| 양방향 링크 | Hub↔Plan↔CL frontmatter 상호 참조 | 동일 폴더 내 상대 경로 참조 |
+> OMC 비활성 시 pipeline.md §9 참조.
 
 ---
 

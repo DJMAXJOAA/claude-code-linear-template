@@ -22,14 +22,13 @@
 
 | 단계 | 행위 |
 |------|------|
-| 1 | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그/마일스톤은 AI 추천 후 승인 |
-| 2 | **type별 description 구성**: 아래 §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 |
-| 3 | **Linear Issue 생성**: Linear MCP로 Issue 생성 — title, description, labels(type + 태그), project(마일스톤), state: Backlog |
-| 4 | **Linear Issue ID 획득**: 응답에서 `PRJ-N` 형식의 ID + URL 추출 |
-| 5 | **Git 폴더 생성**: `docs/{type}/{LINEAR-ID}/` 디렉토리 생성 |
-| 6 | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지) |
-| 7 | **Linear description에 Git 경로 삽입**: description의 `## Git Documents` 섹션에 `docs/{type}/{LINEAR-ID}/_index.md` 경로 기록 |
-| 8 | **일괄 등록 처리** (복수 Issue 시): ID 순차 할당 후 2~7단계를 Issue 수만큼 반복. 병렬 생성 가능 |
+| 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그/마일스톤은 AI 추천 후 승인 |
+| 2 (G2) | **type별 description 구성 + 사용자 승인**: 아래 §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 → `AskUserQuestion`으로 내용 확인 |
+| 3 (G3) | **Linear Issue 생성**: Linear MCP로 Issue 생성 — title, description, labels(type + 태그), project(마일스톤), state: Backlog |
+| 4 (G3) | **Linear Issue ID 획득**: 응답에서 `PRJ-N` 형식의 ID + URL 추출 |
+| 5 (G3) | **Git 폴더 생성**: `docs/{type}/{LINEAR-ID}/` 디렉토리 생성 |
+| 6 (G3) | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지) |
+| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Git Documents` 섹션에 `docs/{type}/{LINEAR-ID}/_index.md` 경로 기록 |
 
 ## Output
 
@@ -105,12 +104,14 @@
 
 > docs-writing.md §2 참조. type별 변형(research 등)도 docs-writing.md §2-3 참조.
 
+### feature / improvement 공통
+
 ```markdown
 ---
 linear_id: {LINEAR-ID}
 title: {제목}
 type: index
-issue_type: {feature|bug|improvement|research}
+issue_type: {feature|improvement}
 created: {YYYY-MM-DD}
 ---
 
@@ -134,17 +135,62 @@ created: {YYYY-MM-DD}
 {feature-close 시 lazy-creation}
 ```
 
+### bug
+
+```markdown
+---
+linear_id: {LINEAR-ID}
+title: {제목}
+type: index
+issue_type: bug
+created: {YYYY-MM-DD}
 ---
 
-## 현행 대비 주요 변경
+> [Linear Issue]({LINEAR-API-응답-URL})
 
-| 항목 | 현행 | 신규 |
+## Documents
+
+| 문서 | 경로 | 상태 |
 |------|------|------|
-| 파일 경로 | `docs/features/F-NNN.md` | `docs/{type}/{LINEAR-ID}/_index.md` |
-| ID 체계 | F-NNN (순차 부여) | Linear ID (PRJ-N, Linear가 부여) |
-| Issue 등록 | gen-issue 별도 스킬 | gen-hub에 통합 (type: bug) |
-| backlogs 갱신 | gen-backlogs 호출 필수 | 제거 — Linear가 인덱스 관리 |
-| Hub 크기 | Overview/SC/Decisions/Constraints/KL/Notes/Documents/Status Log | _index.md: linear_id + Documents 테이블 + Decisions/Notes/Task Log + 구현 결과(lazy) |
+
+## Notes
+
+### Root Cause
+
+{수정 완료 후 기록}
+
+## 구현 결과
+
+{feature-close 시 lazy-creation}
+```
+
+### research
+
+```markdown
+---
+linear_id: {LINEAR-ID}
+title: {제목}
+type: index
+issue_type: research
+created: {YYYY-MM-DD}
+---
+
+> [Linear Issue]({LINEAR-API-응답-URL})
+
+## Documents
+
+| 문서 | 경로 | 상태 |
+|------|------|------|
+| 조사 보고서 | — | 미생성 |
+
+## Notes
+
+## 구현 결과
+
+{feature-close 시 lazy-creation}
+```
+
+> research type은 설계 결정이 없으므로 `## Decisions` 섹션 불필요.
 
 ---
 

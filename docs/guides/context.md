@@ -35,10 +35,10 @@ created: 2026-03-17
 | 단계 | 로드 대상 | 로드하지 않는 것 |
 |------|---------|---------------|
 | `/활성화` | Linear Issue 상태 1회 조회 + `_index.md` Documents 테이블 | plan.md 본문, 다른 Issue 문서 |
-| Planning | plan.md, cl.md (작성 대상) | 이전 Issue 문서, L2 보고서 |
+| Planning | plan.md, cl.md (작성 대상) | 이전 Issue 문서 |
 | 구현 | CL S1 (태스크 목록만), plan.md (필요 시) | CL S2/S3, 다른 태스크 보고서 |
 | 테스트 | CL S3 (검증 조건만), S4 (수동 테스트) | CL S1, plan.md |
-| 검증 | Linear SC (description), CL S3 | plan.md 본문, L2 보고서 |
+| 검증 | Linear SC (description), CL S3 | plan.md 본문 |
 
 ---
 

@@ -21,7 +21,7 @@
 | 1 | 피드백 내용 분석 → 3유형 분류 (아래 §피드백 유형) |
 | 2 | 유형별 대상 문서 + 삽입 위치 제안 |
 | 3 | **G2**: `AskUserQuestion`으로 사용자 승인 (대상 문서 + 위치 + 내용) |
-| 4 | **G3 저장**: 승인된 내용을 대상 문서에 기록 |
+| 4 | **G3 저장**: 승인된 내용을 대상 문서에 기록. backlog 유형은 gen-hub Skill을 호출하여 새 Issue + _index.md 생성 |
 | 5 | 파이프라인 진행 중이면 `_index.md > ## Notes > ### Feedback Log`에 기록 |
 
 ## Output
@@ -39,7 +39,7 @@
 |------|--------|------|
 | `directive` | `.claude/rules/*.md`, `docs/guides/*.md`, `CLAUDE.md` | 지침/규칙 등록 |
 | `limitation` | `_index.md > ## Notes` (해당 Issue 폴더) | Issue 진행 중 전용 — Known Limitations |
-| `backlog` | Linear Issue 신규 생성 | 향후 작업 후보. `/등록`과 동일 플로우 |
+| `backlog` | Linear Issue 신규 생성 (gen-hub 호출) | 향후 작업 후보. gen-hub Skill 경유하여 `/등록`과 동일 플로우 실행 |
 
 ---
 

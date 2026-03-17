@@ -21,9 +21,9 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 
 | 단계 | 행위 |
 |------|------|
-| 1 | **CL S1 상태 확인**: 모든 태스크가 `done`이면 → 완료 조건으로 직행 |
-| 2 | **실행 모드 선택**: `AskUserQuestion`으로 사용자에게 모드 선택 |
-| 3 | **태스크 실행 루프** 시작 |
+| 1 (G1) | **CL S1 상태 확인**: 모든 태스크가 `done`이면 → 완료 조건으로 직행 |
+| 2 (G2) | **실행 모드 선택**: `AskUserQuestion`으로 사용자에게 모드 선택 |
+| 3 (G4) | **태스크 실행 루프** 시작 |
 
 ## Output
 
@@ -100,10 +100,11 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 |------|------|
 | 4-1 | CL S1 모든 태스크 상태 = `done` 확인 |
 | 4-2 | 최종 빌드/테스트 통과 확인 (전체 테스트 스위트) |
-| 4-3 | **수동 테스트 가이드 출력**: CL S4를 읽어 사용자에게 출력 |
-| 4-4 | **`/점검` 안내 출력**: 수동 테스트 후 `/점검`으로 결과 전달 안내 |
-| 4-5 | **완료 분기 대기**: `/점검` 사용 → triage 처리, "없음"/"완료" → 바로 다음 단계 전환 |
-| 4-6 | feature: Linear State → Testing. improvement: Linear State → Verifying |
+| 4-3 | **CL S4 갱신**: 실제 구현 결과를 반영하여 S4 수동 테스트 가이드 갱신 (구현 전 작성된 항목 vs 실제 인터페이스 정합) |
+| 4-4 | **수동 테스트 가이드 출력**: CL S4를 읽어 사용자에게 출력 |
+| 4-5 | **`/점검` 안내 출력**: 수동 테스트 후 `/점검`으로 결과 전달 안내 |
+| 4-6 | **완료 분기 대기**: `/점검` 사용 → triage 처리, "없음"/"완료" → 바로 다음 단계 전환 |
+| 4-7 | feature: Linear State → Testing. improvement: Linear State → Verifying |
 
 ---
 
@@ -114,17 +115,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | executor 위임 | `oh-my-claudecode:executor` | sonnet |
 | ralph 루프 | `oh-my-claudecode:ralph` | (자체 모델 선택) |
 
----
-
-## 현행 대비 주요 변경
-
-| 항목 | 현행 | 신규 |
-|------|------|------|
-| CL 경로 | `docs/plans/CL-F-NNN.md` | `docs/{type}/{LINEAR-ID}/cl.md` |
-| 태스크 완료 기록 | L2 보고서 (`RPT-*-T{NN}-*.md`) | `_index.md > ## Task Log` 간략 로그 |
-| 태스크 ID | `T-F-NNN-NN` | `T-{LINEAR-ID}-NN` |
-| 완료 분기 | light → done 직행, standard → testing | type별 분기: feature → Testing, improvement → Verifying |
-| Linear Sub-issue 동기화 | 없음 | 태스크 완료마다 Linear MCP로 Sub-issue Done |
+> OMC 비활성 시 pipeline.md §9 참조.
 
 ---
 

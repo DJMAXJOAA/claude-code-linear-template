@@ -22,12 +22,12 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 
 | 단계 | 행위 |
 |------|------|
-| 1 | **구현 결과 수집**: plan.md 설계 결정 vs 실제 구현 비교. 설계 이탈, 미해결 이슈, 실제 인터페이스 요약 수집. bug/research는 수정/조사 결과 요약 |
-| 2 | **_index.md에 "구현 결과" 섹션 lazy-create**: 아래 §구현 결과 섹션 템플릿으로 생성. 이미 존재하면 갱신 |
-| 3 | **G2 (검토)**: 구현 결과 요약을 사용자에게 제시 → `AskUserQuestion`으로 확인 |
-| 4 | **Linear 상태 전이**: Linear MCP로 State → Done |
-| 5 | **Linear comment 기록**: Linear MCP로 완료 요약 기록 (구현 결과 1~3줄 요약 + 설계 이탈 유무 + 미해결 이슈 유무) |
-| 6 | **후행 Issue 참조 환류**: 아래 §후행 Issue 환류 참조 |
+| 1 (G1) | **구현 결과 수집**: plan.md 설계 결정 vs 실제 구현 비교. 설계 이탈, 미해결 이슈, 실제 인터페이스 요약 수집. bug/research는 수정/조사 결과 요약 |
+| 2 (G1) | **_index.md에 "구현 결과" 섹션 lazy-create**: 아래 §구현 결과 섹션 템플릿으로 생성. 이미 존재하면 갱신 |
+| 3 (G2) | **검토**: 구현 결과 요약을 사용자에게 제시 → `AskUserQuestion`으로 확인 |
+| 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |
+| 5 (G3) | **Linear comment 기록**: Linear MCP로 완료 요약 기록 (구현 결과 1~3줄 요약 + 설계 이탈 유무 + 미해결 이슈 유무) |
+| 6 (G3) | **후행 Issue 참조 환류**: 아래 §후행 Issue 환류 참조 |
 
 ## Output
 
@@ -86,18 +86,6 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 | 특징 | 스킬 자체는 Git 기록 + Linear 갱신(G3)으로 완료 |
 
 > pipeline.md §2-4 참조
-
----
-
-## 현행 대비 주요 변경
-
-| 항목 | 현행 | 신규 |
-|------|------|------|
-| 구현 결과 기록 위치 | Hub `## 구현 결과` 섹션 | `_index.md` `## 구현 결과` 섹션 |
-| 상태 갱신 | Hub frontmatter `status: done` | Linear State → Done |
-| 완료 요약 | Hub Status Log에 기록 | Linear comment에 기록 |
-| 후행 Feature 탐색 | `backlogs/features.md` 활성 목록 확인 | Linear relations `blocked-by` 역참조 |
-| 후행 Feature 환류 | Hub Notes > Checkpoints append | `_index.md > ## Notes > ### Checkpoints` append + Linear comment |
 
 ---
 

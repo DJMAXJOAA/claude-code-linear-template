@@ -99,6 +99,20 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done |
 | feature-close | `_index.md` 구현 결과 섹션 기록 | state → Done + 완료 comment |
 
+### 2-3a. _index.md 갱신 주체 원칙
+
+> **원칙**: `_index.md`는 해당 섹션을 담당하는 스킬이 직접 갱신한다.
+
+| 섹션 | 갱신 주체 스킬 | 시점 |
+|------|-------------|------|
+| Documents 테이블 | gen-plan, investigation | 파일 생성/삭제 시 |
+| ## Decisions | dev-pipeline (Pre-Plan Q/A) | 설계 결정 확정 시 |
+| ## Notes | feedback, triage, feature-close | 피드백/triage/환류 발생 시 |
+| ## Task Log | implement | 태스크 완료 시 |
+| ## 구현 결과 | feature-close | 완료 처리 시 |
+
+> 각 스킬은 자신이 담당하는 섹션만 갱신한다. 타 스킬 담당 섹션을 직접 수정하지 않는다.
+
 ### 2-4. G3-terminal 스킬 패턴
 
 | 항목 | 내용 |
@@ -122,7 +136,18 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 게이트 연계 | 태스크 완료 후 4단계 게이트(§2)를 경유하여 다음 태스크로 이동 |
 | 금지 패턴 | 여러 단계 일괄 지시, "알아서 다 처리해" 식 실행, 같은 파일을 수정하는 태스크 동시 실행 |
 
-### 3-2. 의존성 기반 실행
+### 3-2. _index.md 갱신 주체
+
+| 규칙 | 내용 |
+|------|------|
+| 원칙 | `_index.md`의 각 섹션은 해당 섹션을 생성/수정하는 스킬이 직접 갱신한다 |
+| Documents 테이블 | gen-hub(초기), gen-plan(plan/cl 행), investigation(보고서 행) |
+| Decisions | Pre-Plan Q/A 시 gen-plan, 구현 중 implement |
+| Notes | feedback, triage |
+| Task Log | implement |
+| 구현 결과 | feature-close |
+
+### 3-3. 의존성 기반 실행
 
 | 항목 | 내용 |
 |------|------|
@@ -131,7 +156,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 순차 실행 | 의존성 있는 태스크는 선행 태스크 완료 후 실행 |
 | 실행 프로세스 | implement Skill이 SSOT — 태스크 선택, 코드 작성, 테스트, 빌드 확인, CL 갱신, 커밋 |
 
-### 3-3. Linear sub-issue 동기화
+### 3-4. Linear sub-issue 동기화
 
 | 트리거 | 행동 |
 |--------|------|
