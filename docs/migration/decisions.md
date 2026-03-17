@@ -50,3 +50,10 @@ created: 2026-03-17
 | I15 | 2026-03-17 | Workflow States 다이어그램 제거 | pipeline.md §1에 위임 | CLAUDE.md Linear Integration 섹션에서 중복 |
 | I16 | 2026-03-17 | CLAUDE.md 총량 | 164줄 → 103줄 (37% 축소) | 토큰 효율 최우선. "상세는 rules/guides에 위임" 원칙 강화 |
 | I17 | 2026-03-17 | 섹션 순서 변경 | PROJECT → FRAMEWORK 순서 | 프로젝트별 내용이 먼저 로드되어 컨텍스트 효율 향상. 사용자가 커스터마이즈할 영역이 상단에 위치 |
+| I18 | 2026-03-17 | §3-3 CL 변경 시 sub-issue 정책 | 추가 태스크: 새 sub-issue 생성. 삭제/변경: 수동 정리 | CL S1 SSOT 원칙 유지. 자동 삭제는 위험 |
+| I19 | 2026-03-17 | type 필드 의미 분리 | `type`=문서유형, `issue_type`=Issue유형 (_index.md 전용) | type 필드 파싱 시 오동작 방지. _index.md에만 issue_type 추가 |
+| I20 | 2026-03-17 | Linear URL 패턴 | gen-hub이 API 응답 URL 직접 삽입. 수동 URL 조합 금지 | workspace slug 하드코딩 방지 |
+| I21 | 2026-03-17 | §6-3↔§11 중복 해소 | §6-3을 "§10 인터뷰 원칙 적용" 참조로 축소 | 동일 규칙 2회 기재 제거 |
+| I22 | 2026-03-17 | §10(커밋) → §3 병합 | 3줄짜리 독립 섹션을 §3-1에 통합 | 중복 해소 + 줄 수 감소 |
+| I23 | 2026-03-17 | 제거된 속성 테이블 삭제 | docs-writing.md §1-2 제거 | 범용 프레임워크 템플릿에 마이그레이션 맥락 불필요 |
+| I24 | 2026-03-17 | research _index.md 변형 | Documents 테이블에서 Plan/CL 행 생략, 조사 보고서만 | research type은 plan.md/cl.md 미생성 |
