@@ -13,9 +13,9 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 |------|------|
 | Linear ID | `PRJ-N` — 완료 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, SC), type, relations |
-| _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
-| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 결정 비교 대상 (feature/improvement) |
-| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — 태스크 완료 상태 확인 (feature/improvement) |
+| _index.md | `docs/{type}/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
+| plan.md | `docs/{type}/{LINEAR-ID}/plan.md` — 설계 결정 비교 대상 (feature/improvement) |
+| cl.md | `docs/{type}/{LINEAR-ID}/cl.md` — 태스크 완료 상태 확인 (feature/improvement) |
 | 검증 결과 | verify Skill 산출물 또는 implement 간략 검증 결과 |
 
 ## Process
@@ -36,7 +36,7 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 | _index.md | `## 구현 결과` 섹션 생성/갱신 |
 | Linear | State → Done |
 | Linear comment | 완료 요약 기록 |
-| 후행 Issue | notes.md 환류 메시지 + Linear comment (대상 존재 시) |
+| 후행 Issue | _index.md Notes 환류 메시지 + Linear comment (대상 존재 시) |
 
 ---
 
@@ -71,10 +71,10 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 | 단계 | 행위 |
 |------|------|
 | 6-1 | Linear MCP로 현재 Issue의 relations 조회 → `blocked-by` 역참조 Issue 목록 수집 |
-| 6-2 | 각 후행 Issue의 `docs/issue/{ID}/` 존재 확인 |
-| 6-3 | 존재 시: `notes.md` lazy-create → `## Checkpoints` 섹션에 환류 메시지 append |
+| 6-2 | 각 후행 Issue의 `docs/{type}/{ID}/` 존재 확인 |
+| 6-3 | 존재 시: `_index.md > ## Notes > ### Checkpoints` 섹션에 환류 메시지 append |
 | 6-4 | 환류 메시지 형식: `- [REF] {LINEAR-ID} 완료 — {1줄 요약}. [Linear]({URL})` |
-| 6-5 | Linear MCP: 후행 Issue에 comment 추가 — `Blocked-by {LINEAR-ID} 완료. 상세: docs/issue/{LINEAR-ID}/_index.md` |
+| 6-5 | Linear MCP: 후행 Issue에 comment 추가 — `Blocked-by {LINEAR-ID} 완료. 상세: docs/{type}/{LINEAR-ID}/_index.md` |
 
 ---
 
@@ -97,7 +97,7 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 | 상태 갱신 | Hub frontmatter `status: done` | Linear State → Done |
 | 완료 요약 | Hub Status Log에 기록 | Linear comment에 기록 |
 | 후행 Feature 탐색 | `backlogs/features.md` 활성 목록 확인 | Linear relations `blocked-by` 역참조 |
-| 후행 Feature 환류 | Hub Notes > Checkpoints append | `notes.md` Checkpoints append + Linear comment |
+| 후행 Feature 환류 | Hub Notes > Checkpoints append | `_index.md > ## Notes > ### Checkpoints` append + Linear comment |
 
 ---
 

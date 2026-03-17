@@ -1,6 +1,6 @@
 # investigation — 조사 수행 및 보고서 생성
 
-research type Issue의 전체 라이프사이클을 관리한다. 조사 범위 확인 → 수행 → 보고서 작성 → _index.md 갱신 → 사용자 확인 → feature-close 연계.
+research type Issue의 조사를 수행한다. 조사 범위 확인 → 수행 → 보고서 작성 → _index.md 갱신 → 사용자 확인 → 완료 결과 반환.
 
 ## Trigger
 
@@ -13,7 +13,7 @@ research type Issue의 전체 라이프사이클을 관리한다. 조사 범위 
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, Scope, Deliverables) |
-| _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
+| _index.md | `docs/research/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
 
 ## Process
 
@@ -21,16 +21,16 @@ research type Issue의 전체 라이프사이클을 관리한다. 조사 범위 
 |------|------|
 | 1 | **조사 범위 확인**: Linear Issue description의 Scope/Deliverables 읽기 |
 | 2 | **코드베이스/외부 자료 조사**: `oh-my-claudecode:explore`로 코드 탐색 + 필요 시 외부 문서 참조 |
-| 3 | **조사 보고서 작성**: `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` 생성 |
+| 3 | **조사 보고서 작성**: `docs/research/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` 생성 |
 | 4 | **_index.md Documents 테이블 갱신**: 조사 보고서 행 추가 |
 | 5 | **사용자에게 결과 요약 + 확인**: `AskUserQuestion`으로 G2 검토 |
-| 6 | **feature-close 연계**: 승인 시 feature-close 호출 (Linear Done + 구현 결과 기록) |
+| 6 | **완료 결과를 반환**: 승인 시 완료 결과를 반환. dev-pipeline이 feature-close 결정 |
 
 ## Output
 
 | 항목 | 내용 |
 |------|------|
-| 조사 보고서 | `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` |
+| 조사 보고서 | `docs/research/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` |
 | _index.md | Documents 테이블에 보고서 행 추가 |
 | Linear | State 전이는 feature-close에서 처리 |
 

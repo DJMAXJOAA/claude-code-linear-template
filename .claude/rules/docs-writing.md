@@ -14,7 +14,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|:----:|------|
 | `linear_id` | 문자열 (예: `PRJ-47`) | O | Linear Issue ID. 해당 Issue와 무관한 문서(ADR, shared)는 제외 |
 | `title` | 문자열 | O | 문서 제목 |
-| `type` | `index` / `plan` / `checklist` / `decisions` / `notes` / `report` / `adr` / `shared` | O | 문서 유형 |
+| `type` | `index` / `plan` / `checklist` / `report` / `adr` / `shared` | O | 문서 유형 |
 | `issue_type` | `feature` / `bug` / `improvement` / `research` | △ | Issue 유형. `_index.md`에만 필수 |
 | `created` | ISO 날짜 (예: `2026-03-17`) | O | 작성일 |
 
@@ -25,9 +25,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `_index.md` (Issue 인덱스) | `linear_id`, `title`, `type`, `issue_type`, `created` | `type: index`, `issue_type: feature/bug/improvement/research` |
 | `plan.md` (설계 SSOT) | `linear_id`, `title`, `type: plan`, `created` | title = "Plan: {Issue 제목}" |
 | `cl.md` (태스크/검증 SSOT) | `linear_id`, `title`, `type: checklist`, `created` | title = "CL: {Issue 제목}" |
-| `decisions.md` (의사결정) | `linear_id`, `title`, `type: decisions`, `created` | lazy-creation |
-| `notes.md` (지식/피드백) | `linear_id`, `title`, `type: notes`, `created` | lazy-creation |
-| `RPT-*.md` (L2 보고서) | `linear_id`, `title`, `type: report`, `qa_level: L2`, `created` | 태스크 완료 시 생성 |
+| `RPT-*.md` (보고서) | `linear_id`, `title`, `type: report`, `created` | research 조사 보고서만 해당 |
 | ADR (`docs/adr/`) | `title`, `type: adr`, `created` | linear_id 없음 (cross-cutting) |
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
 
@@ -54,8 +52,18 @@ created: 2026-03-17
 |------|------|------|
 | Plan | [plan.md](plan.md) | ✅ |
 | Checklist | [cl.md](cl.md) | ✅ |
-| Decisions | [decisions.md](decisions.md) | ✅ |
-| Notes | — | 미생성 |
+
+## Decisions
+
+{Pre-Plan Q/A Phase 1에서 확정된 설계 결정 사항}
+
+## Notes
+
+{피드백, Known Limitations, 기타 메모}
+
+## Task Log
+
+{태스크 완료 시 간략 로그}
 
 ## 구현 결과
 
@@ -71,6 +79,9 @@ created: 2026-03-17
 | Documents 테이블 | 존재하는 파일은 상대경로 링크 + ✅. 미생성 파일은 `—` + `미생성` |
 | 구현 결과 섹션 | feature-close 시 lazy-creation. 최초 생성 시 빈 placeholder |
 | 상태 컬럼 갱신 | 파일 생성/삭제 시 Documents 테이블 갱신 |
+| Decisions 섹션 | Pre-Plan Q/A Phase 1에서 Decisions 항목 확정 시 기록. 구현 중 설계 결정 발생 시 추가 |
+| Notes 섹션 | 피드백(limitation), triage log, Known Limitations 발생 시 기록 |
+| Task Log 섹션 | implement 스킬에서 태스크 완료 시 간략 로그 기록 |
 
 ### 2-3. research type _index.md 변형
 
@@ -89,19 +100,15 @@ Documents 테이블에서 Plan/Checklist 행 생략. 조사 보고서 행만 표
 | `_index.md` | `/등록` | 항상 생성 |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
 | `cl.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (plan.md와 동시) |
-| `decisions.md` | 의사결정 발생 | Pre-Plan Q/A Phase 1에서 Decisions 항목 확정 시. 또는 구현 중 설계 결정 발생 시 |
-| `notes.md` | 피드백/KL 발생 | `/피드백`(limitation), `/점검`(triage log), Known Limitations 발생 시 |
-| `RPT-*.md` | 태스크 완료 | implement 스킬에서 태스크 1개 완료 시 L2 보고서 자동 생성 |
-| 조사 보고서 | investigation 완료 | research type 전용. `RPT-*.md` 형식 또는 스킬이 결정하는 파일명 |
+| `RPT-*.md` (조사 보고서) | investigation 완료 | research type 전용 |
 
 ### Lazy-creation 행동 치환표
 
 | 상황 | 조건 | 행동 |
 |------|------|------|
-| decisions.md 필요 | 파일 미존재 | frontmatter + 빈 Decisions 테이블 생성 → 내용 기록 |
-| decisions.md 필요 | 파일 존재 | 기존 테이블에 행 추가 |
-| notes.md 필요 | 파일 미존재 | frontmatter + 해당 섹션(Feedback Log/Triage Log/KL) 생성 |
-| notes.md 필요 | 파일 존재 | 해당 섹션 있으면 추가, 없으면 섹션 생성 후 추가 |
+| Decisions 기록 필요 | `_index.md` 존재 | `_index.md > ## Decisions` 섹션에 기록 |
+| Notes 기록 필요 | `_index.md` 존재 | `_index.md > ## Notes` 섹션에 기록 (하위 ### 섹션 자동 생성) |
+| Task Log 기록 필요 | `_index.md` 존재 | `_index.md > ## Task Log` 섹션에 기록 |
 | _index.md Documents 갱신 | lazy 파일 신규 생성 | Documents 테이블에서 `—` → 상대경로 링크 + ✅ |
 
 ---
@@ -132,7 +139,6 @@ Documents 테이블에서 Plan/Checklist 행 생략. 조사 보고서 행만 표
 | 위치 | frontmatter `---` 닫힌 직후, `#` 제목 또는 본문 직전 (빈 줄로 분리) |
 | _index.md | `> [Linear Issue]({URL})` — Linear Issue 링크 |
 | plan.md, cl.md | `> ← [_index.md](./_index.md) \| [Linear Issue]({URL})` — 상위 인덱스 + Linear |
-| decisions.md, notes.md | `> ← [_index.md](./_index.md)` — 상위 인덱스 |
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
 | RPT-*.md | `> ← [_index.md](./_index.md)` — 상위 인덱스 |
 
@@ -142,16 +148,14 @@ Documents 테이블에서 Plan/Checklist 행 생략. 조사 보고서 행만 표
 
 ## §5 문서 네이밍
 
-### 5-1. docs/issue/{LINEAR-ID}/ 하위 파일명
+### 5-1. docs/{type}/{LINEAR-ID}/ 하위 파일명
 
 | 파일 | 이름 규칙 | 예시 |
 |------|----------|------|
-| Issue 인덱스 | `_index.md` (고정) | `docs/issue/PRJ-47/_index.md` |
-| Plan | `plan.md` (고정) | `docs/issue/PRJ-47/plan.md` |
-| Checklist | `cl.md` (고정) | `docs/issue/PRJ-47/cl.md` |
-| Decisions | `decisions.md` (고정) | `docs/issue/PRJ-47/decisions.md` |
-| Notes | `notes.md` (고정) | `docs/issue/PRJ-47/notes.md` |
-| L2 보고서 | `RPT-{LINEAR-ID}-T{NN}-{YYYYMMDD}.md` | `docs/issue/PRJ-47/RPT-PRJ-47-T01-20260317.md` |
+| Issue 인덱스 | `_index.md` (고정) | `docs/feature/PRJ-47/_index.md` |
+| Plan | `plan.md` (고정) | `docs/feature/PRJ-47/plan.md` |
+| Checklist | `cl.md` (고정) | `docs/feature/PRJ-47/cl.md` |
+| 조사 보고서 | `RPT-{LINEAR-ID}-{YYYYMMDD}.md` | `docs/research/PRJ-47/RPT-PRJ-47-20260317.md` |
 
 ### 5-2. docs/adr/ 네이밍
 
@@ -171,7 +175,7 @@ Documents 테이블에서 Plan/Checklist 행 생략. 조사 보고서 행만 표
 
 | 경로 | 규칙 | 비고 |
 |------|------|------|
-| `docs/issue/{LINEAR-ID}/` | Linear ID 그대로 사용 (대소문자 유지) | `PRJ-47`, `PRJ-123` |
+| `docs/{type}/{LINEAR-ID}/` | type별 폴더 + Linear ID 그대로 사용 (대소문자 유지) | `docs/feature/PRJ-47/`, `docs/bug/PRJ-123/` |
 | `docs/adr/` | 고정 | 변경 불가 |
 | `docs/shared/` | 고정 | 변경 불가 |
 | `docs/guides/` | 고정 | 변경 불가 |
@@ -205,7 +209,8 @@ Documents 테이블에서 Plan/Checklist 행 생략. 조사 보고서 행만 표
 
 | 규칙 | 내용 |
 |------|------|
-| 보고서 경로 | `docs/issue/{LINEAR-ID}/RPT-*.md` (Issue 폴더 내) |
-| 보고서 frontmatter | `linear_id`, `title`, `type: report`, `qa_level`(L2/L3), `created` |
+| 보고서 대상 | research 조사 보고서만 해당 (태스크별 L2 보고서는 `_index.md > ## Task Log`로 대체) |
+| 보고서 경로 | `docs/research/{LINEAR-ID}/RPT-*.md` (research type 폴더 내) |
+| 보고서 frontmatter | `linear_id`, `title`, `type: report`, `created` |
 | 보고서 링킹 | 보고서 → _index.md 역참조 Nav Link 필수 |
 | 보고서 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 |

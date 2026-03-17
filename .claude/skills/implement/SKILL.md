@@ -1,7 +1,7 @@
 # implement — Micro-tasking 오케스트레이터
 
 CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한다.
-태스크 선택 → 코드 작성 → 테스트 → 빌드 확인 → CL S1 갱신 → Linear Sub-issue 갱신 → L2 보고서 → 커밋 루프.
+태스크 선택 → 코드 작성 → 테스트 → 빌드 확인 → CL S1 갱신 → Linear Sub-issue 갱신 → Task Log 기록 → 커밋 루프.
 
 ## Trigger
 
@@ -13,8 +13,8 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 항목 | 설명 |
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
-| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S1 태스크 목록, S2 완료 기준, S3 검증 조건 |
-| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 참조 (필요 시에만 읽기) |
+| cl.md | `docs/{type}/{LINEAR-ID}/cl.md` — S1 태스크 목록, S2 완료 기준, S3 검증 조건 |
+| plan.md | `docs/{type}/{LINEAR-ID}/plan.md` — 설계 참조 (필요 시에만 읽기) |
 | type | `feature` / `improvement` — bug/research는 implement를 사용하지 않음 |
 
 ## Process
@@ -31,7 +31,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 |------|------|
 | 코드 변경 | CL S1 태스크에 명시된 범위의 코드 + 테스트 |
 | cl.md 갱신 | S1 태스크 상태, Handoff 섹션, S4 수동 테스트 (실제 구현 반영) |
-| L2 보고서 | 태스크별 `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-T{NN}-{YYYYMMDD}.md` |
+| _index.md Task Log | 태스크 완료 시 `_index.md > ## Task Log`에 간략 로그 기록 |
 | 커밋 | 태스크 1개 = 커밋 1개 (Conventional Commits) |
 | Linear | Sub-issue 상태 Done + parent Issue State 전이 |
 
@@ -69,7 +69,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 3a-5 | 빌드 확인: 린트 + 타입체크 + 테스트 통과 |
 | 3a-6 | CL S1 태스크 상태를 `done`으로 갱신 |
 | 3a-7 | **Linear Sub-issue 갱신**: Linear MCP로 해당 Sub-issue State → Done |
-| 3a-8 | L1 인라인 요약 출력 + L2 보고서 생성 (`docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-T{NN}-{YYYYMMDD}.md`) |
+| 3a-8 | L1 인라인 요약 출력 + `_index.md > ## Task Log`에 간략 로그 기록 |
 | 3a-9 | 커밋 (태스크 1개 = 커밋 1개) |
 | 3a-10 | CL Handoff 섹션 갱신 |
 | 3a-11 | 다음 태스크로 루프 (3a-1) — 모든 태스크 `done` 시 완료 조건 처리 |
@@ -86,7 +86,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 3b-4 | 빌드 확인: 린트 + 타입체크 + 테스트 통과 |
 | 3b-5 | CL S1 태스크 상태를 `done`으로 갱신 |
 | 3b-6 | **Linear Sub-issue 갱신**: Linear MCP로 해당 Sub-issue State → Done |
-| 3b-7 | L1 인라인 요약 (executor 출력) + L2 보고서 생성 |
+| 3b-7 | L1 인라인 요약 (executor 출력) + `_index.md > ## Task Log`에 간략 로그 기록 |
 | 3b-8 | 커밋 (태스크 1개 = 커밋 1개) |
 | 3b-9 | CL Handoff 섹션 갱신 |
 | 3b-10 | 의존성 해소된 독립 태스크 탐색 → 복수 executor 동시 투입 가능 |
@@ -120,8 +120,8 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 
 | 항목 | 현행 | 신규 |
 |------|------|------|
-| CL 경로 | `docs/plans/CL-F-NNN.md` | `docs/issue/{LINEAR-ID}/cl.md` |
-| L2 보고서 경로 | `docs/logs/RPT-F-NNN-TNN-YYYYMMDD.md` | `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-TNN-YYYYMMDD.md` |
+| CL 경로 | `docs/plans/CL-F-NNN.md` | `docs/{type}/{LINEAR-ID}/cl.md` |
+| 태스크 완료 기록 | L2 보고서 (`RPT-*-T{NN}-*.md`) | `_index.md > ## Task Log` 간략 로그 |
 | 태스크 ID | `T-F-NNN-NN` | `T-{LINEAR-ID}-NN` |
 | 완료 분기 | light → done 직행, standard → testing | type별 분기: feature → Testing, improvement → Verifying |
 | Linear Sub-issue 동기화 | 없음 | 태스크 완료마다 Linear MCP로 Sub-issue Done |

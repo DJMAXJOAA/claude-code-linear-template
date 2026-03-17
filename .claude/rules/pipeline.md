@@ -1,6 +1,9 @@
 ---
 paths:
-  - "docs/issue/**"
+  - "docs/feature/**"
+  - "docs/bug/**"
+  - "docs/improvement/**"
+  - "docs/research/**"
   - ".claude/skills/**"
 description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micro-tasking, Linear sync
 ---
@@ -126,7 +129,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 의존성 소스 | CL S1의 `depends` 속성 (태스크 간 선후 관계) |
 | 병렬 실행 | 의존성 없는 태스크는 병렬 실행 가능 |
 | 순차 실행 | 의존성 있는 태스크는 선행 태스크 완료 후 실행 |
-| 실행 프로세스 | implement Skill이 SSOT — 태스크 선택, 코드 작성, 테스트, 빌드 확인, CL 갱신, L2 보고서, 커밋 |
+| 실행 프로세스 | implement Skill이 SSOT — 태스크 선택, 코드 작성, 테스트, 빌드 확인, CL 갱신, 커밋 |
 
 ### 3-3. Linear sub-issue 동기화
 
@@ -150,7 +153,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 파이프라인 단계 전환 | Issue 상태 전이 | §1 상태 흐름에 따라 |
 | 태스크 시작/완료 | sub-issue 상태 갱신 | Micro-tasking 연동 |
 | feature-close | 상태 → Done + 완료 comment | 최종 완료 처리 |
-| /점검 결과 기록 | comment 추가 | Git notes.md와 이중 기록 |
+| /점검 결과 기록 | comment 추가 | Git _index.md Notes와 이중 기록 |
 
 > 구체적 MCP 도구명과 파라미터는 NF-1 검증 결과의 MCP 매핑 테이블을 참조. 스킬별 `### Linear MCP` 섹션에 명시.
 
@@ -220,7 +223,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | Phase | 행동 | 상세 |
 |-------|------|------|
-| **Phase -1: Linear relation 조회** | Linear에서 관련 Issue 조회 | related issue, 동일 label issue 탐색. 관련 Issue의 decisions.md/notes.md에서 교차 제약 수집 |
+| **Phase -1: Linear relation 조회** | Linear에서 관련 Issue 조회 | related issue, 동일 label issue 탐색. 관련 Issue의 _index.md에서 교차 제약 수집 |
 | **Phase 0: 코드 조사** | 코드베이스 탐색 + 아키텍처 가이드 확인 | 영향 범위 파악, 기존 패턴 확인, 기술적 제약 도출 |
 | **Phase 1: How 인터뷰 5항목** | AskUserQuestion으로 사용자와 확정 | 아래 5항목 테이블 참조 |
 
@@ -230,7 +233,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |---|------|------|---------|
 | 1 | Success Criteria | 완료 조건 구체화 | Linear Issue description |
 | 2 | 스펙 | 기능 상세 명세 | Linear Issue description |
-| 3 | Decisions | 설계 결정 사항 | `decisions.md` (lazy-creation) |
+| 3 | Decisions | 설계 결정 사항 | `_index.md > ## Decisions` |
 | 4 | 리스크 | 기술적·일정 리스크 | `plan.md` 리스크 섹션 (Planning 시) |
 | 5 | 범위 경계 | 포함/제외 범위 명시 | Linear Issue description |
 
@@ -244,7 +247,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 6-3. Pre-Plan Q/A 규칙
 
-§11 인터뷰 원칙 적용. 추가로:
+§10 인터뷰 원칙 적용. 추가로:
 - 일괄 질문 허용 — 복수 항목을 한 번에 묶어서 질문 가능
 
 ### 6-4. Post-Plan Q/A
@@ -264,11 +267,11 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 유형 | 목적지 | 비고 |
 |------|--------|------|
 | directive | `.claude/rules/*.md`, `docs/guides/*.md`, `CLAUDE.md` | 지침/규칙 등록 |
-| limitation | `notes.md` (해당 Issue 폴더) | Issue 진행 중 전용 (lazy-creation) |
+| limitation | `_index.md > ## Notes` (해당 Issue 폴더) | Issue 진행 중 전용 |
 | backlog | Linear Issue 신규 생성 | `/등록`과 동일 플로우 |
 
-- 피드백 로그: `notes.md` > `### Feedback Log`에 기록 (파이프라인 진행 중 호출 시). Lazy-creation.
-- Triage 로그: `notes.md` > `### Triage Log`에 기록 (`/점검` 사용 시). Lazy-creation. Linear comment에도 이중 기록.
+- 피드백 로그: `_index.md > ## Notes > ### Feedback Log`에 기록 (파이프라인 진행 중 호출 시)
+- Triage 로그: `_index.md > ## Notes > ### Triage Log`에 기록 (`/점검` 사용 시). Linear comment에도 이중 기록.
 
 ---
 

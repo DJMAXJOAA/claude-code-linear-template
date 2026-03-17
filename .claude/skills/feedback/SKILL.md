@@ -22,14 +22,14 @@
 | 2 | 유형별 대상 문서 + 삽입 위치 제안 |
 | 3 | **G2**: `AskUserQuestion`으로 사용자 승인 (대상 문서 + 위치 + 내용) |
 | 4 | **G3 저장**: 승인된 내용을 대상 문서에 기록 |
-| 5 | 파이프라인 진행 중이면 `notes.md` Feedback Log에 기록 (lazy-creation) |
+| 5 | 파이프라인 진행 중이면 `_index.md > ## Notes > ### Feedback Log`에 기록 |
 
 ## Output
 
 | 항목 | 내용 |
 |------|------|
-| 대상 문서 | 피드백이 등록된 문서 (rules, guides, notes.md 등) |
-| notes.md | Feedback Log 섹션에 기록 (파이프라인 진행 중일 때) |
+| 대상 문서 | 피드백이 등록된 문서 (rules, guides, _index.md 등) |
+| _index.md | Notes > Feedback Log 섹션에 기록 (파이프라인 진행 중일 때) |
 
 ---
 
@@ -38,7 +38,7 @@
 | 유형 | 목적지 | 설명 |
 |------|--------|------|
 | `directive` | `.claude/rules/*.md`, `docs/guides/*.md`, `CLAUDE.md` | 지침/규칙 등록 |
-| `limitation` | `notes.md` (해당 Issue 폴더) | Issue 진행 중 전용 — Known Limitations (lazy-creation) |
+| `limitation` | `_index.md > ## Notes` (해당 Issue 폴더) | Issue 진행 중 전용 — Known Limitations |
 | `backlog` | Linear Issue 신규 생성 | 향후 작업 후보. `/등록`과 동일 플로우 |
 
 ---
@@ -52,7 +52,7 @@
 | 파이프라인 규칙 | `.claude/rules/pipeline.md` | 게이트 규칙, 커밋 규칙 |
 | 프레임워크 가이드 | `docs/guides/*.md` | 원칙 추가, 컨텍스트 관리 |
 | 프로젝트 허브 | `CLAUDE.md` | 금지 항목, 전역 규칙 (200줄 제한 주의) |
-| Known Limitations | `docs/issue/{LINEAR-ID}/notes.md` | 현재 구현의 제약, 임시 구현 |
+| Known Limitations | `docs/{type}/{LINEAR-ID}/_index.md > ## Notes` | 현재 구현의 제약, 임시 구현 |
 | 새 규칙 파일 | `.claude/rules/{new}.md` | 기존 문서에 맞지 않는 새 도메인 |
 
 ---

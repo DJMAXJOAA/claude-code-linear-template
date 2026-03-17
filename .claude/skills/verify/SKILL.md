@@ -1,6 +1,6 @@
 # verify — 구현 완전성 검증
 
-구현 완료 후 Success Criteria, CL S3 검증 조건, 코드 품질을 종합 검증한다. PASS 시 feature-close로 연계.
+구현 완료 후 Success Criteria, CL S3 검증 조건, 코드 품질을 종합 검증한다. 검증 결과(PASS/FAIL)를 반환하며, 후속 처리는 dev-pipeline이 결정한다.
 
 ## Trigger
 
@@ -13,7 +13,7 @@
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description의 Success Criteria |
-| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S3 검증 조건 |
+| cl.md | `docs/{type}/{LINEAR-ID}/cl.md` — S3 검증 조건 |
 | 코드 변경 | 구현된 코드 (git diff 기반) |
 
 ## Process
@@ -25,8 +25,8 @@
 | 3 | **검증 실행**: 각 SC/S3 항목에 대해 테스트 실행, 코드 확인, 빌드 검증 |
 | 4 | **검증 결과 정리**: PASS/FAIL 판정 + 근거 |
 | 5 | **사용자에게 결과 제시**: `AskUserQuestion`으로 G2 검토 |
-| 6a | **PASS**: Linear State 유지 (Verifying). feature-close 호출 안내 |
-| 6b | **FAIL**: 실패 항목 목록 + 수정 방안 제시. implement으로 복귀 안내 |
+| 6a | **PASS**: 검증 결과(PASS)를 반환. dev-pipeline이 feature-close 후속 결정 |
+| 6b | **FAIL**: 실패 항목 목록 + 수정 방안 제시. 검증 결과(FAIL)를 반환. dev-pipeline이 implement 복귀 후속 결정 |
 
 ## Output
 
