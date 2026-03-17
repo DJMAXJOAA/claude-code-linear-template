@@ -1,0 +1,14 @@
+# .gitignore 파일
+.idea/
+.vs/
+
+# OMC 임시 파일
+.omc/*
+
+# OS
+Thumbs.db
+.DS_Store
+NUL
+
+# 기타
+_temp/
