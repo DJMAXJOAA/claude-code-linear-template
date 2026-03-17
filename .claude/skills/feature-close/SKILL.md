@@ -71,6 +71,7 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 | 단계 | 행위 |
 |------|------|
 | 6-1 | Linear MCP로 현재 Issue의 relations 조회 → `blocked-by` 역참조 Issue 목록 수집 |
+| 6-1a | **조기 종료**: relations가 없거나 `blocked-by` 역참조가 없으면 환류 없이 완료 처리 종료 |
 | 6-2 | 각 후행 Issue의 `docs/{type}/{ID}/` 존재 확인 |
 | 6-3 | 존재 시: `_index.md > ## Notes > ### Checkpoints` 섹션에 환류 메시지 append |
 | 6-4 | 환류 메시지 형식: `- [REF] {LINEAR-ID} 완료 — {1줄 요약}. [Linear]({URL})` |
@@ -86,6 +87,14 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 | 특징 | 스킬 자체는 Git 기록 + Linear 갱신(G3)으로 완료 |
 
 > pipeline.md §2-4 참조
+
+---
+
+## OMC 에이전트 연동
+
+> feature-close 자체는 에이전트 연동 없음.
+
+> OMC 비활성 시 pipeline.md §9 참조.
 
 ---
 
