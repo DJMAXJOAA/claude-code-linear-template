@@ -84,3 +84,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 2026-03-17 | T-NF7-01~02 | Guides 2개 작성 완료 | framework.md(10대 원칙 + 3영역 SSOT + 차용/변형/제거), context.md(4대 실패 모드 + PD + 50% + /clear + Linear 로딩) |
 | 2026-03-17 | T-NF5-01~05 | 보조 Skills 5개 작성 완료 | triage(7유형 분류), feedback(3유형), investigation(research 전체 라이프사이클), verify(SC+S3 검증), test(전략+실행) |
 | 2026-03-17 | T-NF6-01~09 | Commands 9개 작성 완료 | 등록/활성화/점검/커밋/피드백/조사/검증/병합/현황. 간결한 스킬 호출+인자 매핑 패턴 |
+| 2026-03-17 | Phase 3.5-A | Critical 7건 해소 | MCP 도구명 일괄 교체(CR1 콜사이트별 매핑), improvement 테이블 수정, 상태 전이 이중정의 해소(D32), research 라우팅 명확화, 조사 독립모드 제거, 병합 Linear 면제, 게이트 면제 선언 |
+| 2026-03-17 | Phase 3.5-B | 구조 변경 4건 | B1: docs/{type}/ 폴더 분리(D30). B2: decisions/notes → _index.md 통합(D31). B3: RPT 태스크 보고서 제거(D33, research RPT 유지). B4: 스킬 간 직접 참조 제거 → "결과 반환, dev-pipeline이 후속 결정" 패턴 |
+| 2026-03-17 | Phase 3.5-C | High 10건 해소 | C1: gen-plan critic 리뷰 제거→Post-Plan Q/A 위임. C2: verify→feature-close G2 명확화. C4: _index.md 갱신 주체 원칙 추가. C5: implement CL S4 실제 구현 반영. C6: feedback backlog→gen-hub 경로. C8: 현황 Priority+20건. C10: 등록 단건 전용 |
+| 2026-03-17 | Phase 3.5-D | Medium/Low 16건 보강 | D1: 전체 스킬 게이트 라벨(G1~G4). D2: 현행 대비 섹션 5개 삭제. D3: OMC fallback 10개 스킬. D4~D16: 커맨드 상호참조, AskUserQuestion 통일, 참조문서 명시, 테스트 분류, 검증 구체화 등 |

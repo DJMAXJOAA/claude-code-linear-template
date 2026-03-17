@@ -79,14 +79,6 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 
 ---
 
-## OMC 에이전트 연동
-
-> feature-close 자체는 에이전트 연동 없음.
-
-> OMC 비활성 시 pipeline.md §9 참조.
-
----
-
 ## G3-terminal 스킬 패턴
 
 | 항목 | 내용 |
