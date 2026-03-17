@@ -57,6 +57,14 @@
 
 ---
 
+## OMC 에이전트 연동
+
+> feedback 자체는 에이전트 연동 없음.
+
+> OMC 비활성 시 pipeline.md §9 참조.
+
+---
+
 ## Linear MCP 호출 패턴
 
 | 시점 | MCP 도구 | 용도 |

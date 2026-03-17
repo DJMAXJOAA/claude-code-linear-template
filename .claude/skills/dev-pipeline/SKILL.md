@@ -134,6 +134,8 @@ Planning 상태에서 plan.md + cl.md 존재 확인 후, 다음 행동을 사용
 | improvement | 설계+구현 | sonnet |
 | research | 분석 | opus |
 
+> OMC 비활성 시 pipeline.md §9 참조.
+
 ---
 
 ## Linear MCP 호출 패턴
