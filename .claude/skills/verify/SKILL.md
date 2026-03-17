@@ -44,7 +44,7 @@
 | **SC 충족** | Linear Issue description의 모든 Success Criteria 충족 |
 | **CL S3** | cl.md S3 테이블의 모든 검증 항목 PASS |
 | **빌드** | 린트 + 타입체크 + 전체 테스트 통과 |
-| **코드 품질** | coding.md 규칙 준수 |
+| **코드 품질** | 프로젝트별 coding rules 준수 (`.claude/rules/coding.md`) |
 | **범위** | Plan 범위 외 변경 없음 |
 
 ---
@@ -55,6 +55,8 @@
 |------|---------|------|
 | 검증 실행 | `oh-my-claudecode:verifier` | sonnet |
 | 코드 리뷰 | `oh-my-claudecode:code-reviewer` | opus (선택) |
+
+> OMC 비활성 시 pipeline.md §9 참조.
 
 ---
 
