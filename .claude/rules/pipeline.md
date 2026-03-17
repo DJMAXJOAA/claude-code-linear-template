@@ -132,7 +132,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | 트리거 | 행동 |
 |--------|------|
-| Plan+CL 생성 시 | CL S1 태스크별 Linear sub-issue 생성 (parent: 해당 Issue) |
+| Plan+CL 생성 시 | CL S1 태스크별 Linear sub-issue 생성 (best-effort. 실패 시 CL S1이 SSOT이므로 진행에 영향 없음) |
 | 태스크 시작 | sub-issue state → In Progress |
 | 태스크 완료 | sub-issue state → Done |
 | CL S1 태스크 변경 시 | 추가된 태스크: 새 sub-issue 생성. 삭제/변경: 기존 sub-issue는 수동 정리 (자동 삭제 안 함) |

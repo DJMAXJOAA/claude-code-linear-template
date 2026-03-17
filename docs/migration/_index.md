@@ -36,8 +36,8 @@ created: 2026-03-17
 | 0 | NF-1: Linear MCP 검증 | **done** (8/8) | MCP 도구 매핑 테이블 → `.omc/handoff/HANDOFF-NF1-verification.md` |
 | 1 | NF-2: CLAUDE.md 템플릿 | **done** (3/3) | `CLAUDE.md` |
 | 1 | NF-3: Rules 작성 | **done** (3/3) | `pipeline.md`, `docs-writing.md` |
-| 2 | NF-4: 핵심 Skills (5개) | pending | dev-pipeline, gen-hub, gen-plan, implement, feature-close |
-| 2 | NF-7: Guides 작성 | pending | `framework.md`, `context.md` |
+| 2 | NF-4: 핵심 Skills (5개) | **done** (5/5) | dev-pipeline, gen-hub, gen-plan, implement, feature-close |
+| 2 | NF-7: Guides 작성 | **done** (2/2) | `framework.md`, `context.md` |
 | 3 | NF-5: 보조 Skills (5개) | pending | triage, feedback, investigation, verify, test |
 | 3 | NF-6: Commands (9개) | pending | 등록, 활성화, 점검, 커밋, 피드백, 조사, 검증, 병합, 현황 |
 | 4 | NF-8: 초기 설정 가이드 | pending | 설정 가이드 문서 |
@@ -64,13 +64,13 @@ NF-1 (MCP 검증)  ←── Gate: 실패 시 중단
 | A1 | CLAUDE.md 템플릿 | `CLAUDE.md` | **done** |
 | A2 | pipeline.md | `.claude/rules/pipeline.md` | **done** |
 | A3 | docs-writing.md | `.claude/rules/docs-writing.md` | **done** |
-| A4 | framework.md | `docs/guides/framework.md` | pending |
-| A5 | context.md | `docs/guides/context.md` | pending |
-| B1 | dev-pipeline SKILL.md | `.claude/skills/dev-pipeline/SKILL.md` | pending |
-| B2 | gen-hub SKILL.md | `.claude/skills/gen-hub/SKILL.md` | pending |
-| B3 | gen-plan SKILL.md | `.claude/skills/gen-plan/SKILL.md` | pending |
-| B4 | implement SKILL.md | `.claude/skills/implement/SKILL.md` | pending |
-| B5 | feature-close SKILL.md | `.claude/skills/feature-close/SKILL.md` | pending |
+| A4 | framework.md | `docs/guides/framework.md` | **done** |
+| A5 | context.md | `docs/guides/context.md` | **done** |
+| B1 | dev-pipeline SKILL.md | `.claude/skills/dev-pipeline/SKILL.md` | **done** |
+| B2 | gen-hub SKILL.md | `.claude/skills/gen-hub/SKILL.md` | **done** |
+| B3 | gen-plan SKILL.md | `.claude/skills/gen-plan/SKILL.md` | **done** |
+| B4 | implement SKILL.md | `.claude/skills/implement/SKILL.md` | **done** |
+| B5 | feature-close SKILL.md | `.claude/skills/feature-close/SKILL.md` | **done** |
 | B6 | triage SKILL.md | `.claude/skills/triage/SKILL.md` | pending |
 | B7 | feedback SKILL.md | `.claude/skills/feedback/SKILL.md` | pending |
 | B8 | investigation SKILL.md | `.claude/skills/investigation/SKILL.md` | pending |
@@ -113,6 +113,6 @@ NF-1 (MCP 검증)  ←── Gate: 실패 시 중단
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 작업 | T-NF3-03 (Rules paths 조건 설정 확인) |
-| 다음 작업 | T-NF4-01 (dev-pipeline SKILL.md 작성) |
-| 비고 | NF-3 완료. pipeline.md 312줄, docs-writing.md 211줄. 09a 스펙 전체 반영 |
+| 마지막 완료 작업 | T-NF7-02 (context.md 작성) |
+| 다음 작업 | T-NF5-01 (triage SKILL.md 작성) |
+| 비고 | Phase 2 완료. 핵심 Skills 5개 + Guides 2개. 09b 스펙 전체 반영 |

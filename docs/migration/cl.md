@@ -39,13 +39,13 @@ created: 2026-03-17
 
 | # | ID | Task | Dependencies | Status |
 |---|-----|------|-------------|--------|
-| 15 | T-NF4-01 | dev-pipeline SKILL.md 작성 — 통합 라우터, type별 분기, Linear MCP 패턴. 설계: 09b §1 | T-NF3-03 | pending |
-| 16 | T-NF4-02 | gen-hub SKILL.md 작성 — Linear Issue + _index.md 생성, type별 description 템플릿. 설계: 09b §2 | T-NF3-03 | pending |
-| 17 | T-NF4-03 | gen-plan SKILL.md 작성 — plan.md + cl.md, `docs/issue/{ID}/` 경로. 설계: 09b §3 | T-NF3-03 | pending |
-| 18 | T-NF4-04 | implement SKILL.md 작성 — CL S1 Micro-tasking + Linear sub-issue. 설계: 09b §4 | T-NF3-03 | pending |
-| 19 | T-NF4-05 | feature-close SKILL.md 작성 — 구현 결과 + Linear Done + 후행 환류. 설계: 09b §5 | T-NF3-03 | pending |
-| 20 | T-NF7-01 | framework.md 작성 — 핵심 원칙 (3영역 SSOT, type별 파이프라인, Micro-tasking, 4단계 게이트, Linear-first). 설계: 09 §6-7, 08 부록A | T-NF3-03 | pending |
-| 21 | T-NF7-02 | context.md 작성 — Progressive Disclosure, 50% 규칙, Pre-Compaction, /clear 타이밍, 4대 실패 모드 + Linear 컨텍스트 로딩. 설계: 08 §4 | T-NF3-03 | pending |
+| 15 | T-NF4-01 | dev-pipeline SKILL.md 작성 — 통합 라우터, type별 분기, Linear MCP 패턴. 설계: 09b §1 | T-NF3-03 | **done** |
+| 16 | T-NF4-02 | gen-hub SKILL.md 작성 — Linear Issue + _index.md 생성, type별 description 템플릿. 설계: 09b §2 | T-NF3-03 | **done** |
+| 17 | T-NF4-03 | gen-plan SKILL.md 작성 — plan.md + cl.md, `docs/issue/{ID}/` 경로. 설계: 09b §3 | T-NF3-03 | **done** |
+| 18 | T-NF4-04 | implement SKILL.md 작성 — CL S1 Micro-tasking + Linear sub-issue. 설계: 09b §4 | T-NF3-03 | **done** |
+| 19 | T-NF4-05 | feature-close SKILL.md 작성 — 구현 결과 + Linear Done + 후행 환류. 설계: 09b §5 | T-NF3-03 | **done** |
+| 20 | T-NF7-01 | framework.md 작성 — 핵심 원칙 (3영역 SSOT, type별 파이프라인, Micro-tasking, 4단계 게이트, Linear-first). 설계: 09 §6-7, 08 부록A | T-NF3-03 | **done** |
+| 21 | T-NF7-02 | context.md 작성 — Progressive Disclosure, 50% 규칙, Pre-Compaction, /clear 타이밍, 4대 실패 모드 + Linear 컨텍스트 로딩. 설계: 08 §4 | T-NF3-03 | **done** |
 
 ### Phase 3: 보조 Skills (NF-5) + Commands (NF-6)
 
@@ -122,7 +122,7 @@ created: 2026-03-17
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 태스크 | T-NF3-03 (Rules paths 조건 설정 확인) |
-| 다음 태스크 | T-NF4-01 (dev-pipeline SKILL.md 작성) |
-| 비고 | NF-3 완료. pipeline.md 312줄 (§1-§11 전체), docs-writing.md 211줄 (§1-§8 전체). 09a 스펙 완전 반영 |
+| 마지막 완료 태스크 | T-NF7-02 (context.md 작성) |
+| 다음 태스크 | T-NF5-01 (triage SKILL.md 작성) |
+| 비고 | Phase 2 완료. 핵심 Skills 5개(09b §1-§5) + Guides 2개(framework.md, context.md). 09b/09 §6-7/08 §4 스펙 반영 |
 | 재개 방법 | `docs/migration/_index.md` + `docs/migration/cl.md` 읽고 Handoff 섹션 확인 |

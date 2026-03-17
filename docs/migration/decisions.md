@@ -57,3 +57,8 @@ created: 2026-03-17
 | I22 | 2026-03-17 | §10(커밋) → §3 병합 | 3줄짜리 독립 섹션을 §3-1에 통합 | 중복 해소 + 줄 수 감소 |
 | I23 | 2026-03-17 | 제거된 속성 테이블 삭제 | docs-writing.md §1-2 제거 | 범용 프레임워크 템플릿에 마이그레이션 맥락 불필요 |
 | I24 | 2026-03-17 | research _index.md 변형 | Documents 테이블에서 Plan/CL 행 생략, 조사 보고서만 | research type은 plan.md/cl.md 미생성 |
+| I25 | 2026-03-17 | Sub-issue best-effort | pipeline.md + gen-plan 통일: sub-issue 생성은 best-effort | CL S1이 SSOT. sub-issue는 가시화 미러 — 강제할 이유 약함 |
+| I26 | 2026-03-17 | bug 수정 프로세스 명시 | dev-pipeline에 bug 직접 수정 5단계 프로세스 추가 | implement 미사용 시 "누가 수정하는지" 공백 해소 |
+| I27 | 2026-03-17 | context.md 중복 해소 | §3/§4/§6을 요약 + pipeline.md 참조로 축소 | 3중 로드(docs-writing + context + pipeline) 시 토큰 낭비 방지 |
+| I28 | 2026-03-17 | framework.md §5 축소 | 차용/변형/제거 매트릭스 → 2줄 참조로 축소 | 범용 프레임워크에 마이그레이션 맥락 불필요 |
+| I29 | 2026-03-17 | improvement Post-Plan Q/A 생략 명시 | dev-pipeline improvement 라우팅에 주석 추가 | 09b "feature 전용" 설계 의도 명확화 |

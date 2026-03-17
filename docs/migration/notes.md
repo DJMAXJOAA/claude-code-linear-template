@@ -80,3 +80,5 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 2026-03-17 | T-NF1-08 | MCP 도구 매핑 테이블 작성 | `.omc/handoff/HANDOFF-NF1-verification.md`에 기록. 17개 도구 매핑 완료 |
 | 2026-03-17 | T-NF2-01~03 | CLAUDE.md 템플릿 작성 완료 | 166줄. FRAMEWORK 7섹션 + PROJECT 5섹션. intensity/omc-check 0건. 09 §5 스펙 준수 |
 | 2026-03-17 | T-NF3-01~03 | pipeline.md + docs-writing.md 작성 완료 | pipeline 312줄(§1-§11), docs-writing 211줄(§1-§8). 09a 스펙 전체 반영. MCP 도구명 하드코딩 0건 |
+| 2026-03-17 | T-NF4-01~05 | 핵심 Skills 5개 작성 완료 | dev-pipeline, gen-hub, gen-plan, implement, feature-close. 09b §1-§5 스펙 반영. MCP 도구명은 ### Linear MCP 섹션에만 |
+| 2026-03-17 | T-NF7-01~02 | Guides 2개 작성 완료 | framework.md(10대 원칙 + 3영역 SSOT + 차용/변형/제거), context.md(4대 실패 모드 + PD + 50% + /clear + Linear 로딩) |
