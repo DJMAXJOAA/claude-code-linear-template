@@ -15,8 +15,8 @@ created: 2026-03-17
 
 | # | ID | Task | Dependencies | Status |
 |---|-----|------|-------------|--------|
-| 1 | T-NF1-01 | Linear MCP 서버 설치 + Claude Code MCP 설정 등록 | — | pending |
-| 2 | T-NF1-02 | Linear API 키 발급 + MCP config 설정 | T-NF1-01 | pending |
+| 1 | T-NF1-01 | Linear MCP 서버 설치 + Claude Code MCP 설정 등록 | — | **done** |
+| 2 | T-NF1-02 | Linear API 키 발급 + MCP config 설정 | T-NF1-01 | **done** (OAuth — 키 불필요) |
 | 3 | T-NF1-03 | 테스트용 Team 생성 (Linear UI) | T-NF1-02 | pending |
 | 4 | T-NF1-04 | Issue CRUD + 상태 변경 라운드트립 검증 | T-NF1-03 | pending |
 | 5 | T-NF1-05 | `linear_get_teams`로 State/Label 목록 조회 확인 | T-NF1-03 | pending |
@@ -122,7 +122,7 @@ created: 2026-03-17
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 태스크 | — (초기 상태) |
-| 다음 태스크 | T-NF1-01 (Linear MCP 서버 설치) |
-| 비고 | 설계 스펙 확인 완료. NF-1 Gate 통과 후 본격 구현 시작 |
+| 마지막 완료 태스크 | T-NF1-02 (MCP 설정 완료) |
+| 다음 태스크 | T-NF1-03~08 (MCP 동작 검증 — 별도 세션에서 진행) |
+| 비고 | Linear 공식 호스팅 MCP (`https://mcp.linear.app/mcp`) 사용, HTTP 방식, OAuth 인증. 대상 프로젝트에서 별도 세션으로 검증 필요 |
 | 재개 방법 | `docs/migration/_index.md` + `docs/migration/cl.md` 읽고 Handoff 섹션 확인 |

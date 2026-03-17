@@ -70,3 +70,5 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 날짜 | 태스크 | 작업 내용 | 비고 |
 |------|--------|----------|------|
 | 2026-03-17 | — | Hub(_index.md) + CL(cl.md) + Decisions + Notes 초기화 | 설계 스펙 전체 확인 완료 |
+| 2026-03-17 | T-NF1-01 | Linear MCP 서버 설치 완료 | `@anthropic/linear-mcp-server` → 공식 호스팅(`https://mcp.linear.app/mcp`)으로 변경 |
+| 2026-03-17 | T-NF1-02 | MCP 설정 완료 | OAuth 방식이라 별도 API 키 불필요. 프로젝트 스코프로 등록됨 |

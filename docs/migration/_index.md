@@ -33,7 +33,7 @@ created: 2026-03-17
 
 | Phase | Feature | 상태 | 산출물 |
 |-------|---------|------|--------|
-| 0 | NF-1: Linear MCP 검증 | pending | MCP 도구 매핑 테이블 |
+| 0 | NF-1: Linear MCP 검증 | **in-progress** (2/8 done) | MCP 도구 매핑 테이블 |
 | 1 | NF-2: CLAUDE.md 템플릿 | pending | `CLAUDE.md` |
 | 1 | NF-3: Rules 작성 | pending | `pipeline.md`, `docs-writing.md` |
 | 2 | NF-4: 핵심 Skills (5개) | pending | dev-pipeline, gen-hub, gen-plan, implement, feature-close |
@@ -113,6 +113,6 @@ NF-1 (MCP 검증)  ←── Gate: 실패 시 중단
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 작업 | 문서 초기화 (Hub + CL 생성) |
-| 다음 작업 | NF-1: Linear MCP 검증 |
-| 비고 | 설계 스펙(09/09a/09b) 확인 완료. 구현 시작 대기 |
+| 마지막 완료 작업 | T-NF1-01~02 (MCP 설치+설정 완료) |
+| 다음 작업 | T-NF1-03~08 (MCP 동작 검증 — **별도 세션에서 진행**) |
+| 비고 | Linear 공식 호스팅 MCP 사용 (HTTP, OAuth). 대상 프로젝트(`claude-code-linear-template`)에서 검증 세션 필요 |
