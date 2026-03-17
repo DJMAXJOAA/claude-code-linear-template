@@ -78,3 +78,4 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 2026-03-17 | T-NF1-06 | Sub-issue 검증 완료 | parentId로 Sub-issue 생성 성공(PRO-6). 독립 상태 변경 가능 확인 |
 | 2026-03-17 | T-NF1-07 | 응답 시간 측정 | 전체 호출 ~1초. 3초 미만 목표 충족 |
 | 2026-03-17 | T-NF1-08 | MCP 도구 매핑 테이블 작성 | `.omc/handoff/HANDOFF-NF1-verification.md`에 기록. 17개 도구 매핑 완료 |
+| 2026-03-17 | T-NF2-01~03 | CLAUDE.md 템플릿 작성 완료 | 166줄. FRAMEWORK 7섹션 + PROJECT 5섹션. intensity/omc-check 0건. 09 §5 스펙 준수 |

@@ -28,9 +28,9 @@ created: 2026-03-17
 
 | # | ID | Task | Dependencies | Status |
 |---|-----|------|-------------|--------|
-| 9 | T-NF2-01 | CLAUDE.md `<!-- FRAMEWORK -->` 섹션 작성 — Pipeline 요약, Context, Commands & Skills 인덱스, Linear Integration, ID System, Rules Delegation, Forbidden | T-NF1-08 | pending |
-| 10 | T-NF2-02 | CLAUDE.md `<!-- PROJECT -->` 섹션 작성 — Project Identity, Tech Stack, Directory Overview, Project Rules, Key References (placeholder) | T-NF2-01 | pending |
-| 11 | T-NF2-03 | CLAUDE.md 200줄 이내 확인 + 토큰 효율 검토 | T-NF2-02 | pending |
+| 9 | T-NF2-01 | CLAUDE.md `<!-- FRAMEWORK -->` 섹션 작성 — Pipeline 요약, Context, Commands & Skills 인덱스, Linear Integration, ID System, Rules Delegation, Forbidden | T-NF1-08 | **done** |
+| 10 | T-NF2-02 | CLAUDE.md `<!-- PROJECT -->` 섹션 작성 — Project Identity, Tech Stack, Directory Overview, Project Rules, Key References (placeholder) | T-NF2-01 | **done** |
+| 11 | T-NF2-03 | CLAUDE.md 200줄 이내 확인 + 토큰 효율 검토 | T-NF2-02 | **done** |
 | 12 | T-NF3-01 | pipeline.md 작성 — §1 type별 워크플로우, §2 4단계 게이트, §3 Micro-tasking, §4 Linear sync, §5 Pre-Compaction, §6 Pre/Post-Plan Q/A, §7 피드백, §8 금지사항, §9 에이전트 라우팅, §10 커밋, §11 인터뷰 원칙 | T-NF2-03 | pending |
 | 13 | T-NF3-02 | docs-writing.md 작성 — §1 Frontmatter, §2 _index.md 템플릿, §3 Lazy-creation, §4 링킹, §5 문서 네이밍, §6 SSOT, §7 스타일, §8 보고서 | T-NF2-03 | pending |
 | 14 | T-NF3-03 | Rules paths 조건 설정 확인 (pipeline: `docs/issue/**`, `.claude/skills/**` / docs-writing: `docs/**`) | T-NF3-01, T-NF3-02 | pending |
@@ -122,7 +122,7 @@ created: 2026-03-17
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 태스크 | T-NF1-08 (NF-1 전체 검증 완료) |
-| 다음 태스크 | T-NF2-01 (CLAUDE.md FRAMEWORK 섹션 작성) |
-| 비고 | NF-1 Gate 통과. MCP 도구 매핑 테이블은 `.omc/handoff/HANDOFF-NF1-verification.md` 참조 |
+| 마지막 완료 태스크 | T-NF2-03 (CLAUDE.md 200줄 확인 + 토큰 효율 검토) |
+| 다음 태스크 | T-NF3-01 (pipeline.md 작성) |
+| 비고 | NF-2 완료 (166줄). MCP 도구 매핑 테이블은 `.omc/handoff/HANDOFF-NF1-verification.md` 참조 |
 | 재개 방법 | `docs/migration/_index.md` + `docs/migration/cl.md` 읽고 Handoff 섹션 확인 |

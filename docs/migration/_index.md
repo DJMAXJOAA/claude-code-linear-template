@@ -34,7 +34,7 @@ created: 2026-03-17
 | Phase | Feature | 상태 | 산출물 |
 |-------|---------|------|--------|
 | 0 | NF-1: Linear MCP 검증 | **done** (8/8) | MCP 도구 매핑 테이블 → `.omc/handoff/HANDOFF-NF1-verification.md` |
-| 1 | NF-2: CLAUDE.md 템플릿 | pending | `CLAUDE.md` |
+| 1 | NF-2: CLAUDE.md 템플릿 | **done** (3/3) | `CLAUDE.md` |
 | 1 | NF-3: Rules 작성 | pending | `pipeline.md`, `docs-writing.md` |
 | 2 | NF-4: 핵심 Skills (5개) | pending | dev-pipeline, gen-hub, gen-plan, implement, feature-close |
 | 2 | NF-7: Guides 작성 | pending | `framework.md`, `context.md` |
@@ -61,7 +61,7 @@ NF-1 (MCP 검증)  ←── Gate: 실패 시 중단
 
 | # | 산출물 | 경로 | 상태 |
 |---|--------|------|------|
-| A1 | CLAUDE.md 템플릿 | `CLAUDE.md` | pending |
+| A1 | CLAUDE.md 템플릿 | `CLAUDE.md` | **done** |
 | A2 | pipeline.md | `.claude/rules/pipeline.md` | pending |
 | A3 | docs-writing.md | `.claude/rules/docs-writing.md` | pending |
 | A4 | framework.md | `docs/guides/framework.md` | pending |
@@ -113,6 +113,6 @@ NF-1 (MCP 검증)  ←── Gate: 실패 시 중단
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 작업 | T-NF1-08 (NF-1 전체 검증 완료) |
-| 다음 작업 | T-NF2-01 (CLAUDE.md FRAMEWORK 섹션 작성) |
-| 비고 | NF-1 Gate 통과. 커스텀 상태(Planning/Testing/Verifying) + Research label 추가 여부 결정 필요 |
+| 마지막 완료 작업 | T-NF2-03 (CLAUDE.md 200줄 확인 + 토큰 효율 검토) |
+| 다음 작업 | T-NF3-01 (pipeline.md 작성) |
+| 비고 | NF-2 완료. CLAUDE.md 166줄. 커스텀 상태(Planning/Testing/Verifying) + Research label 추가 여부 결정 필요 |

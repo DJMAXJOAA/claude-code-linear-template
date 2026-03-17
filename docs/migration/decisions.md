@@ -40,3 +40,13 @@ created: 2026-03-17
 | I5 | 2026-03-17 | state/label 이름 지정 | stateId/labelId 대신 이름(문자열)으로 직접 지정 | MCP 서버가 이름→ID 해석 지원. 스킬에서 ID 캐싱 불필요 |
 | I6 | 2026-03-17 | 커스텀 Workflow States | Planning/Testing/Verifying 추가 필요 | Linear UI Workflow Settings에서 수동 추가. **사용자 확인 대기** |
 | I7 | 2026-03-17 | Research label | 추가 필요 | 4번째 type label. MCP `create_issue_label`로 추가 가능. **사용자 확인 대기** |
+| I8 | 2026-03-17 | Commands & Skills 테이블 축소 | 19행 테이블 → 3행 불릿 | 커맨드 이름 나열은 유지(한글 매칭 힌트), 스킬 테이블 제거. `/` 치면 목록이 나오고, 스킬은 paths 기반 자동 로드 |
+| I9 | 2026-03-17 | Linear Integration SSOT 테이블 제거 | 원칙 1줄 + 참조 링크로 축소 | pipeline.md §4, framework.md에서 반복되는 내용. CLAUDE.md는 원칙만 명시 |
+| I10 | 2026-03-17 | Pipeline type 테이블 제거 | 4행 불릿으로 축소 | pipeline.md에 동일 테이블 존재. CLAUDE.md에서는 위임 |
+| I11 | 2026-03-17 | ID System 파일 구성 테이블 제거 | 4행 불릿으로 축소 | docs-writing.md §2~§3에 상세. CLAUDE.md에서는 요약만 |
+| I12 | 2026-03-17 | Forbidden 이유 컬럼 제거 | 테이블 → 불릿 리스트 | 규칙 자체가 중요. 이유는 framework.md에 위임 |
+| I13 | 2026-03-17 | Rules Delegation 프로젝트별 행 제거 | Project Rules 참조로 대체 | PROJECT 섹션 Project Rules와 중복 |
+| I14 | 2026-03-17 | Linear 컨텍스트 캐싱 규칙 추가 | Context Management에 1줄 추가 | 09a §4-4 읽기 최적화. 모든 세션에서 적용 필요한 가드레일 |
+| I15 | 2026-03-17 | Workflow States 다이어그램 제거 | pipeline.md §1에 위임 | CLAUDE.md Linear Integration 섹션에서 중복 |
+| I16 | 2026-03-17 | CLAUDE.md 총량 | 164줄 → 103줄 (37% 축소) | 토큰 효율 최우선. "상세는 rules/guides에 위임" 원칙 강화 |
+| I17 | 2026-03-17 | 섹션 순서 변경 | PROJECT → FRAMEWORK 순서 | 프로젝트별 내용이 먼저 로드되어 컨텍스트 효율 향상. 사용자가 커스터마이즈할 영역이 상단에 위치 |
