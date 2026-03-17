@@ -17,12 +17,12 @@ created: 2026-03-17
 |---|-----|------|-------------|--------|
 | 1 | T-NF1-01 | Linear MCP 서버 설치 + Claude Code MCP 설정 등록 | — | **done** |
 | 2 | T-NF1-02 | Linear API 키 발급 + MCP config 설정 | T-NF1-01 | **done** (OAuth — 키 불필요) |
-| 3 | T-NF1-03 | 테스트용 Team 생성 (Linear UI) | T-NF1-02 | pending |
-| 4 | T-NF1-04 | Issue CRUD + 상태 변경 라운드트립 검증 | T-NF1-03 | pending |
-| 5 | T-NF1-05 | `linear_get_teams`로 State/Label 목록 조회 확인 | T-NF1-03 | pending |
-| 6 | T-NF1-06 | Sub-issue 생성 (`parentId`) 동작 확인 | T-NF1-04 | pending |
-| 7 | T-NF1-07 | 응답 시간 측정 (< 3초 목표) | T-NF1-04 | pending |
-| 8 | T-NF1-08 | MCP 도구 이름 + 파라미터 매핑 테이블 작성 | T-NF1-05 | pending |
+| 3 | T-NF1-03 | 테스트용 Team 확인 (ProjectX, PRO) | T-NF1-02 | **done** |
+| 4 | T-NF1-04 | Issue CRUD + 상태 변경 라운드트립 검증 | T-NF1-03 | **done** |
+| 5 | T-NF1-05 | State/Label 목록 조회 확인 | T-NF1-03 | **done** |
+| 6 | T-NF1-06 | Sub-issue 생성 (`parentId`) 동작 확인 | T-NF1-04 | **done** |
+| 7 | T-NF1-07 | 응답 시간 측정 (< 3초 목표) — 전체 PASS | T-NF1-04 | **done** |
+| 8 | T-NF1-08 | MCP 도구 매핑 테이블 작성 완료 | T-NF1-05 | **done** |
 
 ### Phase 1: 허브 + Rules (NF-2, NF-3)
 
@@ -122,7 +122,7 @@ created: 2026-03-17
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 태스크 | T-NF1-02 (MCP 설정 완료) |
-| 다음 태스크 | T-NF1-03~08 (MCP 동작 검증 — 별도 세션에서 진행) |
-| 비고 | Linear 공식 호스팅 MCP (`https://mcp.linear.app/mcp`) 사용, HTTP 방식, OAuth 인증. 대상 프로젝트에서 별도 세션으로 검증 필요 |
+| 마지막 완료 태스크 | T-NF1-08 (NF-1 전체 검증 완료) |
+| 다음 태스크 | T-NF2-01 (CLAUDE.md FRAMEWORK 섹션 작성) |
+| 비고 | NF-1 Gate 통과. MCP 도구 매핑 테이블은 `.omc/handoff/HANDOFF-NF1-verification.md` 참조 |
 | 재개 방법 | `docs/migration/_index.md` + `docs/migration/cl.md` 읽고 Handoff 섹션 확인 |

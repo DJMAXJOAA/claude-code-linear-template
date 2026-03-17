@@ -36,3 +36,7 @@ created: 2026-03-17
 | I1 | 2026-03-17 | Linear MCP 서버 방식 | Linear 공식 호스팅 MCP (`https://mcp.linear.app/mcp`, HTTP, OAuth) | API 키 별도 관리 불필요. `.claude.json` projects 섹션에 프로젝트 스코프로 등록 |
 | I2 | 2026-03-17 | MCP 설정 위치 | 프로젝트 스코프 (`.claude.json` > projects > 해당 경로) | 프레임워크 템플릿에 종속. 글로벌 오염 방지 |
 | I3 | 2026-03-17 | NF-1 검증 세션 | 대상 프로젝트에서 별도 세션으로 진행 | 현재 프로젝트에서는 Linear MCP에 접근 불가 (프로젝트 스코프 MCP) |
+| I4 | 2026-03-17 | save_issue upsert 패턴 | id 미지정=Create, id 지정=Update | 별도 create/update 도구 없음. 스킬에서 이 패턴을 추상화 참조 |
+| I5 | 2026-03-17 | state/label 이름 지정 | stateId/labelId 대신 이름(문자열)으로 직접 지정 | MCP 서버가 이름→ID 해석 지원. 스킬에서 ID 캐싱 불필요 |
+| I6 | 2026-03-17 | 커스텀 Workflow States | Planning/Testing/Verifying 추가 필요 | Linear UI Workflow Settings에서 수동 추가. **사용자 확인 대기** |
+| I7 | 2026-03-17 | Research label | 추가 필요 | 4번째 type label. MCP `create_issue_label`로 추가 가능. **사용자 확인 대기** |

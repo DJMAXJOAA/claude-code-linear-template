@@ -72,3 +72,9 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 2026-03-17 | — | Hub(_index.md) + CL(cl.md) + Decisions + Notes 초기화 | 설계 스펙 전체 확인 완료 |
 | 2026-03-17 | T-NF1-01 | Linear MCP 서버 설치 완료 | `@anthropic/linear-mcp-server` → 공식 호스팅(`https://mcp.linear.app/mcp`)으로 변경 |
 | 2026-03-17 | T-NF1-02 | MCP 설정 완료 | OAuth 방식이라 별도 API 키 불필요. 프로젝트 스코프로 등록됨 |
+| 2026-03-17 | T-NF1-03 | Team 확인 | ProjectX (key: PRO, id: `99a27269-...`). 기존 Team 사용 |
+| 2026-03-17 | T-NF1-04 | Issue CRUD 검증 완료 | Create(PRO-5)→Read→Update(Backlog→InProgress→Done)→Canceled 전체 성공. 마크다운 정상 |
+| 2026-03-17 | T-NF1-05 | State/Label 조회 완료 | 기본 States 6개, Labels 3개 확인. 커스텀 상태 3개 + Research label 추가 필요 |
+| 2026-03-17 | T-NF1-06 | Sub-issue 검증 완료 | parentId로 Sub-issue 생성 성공(PRO-6). 독립 상태 변경 가능 확인 |
+| 2026-03-17 | T-NF1-07 | 응답 시간 측정 | 전체 호출 ~1초. 3초 미만 목표 충족 |
+| 2026-03-17 | T-NF1-08 | MCP 도구 매핑 테이블 작성 | `.omc/handoff/HANDOFF-NF1-verification.md`에 기록. 17개 도구 매핑 완료 |
