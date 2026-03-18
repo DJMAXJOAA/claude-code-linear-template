@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    # 템플릿 레포에서만 실행 — 파생 프로젝트에서는 silent skip
+    if: github.repository == 'DJMAXJOAA/claude-code-linear-template'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify framework structure
+        run: |
+          FAIL=0
+
+          # 필수 파일 존재 확인
+          REQUIRED_FILES=(
+            "CLAUDE.md"
+            "README.md"
+            ".claude/rules/pipeline.md"
+            ".claude/rules/docs-writing.md"
+            "docs/guides/framework.md"
+            "docs/guides/context.md"
+            "docs/guides/setup.md"
+          )
+          for f in "${REQUIRED_FILES[@]}"; do
+            test -f "$f" || { echo "FAIL: $f not found"; FAIL=1; }
+          done
+
+          # 필수 스킬 존재 확인 (이름 기반)
+          REQUIRED_SKILLS=(
+            "dev-pipeline" "gen-hub" "gen-plan" "implement" "feature-close"
+            "triage" "feedback" "investigation" "verify" "test"
+          )
+          for s in "${REQUIRED_SKILLS[@]}"; do
+            test -f ".claude/skills/$s/SKILL.md" || { echo "FAIL: skill $s not found"; FAIL=1; }
+          done
+
+          # 필수 커맨드 존재 확인 (이름 기반)
+          REQUIRED_COMMANDS=("등록" "활성화" "점검" "커밋" "피드백" "조사" "검증" "병합" "현황")
+          for c in "${REQUIRED_COMMANDS[@]}"; do
+            test -f ".claude/commands/${c}.md" || { echo "FAIL: command ${c} not found"; FAIL=1; }
+          done
+
+          # CLAUDE.md 줄 수 제한
+          LINES=$(wc -l < CLAUDE.md)
+          [ "$LINES" -le 200 ] || { echo "FAIL: CLAUDE.md ${LINES} lines > 200"; FAIL=1; }
+
+          [ "$FAIL" -eq 0 ] || exit 1
+          echo "All checks passed"
+
+      - name: Create clean archive
+        run: |
+          TAG=${GITHUB_REF_NAME}
+          REPO_NAME=${GITHUB_REPOSITORY##*/}
+          git archive --format=tar.gz --prefix=${REPO_NAME}-${TAG}/ -o release-${TAG}.tar.gz HEAD
+          git archive --format=zip --prefix=${REPO_NAME}-${TAG}/ -o release-${TAG}.zip HEAD
+
+      - name: Create release
+        run: |
+          TAG=${GITHUB_REF_NAME}
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            release-${TAG}.tar.gz \
+            release-${TAG}.zip
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

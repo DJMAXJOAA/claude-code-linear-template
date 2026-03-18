@@ -1,0 +1,5 @@
+# Release Asset에서 제외 (git archive 시 적용)
+# "Use this template"에는 영향 없음 — 파생 프로젝트 방어는 release.yml + 릴리스.md 내부 가드
+.github/workflows/ export-ignore
+.claude/commands/릴리스.md export-ignore
+.gitattributes export-ignore
