@@ -12,9 +12,9 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 |------|------|
 | Linear ID | `PRJ-N` — 완료 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, SC), type, relations |
-| _index.md | `docs/{type}/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
-| plan.md | `docs/{type}/{LINEAR-ID}/plan.md` — 설계 결정 비교 대상 (feature/improvement) |
-| cl.md | `docs/{type}/{LINEAR-ID}/cl.md` — 태스크 완료 상태 확인 (feature/improvement) |
+| _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
+| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 결정 비교 대상 (feature/improvement) |
+| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — 태스크 완료 상태 확인 (feature/improvement) |
 | 검증 결과 | verify Skill 산출물 또는 implement 간략 검증 결과 |
 
 ## Process
@@ -53,10 +53,10 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 |------|------|
 | 6-1 | Linear MCP로 현재 Issue의 relations 조회 → `blocked-by` 역참조 Issue 목록 수집 |
 | 6-1a | **조기 종료**: relations가 없거나 `blocked-by` 역참조가 없으면 환류 없이 완료 처리 종료 |
-| 6-2 | 각 후행 Issue의 `docs/{type}/{ID}/` 존재 확인 |
+| 6-2 | 각 후행 Issue의 `docs/issue/{ID}/` 존재 확인 |
 | 6-3 | 존재 시: `_index.md > ## Notes > ### Checkpoints` 섹션에 환류 메시지 append |
 | 6-4 | 환류 메시지 형식: `- [REF] {LINEAR-ID} 완료 — {1줄 요약}. [Linear]({URL})` |
-| 6-5 | Linear MCP: 후행 Issue에 comment 추가 — `Blocked-by {LINEAR-ID} 완료. 상세: docs/{type}/{LINEAR-ID}/_index.md` |
+| 6-5 | Linear MCP: 후행 Issue에 comment 추가 — `Blocked-by {LINEAR-ID} 완료. 상세: docs/issue/{LINEAR-ID}/_index.md` |
 
 ---
 

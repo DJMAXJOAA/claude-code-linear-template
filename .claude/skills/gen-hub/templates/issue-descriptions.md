@@ -20,7 +20,7 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 ---
 
 ## Git Documents
-- Index: `docs/{type}/{LINEAR-ID}/_index.md`
+- Index: `docs/issue/{LINEAR-ID}/_index.md`
 
 ---
 
@@ -51,7 +51,7 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 ---
 
 ## Git Documents
-- Index: `docs/bug/{LINEAR-ID}/_index.md`
+- Index: `docs/issue/{LINEAR-ID}/_index.md`
 
 ---
 

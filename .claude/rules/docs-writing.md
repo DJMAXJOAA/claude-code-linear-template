@@ -102,13 +102,13 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 ## §5 문서 네이밍
 
-### 5-1. docs/{type}/{LINEAR-ID}/ 하위 파일명
+### 5-1. docs/issue/{LINEAR-ID}/ 하위 파일명
 
 | 파일 | 이름 규칙 | 예시 |
 |------|----------|------|
-| Issue 인덱스 | `_index.md` (고정) | `docs/feature/PRJ-47/_index.md` |
-| Plan | `plan.md` (고정) | `docs/feature/PRJ-47/plan.md` |
-| Checklist | `cl.md` (고정) | `docs/feature/PRJ-47/cl.md` |
+| Issue 인덱스 | `_index.md` (고정) | `docs/issue/PRJ-47/_index.md` |
+| Plan | `plan.md` (고정) | `docs/issue/PRJ-47/plan.md` |
+| Checklist | `cl.md` (고정) | `docs/issue/PRJ-47/cl.md` |
 
 ### 5-2. docs/adr/ 네이밍
 
@@ -128,7 +128,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 경로 | 규칙 | 비고 |
 |------|------|------|
-| `docs/{type}/{LINEAR-ID}/` | type별 폴더 + Linear ID 그대로 사용 (대소문자 유지) | `docs/feature/PRJ-47/`, `docs/bug/PRJ-123/` |
+| `docs/issue/{LINEAR-ID}/` | Linear ID 그대로 사용 (대소문자 유지) | `docs/issue/PRJ-47/`, `docs/issue/PRJ-123/` |
 | `docs/adr/` | 고정 | 변경 불가 |
 | `docs/shared/` | 고정 | 변경 불가 |
 | `docs/spec/` | 고정 | 변경 불가 |

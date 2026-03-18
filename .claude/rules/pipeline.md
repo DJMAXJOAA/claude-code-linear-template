@@ -1,8 +1,6 @@
 ---
 paths:
-  - "docs/feature/**"
-  - "docs/bug/**"
-  - "docs/improvement/**"
+  - "docs/issue/**"
   - ".claude/skills/**"
 description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micro-tasking, Linear sync
 ---

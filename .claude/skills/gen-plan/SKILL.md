@@ -1,6 +1,6 @@
 # gen-plan — plan.md + cl.md 생성
 
-dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/{type}/{LINEAR-ID}/plan.md`와 `cl.md`를 동시 생성한다.
+dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-ID}/plan.md`와 `cl.md`를 동시 생성한다.
 
 ## Trigger
 
@@ -13,7 +13,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/{type}/{LINEAR
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, SC), type, labels, relations |
-| _index.md | `docs/{type}/{LINEAR-ID}/_index.md` — 기존 문서 목록 확인 |
+| _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 목록 확인 |
 | 코드베이스 조사 결과 | Pre-Plan Q/A Phase 0에서 수집된 관련 파일, 아키텍처 가이드 |
 | How 인터뷰 결과 | Pre-Plan Q/A Phase 1에서 확정된 SC, 스펙, Decisions, 리스크, 범위 |
 
@@ -22,7 +22,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/{type}/{LINEAR
 | 단계 | 행위 |
 |------|------|
 | 1 (G1) | **Linear Issue 정보 읽기**: Linear MCP로 description(Overview, SC), type, relations 조회 |
-| 2 (G1) | **Related Issue Known Limitations 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/{type}/{ID}/_index.md`에서 `## 구현 결과` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
+| 2 (G1) | **Related Issue Known Limitations 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/issue/{ID}/_index.md`에서 `## 구현 결과` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
 | 3 (G1) | **plan.md 작성**: 아래 §plan.md 구조에 따라 작성. type에 따라 작성 범위 결정 |
 | 4 (G1) | **cl.md 작성**: 아래 §cl.md 구조에 따라 작성. Plan의 접근 방식에서 태스크 추출 |
 | 5 (G2) | **Plan+CL 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
@@ -34,8 +34,8 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/{type}/{LINEAR
 
 | 항목 | 내용 |
 |------|------|
-| plan.md | `docs/{type}/{LINEAR-ID}/plan.md` |
-| cl.md | `docs/{type}/{LINEAR-ID}/cl.md` |
+| plan.md | `docs/issue/{LINEAR-ID}/plan.md` |
+| cl.md | `docs/issue/{LINEAR-ID}/cl.md` |
 | _index.md | Documents 테이블 갱신 |
 | Linear | State → Planning |
 

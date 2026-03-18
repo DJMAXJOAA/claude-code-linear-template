@@ -37,7 +37,7 @@ Linear를 상태 SSOT로, Git을 지식 SSOT로 사용하는 Claude Code 개발 
 | 영역 | 역할 | 저장소 |
 |------|------|--------|
 | Linear | 상태 (State, Labels, Priority, SC) | Linear API |
-| Git | 지식 (Plan, CL, Decisions, 구현 결과) | docs/{type}/{ID}/ |
+| Git | 지식 (Plan, CL, Decisions, 구현 결과) | docs/issue/{ID}/ |
 | Claude Code | 실행 (Skills, Commands, Rules) | .claude/ |
 
 ## 커맨드 요약

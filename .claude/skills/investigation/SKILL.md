@@ -12,7 +12,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, Scope, Deliverables) |
-| _index.md | `docs/{type}/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
+| _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
 
 ## Process
 
@@ -20,7 +20,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 |------|------|
 | 1 (G1) | **조사 범위 확인**: Linear Issue description의 Scope/Deliverables 읽기 |
 | 2 (G1) | **코드베이스/외부 자료 조사**: `oh-my-claudecode:explore`로 코드 탐색 + 필요 시 외부 문서 참조. 심층 분석이 필요하면 `oh-my-claudecode:scientist`에 분석 위임 |
-| 3 (G1) | **조사 보고서 작성**: `docs/{type}/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` 생성 |
+| 3 (G1) | **조사 보고서 작성**: `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` 생성 |
 | 4 (G2) | **사용자에게 결과 요약 + 확인**: `AskUserQuestion`으로 검토 |
 | 5 (G3) | **_index.md Documents 테이블 갱신**: 조사 보고서 행 추가 |
 | 6 (G4) | **완료 결과를 반환**: 승인 시 완료 결과를 반환. dev-pipeline이 feature-close 결정 |
@@ -29,7 +29,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 
 | 항목 | 내용 |
 |------|------|
-| 조사 보고서 | `docs/{type}/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` |
+| 조사 보고서 | `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` |
 | _index.md | Documents 테이블에 보고서 행 추가 |
 | Linear | State 전이는 feature-close에서 처리 |
 
@@ -57,7 +57,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 | 규칙 | 내용 |
 |------|------|
 | 보고서 대상 | 조사 보고서 (태스크별 L2 보고서는 `_index.md > ## Task Log`로 대체) |
-| 보고서 경로 | `docs/{type}/{LINEAR-ID}/RPT-*.md` (해당 type 폴더 내) |
+| 보고서 경로 | `docs/issue/{LINEAR-ID}/RPT-*.md` |
 | 보고서 frontmatter | `linear_id`, `title`, `type: report`, `created` |
 | 보고서 링킹 | 보고서 → _index.md 역참조 Nav Link 필수 |
 | 보고서 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 |

@@ -13,7 +13,7 @@
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description의 Success Criteria |
-| cl.md | `docs/{type}/{LINEAR-ID}/cl.md` — S3 검증 조건 |
+| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S3 검증 조건 |
 | 코드 변경 | 구현된 코드 (git diff 기반) |
 
 ## Process

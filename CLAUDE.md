@@ -29,7 +29,7 @@
 | `src/` | 프로젝트 소스코드 |
 | *(프로젝트별 추가)* | *(레이어/모듈 구조 등)* |
 
-> 프레임워크 고정 경로(`docs/{type}/`, `docs/adr/`, `.claude/` 등)는 [ID System](#framework-id-system) 참조
+> 프레임워크 고정 경로(`docs/issue/`, `docs/adr/`, `.claude/` 등)는 [ID System](#framework-id-system) 참조
 
 ## Project Rules
 
@@ -81,7 +81,7 @@
 
 ## Framework: ID System
 
-- Issue: Linear ID (`PRJ-47`) — `docs/{type}/PRJ-47/` 폴더에 문서 (type: feature/bug/improvement)
+- Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서. `issue_type` frontmatter로 feature/bug/improvement 구분
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `_index.md`(항상) + `plan.md`, `cl.md`(Planning 시)
 - Spec: `docs/spec/{spec-name}.md` (kebab-case, Living document)
@@ -91,7 +91,7 @@
 
 | 파일 | paths | 역할 |
 |------|-------|------|
-| [pipeline.md](.claude/rules/pipeline.md) | `docs/feature/**`, `docs/bug/**`, `docs/improvement/**`, `.claude/skills/**` | 파이프라인 |
+| [pipeline.md](.claude/rules/pipeline.md) | `docs/issue/**`, `.claude/skills/**` | 파이프라인 |
 | [docs-writing.md](.claude/rules/docs-writing.md) | `docs/**` | 문서 작성 |
 
 프로젝트별 추가 Rules → [Project Rules](#project-rules) 참조

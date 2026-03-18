@@ -172,7 +172,7 @@ cd /path/to/your-project
 mkdir -p docs/adr
 ```
 
-> `docs/feature/`, `docs/bug/`, `docs/improvement/` 디렉토리는 `/등록` 실행 시 자동 생성된다. 미리 만들 필요 없다.
+> `docs/issue/` 디렉토리는 `/등록` 실행 시 자동 생성된다. 미리 만들 필요 없다.
 
 `docs/adr/_index.md`를 초기화한다:
 
@@ -264,12 +264,12 @@ Claude가 아래를 순서대로 안내한다:
 
 Claude가 수행하는 작업:
 1. Linear Issue 생성 (상태: Backlog)
-2. `docs/{type}/{LINEAR-ID}/` 폴더 생성 (예: `docs/feature/MYP-1/`)
+2. `docs/issue/{LINEAR-ID}/` 폴더 생성 (예: `docs/issue/MYP-1/`)
 3. `_index.md` 생성
 
 확인 사항:
 - **Linear UI**: Team → Issues에서 Issue가 Backlog 상태로 생성되었는지
-- **Git**: `docs/feature/MYP-1/_index.md` 파일이 존재하는지
+- **Git**: `docs/issue/MYP-1/_index.md` 파일이 존재하는지
 
 ### 6-2. 활성화
 

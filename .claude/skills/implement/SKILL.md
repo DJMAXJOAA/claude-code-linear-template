@@ -13,8 +13,8 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 항목 | 설명 |
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
-| cl.md | `docs/{type}/{LINEAR-ID}/cl.md` — S1 태스크 목록, S2 완료 기준, S3 검증 조건 |
-| plan.md | `docs/{type}/{LINEAR-ID}/plan.md` — 설계 참조 (필요 시에만 읽기) |
+| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S1 태스크 목록, S2 완료 기준, S3 검증 조건 |
+| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 참조 (필요 시에만 읽기) |
 | type | `feature` / `improvement` — bug는 implement를 사용하지 않음 |
 
 ## Process

@@ -52,7 +52,7 @@
 | 파이프라인 규칙 | `.claude/rules/pipeline.md` | 게이트 규칙, 커밋 규칙 |
 | 프레임워크 가이드 | `docs/guides/*.md` | 원칙 추가, 컨텍스트 관리 |
 | 프로젝트 허브 | `CLAUDE.md` | 금지 항목, 전역 규칙 (200줄 제한 주의) |
-| Known Limitations | `docs/{type}/{LINEAR-ID}/_index.md > ## Notes` | 현재 구현의 제약, 임시 구현 |
+| Known Limitations | `docs/issue/{LINEAR-ID}/_index.md > ## Notes` | 현재 구현의 제약, 임시 구현 |
 | 새 규칙 파일 | `.claude/rules/{new}.md` | 기존 문서에 맞지 않는 새 도메인 |
 
 ---
