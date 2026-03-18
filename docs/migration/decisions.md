@@ -15,7 +15,7 @@ created: 2026-03-17
 |---|------|------|------|------|
 | D1 | 파이프라인 통합 | type(label)별 워크플로우 분기 | Feature/Issue 분리 폐기 | 09 §1 |
 | D2 | intensity 시스템 | 폐기 | type이 프로세스 엄밀도 결정 | 09 §1 |
-| D3 | 폴더 구조 | `docs/issue/{LINEAR-ID}/` 통합 | Issue 종속 문서만 Linear ID 폴더. ADR 등 cross-cutting은 독립 | 09 §4 |
+| D3 | 폴더 구조 | ~~`docs/issue/{LINEAR-ID}/`~~ → **`docs/{type}/{LINEAR-ID}/`** | Phase 3.5-B(B1)에서 type별 폴더로 변경. type별 탐색 용이 + paths 규칙 세분화. ADR 등 cross-cutting은 `docs/adr/` 독립 | 09 §4 → Phase 3.5-B |
 | D4 | CLAUDE.md | 단일 파일 + `<!-- FRAMEWORK -->` / `<!-- PROJECT -->` | 200줄 내외. 상세는 rules/guides에 위임 | 09 §5 |
 | D5 | Hub 파일 | `_index.md` (인덱스 전용) | 상태/개요/SC는 Linear. Git에는 문서 목록 + linear_id 매핑만 | 09 §4 |
 | D6 | 파일 구성 | _index.md + plan.md + cl.md 기본 | decisions.md, notes.md는 lazy-creation | 09 §4 |
@@ -23,7 +23,7 @@ created: 2026-03-17
 | D8 | 커맨드 이름 | /등록, /활성화 | 통합 파이프라인에 맞는 범용 이름 | 09 §2 |
 | D9 | OMC 전제 | 무조건 활성화 | omc-check 제거. 스킬 내용을 직접 정의 | 09 §8 |
 | D10 | Rules 범위 | 프레임워크 고정 2개만 | pipeline.md, docs-writing.md. coding.md 등은 프로젝트별 추가 | 09 §6 |
-| D11 | 폴더명 | `docs/issue/` (단수형) | 단수형이 경로 표기에 자연스러움. `docs/adr/`과 일관 | 09 §12 |
+| D11 | 폴더명 | ~~`docs/issue/`~~ → **`docs/{type}/`** (type별 분리) | Phase 3.5-B에서 D3과 함께 변경. `docs/feature/`, `docs/bug/`, `docs/improvement/`, `docs/research/` 4개 폴더 | 09 §12 → Phase 3.5-B |
 | D12 | research type Plan | plan.md 미생성 | investigation 스킬이 조사 보고서 직접 생성 | 09 §12 |
 | D13 | Domain Notes | `docs/shared/`에 보관 | `docs/shared/domain-{topic}.md` 형태 | 09 §12 |
 

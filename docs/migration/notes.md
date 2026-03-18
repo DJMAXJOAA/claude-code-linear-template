@@ -38,7 +38,8 @@ created: 2026-03-17
 | context.md | 08 §4 | Linear로 개선되는 것, 유지할 것, 변형이 필요한 것 |
 | 보조 Skills | 현행 SKILL.md + 09 §7 | 현행 차용 + Linear 연동 변경점 |
 | Commands | 09 §2 | 커맨드 체계, 유지/제거/신규 목록 |
-| 설정 가이드 | 11-setup-guide.md | Linear 셋업, MCP 설정, 첫 /등록 절차 |
+| 설정 가이드 | **11-setup-guide.md + 12-gap-analysis.md 기반 재작성** | 11 구조 계승 + G1~G5 차이점 반영. 현행 구현 기준 |
+| 차이점 분석 | `.omc/linear-new-plan/12-gap-analysis.md` | OMC 계획 vs 현재 구현 괴리 18건 |
 
 ## 현행 프레임워크와의 관계
 
@@ -88,3 +89,6 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 2026-03-17 | Phase 3.5-B | 구조 변경 4건 | B1: docs/{type}/ 폴더 분리(D30). B2: decisions/notes → _index.md 통합(D31). B3: RPT 태스크 보고서 제거(D33, research RPT 유지). B4: 스킬 간 직접 참조 제거 → "결과 반환, dev-pipeline이 후속 결정" 패턴 |
 | 2026-03-17 | Phase 3.5-C | High 10건 해소 | C1: gen-plan critic 리뷰 제거→Post-Plan Q/A 위임. C2: verify→feature-close G2 명확화. C4: _index.md 갱신 주체 원칙 추가. C5: implement CL S4 실제 구현 반영. C6: feedback backlog→gen-hub 경로. C8: 현황 Priority+20건. C10: 등록 단건 전용 |
 | 2026-03-17 | Phase 3.5-D | Medium/Low 16건 보강 | D1: 전체 스킬 게이트 라벨(G1~G4). D2: 현행 대비 섹션 5개 삭제. D3: OMC fallback 10개 스킬. D4~D16: 커맨드 상호참조, AskUserQuestion 통일, 참조문서 명시, 테스트 분류, 검증 구체화 등 |
+| 2026-03-18 | Phase 4A | 정합성 보정 3건 | T-FIX-01: decisions.md D3/D11 갱신(`docs/{type}/`). T-FIX-02: _index.md G1~G5 구조 변경 요약. T-FIX-03: notes.md 설계 참조 갱신 |
+| 2026-03-18 | T-NF8-01~02 | 초기 설정 가이드 작성 완료 | `docs/guides/setup.md` (10섹션). 11-setup-guide.md 구조 계승 + G1~G5 반영 재작성. 공식 MCP+OAuth, `docs/{type}/`, PROJECT→FRAMEWORK 순서 |
+| 2026-03-18 | T-NF9-01~07 | 통합 검증 7/7 PASS | 완전성(25개)·참조(4경로)·시나리오(4type)·범용성·잔재(0건)·MCP추상화·줄수(104≤200) |

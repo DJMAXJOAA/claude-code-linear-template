@@ -44,8 +44,8 @@ created: 2026-03-17
 | 3.5 | Phase B: 구조 변경 (4건) | **done** | type별 폴더, 문서 통합, RPT 제거, 직접 참조 제거 |
 | 3.5 | Phase C: High 해소 (10건) | **done** | gen-plan 축소, verify→close 명확화, 커맨드 보강 |
 | 3.5 | Phase D: Medium/Low 보강 (16건) | **done** | 게이트 라벨, 현행 대비 삭제, OMC fallback, 상호 참조 |
-| 4 | NF-8: 초기 설정 가이드 | pending | 설정 가이드 문서 |
-| 4 | NF-9: 통합 검증 | pending | 검증 보고서 |
+| 4 | NF-8: 초기 설정 가이드 | **done** (2/2) | `docs/guides/setup.md` — 현행 구현 기준 재작성 |
+| 4 | NF-9: 통합 검증 | **done** (7/7 PASS) | 완전성·참조·시나리오·범용성·잔재·MCP·줄수 전항목 통과 |
 
 ## 의존 그래프
 
@@ -113,12 +113,24 @@ NF-1 (MCP 검증)  ←── Gate: 실패 시 중단
 | 프레임워크 분석 | `C:\CHJ\claude-project-template\.omc\linear-migration\08-framework-analysis.md` |
 | 핸드오프 | `C:\CHJ\claude-project-template\.omc\linear-migration\HANDOFF-new-framework.md` |
 
+## 구조적 변경 (Phase 3.5 이후 — 스펙 09 대비)
+
+> 12-gap-analysis.md에서 식별. 구현이 스펙 09를 초과/이탈한 항목. 모두 구현 측이 더 나은 선택.
+
+| ID | 변경 | 스펙 09 | 현재 구현 |
+|----|------|---------|----------|
+| G1 | 폴더 구조 | `docs/issue/{LINEAR-ID}/` | `docs/{type}/{LINEAR-ID}/` (type별 분리) |
+| G2 | MCP 서버 | `@cline/linear-mcp` + API Key | Linear 공식 호스팅 MCP + OAuth |
+| G3 | ID 해석 | stateId/labelId 캐싱 | 이름(문자열) 직접 지정 |
+| G4 | MCP 도구 | `linear_create_issue` 등 CRUD 분리 | `save_issue` upsert 패턴 |
+| G5 | CLAUDE.md 순서 | FRAMEWORK → PROJECT | PROJECT → FRAMEWORK |
+
 ## Handoff
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 작업 | Phase 3.5-D (Medium/Low 보강 16건) |
-| 다음 작업 | T-NF8-01 (초기 설정 가이드 작성) |
-| 비고 | Phase 3.5 완료. 리뷰 35건 반영 (7C+10H+11M+7L). Phase 4 진행 준비 |
+| 마지막 완료 작업 | **Phase 4 전체 완료** (NF-8 설정 가이드 + NF-9 통합 검증 7/7 PASS) |
+| 다음 작업 | — (프레임워크 구축 완료) |
+| 비고 | Phase 0~4 전체 완료. 산출물 25개. 새 프로젝트 적용: `docs/guides/setup.md` |
 
 > **배포 참고**: `docs/migration/`은 프레임워크 구축 이력 문서. 새 프로젝트에 이 템플릿을 적용할 때는 `docs/migration/` 폴더를 제외한다.

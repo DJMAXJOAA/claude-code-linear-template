@@ -70,12 +70,12 @@ created: 2026-03-17
 
 | # | ID | Task | Dependencies | Status |
 |---|-----|------|-------------|--------|
-| 36 | T-NF8-01 | 초기 설정 가이드 작성 — Linear 셋업 → MCP → CLAUDE.md 커스터마이즈 → 첫 /등록. 설계: 11-setup-guide.md | T-NF6-09 | pending |
-| 37 | T-NF8-02 | 프레임워크 고정 파일 vs 프로젝트별 파일 구분 명시 | T-NF8-01 | pending |
-| 38 | T-NF9-01 | 산출물 완전성 확인 — 24개 파일 존재 + 내용 비어있지 않음 | T-NF8-02 | pending |
-| 39 | T-NF9-02 | 참조 일관성 — CLAUDE.md 인덱스가 실제 파일과 일치 | T-NF9-01 | pending |
-| 40 | T-NF9-03 | 시나리오 검증 — `/등록` → `/활성화` → Plan → 구현 → `/점검` → 완료 경로 문서상 완결 | T-NF9-02 | pending |
-| 41 | T-NF9-04 | 범용성 확인 — FRAMEWORK 섹션에 프로젝트 특정 내용 없음 | T-NF9-03 | pending |
+| 36 | T-NF8-01 | 초기 설정 가이드 작성 — `docs/guides/setup.md`. 11-setup-guide.md 구조 계승 + G1~G5 반영 재작성 | T-NF6-09 | **done** |
+| 37 | T-NF8-02 | 프레임워크 고정 파일 vs 프로젝트별 파일 구분 명시 — setup.md §8에 포함 | T-NF8-01 | **done** |
+| 38 | T-NF9-01 | 산출물 완전성 확인 — 25개 파일 존재 + 내용 비어있지 않음 | T-NF8-02 | **done** |
+| 39 | T-NF9-02 | 참조 일관성 — CLAUDE.md 인덱스가 실제 파일과 일치 | T-NF8-02 | **done** |
+| 40 | T-NF9-03 | 시나리오 검증 — type별 `/등록` → `/활성화` → ... → 완료 경로 문서상 완결 | T-NF8-02 | **done** |
+| 41 | T-NF9-04 | 범용성 + intensity/omc-check 잔재 + MCP 추상화 + CLAUDE.md 줄수 확인 | T-NF8-02 | **done** |
 
 ## S2. Done Criteria
 
@@ -122,7 +122,7 @@ created: 2026-03-17
 
 | 항목 | 내용 |
 |------|------|
-| 마지막 완료 태스크 | Phase 3.5-D (Medium/Low 보강) |
-| 다음 태스크 | T-NF8-01 (초기 설정 가이드 작성) |
-| 비고 | Phase 3.5 완료 (리뷰 35건 전체 반영). Phase 4(NF-8 설정 가이드 + NF-9 통합 검증) 준비 |
-| 재개 방법 | `docs/migration/_index.md` + `docs/migration/cl.md` 읽고 Handoff 섹션 확인 |
+| 마지막 완료 태스크 | T-NF9-04 (통합 검증 완료) — **Phase 4 전체 완료** |
+| 다음 태스크 | — (전체 프레임워크 구축 완료) |
+| 비고 | Phase 0~4 전체 완료. 41개 태스크 done. 검증 7/7 PASS. 산출물 25개 |
+| 재개 방법 | 프레임워크 구축 완료. 새 프로젝트 적용은 `docs/guides/setup.md` 참조 |
