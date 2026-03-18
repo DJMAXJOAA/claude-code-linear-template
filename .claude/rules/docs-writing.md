@@ -14,7 +14,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|:----:|------|
 | `linear_id` | 문자열 (예: `PRJ-47`) | O | Linear Issue ID. 해당 Issue와 무관한 문서(ADR, shared)는 제외 |
 | `title` | 문자열 | O | 문서 제목 |
-| `type` | `index` / `plan` / `checklist` / `report` / `adr` / `shared` | O | 문서 유형 |
+| `type` | `index` / `plan` / `checklist` / `report` / `adr` / `shared` / `spec` | O | 문서 유형 |
 | `issue_type` | `feature` / `bug` / `improvement` | △ | Issue 유형. `_index.md`에만 필수 |
 | `created` | ISO 날짜 (예: `2026-03-17`) | O | 작성일 |
 
@@ -27,6 +27,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `cl.md` (태스크/검증 SSOT) | `linear_id`, `title`, `type: checklist`, `created` | title = "CL: {Issue 제목}" |
 | ADR (`docs/adr/`) | `title`, `type: adr`, `created` | linear_id 없음 (cross-cutting) |
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
+| Spec (`docs/spec/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). Living document이므로 `updated` 필수 |
 
 ---
 
@@ -53,6 +54,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `_index.md` | `/등록` | 항상 생성 |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
 | `cl.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (plan.md와 동시) |
+| `docs/spec/{name}.md` | `/스펙` | 항상 생성 |
 
 ### Lazy-creation 행동 치환표
 
@@ -92,6 +94,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | _index.md | `> [Linear Issue]({URL})` — Linear Issue 링크 |
 | plan.md, cl.md | `> ← [_index.md](./_index.md) \| [Linear Issue]({URL})` — 상위 인덱스 + Linear |
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
+| Spec | `> ← [Spec Index](./_index.md)` — spec 인덱스 |
 
 > 테이블 내 `\|`는 마크다운 이스케이프. 실제 파일에는 `|`로 기록.
 
@@ -128,6 +131,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `docs/{type}/{LINEAR-ID}/` | type별 폴더 + Linear ID 그대로 사용 (대소문자 유지) | `docs/feature/PRJ-47/`, `docs/bug/PRJ-123/` |
 | `docs/adr/` | 고정 | 변경 불가 |
 | `docs/shared/` | 고정 | 변경 불가 |
+| `docs/spec/` | 고정 | 변경 불가 |
 | `docs/guides/` | 고정 | 변경 불가 |
 
 ---
@@ -141,6 +145,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | Linear = 상태 원천 | 진행 상태, 라벨, 프로젝트, relation은 Linear가 SSOT. Git에 상태 복제 금지 |
 | _index.md = 인덱스 원천 | Issue 폴더 내 문서 목록 + Linear ID 매핑 |
 | 중복 기술 금지 | 동일 정보를 여러 문서에 복제하지 않고 링크로 연결 |
+| Spec = 기능 명세 원천 | 기능 요구사항, 기술 명세는 spec 문서가 SSOT. plan.md는 "How" 설계, spec은 "What/Why" 명세 |
 
 ---
 
@@ -162,3 +167,17 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 보고서 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 |
 
 > 보고서 생성 규칙 상세: [investigation SKILL.md](../.claude/skills/investigation/SKILL.md) 참조
+
+---
+
+## §9 spec 갱신 규칙
+
+| 규칙 | 내용 |
+|------|------|
+| 생명주기 | Living document — 구현 진행 중 갱신 가능 |
+| 초기 생성 | `/스펙` 스킬이 조사 → 인터뷰 → spec 문서 생성 |
+| 연동 갱신 | feature-close 시 링크된 spec의 Related Issues + Change Log 갱신 |
+| `updated` 갱신 | spec 문서 변경 시 frontmatter `updated` 날짜 반드시 갱신 |
+| _index.md 자동 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
+
+> spec 생성 규칙 상세: [spec SKILL.md](../.claude/skills/spec/SKILL.md) 참조

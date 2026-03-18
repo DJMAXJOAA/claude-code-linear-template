@@ -33,7 +33,8 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 ├─ Relations                ├─ Known Limitations      └─ CL S1 의존성 그래프
 ├─ Priority                 ├─ Constraints
 ├─ Overview / SC            ├─ 구현 결과
-└─ Activity (자동 이력)     └─ ADR, 도메인 지식
+└─ Activity (자동 이력)     ├─ Spec (docs/spec/)
+                            └─ ADR, 도메인 지식
 ```
 
 ### 교차 복제 금지 규칙
@@ -53,6 +54,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | Git → Linear | `_index.md` blockquote에 Linear Issue URL. frontmatter `linear_id` |
 | Claude Code → Linear | 스킬의 `### Linear MCP` 섹션에 호출 패턴 정의 |
 | Claude Code → Git | 스킬이 `docs/{type}/{ID}/` 하위 파일 직접 생성/갱신 |
+| Linear Document → Git spec | Document에 `docs/spec/{name}.md#section` 앵커 링크. 상세 결정은 Document에 작성 |
 
 ---
 

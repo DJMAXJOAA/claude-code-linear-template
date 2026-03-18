@@ -17,18 +17,19 @@
 | 태그 | Linear Label로 등록할 태그 목록. AI가 컨텍스트 기반 추천 → 사용자 승인 |
 | 마일스톤 | Linear Project에 매핑할 마일스톤 (선택) |
 | Priority | High / Medium / Low (선택, 기본값: Medium) |
+| spec 레퍼런스 | 관련 spec 문서 경로 + 섹션 앵커 (선택). 예: `docs/spec/combat-system.md#functional-requirements` |
 
 ## Process
 
 | 단계 | 행위 |
 |------|------|
-| 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그/마일스톤은 AI 추천 후 승인 |
+| 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그/마일스톤은 AI 추천 후 승인. spec 레퍼런스는 사용자 직접 지정 또는 AI가 `docs/spec/` 탐색 후 추천 |
 | 2 (G2) | **type별 description 구성 + 사용자 승인**: 아래 §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 → `AskUserQuestion`으로 내용 확인 |
 | 3 (G3) | **Linear Issue 생성**: Linear MCP로 Issue 생성 — title, description, labels(type + 태그), project(마일스톤), state: Backlog |
 | 4 (G3) | **Linear Issue ID 획득**: 응답에서 `PRJ-N` 형식의 ID + URL 추출 |
 | 5 (G3) | **Git 폴더 생성**: `docs/{type}/{LINEAR-ID}/` 디렉토리 생성 |
-| 6 (G3) | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지) |
-| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Git Documents` 섹션에 `docs/{type}/{LINEAR-ID}/_index.md` 경로 기록 |
+| 6 (G3) | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지). spec 레퍼런스가 있으면 Documents 테이블에 Spec 행 추가 |
+| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Git Documents` 섹션에 `docs/{type}/{LINEAR-ID}/_index.md` 경로 기록. spec 레퍼런스 존재 시 spec 경로도 삽입 |
 
 ## Output
 

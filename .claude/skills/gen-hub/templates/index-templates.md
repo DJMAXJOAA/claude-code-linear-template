@@ -43,6 +43,7 @@ created: {YYYY-MM-DD}
 |------|------|------|
 | Plan | — | 미생성 |
 | Checklist | — | 미생성 |
+| Spec | {spec 레퍼런스 존재 시: [spec-name.md](../../spec/spec-name.md) + ✅, 미존재 시: 행 자체 생략} | {선택적} |
 
 ## Decisions
 

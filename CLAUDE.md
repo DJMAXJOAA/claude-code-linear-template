@@ -45,6 +45,7 @@
 |------|------|------|
 | 프레임워크 가이드 | [docs/guides/framework.md](docs/guides/framework.md) | 핵심 원칙, 3영역 SSOT |
 | 컨텍스트 관리 | [docs/guides/context.md](docs/guides/context.md) | Progressive Disclosure, 토큰 관리 |
+| Spec 인덱스 | [docs/spec/_index.md](docs/spec/_index.md) | 기능 명세 인덱스 |
 | *(프로젝트별 추가)* | *(경로)* | *(설명)* |
 
 <!-- ============ FRAMEWORK ============ -->
@@ -68,8 +69,8 @@
 
 ## Framework: Commands
 
-- 커맨드 9개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`
-- 스킬 10개: 각 `.claude/skills/*/SKILL.md`에 정의
+- 커맨드 10개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`, `/스펙`
+- 스킬 13개: 각 `.claude/skills/*/SKILL.md`에 정의
 - 커맨드 → 스킬 매핑은 각 커맨드 파일 내부에 명시
 
 ## Framework: Linear Integration
@@ -83,6 +84,7 @@
 - Issue: Linear ID (`PRJ-47`) — `docs/{type}/PRJ-47/` 폴더에 문서 (type: feature/bug/improvement)
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `_index.md`(항상) + `plan.md`, `cl.md`(Planning 시)
+- Spec: `docs/spec/{spec-name}.md` (kebab-case, Living document)
 - 상세: [.claude/rules/docs-writing.md](.claude/rules/docs-writing.md)
 
 ## Framework: Rules Delegation

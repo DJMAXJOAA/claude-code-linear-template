@@ -27,6 +27,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |
 | 5 (G3) | **Linear comment 기록**: Linear MCP로 완료 요약 기록 (구현 결과 1~3줄 요약 + 설계 이탈 유무 + 미해결 이슈 유무) |
 | 6 (G3) | **후행 Issue 참조 환류**: 아래 §후행 Issue 환류 참조 |
+| 7 (G3) | **spec 연동 갱신**: 아래 §spec 연동 갱신 참조 |
 
 ## Output
 
@@ -36,6 +37,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 | Linear | State → Done |
 | Linear comment | 완료 요약 기록 |
 | 후행 Issue | _index.md Notes 환류 메시지 + Linear comment (대상 존재 시) |
+| spec 문서 | Related Issues + Change Log 갱신 (링크된 spec 존재 시) |
 
 ---
 
@@ -55,6 +57,22 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 | 6-3 | 존재 시: `_index.md > ## Notes > ### Checkpoints` 섹션에 환류 메시지 append |
 | 6-4 | 환류 메시지 형식: `- [REF] {LINEAR-ID} 완료 — {1줄 요약}. [Linear]({URL})` |
 | 6-5 | Linear MCP: 후행 Issue에 comment 추가 — `Blocked-by {LINEAR-ID} 완료. 상세: docs/{type}/{LINEAR-ID}/_index.md` |
+
+---
+
+## spec 연동 갱신
+
+| 단계 | 행위 |
+|------|------|
+| 7-1 | `_index.md` Documents 테이블에서 Spec 행 확인. 없으면 스킵 |
+| 7-2 | spec 문서 로드 → `## Related Issues` 테이블에 현재 Issue 완료 상태 갱신 |
+| 7-3 | 구현 결과에서 spec 변경이 필요한 내용 감지 (설계 이탈, 추가 요구사항 등) |
+| 7-4 | 변경 필요 시: `AskUserQuestion`으로 spec 갱신 내용 확인 → 승인 시 spec 문서 갱신 |
+| 7-5 | spec 문서의 `## Change Log`에 변경 이력 추가 |
+| 7-6 | spec frontmatter `updated` 날짜 갱신 |
+| 7-7 | `docs/spec/_index.md` 목록 테이블의 수정일 자동 갱신 |
+
+> spec 전체 로드 대신 Related Issues + Change Log 섹션만 선택적 로드 (컨텍스트 절약)
 
 ---
 

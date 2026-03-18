@@ -87,7 +87,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | 섹션 | 갱신 주체 스킬 | 시점 |
 |------|-------------|------|
-| Documents 테이블 | gen-hub(초기), gen-plan(plan/cl 행), investigation(보고서 행) | 파일 생성/삭제 시 |
+| Documents 테이블 | gen-hub(초기, Spec 행 포함), gen-plan(plan/cl 행), investigation(보고서 행), feature-close(Spec 갱신) | 파일 생성/삭제 시 |
 | ## Decisions | dev-pipeline (Pre-Plan Q/A) | 설계 결정 확정 시 |
 | ## Notes | feedback, triage, feature-close | 피드백/triage/환류 발생 시 |
 | ## Task Log | implement | 태스크 완료 시 |
@@ -202,11 +202,12 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | 금지 | 이유 |
 |------|------|
-| Issue 구현 중 프레임워크 문서 업데이트 | 범위 분리 |
+| Issue 구현 중 프레임워크 문서 업데이트 | 범위 분리. 단, 링크된 spec의 Related Issues/Change Log 갱신은 feature-close에서 허용 |
 | 리뷰 단계에서 즉시 코드 수정 | 메모만 — 계획 우선 |
 | 검증 실패 시 임의 우회 | 계획 수정 후 재구현 |
 | 계획 범위 외 코드 수정 | 범위 초과 금지 |
 | Linear 상태를 Git 파일에 복제 | 상태 SSOT = Linear. Git에 status 속성 금지 |
+| `docs/archive/feature-roadmap/` 마일스톤 문서 참조 | 절대 금지. 사용 불가 |
 
 ---
 
@@ -236,10 +237,21 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | test | 기본 모델로 직접 테스트 전략 수립·실행 |
 | verify | 기본 모델로 직접 검증 |
 | feedback, gen-hub, gen-plan, feature-close | 에이전트 연동 없음 — 영향 없음 |
+| spec | 기본 모델로 직접 조사/인터뷰. explore/scientist 에이전트 대신 직접 탐색 |
 
 ---
 
-## §10 인터뷰 원칙
+## §10 파이프라인 외부 스킬
+
+| 스킬 | 설명 |
+|------|------|
+| `/스펙` (spec) | 기능 명세 생성. Issue 파이프라인(`/등록`→`/활성화`)과 독립. `/등록` 시 spec 레퍼런스를 프롬프트로 전달하여 연동 |
+
+> 파이프라인 외부 스킬은 Linear Issue 상태 전이를 수행하지 않는다.
+
+---
+
+## §11 인터뷰 원칙
 
 | 규칙 | 내용 |
 |------|------|
