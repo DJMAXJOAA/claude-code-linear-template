@@ -172,7 +172,7 @@ cd /path/to/your-project
 mkdir -p docs/adr
 ```
 
-> `docs/feature/`, `docs/bug/`, `docs/improvement/`, `docs/research/` 디렉토리는 `/등록` 실행 시 자동 생성된다. 미리 만들 필요 없다.
+> `docs/feature/`, `docs/bug/`, `docs/improvement/` 디렉토리는 `/등록` 실행 시 자동 생성된다. 미리 만들 필요 없다.
 
 `docs/adr/_index.md`를 초기화한다:
 
@@ -258,7 +258,7 @@ CLAUDE.md는 상단에 `<!-- PROJECT -->` 섹션, 하단에 `<!-- FRAMEWORK -->`
 Claude가 아래를 순서대로 안내한다:
 1. **제목**: 예) `사용자 인증 시스템 구현`
 2. **설명**: 예) `JWT 기반 로그인/로그아웃 + 세션 관리`
-3. **type**: `feature` / `bug` / `improvement` / `research` 선택
+3. **type**: `feature` / `bug` / `improvement` 선택
 4. **태그** (선택): 예) `network`, `security`
 5. **Project** (선택): 예) `Foundation`
 
@@ -284,7 +284,6 @@ Claude가 Linear에서 Issue 상태와 type을 조회한 뒤, type에 따라 다
 | `feature` | Pre-Plan Q/A (SC·스펙·리스크·범위 인터뷰) → gen-plan |
 | `bug` | 버그 현상/재현 조건 확인 → Root Cause 분석 |
 | `improvement` | 개선 목표·범위 확인 → 간략 gen-plan |
-| `research` | 조사 목표·범위 확인 → investigation |
 
 Linear UI에서 Issue 상태가 `Backlog` → `Planning` (또는 `In Progress`)으로 전이되는 것을 확인한다.
 

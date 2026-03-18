@@ -1,11 +1,10 @@
 # feature-close — 완료 처리
 
-verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어, `_index.md`에 구현 결과를 기록하고 Linear Issue를 Done으로 전이한다.
+verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결과를 기록하고 Linear Issue를 Done으로 전이한다.
 
 ## Trigger
 
 - dev-pipeline에서 verify PASS 감지 후 자동 호출 (feature, improvement, bug)
-- research type의 조사 완료 후 호출
 
 ## Input
 
@@ -22,7 +21,7 @@ verify PASS 후(feature/improvement/bug) 또는 research 완료 후 호출되어
 
 | 단계 | 행위 |
 |------|------|
-| 1 (G1) | **구현 결과 수집**: plan.md 설계 결정 vs 실제 구현 비교. 설계 이탈, 미해결 이슈, 실제 인터페이스 요약 수집. bug/research는 수정/조사 결과 요약 |
+| 1 (G1) | **구현 결과 수집**: plan.md 설계 결정 vs 실제 구현 비교. 설계 이탈, 미해결 이슈, 실제 인터페이스 요약 수집. bug는 수정 결과 요약 |
 | 2 (G1) | **_index.md에 "구현 결과" 섹션 lazy-create**: 아래 §구현 결과 섹션 템플릿으로 생성. 이미 존재하면 갱신 |
 | 3 (G2) | **검토**: 구현 결과 요약을 사용자에게 제시 → `AskUserQuestion`으로 확인 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |

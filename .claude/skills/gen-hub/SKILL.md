@@ -13,7 +13,7 @@
 |------|------|
 | 제목 | Issue 제목 |
 | 설명 | What + Why (1~3문장) |
-| type | `feature` / `bug` / `improvement` / `research` — 사용자 지정 또는 AI 추천 |
+| type | `feature` / `bug` / `improvement` — 사용자 지정 또는 AI 추천 |
 | 태그 | Linear Label로 등록할 태그 목록. AI가 컨텍스트 기반 추천 → 사용자 승인 |
 | 마일스톤 | Linear Project에 매핑할 마일스톤 (선택) |
 | Priority | High / Medium / Low (선택, 기본값: Medium) |

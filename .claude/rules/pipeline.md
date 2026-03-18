@@ -3,7 +3,6 @@ paths:
   - "docs/feature/**"
   - "docs/bug/**"
   - "docs/improvement/**"
-  - "docs/research/**"
   - ".claude/skills/**"
 description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micro-tasking, Linear sync
 ---
@@ -19,7 +18,6 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | `feature` | 새 기능 개발 | Full: Planning → In Progress → Testing → Verifying → Done |
 | `bug` | 버그 수정 | Short: In Progress → Verifying → Done |
 | `improvement` | 기존 기능 개선/리팩토링 | Mid: Planning → In Progress → Verifying → Done |
-| `research` | 조사/분석 | Minimal: In Progress → Done |
 
 ### 1-2. 통합 상태 흐름 (Linear Workflow States)
 
@@ -27,18 +25,17 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 1-3. Type별 사용 상태
 
-| State | feature | bug | improvement | research |
-|-------|:-------:|:---:|:-----------:|:--------:|
-| Backlog | O | O | O | O |
-| Planning | O | — | O | — |
-| In Progress | O | O | O | O |
-| Testing | O | — | — | — |
-| Verifying | O | O | O | — |
-| Done | O | O | O | O |
+| State | feature | bug | improvement |
+|-------|:-------:|:---:|:-----------:|
+| Backlog | O | O | O |
+| Planning | O | — | O |
+| In Progress | O | O | O |
+| Testing | O | — | — |
+| Verifying | O | O | O |
+| Done | O | O | O |
 
 - `—` = 해당 type에서 스킵 (자동으로 다음 상태로 전이)
 - feature만 Testing 단계를 거침
-- research는 Planning/Testing/Verifying 모두 스킵
 
 ### 1-4. Type별 스킬 분기
 
@@ -222,7 +219,6 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | feature | opus (설계 단계) → sonnet (구현 단계) |
 | bug | sonnet (분석+수정) |
 | improvement | sonnet (설계+구현) |
-| research | opus (분석) |
 
 각 스킬의 OMC 연동 섹션에 사용할 에이전트가 직접 명시된다. OMC는 항상 활성화 전제.
 

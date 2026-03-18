@@ -20,4 +20,3 @@
 | feature | 실제 인터페이스, 설계 이탈, 미해결 이슈 |
 | improvement | 변경 범위 요약, 설계 이탈 |
 | bug | Root Cause, 수정 방법, 영향 범위 |
-| research | 조사 결과 요약, 핵심 발견사항, 후속 작업 제안 |

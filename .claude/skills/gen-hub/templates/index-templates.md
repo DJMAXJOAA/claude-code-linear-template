@@ -21,7 +21,6 @@
 |------|-----------|----------|---------|
 | `feature` / `improvement` | 포함 | 포함 | 설계 결정과 태스크 진행 추적 필요 |
 | `bug` | 불필요 | 불필요 | `## Notes > ### Root Cause` 섹션 포함. 태스크 없이 직접 수정 |
-| `research` | 불필요 | 불필요 | `## Documents` 테이블에 조사 보고서 행 포함. 설계 결정 없음 |
 
 ---
 
@@ -85,28 +84,3 @@ created: {YYYY-MM-DD}
 {feature-close 시 lazy-creation}
 ```
 
-## research
-
-```markdown
----
-linear_id: {LINEAR-ID}
-title: {제목}
-type: index
-issue_type: research
-created: {YYYY-MM-DD}
----
-
-> [Linear Issue]({LINEAR-API-응답-URL})
-
-## Documents
-
-| 문서 | 경로 | 상태 |
-|------|------|------|
-| 조사 보고서 | — | 미생성 |
-
-## Notes
-
-## 구현 결과
-
-{feature-close 시 lazy-creation}
-```

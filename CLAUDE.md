@@ -53,7 +53,7 @@
 ## Framework: Pipeline
 
 `/등록` → `/활성화` → type별 워크플로우 분기 → 완료
-- type(feature/bug/improvement/research)이 프로세스 깊이 결정
+- type(feature/bug/improvement)이 프로세스 깊이 결정
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
 - 구현: CL S1 기반 Micro-tasking (1 태스크 = 1 커밋)
 - 상세: [.claude/rules/pipeline.md](.claude/rules/pipeline.md)
@@ -80,7 +80,7 @@
 
 ## Framework: ID System
 
-- Issue: Linear ID (`PRJ-47`) — `docs/{type}/PRJ-47/` 폴더에 문서 (type: feature/bug/improvement/research)
+- Issue: Linear ID (`PRJ-47`) — `docs/{type}/PRJ-47/` 폴더에 문서 (type: feature/bug/improvement)
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `_index.md`(항상) + `plan.md`, `cl.md`(Planning 시)
 - 상세: [.claude/rules/docs-writing.md](.claude/rules/docs-writing.md)
@@ -89,7 +89,7 @@
 
 | 파일 | paths | 역할 |
 |------|-------|------|
-| [pipeline.md](.claude/rules/pipeline.md) | `docs/feature/**`, `docs/bug/**`, `docs/improvement/**`, `docs/research/**`, `.claude/skills/**` | 파이프라인 |
+| [pipeline.md](.claude/rules/pipeline.md) | `docs/feature/**`, `docs/bug/**`, `docs/improvement/**`, `.claude/skills/**` | 파이프라인 |
 | [docs-writing.md](.claude/rules/docs-writing.md) | `docs/**` | 문서 작성 |
 
 프로젝트별 추가 Rules → [Project Rules](#project-rules) 참조

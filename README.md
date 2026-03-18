@@ -31,7 +31,6 @@ Linear를 상태 SSOT로, Git을 지식 SSOT로 사용하는 Claude Code 개발 
 | feature | Planning → In Progress → Testing → Verifying → Done |
 | bug | In Progress → Verifying → Done |
 | improvement | Planning → In Progress → Verifying → Done |
-| research | In Progress → Done |
 
 ## 3영역 SSOT
 

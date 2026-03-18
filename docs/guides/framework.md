@@ -73,7 +73,6 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | feature | Full | O | O | O |
 | bug | Short | — | — | O |
 | improvement | Mid | O | — | O |
-| research | Minimal | — | — | — |
 
 > 상세: [pipeline.md](../../.claude/rules/pipeline.md) §1
 

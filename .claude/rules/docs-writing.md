@@ -15,17 +15,16 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `linear_id` | 문자열 (예: `PRJ-47`) | O | Linear Issue ID. 해당 Issue와 무관한 문서(ADR, shared)는 제외 |
 | `title` | 문자열 | O | 문서 제목 |
 | `type` | `index` / `plan` / `checklist` / `report` / `adr` / `shared` | O | 문서 유형 |
-| `issue_type` | `feature` / `bug` / `improvement` / `research` | △ | Issue 유형. `_index.md`에만 필수 |
+| `issue_type` | `feature` / `bug` / `improvement` | △ | Issue 유형. `_index.md`에만 필수 |
 | `created` | ISO 날짜 (예: `2026-03-17`) | O | 작성일 |
 
 ### 1-2. 문서 유형별 속성
 
 | 문서 유형 | 속성 | 비고 |
 |----------|------|------|
-| `_index.md` (Issue 인덱스) | `linear_id`, `title`, `type`, `issue_type`, `created` | `type: index`, `issue_type: feature/bug/improvement/research` |
+| `_index.md` (Issue 인덱스) | `linear_id`, `title`, `type`, `issue_type`, `created` | `type: index`, `issue_type: feature/bug/improvement` |
 | `plan.md` (설계 SSOT) | `linear_id`, `title`, `type: plan`, `created` | title = "Plan: {Issue 제목}" |
 | `cl.md` (태스크/검증 SSOT) | `linear_id`, `title`, `type: checklist`, `created` | title = "CL: {Issue 제목}" |
-| `RPT-*.md` (보고서) | `linear_id`, `title`, `type: report`, `created` | research 조사 보고서만 해당 |
 | ADR (`docs/adr/`) | `title`, `type: adr`, `created` | linear_id 없음 (cross-cutting) |
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
 
@@ -54,7 +53,6 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `_index.md` | `/등록` | 항상 생성 |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
 | `cl.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (plan.md와 동시) |
-| `RPT-*.md` (조사 보고서) | investigation 완료 | research type 전용 |
 
 ### Lazy-creation 행동 치환표
 
@@ -94,7 +92,6 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | _index.md | `> [Linear Issue]({URL})` — Linear Issue 링크 |
 | plan.md, cl.md | `> ← [_index.md](./_index.md) \| [Linear Issue]({URL})` — 상위 인덱스 + Linear |
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
-| RPT-*.md | `> ← [_index.md](./_index.md)` — 상위 인덱스 |
 
 > 테이블 내 `\|`는 마크다운 이스케이프. 실제 파일에는 `|`로 기록.
 
@@ -109,7 +106,6 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | Issue 인덱스 | `_index.md` (고정) | `docs/feature/PRJ-47/_index.md` |
 | Plan | `plan.md` (고정) | `docs/feature/PRJ-47/plan.md` |
 | Checklist | `cl.md` (고정) | `docs/feature/PRJ-47/cl.md` |
-| 조사 보고서 | `RPT-{LINEAR-ID}-{YYYYMMDD}.md` | `docs/research/PRJ-47/RPT-PRJ-47-20260317.md` |
 
 ### 5-2. docs/adr/ 네이밍
 
