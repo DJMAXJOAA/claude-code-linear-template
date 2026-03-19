@@ -57,7 +57,7 @@
 - feature/improvement(통합): Todo → Planning → In Progress → In Review → Done
 - bug(경량): Todo → In Progress → In Review → Done (Git 문서 미생성, Linear only)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
-- 구현: CL S1 기반 Micro-tasking (1 태스크 = 1 커밋)
+- 구현: CL S1 기반 Micro-tasking (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)
 - In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → Done
 - 상세: [.claude/rules/pipeline.md](.claude/rules/pipeline.md)
 
