@@ -13,27 +13,38 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | Type | 설명 | 워크플로우 |
 |------|------|-----------|
-| `feature` | 새 기능 개발 | Full: Planning → In Progress → Testing → Verifying → Done |
-| `bug` | 버그 수정 | Short: In Progress → Verifying → Done |
-| `improvement` | 기존 기능 개선/리팩토링 | Mid: Planning → In Progress → Verifying → Done |
+| `feature` / `improvement` | 새 기능 개발 / 기존 기능 개선·리팩토링 | Planning → In Progress → In Review → Done |
+| `bug` | 버그 수정 | In Progress → In Review → Done |
+
+> feature와 improvement는 동일 파이프라인. 차이는 Pre-Plan Q/A 깊이뿐.
 
 ### 1-2. 통합 상태 흐름 (Linear Workflow States)
 
-`Backlog → Planning → In Progress → Testing → Verifying → Done`
+`Backlog → Todo → Planning → In Progress → In Review → Done`
+
+| 상태 | category | 설명 |
+|------|----------|------|
+| Backlog | `backlog` | 미정리/아이디어 |
+| Todo | `unstarted` | 등록 완료, 우선순위 확정 |
+| Planning | `started` | pre-plan + plan (+review) |
+| In Progress | `started` | implement + auto-verify |
+| In Review | `started` | 사용자 직접 확인 |
+| Done | `completed` | 완료 |
+| Canceled | `canceled` | 취소 |
+| (Duplicate) | `canceled` | 중복 |
 
 ### 1-3. Type별 사용 상태
 
-| State | feature | bug | improvement |
-|-------|:-------:|:---:|:-----------:|
-| Backlog | O | O | O |
-| Planning | O | — | O |
-| In Progress | O | O | O |
-| Testing | O | — | — |
-| Verifying | O | O | O |
-| Done | O | O | O |
+| State | feature/improvement | bug |
+|-------|:------------------:|:---:|
+| Backlog | O | O |
+| Todo | O | O |
+| Planning | O | — |
+| In Progress | O | O |
+| In Review | O | O |
+| Done | O | O |
 
 - `—` = 해당 type에서 스킵 (자동으로 다음 상태로 전이)
-- feature만 Testing 단계를 거침
 
 ### 1-4. Type별 스킬 분기
 
@@ -47,6 +58,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 스킵 자동화 | type에 `—`인 상태는 dev-pipeline이 자동으로 다음 상태로 건너뜀 |
 | 전이 시 행동 | 모든 상태 전이는 §4 Linear sync 프로토콜을 경유 |
 | 전이 트리거 | 스킬 완료 시 자동 전이. 사용자가 수동 전이하지 않음 |
+| auto-verify | In Progress 완료 후 verify 스킬 자동 호출. 별도 상태 없음 |
+| In Review 전이 | verify PASS 후 호출 스킬(implement/dev-pipeline)이 In Review로 전이 |
 
 ---
 
@@ -75,9 +88,10 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 대상 | Git 기록 | Linear 갱신 |
 |------|---------|------------|
 | 파이프라인 단계 전환 | `_index.md` Documents 테이블 상태 갱신 | state 전이 |
-| Plan 완료 | `plan.md` + `cl.md` 파일 생성 | state: Backlog → Planning |
+| Plan 완료 | `plan.md` + `cl.md` 파일 생성 | state: Todo → Planning |
 | 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done + 태스크 완료 comment |
-| feature-close | `_index.md` 구현 결과 섹션 기록 | state → Done + 완료 comment + description 최종 미러링 |
+| implement 완료 | verify 자동 호출 → PASS 시 | state → In Review |
+| feature-close | `_index.md` 구현 결과 섹션 기록 (bug: Linear comment만) | state → Done + 완료 comment + description 최종 미러링 |
 
 ### 2-3a. _index.md 갱신 주체 원칙
 
@@ -129,6 +143,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |--------|------------|------|
 | 파이프라인 단계 전환 | Issue 상태 전이 | §1 상태 흐름에 따라 |
 | 태스크 시작/완료 | sub-issue 상태 갱신 + 태스크 완료 comment | Micro-tasking 연동 |
+| verify PASS | 상태 → In Review | implement/dev-pipeline이 전이 수행 |
 | feature-close | 상태 → Done + 완료 comment + description 최종 미러링 | 최종 완료 처리 (1회성 스냅샷) |
 | /점검 결과 기록 | comment 추가 | Git _index.md Notes와 이중 기록 |
 
@@ -148,8 +163,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 규칙 | 내용 |
 |------|------|
 | 이름 기반 지정 | state/label은 이름(문자열)으로 직접 지정. ID 캐싱 불필요 |
-| CL 선택적 읽기 | 구현 단계: S1(태스크 목록)만. 테스트 단계: S3(검증 조건)만 |
-| _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 feature-close 시에만 |
+| CL 선택적 읽기 | 구현 단계: S1(태스크 목록)만. 검증 단계: S3(검증 조건)만 |
+| _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 feature-close 시에만. bug는 _index.md 없음 |
 | Linear 조회 최소화 | /활성화 시 1회 상태 조회 후 세션 내 상태는 내부 추적. 매 태스크마다 재조회 금지 |
 
 ---
@@ -180,7 +195,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |------|----------|------|
 | Plan 완료 후 (Post-Plan Q/A 직후) | 권장 | Planning 컨텍스트 해제, 구현 컨텍스트 확보 |
 | 태스크 3~5개 연속 완료 후 | 권장 | 누적 코드 컨텍스트 해제 |
-| 파이프라인 단계 전환 시 | 권장 | 이전 단계 컨텍스트 불필요 |
+| In Progress → In Review 전환 시 | 권장 | 구현 컨텍스트 해제 |
 | 단일 태스크 중간 | 비권장 | 작업 연속성 손실 위험 |
 
 ---
@@ -215,9 +230,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | type | 기본 에이전트 모델 |
 |------|-----------------|
-| feature | opus (설계 단계) → sonnet (구현 단계) |
-| bug | sonnet (분석+수정) |
-| improvement | sonnet (설계+구현) |
+| feature/improvement | opus (설계 단계) → sonnet (구현 단계) |
+| bug | sonnet (explore → debugger → executor) |
 
 각 스킬의 OMC 연동 섹션에 사용할 에이전트가 직접 명시된다. OMC는 항상 활성화 전제.
 
@@ -229,11 +243,12 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 스킬 | fallback 행동 |
 |------|-------------|
 | dev-pipeline | 기본 모델로 라우팅 수행. explore/critic 에이전트 대신 직접 코드 탐색/리뷰 |
+| bug-fix | 기본 모델로 직접 탐색/분석/수정. explore/debugger/executor 에이전트 대신 직접 수행 |
 | implement | 수동 모드(a)로 fallback. executor/ralph 위임 불가 |
 | triage | 기본 모델로 직접 분류. analyst 없이 사용자 입력 기반 판단 |
 | investigation | 기본 모델로 직접 조사. explore/scientist 에이전트 대신 직접 탐색 |
-| test | 기본 모델로 직접 테스트 전략 수립·실행 |
-| verify | 기본 모델로 직접 검증 |
+| test | 기본 모델로 직접 테스트 전략 수립·실행 (파이프라인 자동 호출 없음, 사용자 요청 시 호출) |
+| verify | 기본 모델로 직접 검증 (implement/dev-pipeline에서 자동 호출) |
 | feedback, gen-hub, gen-plan, feature-close | 에이전트 연동 없음 — 영향 없음 |
 | spec | 기본 모델로 직접 조사/인터뷰. explore/scientist 에이전트 대신 직접 탐색 |
 

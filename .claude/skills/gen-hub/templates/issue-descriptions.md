@@ -60,8 +60,8 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 ## Documents
 | 유형 | 경로 | 설명 |
 |------|------|------|
-| Index | `docs/issue/{LINEAR-ID}/_index.md` | Issue 허브 |
 | {기타} | {경로} | {참조 문서, 스크립트, 설정 등} |
 
-> - 기타 행: 추가 참조 문서 없으면 행 자체 생략
+> - bug는 Git 문서(`_index.md`)를 생성하지 않으므로 Index 행 없음
+> - 참조 문서 없으면 Documents 섹션 자체 생략
 ```

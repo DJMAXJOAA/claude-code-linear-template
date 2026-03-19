@@ -4,7 +4,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 
 ## Trigger
 
-- dev-pipeline에서 Planning 단계 진입 시 (feature: Backlog→Planning, improvement: Backlog→Planning)
+- dev-pipeline에서 Planning 단계 진입 시 (feature/improvement: Todo→Planning)
 - Pre-Plan Q/A 완료 후 자동 호출
 
 ## Input

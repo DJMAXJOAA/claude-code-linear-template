@@ -4,7 +4,8 @@
 
 ## Trigger
 
-- dev-pipeline에서 Verifying 단계 진입 시 (feature, improvement, bug)
+- implement 완료 후 자동 호출 (feature/improvement)
+- bug 수정 완료 후 dev-pipeline에서 자동 호출
 - `/검증` 커맨드에서 구현 검증으로 호출 시 (프레임워크 검증과 별도)
 
 ## Input
@@ -12,8 +13,8 @@
 | 항목 | 설명 |
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
-| Linear Issue 정보 | description의 Success Criteria |
-| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S3 검증 조건 |
+| Linear Issue 정보 | description의 Success Criteria (feature/improvement) 또는 Acceptance Criteria (bug) |
+| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S3 검증 조건 (feature/improvement만. bug는 없음) |
 | 코드 변경 | 구현된 코드 (git diff 기반) |
 
 ## Process
@@ -33,7 +34,8 @@
 | 항목 | 내용 |
 |------|------|
 | 검증 결과 | PASS/FAIL 판정 + 항목별 근거 |
-| Linear | State → Verifying (dev-pipeline이 설정) |
+
+> verify는 Linear 상태 전이를 수행하지 않는다. 호출자(implement/dev-pipeline)가 PASS 시 In Review로 전이.
 
 ---
 

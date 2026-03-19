@@ -54,9 +54,11 @@
 ## Framework: Pipeline
 
 `/등록` → `/활성화` → type별 워크플로우 분기 → 완료
-- type(feature/bug/improvement)이 프로세스 깊이 결정
+- feature/improvement(통합): Todo → Planning → In Progress → In Review → Done
+- bug(경량): Todo → In Progress → In Review → Done (Git 문서 미생성, Linear only)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
 - 구현: CL S1 기반 Micro-tasking (1 태스크 = 1 커밋)
+- In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → Done
 - 상세: [.claude/rules/pipeline.md](.claude/rules/pipeline.md)
 
 ## Framework: Context Management
@@ -70,7 +72,7 @@
 ## Framework: Commands
 
 - 커맨드 10개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`, `/스펙`
-- 스킬 13개: 각 `.claude/skills/*/SKILL.md`에 정의
+- 스킬 11개: 각 `.claude/skills/*/SKILL.md`에 정의
 - 커맨드 → 스킬 매핑은 각 커맨드 파일 내부에 명시
 
 ## Framework: Linear Integration
@@ -81,7 +83,7 @@
 
 ## Framework: ID System
 
-- Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서. `issue_type` frontmatter로 feature/bug/improvement 구분
+- Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서 (bug 제외 — bug는 Git 문서 미생성). `issue_type` frontmatter로 feature/improvement 구분
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `_index.md`(항상) + `plan.md`, `cl.md`(Planning 시)
 - Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + 하위 문서들)

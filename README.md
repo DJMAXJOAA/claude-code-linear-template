@@ -17,7 +17,7 @@ Linear를 상태 SSOT로, Git을 지식 SSOT로 사용하는 Claude Code 개발 
 | CLAUDE.md | 1 | 프로젝트 허브 (PROJECT + FRAMEWORK 섹션) |
 | Rules | 2 | pipeline.md, docs-writing.md |
 | Guides | 3 | framework.md, context.md, setup.md |
-| Skills | 10 | dev-pipeline, gen-hub, gen-plan, implement, feature-close, triage, feedback, investigation, verify, test |
+| Skills | 11 | dev-pipeline, gen-hub, gen-plan, implement, bug-fix, feature-close, triage, feedback, investigation, verify, test |
 | Commands | 9 | /등록, /활성화, /점검, /커밋, /피드백, /조사, /검증, /병합, /현황 |
 
 ## 파이프라인
@@ -28,9 +28,8 @@ Linear를 상태 SSOT로, Git을 지식 SSOT로 사용하는 Claude Code 개발 
 
 | Type | 워크플로우 |
 |------|-----------|
-| feature | Planning → In Progress → Testing → Verifying → Done |
-| bug | In Progress → Verifying → Done |
-| improvement | Planning → In Progress → Verifying → Done |
+| feature / improvement | Planning → In Progress → In Review → Done |
+| bug | In Progress → In Review → Done |
 
 ## 3영역 SSOT
 

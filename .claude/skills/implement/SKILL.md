@@ -5,7 +5,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 
 ## Trigger
 
-- dev-pipeline에서 In Progress 단계 진입 시 (feature, improvement)
+- dev-pipeline에서 In Progress 단계 진입 시 (feature/improvement 통합)
 - `/활성화`에서 In Progress 상태 재개 시
 
 ## Input
@@ -15,7 +15,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S1 태스크 목록, S2 완료 기준, S3 검증 조건 |
 | plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 참조 (필요 시에만 읽기) |
-| type | `feature` / `improvement` — bug는 implement를 사용하지 않음 |
+| type | `feature` / `improvement` (통합 처리) — bug는 implement를 사용하지 않음 |
 
 ## Process
 
@@ -121,11 +121,9 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 |------|------|
 | 4-1 | CL S1 모든 태스크 상태 = `done` 확인 |
 | 4-2 | 최종 빌드/테스트 통과 확인 (전체 테스트 스위트) |
-| 4-3 | **CL S4 갱신**: 실제 구현 결과를 반영하여 S4 수동 테스트 가이드 갱신 (구현 전 작성된 항목 vs 실제 인터페이스 정합) |
-| 4-4 | **수동 테스트 가이드 출력**: CL S4를 읽어 사용자에게 출력 |
-| 4-5 | **`/점검` 안내 출력**: 수동 테스트 후 `/점검`으로 결과 전달 안내 |
-| 4-6 | **완료 분기 대기**: `/점검` 사용 → triage 처리, "없음"/"완료" → 바로 다음 단계 전환 |
-| 4-7 | feature: Linear State → Testing. improvement: Linear State → Verifying |
+| 4-3 | **verify 자동 호출**: verify 스킬 호출하여 SC/S3 검증 수행 |
+| 4-4 | verify PASS 시 **Linear State → In Review** (implement가 전이 수행) |
+| 4-5 | verify FAIL 시 실패 항목 목록 + 수정 방안 제시 → 태스크 루프로 복귀 |
 
 ---
 
@@ -145,4 +143,4 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
 | 태스크 완료마다 | `save_issue` (id 지정) | Sub-issue State → Done |
-| 전체 완료 시 | `save_issue` (id 지정) | parent Issue State 전이 (In Progress → Testing/Verifying) |
+| verify PASS 시 | `save_issue` (id 지정) | parent Issue State 전이 (In Progress → In Review) |

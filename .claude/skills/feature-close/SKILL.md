@@ -4,7 +4,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 
 ## Trigger
 
-- dev-pipeline에서 verify PASS 감지 후 자동 호출 (feature, improvement, bug)
+- In Review에서 사용자 승인 후 자동 호출 (전 type 공통)
 
 ## Input
 
@@ -12,16 +12,18 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 |------|------|
 | Linear ID | `PRJ-N` — 완료 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, SC), type, relations |
-| _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 확인 |
-| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 결정 비교 대상 (feature/improvement) |
-| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — 태스크 완료 상태 확인 (feature/improvement) |
-| 검증 결과 | verify Skill 산출물 또는 implement 간략 검증 결과 |
+| _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 확인 (feature/improvement만. bug는 없음) |
+| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 결정 비교 대상 (feature/improvement만. bug는 없음) |
+| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — 태스크 완료 상태 확인 (feature/improvement만. bug는 없음) |
+| 검증 결과 | verify Skill 산출물 |
 
 ## Process
 
 | 단계 | 행위 |
 |------|------|
-| 1 (G1) | **구현 결과 수집**: plan.md 설계 결정 vs 실제 구현 비교. 설계 이탈, 미해결 이슈, 실제 인터페이스 요약 수집. bug는 수정 결과 요약 |
+| 1 (G1) | **구현 결과 수집**: plan.md 설계 결정 vs 실제 구현 비교. 설계 이탈, 미해결 이슈, 실제 인터페이스 요약 수집 |
+
+> **bug 축약 경로**: bug는 단계 1→3→4→5만 수행. (1) Linear comment에서 수정 결과 요약 수집, (3) 사용자 확인, (4) State → Done, (5) Linear comment 기록. 단계 2(_index.md 갱신), 5a(description 미러링 — Acceptance Criteria 충족만 간략 반영), 6(후행 Issue 환류), 7(spec 연동)은 bug에서 스킵.
 | 2 (G1) | **_index.md에 "구현 결과" 섹션 lazy-create**: 아래 §구현 결과 섹션 템플릿으로 생성. 이미 존재하면 갱신 |
 | 3 (G2) | **검토**: 구현 결과 요약을 사용자에게 제시 → `AskUserQuestion`으로 확인 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |

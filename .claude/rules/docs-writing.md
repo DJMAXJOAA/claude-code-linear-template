@@ -41,7 +41,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 항목 | 규칙 |
 |------|------|
-| 생성 시점 | `/등록` 시 항상 생성 (gen-hub) |
+| 생성 시점 | `/등록` 시 생성 (gen-hub). bug 제외 — bug는 Git 문서 미생성 |
 | Linear Issue 링크 | gen-hub이 Linear API 응답 URL 직접 삽입. 수동 URL 조합 금지 |
 | 구현 결과 섹션 | feature-close 시 lazy-creation |
 
@@ -53,7 +53,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 파일 | 트리거 | 조건 |
 |------|--------|------|
-| `_index.md` | `/등록` | 항상 생성 |
+| `_index.md` | `/등록` | 생성 (bug 제외) |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
 | `cl.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (plan.md와 동시) |
 | `docs/spec/{name}/` | `/스펙` | 디렉토리 + `_index.md` + N개 하위 문서 생성 |

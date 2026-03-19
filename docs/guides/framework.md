@@ -70,11 +70,10 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 
 ## 4. Type별 파이프라인
 
-| Type | 워크플로우 | Planning | Testing | Verifying |
-|------|-----------|:--------:|:-------:|:---------:|
-| feature | Full | O | O | O |
-| bug | Short | — | — | O |
-| improvement | Mid | O | — | O |
+| Type | 워크플로우 | Planning | In Review |
+|------|-----------|:--------:|:---------:|
+| feature/improvement | Planning → In Progress → In Review → Done | O | O |
+| bug | In Progress → In Review → Done | — | O |
 
 > 상세: [pipeline.md](../../.claude/rules/pipeline.md) §1
 
