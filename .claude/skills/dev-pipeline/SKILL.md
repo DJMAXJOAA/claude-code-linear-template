@@ -49,10 +49,12 @@ improvement는 간략 버전으로 수행한다.
 
 | 단계 | 행위 |
 |------|------|
-| 1 | **컨텍스트 수집**: Linear MCP로 related issue 조회 + Label 기반 관련 Issue 필터링. `oh-my-claudecode:explore` 에이전트로 코드베이스 조사 위임 |
-| 2 | **간략 조사**: 관련 파일 탐색 (구현 대상, 의존 모듈), 아키텍처 가이드 참조. improvement는 핵심 파일만 확인 |
-| 3 | **How 인터뷰**: `AskUserQuestion`으로 각 항목 확인. feature는 5항목(SC, 스펙, Decisions, 리스크, 범위). improvement는 3항목(SC, 접근방식, 범위)으로 축소 |
-| 4 | **SC를 Linear description에 기록**: 확정된 SC를 Linear Issue description의 `## Success Criteria` 섹션에 삽입 |
+| 0 | **Linear 상태 갱신**: Linear MCP로 State → Planning 즉시 전이. Pre-Plan Q/A 시작을 Linear에 선반영 |
+| 1 | **컨텍스트 수집**: Linear MCP로 related issue 조회 + Label 기반 관련 Issue 필터링 |
+| 2 | **스코프/조사 인터뷰**: `AskUserQuestion`으로 (a) explore 탐색 범위(전체/특정 모듈/최소) (b) `/조사`(investigation) 실행 여부를 확인 |
+| 3 | **코드베이스 조사**: 인터뷰 결과에 따라 `oh-my-claudecode:explore` 에이전트로 코드베이스 조사 위임. improvement는 핵심 파일만 확인. 조사 선택 시 investigation 스킬 호출 |
+| 4 | **How 인터뷰**: `AskUserQuestion`으로 각 항목 확인. feature는 5항목(SC, 스펙, Decisions, 리스크, 범위). improvement는 3항목(SC, 접근방식, 범위)으로 축소 |
+| 5 | **SC를 Linear description에 기록**: 확정된 SC를 Linear Issue description의 `## Success Criteria` 섹션에 삽입 |
 
 > §10 인터뷰 원칙 적용 (pipeline.md 참조)
 
@@ -91,4 +93,5 @@ Planning 상태에서 plan.md + cl.md 존재 확인 후, 다음 행동을 사용
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
 | 상태 조회 | `get_issue` | Issue의 현재 State + type(Label) + assignee 조회 (단일 Issue) |
+| Pre-Plan 상태 전이 | `save_issue` (id 지정) | State → Planning (Pre-Plan Q/A 시작 전 즉시) |
 | 관련 Issue 조회 | `list_issues` (Label 필터) | Pre-Plan Q/A 컨텍스트 수집 (다수 검색) |

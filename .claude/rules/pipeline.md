@@ -88,7 +88,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 대상 | Git 기록 | Linear 갱신 |
 |------|---------|------------|
 | 파이프라인 단계 전환 | `_index.md` Documents 테이블 상태 갱신 | state 전이 |
-| Plan 완료 | `plan.md` + `cl.md` 파일 생성 | state: Todo → Planning |
+| Pre-Plan 진입 | — (상태 전이만) | state: Todo → Planning (dev-pipeline이 Pre-Plan Q/A 시작 전 즉시 전이) |
+| Plan 완료 | `plan.md` + `cl.md` 파일 생성 | — (이미 Planning 상태) |
 | 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done + 태스크 완료 comment |
 | implement 완료 | verify 자동 호출 → PASS 시 | state → In Review |
 | feature-close | `_index.md` 구현 결과 섹션 기록 (bug: Linear comment만) | state → Done + 완료 comment + description 최종 미러링 |

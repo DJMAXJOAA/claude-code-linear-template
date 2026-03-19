@@ -6,7 +6,7 @@ type별 라우팅 상세 + bug 수정 프로세스.
 
 | 현재 State | 라우팅 대상 | 완료 후 State |
 |-----------|-----------|-------------|
-| Todo | **Pre-Plan Q/A** → gen-plan | Planning |
+| Todo | **Linear → Planning 즉시 전이** → **Pre-Plan Q/A** → gen-plan | Planning |
 | Planning (plan.md 존재) | **Post-Plan Q/A** → implement | In Progress |
 | In Progress | implement Skill | In Progress (태스크 진행) |
 | In Progress (모든 태스크 done) | verify 자동 호출 → PASS 시 In Review 전이 | In Review |
