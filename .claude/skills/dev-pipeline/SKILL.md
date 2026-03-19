@@ -68,7 +68,7 @@ Planning 상태에서 plan.md + cl.md 존재 확인 후, 다음 행동을 사용
 |------|------|
 | 1 | Plan+CL 핵심 요약 제시 |
 | 2 | `AskUserQuestion`으로 사용자 선택: **(a)** 바로 구현 (AI 권장) **(b)** Plan Q&A 인터뷰 **(c)** AI 리뷰 (`oh-my-claudecode:critic`) |
-| 3a | 바로 구현: Linear State → In Progress → implement Skill 호출 |
+| 3a | 바로 구현: plan.md + cl.md + _index.md가 미커밋 상태이면 Git 커밋 수행 → Linear State → In Progress → implement Skill 호출 |
 | 3b | Q&A 인터뷰: Plan 내용 질의응답 → 완료 후 다시 선택(2단계) |
 | 3c | AI 리뷰: `oh-my-claudecode:critic` 에이전트로 리뷰 → 결과 제시 후 다시 선택(2단계) |
 

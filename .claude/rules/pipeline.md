@@ -91,7 +91,9 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | Pre-Plan 진입 | — (상태 전이만) | state: Todo → Planning (dev-pipeline이 Pre-Plan Q/A 시작 전 즉시 전이) |
 | Pre-Plan 완료 | `_index.md` Decisions·Notes 갱신 | — (dev-pipeline이 gen-plan 호출 직전에 수집 정보 선저장) |
 | Plan 완료 | `plan.md` + `cl.md` 파일 생성 | — (이미 Planning 상태) |
-| 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done + 태스크 완료 comment |
+| 구현 진입 | plan.md + cl.md + _index.md 미커밋 시 Git 커밋 (implement 호출 전) | state: Planning → In Progress |
+| 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done |
+| verify 완료 | 미커밋 변경사항 커밋 | Linear comment 1회 (전체 작업 요약) |
 | implement 완료 | verify 자동 호출 → PASS 시 | state → In Review |
 | feature-close | `_index.md` 구현 결과 섹션 기록 (bug: Linear comment만) | state → Done + 완료 comment + description 최종 미러링 |
 
@@ -129,7 +131,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 핵심 규칙 | **에이전트 당 1개 태스크**만 진행 → 결과 검수 → 다음 이동 |
 | 태스크 단위 | CL 문서의 S1 태스크 목록 |
 | 체크리스트 갱신 | 태스크 완료 직후 CL S1 체크박스 즉시 갱신 |
-| 커밋 규칙 | 태스크 1개 = 커밋 1개. Conventional Commits (`feat:`, `fix:`, `docs:` 등). `/커밋` command 참조 |
+| 커밋 규칙 | verify 완료 후 커밋. 작업 규모가 크면 중간 커밋 허용. Conventional Commits (`feat:`, `fix:`, `docs:` 등). `/커밋` command 참조 |
 | 게이트 연계 | 태스크 완료 후 4단계 게이트(§2)를 경유하여 다음 태스크로 이동 |
 | 금지 패턴 | 여러 단계 일괄 지시, "알아서 다 처리해" 식 실행, 같은 파일을 수정하는 태스크 동시 실행 |
 
@@ -144,7 +146,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 트리거 | Linear 행동 | 비고 |
 |--------|------------|------|
 | 파이프라인 단계 전환 | Issue 상태 전이 | §1 상태 흐름에 따라 |
-| 태스크 시작/완료 | sub-issue 상태 갱신 + 태스크 완료 comment | Micro-tasking 연동 |
+| 태스크 시작/완료 | sub-issue 상태 갱신 | Micro-tasking 연동 |
 | Plan 완료 | comment 추가 (태스크 수, 주요 설계 결정) | gen-plan이 기록 |
 | verify 완료 | comment 추가 (PASS/FAIL + 항목별 요약) | verify가 기록 |
 | verify PASS | 상태 → In Review | implement/dev-pipeline이 전이 수행 |

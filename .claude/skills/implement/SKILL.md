@@ -1,7 +1,7 @@
 # implement — Micro-tasking 오케스트레이터
 
 CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한다.
-태스크 선택 → 코드 작성 → 테스트 → 빌드 확인 → CL S1 갱신 → Linear Sub-issue 갱신 → Linear comment 기록 → 커밋 루프.
+태스크 선택 → 코드 작성 → 테스트 → 빌드 확인 → CL S1 갱신 → Linear Sub-issue 갱신 루프. verify 완료 후 커밋 + Linear comment 1회.
 
 ## Trigger
 
@@ -31,8 +31,8 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 |------|------|
 | 코드 변경 | CL S1 태스크에 명시된 범위의 코드 + 테스트 |
 | cl.md 갱신 | S1 태스크 상태, Handoff 섹션, S4 수동 테스트 (실제 구현 반영) |
-| Linear comment | 태스크 완료 시 Linear comment로 간략 로그 기록 |
-| 커밋 | 태스크 1개 = 커밋 1개 (Conventional Commits) |
+| 커밋 | verify 완료 후 커밋. 작업 규모가 크면 중간 커밋 허용 (Conventional Commits) |
+| Linear comment | verify 완료 후 1회 — 전체 작업 내용 간략 요약 |
 | Linear | Sub-issue 상태 Done + parent Issue State 전이 |
 
 ---
@@ -90,8 +90,8 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 3a-5 | 빌드 확인: 린트 + 타입체크 + 테스트 통과 |
 | 3a-6 | CL S1 태스크 상태를 `done`으로 갱신 |
 | 3a-7 | **Linear Sub-issue 갱신**: Linear MCP로 해당 Sub-issue State → Done |
-| 3a-8 | L1 인라인 요약 출력 + Linear comment로 간략 로그 기록 |
-| 3a-9 | 커밋 (태스크 1개 = 커밋 1개) |
+| 3a-8 | L1 인라인 요약 출력 |
+| 3a-9 | 작업 규모가 크면 중간 커밋 수행 (선택적) |
 | 3a-10 | CL Handoff 섹션 갱신 |
 | 3a-11 | 다음 태스크로 루프 (3a-1) — 모든 태스크 `done` 시 완료 조건 처리 |
 
@@ -107,8 +107,8 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 3b-4 | 빌드 확인: 린트 + 타입체크 + 테스트 통과 |
 | 3b-5 | CL S1 태스크 상태를 `done`으로 갱신 |
 | 3b-6 | **Linear Sub-issue 갱신**: Linear MCP로 해당 Sub-issue State → Done |
-| 3b-7 | L1 인라인 요약 (executor 출력) + Linear comment로 간략 로그 기록 |
-| 3b-8 | 커밋 (태스크 1개 = 커밋 1개) |
+| 3b-7 | L1 인라인 요약 (executor 출력) |
+| 3b-8 | 작업 규모가 크면 중간 커밋 수행 (선택적) |
 | 3b-9 | CL Handoff 섹션 갱신 |
 | 3b-10 | 의존성 해소된 독립 태스크 탐색 → 복수 executor 동시 투입 가능 |
 | 3b-11 | 모든 태스크 `done` 시 완료 조건 처리 |
@@ -122,8 +122,9 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 4-1 | CL S1 모든 태스크 상태 = `done` 확인 |
 | 4-2 | 최종 빌드/테스트 통과 확인 (전체 테스트 스위트) |
 | 4-3 | **verify 자동 호출**: verify 스킬 호출하여 SC/S3 검증 수행 |
-| 4-4 | verify PASS 시 **Linear State → In Review** (implement가 전이 수행) |
-| 4-5 | verify FAIL 시 실패 항목 목록 + 수정 방안 제시 → 태스크 루프로 복귀 |
+| 4-4 | verify PASS 시: 미커밋 변경사항 Git 커밋 + **Linear comment 1회** (전체 작업 내용 간략 요약) |
+| 4-5 | **Linear State → In Review** (implement가 전이 수행) |
+| 4-6 | verify FAIL 시 실패 항목 목록 + 수정 방안 제시 → 태스크 루프로 복귀 |
 
 ---
 
@@ -143,4 +144,5 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
 | 태스크 완료마다 | `save_issue` (id 지정) | Sub-issue State → Done |
+| verify PASS 시 | `save_comment` | 전체 작업 내용 간략 요약 comment 1회 |
 | verify PASS 시 | `save_issue` (id 지정) | parent Issue State 전이 (In Progress → In Review) |
