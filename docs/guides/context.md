@@ -34,7 +34,8 @@ created: 2026-03-17
 
 | 단계 | 로드 대상 | 로드하지 않는 것 |
 |------|---------|---------------|
-| `/활성화` | Linear Issue 상태 1회 조회 + `_index.md` Documents 테이블 | plan.md 본문, 다른 Issue 문서 |
+| `/활성화` (라우팅) | Linear Issue 상태 1회 조회 + `_index.md` Documents 테이블 | plan.md 본문, 다른 Issue 문서 |
+| Pre-Plan Q/A | related issue의 `_index.md`(Decisions, Notes) + `plan.md`(존재 시). 최대 5개 issue, 요약만 활용 | related issue의 구현 결과 섹션 (gen-plan에서 별도 참조) |
 | Planning | plan.md, cl.md (작성 대상) | 이전 Issue 문서 |
 | 구현 | CL S1 (태스크 목록만), plan.md (필요 시) | CL S2/S3, 다른 태스크 보고서 |
 | 테스트 | CL S3 (검증 조건만), S4 (수동 테스트) | CL S1, plan.md |
