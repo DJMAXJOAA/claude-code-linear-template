@@ -1,6 +1,6 @@
 # Linear 기반 Claude Code 프레임워크
 
-> 버전: v1.1.0
+> 버전: v1.2.0
 
 Linear를 상태 SSOT로, Git을 지식 SSOT로 사용하는 Claude Code 개발 프레임워크 템플릿.
 
@@ -72,5 +72,6 @@ MIT
 
 | 버전 | 날짜 | 주요 변경 |
 |------|------|----------|
+| v1.2.0 | 2026-03-19 | /등록 템플릿 재구성(Spec Summary/Constraints/SC 초안), Task Log→Linear comment, feature-close Linear 미러링 |
 | v1.1.0 | 2026-03-19 | /스펙 커맨드 추가, docs/issue/ 플랫 구조 전환, spec-driven development 도입, research type 제거 |
 | v1.0.0 | 2026-03-18 | 초기 릴리스. 25개 산출물 (CLAUDE.md + Rules 2 + Guides 3 + Skills 10 + Commands 9) |
