@@ -65,14 +65,15 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 | 단계 | 행위 |
 |------|------|
 | 7-1 | `_index.md` Documents 테이블에서 Spec 행 확인. 없으면 스킵 |
-| 7-2 | spec 문서 로드 → `## Related Issues` 테이블에 현재 Issue 완료 상태 갱신 |
-| 7-3 | 구현 결과에서 spec 변경이 필요한 내용 감지 (설계 이탈, 추가 요구사항 등) |
-| 7-4 | 변경 필요 시: `AskUserQuestion`으로 spec 갱신 내용 확인 → 승인 시 spec 문서 갱신 |
-| 7-5 | spec 문서의 `## Change Log`에 변경 이력 추가 |
-| 7-6 | spec frontmatter `updated` 날짜 갱신 |
-| 7-7 | `docs/spec/_index.md` 목록 테이블의 수정일 자동 갱신 |
+| 7-2 | spec 디렉토리 (`docs/spec/{spec-name}/`) 존재 확인. 경로/링크 없으면 무시 (필수 아님) |
+| 7-3 | spec `_index.md` 로드 → `## Related Issues` 테이블에 현재 Issue 완료 상태 갱신 |
+| 7-4 | 구현 결과에서 spec 변경이 필요한 내용 감지 (설계 이탈, 추가 요구사항 등) |
+| 7-5 | 변경 필요 시: `AskUserQuestion`으로 spec 갱신 내용 확인 → 승인 시 spec 문서 갱신 |
+| 7-6 | spec `_index.md`의 `## Change Log`에 변경 이력 추가 |
+| 7-7 | spec frontmatter `updated` 날짜 갱신 |
+| 7-8 | `docs/spec/_index.md` 글로벌 목록 테이블 자동 갱신 |
 
-> spec 전체 로드 대신 Related Issues + Change Log 섹션만 선택적 로드 (컨텍스트 절약)
+> spec 전체 로드 대신 `_index.md`의 Related Issues + Change Log 섹션만 선택적 로드 (컨텍스트 절약). 경로/링크 없으면 무시.
 
 ---
 

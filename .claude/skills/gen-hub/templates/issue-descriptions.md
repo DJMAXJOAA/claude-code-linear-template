@@ -25,7 +25,7 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 ---
 
 ## Spec Reference
-{spec 레퍼런스 존재 시: `docs/spec/{spec-name}.md#{section}` — 미존재 시 섹션 자체 생략}
+{spec 레퍼런스 존재 시: `docs/spec/{spec-name}/` (디렉토리) 또는 `docs/spec/{spec-name}/{doc}.md#{section}` (하위 문서 앵커) — 미존재 시 섹션 자체 생략}
 
 ---
 

@@ -84,7 +84,7 @@
 - Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서. `issue_type` frontmatter로 feature/bug/improvement 구분
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `_index.md`(항상) + `plan.md`, `cl.md`(Planning 시)
-- Spec: `docs/spec/{spec-name}.md` (kebab-case, Living document)
+- Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + 하위 문서들)
 - 상세: [.claude/rules/docs-writing.md](.claude/rules/docs-writing.md)
 
 ## Framework: Rules Delegation

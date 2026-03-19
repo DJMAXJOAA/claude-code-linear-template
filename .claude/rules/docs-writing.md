@@ -27,7 +27,8 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `cl.md` (태스크/검증 SSOT) | `linear_id`, `title`, `type: checklist`, `created` | title = "CL: {Issue 제목}" |
 | ADR (`docs/adr/`) | `title`, `type: adr`, `created` | linear_id 없음 (cross-cutting) |
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
-| Spec (`docs/spec/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). Living document이므로 `updated` 필수 |
+| Spec `_index.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). 디렉토리 허브 (Overview + 하위 문서 목록) |
+| Spec 하위 문서 (`docs/spec/{name}/`) | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` | `parent-spec`으로 소속 명시 |
 
 ---
 
@@ -54,7 +55,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `_index.md` | `/등록` | 항상 생성 |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
 | `cl.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (plan.md와 동시) |
-| `docs/spec/{name}.md` | `/스펙` | 항상 생성 |
+| `docs/spec/{name}/` | `/스펙` | 디렉토리 + `_index.md` + N개 하위 문서 생성 |
 
 ### Lazy-creation 행동 치환표
 
@@ -94,7 +95,8 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | _index.md | `> [Linear Issue]({URL})` — Linear Issue 링크 |
 | plan.md, cl.md | `> ← [_index.md](./_index.md) \| [Linear Issue]({URL})` — 상위 인덱스 + Linear |
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
-| Spec | `> ← [Spec Index](./_index.md)` — spec 인덱스 |
+| Spec `_index.md` | `> ← [Spec Index](../_index.md)` — 글로벌 spec 인덱스 |
+| Spec 하위 문서 | `> ← [_index.md](./_index.md)` — 소속 spec 인덱스 |
 
 > 테이블 내 `\|`는 마크다운 이스케이프. 실제 파일에는 `|`로 기록.
 
@@ -124,7 +126,14 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 도메인 지식 | `domain-{topic}.md` (kebab-case) | `docs/shared/domain-networking.md` |
 | 가이드 | `{topic}.md` (kebab-case) | `docs/shared/error-handling-patterns.md` |
 
-### 5-4. 폴더명 규칙
+### 5-4. docs/spec/{spec-name}/ 네이밍
+
+| 파일 | 이름 규칙 | 예시 |
+|------|----------|------|
+| Spec 인덱스 | `_index.md` (고정) | `docs/spec/combat-system/_index.md` |
+| Spec 하위 문서 | `{topic}.md` (kebab-case, 도메인 단위 자유 분할) | `docs/spec/combat-system/turn-system.md` |
+
+### 5-5. 폴더명 규칙
 
 | 경로 | 규칙 | 비고 |
 |------|------|------|
@@ -132,6 +141,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `docs/adr/` | 고정 | 변경 불가 |
 | `docs/shared/` | 고정 | 변경 불가 |
 | `docs/spec/` | 고정 | 변경 불가 |
+| `docs/spec/{spec-name}/` | kebab-case | 2depth 제한. 예: `docs/spec/combat-system/` |
 | `docs/guides/` | 고정 | 변경 불가 |
 
 ---
@@ -174,10 +184,11 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 규칙 | 내용 |
 |------|------|
-| 생명주기 | Living document — 구현 진행 중 갱신 가능 |
-| 초기 생성 | `/스펙` 스킬이 조사 → 인터뷰 → spec 문서 생성 |
-| 연동 갱신 | feature-close 시 링크된 spec의 Related Issues + Change Log 갱신 |
+| 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
+| 구조 | `docs/spec/{spec-name}/` 디렉토리. `_index.md`(허브) + N개 하위 문서 (도메인 단위 자유 분할) |
+| 초기 생성 | `/스펙` 스킬이 5-게이트 파이프라인(조사 → 프리필 인터뷰 → 구조 제안 → 초안 → 저장)으로 생성 |
+| 연동 갱신 | feature-close 시 링크된 spec의 Related Issues + Change Log 갱신 (경로/링크 없으면 무시, 필수 아님) |
 | `updated` 갱신 | spec 문서 변경 시 frontmatter `updated` 날짜 반드시 갱신 |
-| _index.md 자동 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
+| 글로벌 _index.md 자동 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
 
 > spec 생성 규칙 상세: [spec SKILL.md](../.claude/skills/spec/SKILL.md) 참조

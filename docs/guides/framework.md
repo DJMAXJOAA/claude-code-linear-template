@@ -54,7 +54,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | Git → Linear | `_index.md` blockquote에 Linear Issue URL. frontmatter `linear_id` |
 | Claude Code → Linear | 스킬의 `### Linear MCP` 섹션에 호출 패턴 정의 |
 | Claude Code → Git | 스킬이 `docs/issue/{ID}/` 하위 파일 직접 생성/갱신 |
-| Linear Document → Git spec | Document에 `docs/spec/{name}.md#section` 앵커 링크. 상세 결정은 Document에 작성 |
+| Linear Document → Git spec | Document에 `docs/spec/{name}/{doc}.md#section` 앵커 링크. 디렉토리 진입점은 `docs/spec/{name}/`. 상세 결정은 Document에 작성 |
 
 ---
 
