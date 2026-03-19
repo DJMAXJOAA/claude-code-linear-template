@@ -23,7 +23,8 @@
 
 | 단계 | 행위 |
 |------|------|
-| 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그/마일스톤은 AI 추천 후 승인. spec 레퍼런스는 사용자 직접 지정 또는 AI가 `docs/spec/` 탐색 후 추천 |
+| 0 (G0) | **Linear 컨텍스트 조회**: `list_issue_labels` + `list_projects`를 **병렬** 호출하여 기존 Label/Project 목록 획득. 배치 모드에서 호출 시 캐싱 데이터가 전달되면 이 단계 생략 |
+| 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그는 G0에서 조회한 기존 Label 목록 기반으로 AI 추천 후 승인. 마일스톤은 기존 Project 목록 기반 추천. spec 레퍼런스는 사용자 직접 지정 또는 AI가 `docs/spec/` 탐색 후 추천 |
 | 2 (G2) | **type별 description 구성 + 사용자 승인**: 아래 §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 → `AskUserQuestion`으로 내용 확인 |
 | 3 (G3) | **Linear Issue 생성**: Linear MCP로 Issue 생성 — title, description, labels(type + 태그), project(마일스톤), state: Backlog |
 | 4 (G3) | **Linear Issue ID 획득**: 응답에서 `PRJ-N` 형식의 ID + URL 추출 |
@@ -60,6 +61,10 @@
 
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
-| Team/Label 확인 | `list_teams` | label 이름 확인 (필요 시) |
-| Issue 생성 | `save_issue` (id 미지정) | title, description, labels, project, state 지정 |
+| Label 목록 조회 | `list_issue_labels` | 기존 Label 목록 획득 → 태그 추천 기반 |
+| Project 목록 조회 | `list_projects` | 활성 Project 목록 획득 → 마일스톤 추천 기반 |
+| Team 확인 | `list_teams` | 팀 ID 확인 (필요 시) |
+| Issue 생성 | `save_issue` (id 미지정) | title, description, labels, project, state, blockedBy, blocks, relatedTo, parentId 지정 |
 | description 갱신 | `save_issue` (id 지정) | Git Documents 경로 삽입 |
+
+> Label/Project 조회는 G0 단계에서 **병렬** 호출. 배치 모드에서 캐싱 데이터가 전달되면 생략.
