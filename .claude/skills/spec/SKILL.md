@@ -35,8 +35,9 @@
 |------|------|
 | 2-1 | **코드베이스 조사**: `oh-my-claudecode:explore`로 관련 코드 탐색 + 기존 아키텍처 문서 참조 |
 | 2-2 | **심층 조사 (선택)**: 외부 프로토콜/기술 스펙이 필요하면 `oh-my-claudecode:scientist` 위임 |
+| 2-3 | **References 보고서 마킹 (선택)**: 2-1/2-2에서 보고서 수준의 조사 결과가 생성되었으면, `references/` 저장 대상으로 자동 마킹. 보고서는 spec(SDD)과 역할 분리 — spec은 "What/Why" 명세, 보고서는 조사 결과 레퍼런스 |
 
-> G2 출력: 조사 결과 통합 요약 (관련 코드, 기존 구조, 외부 스펙) → `AskUserQuestion`으로 유저 확인
+> G2 출력: 조사 결과 통합 요약 (관련 코드, 기존 구조, 외부 스펙) + **References 보고서 포함 여부** → `AskUserQuestion`으로 유저 확인
 
 ### G3. 요구사항 확정
 
@@ -57,22 +58,22 @@
 
 > G3 출력: 프리필된 요구사항 전체 → `AskUserQuestion`으로 유저 확인/수정
 
-### G4. 구조 + 초안
+### G4. 구조 확인
 
 | 단계 | 행위 |
 |------|------|
-| 4-1 | **문서 분할 구조 제안**: G3 확정 요구사항을 기반으로 디렉토리 구조 제안 (`_index.md` + 하위 문서 N개, 도메인 단위 자유 분할) |
-| 4-2 | **spec 초안 작성**: `templates/spec-template.md` 기반으로 `_index.md` + 하위 문서 초안을 동시 제시 |
+| 4-1 | **문서 분할 구조 제안**: G3 확정 요구사항을 기반으로 디렉토리 구조 제안 (`_index.md` + 하위 문서 N개, 도메인 단위 자유 분할). G2에서 보고서가 생성되었으면 `references/` 포함 여부도 함께 제시 |
 
-> G4 출력: 디렉토리 구조 + 전체 초안 → `AskUserQuestion`으로 유저 검토
+> G4 출력: 디렉토리 구조만 제시 (초안 없음) → `AskUserQuestion`으로 간단 확인. 확인 즉시 G5로 진행
 
-### G5. 저장 + 후속
+### G5. 작성 + 저장 + 후속
 
 | 단계 | 행위 |
 |------|------|
-| 5-1 | **spec 디렉토리 생성**: `docs/spec/{spec-name}/` 디렉토리 + `_index.md` + 하위 문서 저장 (kebab-case) |
-| 5-2 | **글로벌 _index.md 갱신**: `docs/spec/_index.md` 목록 테이블에 신규 행 추가 (디렉토리 링크, 제목, 생성일, 설명) |
-| 5-3 | **Linear Document 생성 (선택)**: 승인 시 Linear MCP로 Document 생성 |
+| 5-1 | **spec 문서 작성**: `templates/spec-template.md` 기반으로 `_index.md` + 하위 문서 작성. G2 보고서가 있으면 `references/` 하위에 보고서 파일도 작성 |
+| 5-2 | **spec 디렉토리 저장**: `docs/spec/{spec-name}/` 디렉토리 + 전체 문서 저장 (kebab-case) |
+| 5-3 | **글로벌 _index.md 갱신**: `docs/spec/_index.md` 목록 테이블에 신규 행 추가 (디렉토리 링크, 제목, 생성일, 설명) |
+| 5-4 | **Linear Document 생성 (선택)**: 승인 시 Linear MCP로 Document 생성 |
 
 > G5 출력: 저장 완료 확인 + Linear Document 생성 여부 → `AskUserQuestion`으로 한 번에 확인
 
@@ -83,6 +84,7 @@
 | 항목 | 내용 |
 |------|------|
 | spec 디렉토리 | `docs/spec/{spec-name}/` — `_index.md` + N개 하위 문서 |
+| references 디렉토리 | (선택) `docs/spec/{spec-name}/references/` — 조사 보고서. G2에서 보고서 생성 시에만 |
 | spec 글로벌 인덱스 | `docs/spec/_index.md` 자동 갱신 |
 | Linear Document | (선택) `[Spec] {제목}` — spec Git 링크 + 하위 문서별 앵커 포함 |
 

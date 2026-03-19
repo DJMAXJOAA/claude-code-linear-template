@@ -14,7 +14,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|:----:|------|
 | `linear_id` | 문자열 (예: `PRJ-47`) | O | Linear Issue ID. 해당 Issue와 무관한 문서(ADR, shared)는 제외 |
 | `title` | 문자열 | O | 문서 제목 |
-| `type` | `index` / `plan` / `checklist` / `report` / `adr` / `shared` / `spec` | O | 문서 유형 |
+| `type` | `index` / `plan` / `checklist` / `report` / `adr` / `shared` / `spec` / `spec-reference` | O | 문서 유형 |
 | `issue_type` | `feature` / `bug` / `improvement` | △ | Issue 유형. `_index.md`에만 필수 |
 | `created` | ISO 날짜 (예: `2026-03-17`) | O | 작성일 |
 
@@ -29,6 +29,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
 | Spec `_index.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). 디렉토리 허브 (Overview + 하위 문서 목록) |
 | Spec 하위 문서 (`docs/spec/{name}/`) | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` | `parent-spec`으로 소속 명시 |
+| Spec Reference (`docs/spec/{name}/references/`) | `title`, `type: spec-reference`, `parent-spec: {spec-name}`, `created` | 조사 보고서. 선택적. `updated` 없음 (불변) |
 
 ---
 
@@ -97,6 +98,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
 | Spec `_index.md` | `> ← [Spec Index](../_index.md)` — 글로벌 spec 인덱스 |
 | Spec 하위 문서 | `> ← [_index.md](./_index.md)` — 소속 spec 인덱스 |
+| Spec Reference 보고서 | `> ← [_index.md](../_index.md)` — 소속 spec 인덱스 (references/ 하위이므로 `../`) |
 
 > 테이블 내 `\|`는 마크다운 이스케이프. 실제 파일에는 `|`로 기록.
 
@@ -132,6 +134,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|----------|------|
 | Spec 인덱스 | `_index.md` (고정) | `docs/spec/combat-system/_index.md` |
 | Spec 하위 문서 | `{topic}.md` (kebab-case, 도메인 단위 자유 분할) | `docs/spec/combat-system/turn-system.md` |
+| Spec Reference 보고서 | `references/{topic}.md` (kebab-case) | `docs/spec/combat-system/references/protocol-analysis.md` |
 
 ### 5-5. 폴더명 규칙
 
@@ -142,6 +145,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `docs/shared/` | 고정 | 변경 불가 |
 | `docs/spec/` | 고정 | 변경 불가 |
 | `docs/spec/{spec-name}/` | kebab-case | 2depth 제한. 예: `docs/spec/combat-system/` |
+| `docs/spec/{spec-name}/references/` | 고정 (선택적) | 보고서 존재 시에만 생성. 미존재 시 디렉토리 자체 없음 |
 | `docs/guides/` | 고정 | 변경 불가 |
 
 ---
@@ -186,7 +190,9 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|
 | 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
 | 구조 | `docs/spec/{spec-name}/` 디렉토리. `_index.md`(허브) + N개 하위 문서 (도메인 단위 자유 분할) |
-| 초기 생성 | `/스펙` 스킬이 5-게이트 파이프라인(조사 → 프리필 인터뷰 → 구조 제안 → 초안 → 저장)으로 생성 |
+| 초기 생성 | `/스펙` 스킬이 5-게이트 파이프라인(조사 → 프리필 인터뷰 → 구조 확인 → 작성+저장)으로 생성 |
+| references 디렉토리 | (선택) `docs/spec/{name}/references/` — G2 조사에서 보고서 생성 시에만. spec(SDD)과 역할 분리: spec = "What/Why" 명세, 보고서 = 조사 결과 레퍼런스 |
+| references 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 (§8 준용) |
 | 연동 갱신 | feature-close 시 링크된 spec의 Related Issues + Change Log 갱신 (경로/링크 없으면 무시, 필수 아님) |
 | `updated` 갱신 | spec 문서 변경 시 frontmatter `updated` 날짜 반드시 갱신 |
 | 글로벌 _index.md 자동 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |

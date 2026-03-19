@@ -8,8 +8,9 @@
 |------|------|
 | 생성 시점 | `/스펙` 커맨드 호출 시 항상 생성 |
 | 디렉토리 위치 | `docs/spec/{spec-name}/` — kebab-case |
-| 디렉토리 구성 | `_index.md`(필수) + N개 하위 문서 (도메인 단위 자유 분할) |
-| 깊이 제한 | 2depth (`docs/spec/{name}/{doc}.md`) |
+| 디렉토리 구성 | `_index.md`(필수) + N개 하위 문서 (도메인 단위 자유 분할) + `references/`(선택) |
+| references 디렉토리 | (선택) `docs/spec/{name}/references/` — G2 조사에서 보고서 생성 시에만 생성. 보고서 없으면 디렉토리 자체 미생성 |
+| 깊이 제한 | 2depth (`docs/spec/{name}/{doc}.md`), references는 예외 (`docs/spec/{name}/references/{report}.md`) |
 | 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
 | 갱신 주체 | `/스펙`(초기 생성/재호출), feature-close(Issue 완료 시 연동 갱신 — 경로/링크 없으면 무시) |
 | 글로벌 _index.md 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 자동 갱신 |
@@ -33,6 +34,18 @@
 | frontmatter | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` |
 | Nav Link | `> ← [_index.md](./_index.md)` |
 | 본문 구성 | 자유 (고정 양식 없음). 아래 섹션 가이드 참조 |
+
+### 3. Reference 보고서 — 조사 결과 레퍼런스 (선택)
+
+| 항목 | 규칙 |
+|------|------|
+| 역할 | spec(SDD)이 참조하는 조사 결과 보고서. spec = "What/Why" 명세, 보고서 = 조사 결과 레퍼런스. 역할 혼합 금지 |
+| 위치 | `docs/spec/{spec-name}/references/` |
+| 생성 조건 | G2 조사에서 보고서 수준의 결과 생성 시에만. 선택적 |
+| frontmatter | `title`, `type: spec-reference`, `parent-spec: {spec-name}`, `created` |
+| Nav Link | `> ← [_index.md](../_index.md)` |
+| 본문 구성 | 자유. 조사 방법, 결과, 결론 중심 |
+| 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 (docs-writing.md §8 준용) |
 
 ## 섹션별 작성 가이드
 
@@ -84,6 +97,14 @@ updated: {YYYY-MM-DD}
 |------|------|------|
 | [{doc-name}.md](./{doc-name}.md) | {제목} | {한 줄 설명} |
 
+## References
+
+{G2 조사에서 보고서 생성 시에만 포함. 보고서 없으면 이 섹션 자체 생략}
+
+| 보고서 | 제목 | 설명 |
+|--------|------|------|
+| [references/{report-name}.md](./references/{report-name}.md) | {제목} | {조사 대상 요약} |
+
 ## Related Issues
 
 | Linear ID | 제목 | 상태 |
@@ -110,4 +131,33 @@ updated: {YYYY-MM-DD}
 > ← [_index.md](./_index.md)
 
 {본문 — 자유 구성. 섹션별 작성 가이드 참조}
+```
+
+## 템플릿: Reference 보고서 (선택)
+
+```markdown
+---
+title: {보고서 제목}
+type: spec-reference
+parent-spec: {spec-name}
+created: {YYYY-MM-DD}
+---
+
+> ← [_index.md](../_index.md)
+
+## 조사 배경
+
+{조사 목적 + 대상}
+
+## 조사 방법
+
+{사용한 도구/접근법}
+
+## 결과
+
+{핵심 발견 사항}
+
+## 결론
+
+{spec에 반영할 시사점}
 ```
