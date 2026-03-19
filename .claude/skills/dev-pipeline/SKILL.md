@@ -55,6 +55,7 @@ improvement는 간략 버전으로 수행한다.
 | 3 | **코드베이스 조사**: 인터뷰 결과에 따라 `oh-my-claudecode:explore` 에이전트로 코드베이스 조사 위임. improvement는 핵심 파일만 확인. 조사 선택 시 investigation 스킬 호출 |
 | 4 | **How 인터뷰**: `AskUserQuestion`으로 각 항목 확인. feature는 5항목(SC, 스펙, Decisions, 리스크, 범위). improvement는 3항목(SC, 접근방식, 범위)으로 축소 |
 | 5 | **SC를 Linear description에 기록**: 확정된 SC를 Linear Issue description의 `## Success Criteria` 섹션에 삽입 |
+| 6 | **_index.md 갱신**: `## Decisions`에 설계 결정 기록, `## Notes`에 조사 결과 요약 + 스코프 범위 기록. gen-plan 호출 전 수집 정보를 Git에 선저장 |
 
 > §10 인터뷰 원칙 적용 (pipeline.md 참조)
 

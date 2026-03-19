@@ -89,6 +89,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |------|---------|------------|
 | 파이프라인 단계 전환 | `_index.md` Documents 테이블 상태 갱신 | state 전이 |
 | Pre-Plan 진입 | — (상태 전이만) | state: Todo → Planning (dev-pipeline이 Pre-Plan Q/A 시작 전 즉시 전이) |
+| Pre-Plan 완료 | `_index.md` Decisions·Notes 갱신 | — (dev-pipeline이 gen-plan 호출 직전에 수집 정보 선저장) |
 | Plan 완료 | `plan.md` + `cl.md` 파일 생성 | — (이미 Planning 상태) |
 | 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done + 태스크 완료 comment |
 | implement 완료 | verify 자동 호출 → PASS 시 | state → In Review |
@@ -102,7 +103,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |------|-------------|------|
 | Documents 테이블 | gen-hub(초기, Spec 행 포함), gen-plan(plan/cl 행), investigation(보고서 행), feature-close(Spec 갱신) | 파일 생성/삭제 시 |
 | ## Decisions | dev-pipeline (Pre-Plan Q/A) | 설계 결정 확정 시 |
-| ## Notes | feedback, triage, feature-close | 피드백/triage/환류 발생 시 |
+| ## Notes | dev-pipeline(Pre-Plan Q/A), feedback, triage, feature-close | 조사 결과·스코프/피드백/triage/환류 발생 시 |
 | ## 구현 결과 | feature-close | 완료 처리 시 |
 
 > 태스크 완료 로그는 `_index.md`가 아닌 **Linear comment**로 기록한다 (implement 스킬).
