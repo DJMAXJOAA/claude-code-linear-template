@@ -65,12 +65,17 @@ jobs:
         run: |
           TAG=${GITHUB_REF_NAME}
           # tag annotation에서 사람이 작성한 릴리스 요약 추출
-          NOTES=$(git tag -l --format='%(contents)' "$TAG" | sed '/^$/d')
+          ANNOTATION=$(git tag -l --format='%(contents)' "$TAG" | sed '/^$/d')
+          # auto-generated notes로 릴리스 생성 후, tag annotation을 상단에 삽입
           gh release create "$TAG" \
             --title "$TAG" \
-            --notes "$NOTES" \
             --generate-notes \
             release-${TAG}.tar.gz \
             release-${TAG}.zip
+          if [ -n "$ANNOTATION" ]; then
+            CURRENT=$(gh release view "$TAG" --json body -q .body)
+            COMBINED=$(printf '%s\n\n---\n\n%s' "$ANNOTATION" "$CURRENT")
+            gh release edit "$TAG" --notes "$COMBINED"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
