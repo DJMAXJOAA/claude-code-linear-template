@@ -1,6 +1,6 @@
 # feature-close — 완료 처리
 
-verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결과를 기록하고 Linear Issue를 Done으로 전이한다.
+verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결과를 기록하고 Linear Issue를 Done으로 전이한다. 최종 상태를 Linear description에 1회성 미러링한다.
 
 ## Trigger
 
@@ -26,6 +26,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 | 3 (G2) | **검토**: 구현 결과 요약을 사용자에게 제시 → `AskUserQuestion`으로 확인 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |
 | 5 (G3) | **Linear comment 기록**: Linear MCP로 완료 요약 기록 (구현 결과 1~3줄 요약 + 설계 이탈 유무 + 미해결 이슈 유무) |
+| 5a (G3) | **Linear description 최종 미러링**: 아래 §Linear description 미러링 참조 |
 | 6 (G3) | **후행 Issue 참조 환류**: 아래 §후행 Issue 환류 참조 |
 | 7 (G3) | **spec 연동 갱신**: 아래 §spec 연동 갱신 참조 |
 
@@ -36,6 +37,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 | _index.md | `## 구현 결과` 섹션 생성/갱신 |
 | Linear | State → Done |
 | Linear comment | 완료 요약 기록 |
+| Linear description | 최종 상태 미러링 (1회성 스냅샷) |
 | 후행 Issue | _index.md Notes 환류 메시지 + Linear comment (대상 존재 시) |
 | spec 문서 | Related Issues + Change Log 갱신 (링크된 spec 존재 시) |
 
@@ -44,6 +46,32 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 ## 구현 결과 섹션 템플릿
 
 > 구현 결과 템플릿 + type별 기록 내용: [templates/implementation-result.md](templates/implementation-result.md)
+
+---
+
+## Linear description 미러링
+
+feature-close 시 _index.md의 최종 처리 내용을 Linear Issue description에 1회성 스냅샷으로 반영한다.
+
+### 미러링 규칙
+
+| 규칙 | 내용 |
+|------|------|
+| 1회성 | feature-close 시점에 1회만 실행. 이후 Linear description 재갱신 금지 |
+| 스냅샷 성격 | "최종 처리 결과 스냅샷"으로 명시. 진행 중 상태 복제가 아님 |
+| Git이 원천 | Decisions/구현 결과의 SSOT는 여전히 _index.md. Linear는 읽기 편의용 사본 |
+
+### 미러링 대상
+
+| description 섹션 | 미러링 행동 |
+|-----------------|------------|
+| Success Criteria | 검증 결과 반영 (충족/미충족/부분 충족) |
+| Documents | 최종 경로 확정 (미생성 → 실제 경로 + 설명) |
+| + Decisions Summary | _index.md `## Decisions` 섹션 내용 요약 추가 (있을 때만) |
+| + Implementation Result | 구현 결과 테이블 요약 추가 |
+| + Key Notes | _index.md `## Notes`에서 핵심 항목만 추가 (있을 때만) |
+
+> 미러링 섹션은 요약 수준으로 유지. 상세 내용은 Git 문서 경로로 안내.
 
 ---
 
@@ -102,5 +130,6 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 |------|---------|------|
 | 상태 전이 | `save_issue` (id 지정) | State → Done |
 | 완료 요약 기록 | `save_comment` | 구현 결과 요약 comment |
+| description 미러링 | `save_issue` (id 지정) | description 최종 상태 갱신 (1회성) |
 | 후행 Issue 탐색 | `list_issues` (relation 필터) | blocked-by 역참조 Issue 조회 (다수 검색) |
 | 후행 Issue 알림 | `save_comment` | 환류 알림 comment |

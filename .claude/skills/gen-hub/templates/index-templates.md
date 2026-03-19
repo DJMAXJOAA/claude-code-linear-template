@@ -13,14 +13,14 @@
 | 상태 컬럼 갱신 | 파일 생성/삭제 시 Documents 테이블 갱신 |
 | Decisions 섹션 | Pre-Plan Q/A Phase 1에서 Decisions 항목 확정 시 기록. 구현 중 설계 결정 발생 시 추가 |
 | Notes 섹션 | 피드백(limitation), triage log, Known Limitations 발생 시 기록 |
-| Task Log 섹션 | implement 스킬에서 태스크 완료 시 간략 로그 기록 |
+| 태스크 로그 | Linear comment로 기록. _index.md에는 포함하지 않음 |
 
 ## type별 변형 원칙
 
-| type | Decisions | Task Log | 특이사항 |
-|------|-----------|----------|---------|
-| `feature` / `improvement` | 포함 | 포함 | 설계 결정과 태스크 진행 추적 필요 |
-| `bug` | 불필요 | 불필요 | `## Notes > ### Root Cause` 섹션 포함. 태스크 없이 직접 수정 |
+| type | Decisions | 태스크 로그 | 특이사항 |
+|------|-----------|------------|---------|
+| `feature` / `improvement` | 포함 | Linear comment | 설계 결정은 Git, 태스크 진행 로그는 Linear |
+| `bug` | 불필요 | Linear comment | `## Notes > ### Root Cause` 섹션 포함. 태스크 없이 직접 수정 |
 
 ---
 
@@ -39,17 +39,15 @@ created: {YYYY-MM-DD}
 
 ## Documents
 
-| 문서 | 경로 | 상태 |
-|------|------|------|
-| Plan | — | 미생성 |
-| Checklist | — | 미생성 |
-| Spec | {spec 레퍼런스 존재 시: [spec-name.md](../../spec/spec-name.md) + ✅, 미존재 시: 행 자체 생략} | {선택적} |
+| 문서 | 경로 | 설명 | 상태 |
+|------|------|------|------|
+| Plan | — | 설계 문서 | 미생성 |
+| Checklist | — | 태스크/검증 체크리스트 | 미생성 |
+| Spec | {spec 레퍼런스 존재 시: [spec-name](../../spec/spec-name/) + ✅, 미존재 시: 행 자체 생략} | {요구사항 명세} | {선택적} |
 
 ## Decisions
 
 ## Notes
-
-## Task Log
 
 ## 구현 결과
 
@@ -71,8 +69,8 @@ created: {YYYY-MM-DD}
 
 ## Documents
 
-| 문서 | 경로 | 상태 |
-|------|------|------|
+| 문서 | 경로 | 설명 | 상태 |
+|------|------|------|------|
 
 ## Notes
 
@@ -84,4 +82,3 @@ created: {YYYY-MM-DD}
 
 {feature-close 시 lazy-creation}
 ```
-

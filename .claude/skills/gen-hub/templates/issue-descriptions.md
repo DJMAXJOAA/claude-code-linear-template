@@ -9,28 +9,35 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 | 항목 | 내용 |
 |------|------|
 | What | {한 줄 설명} |
-| Why | {필요성} |
+| Why | {필요성/배경} |
 | Priority | {High/Medium/Low} |
 
 ---
 
+## Spec Summary
+{요구사항 핵심 요약 2~5문장 — AI가 사용자 입력 기반 추론 초안 작성 → 사용자 확인}
+
+---
+
+## Constraints
+{제약사항/비기능 요구사항 — AI 추론 초안 → 사용자 확인. 없으면 섹션 자체 생략}
+
+---
+
 ## Success Criteria
-{Pre-Plan Q/A에서 확정 — 등록 시점에는 비워둠}
+1. {AI 추론 초안 → 사용자 확인. Pre-Plan에서 보완}
 
 ---
 
-## Git Documents
-- Index: `docs/issue/{LINEAR-ID}/_index.md`
+## Documents
+| 유형 | 경로 | 설명 |
+|------|------|------|
+| Index | `docs/issue/{LINEAR-ID}/_index.md` | Issue 허브 |
+| Spec | {있을 때만: `docs/spec/{spec-name}/` 또는 `docs/spec/{spec-name}/{doc}.md#{section}`} | {요구사항 명세} |
+| {기타} | {경로} | {참조 문서, 스크립트, 설정 등} |
 
----
-
-## Spec Reference
-{spec 레퍼런스 존재 시: `docs/spec/{spec-name}/` (디렉토리) 또는 `docs/spec/{spec-name}/{doc}.md#{section}` (하위 문서 앵커) — 미존재 시 섹션 자체 생략}
-
----
-
-## Source References
-{관련 소스 파일 경로 — 등록 시점에는 비워둠}
+> - Spec 행: 참조 spec 미존재 시 행 자체 생략
+> - 기타 행: 추가 참조 문서 없으면 행 자체 생략
 ```
 
 ## bug
@@ -50,11 +57,11 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 
 ---
 
-## Git Documents
-- Index: `docs/issue/{LINEAR-ID}/_index.md`
+## Documents
+| 유형 | 경로 | 설명 |
+|------|------|------|
+| Index | `docs/issue/{LINEAR-ID}/_index.md` | Issue 허브 |
+| {기타} | {경로} | {참조 문서, 스크립트, 설정 등} |
 
----
-
-## Source References
-{관련 소스 파일 경로}
+> - 기타 행: 추가 참조 문서 없으면 행 자체 생략
 ```

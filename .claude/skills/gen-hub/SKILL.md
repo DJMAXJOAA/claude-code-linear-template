@@ -17,20 +17,21 @@
 | 태그 | Linear Label로 등록할 태그 목록. AI가 컨텍스트 기반 추천 → 사용자 승인 |
 | 마일스톤 | Linear Project에 매핑할 마일스톤 (선택) |
 | Priority | High / Medium / Low (선택, 기본값: Medium) |
-| spec 레퍼런스 | 관련 spec 문서 경로 + 섹션 앵커 (선택). 예: `docs/spec/combat-system.md#functional-requirements` |
+| 참조 문서 | 관련 spec 문서, 스크립트, 설정 등의 경로 (선택, 복수 가능). 예: `docs/spec/combat-system/`, `scripts/migrate.ts` |
 
 ## Process
 
 | 단계 | 행위 |
 |------|------|
 | 0 (G0) | **Linear 컨텍스트 조회**: `list_issue_labels` + `list_projects`를 **병렬** 호출하여 기존 Label/Project 목록 획득. 배치 모드에서 호출 시 캐싱 데이터가 전달되면 이 단계 생략 |
-| 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그는 G0에서 조회한 기존 Label 목록 기반으로 AI 추천 후 승인. 마일스톤은 기존 Project 목록 기반 추천. spec 레퍼런스는 사용자 직접 지정 또는 AI가 `docs/spec/` 탐색 후 추천 |
-| 2 (G2) | **type별 description 구성 + 사용자 승인**: 아래 §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 → `AskUserQuestion`으로 내용 확인 |
+| 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그는 G0에서 조회한 기존 Label 목록 기반으로 AI 추천 후 승인. 마일스톤은 기존 Project 목록 기반 추천. 참조 문서는 사용자 직접 지정 또는 AI가 `docs/spec/` 등 탐색 후 추천 |
+| 1a (G1) | **AI 추론**: 사용자 입력(제목+설명)을 기반으로 Spec Summary, Constraints, Success Criteria 초안을 AI가 추론 |
+| 2 (G2) | **type별 description 구성 + 사용자 확인**: 아래 §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 (Spec Summary + Constraints + Success Criteria 초안 포함) → `AskUserQuestion`으로 전체 내용 확인/수정 |
 | 3 (G3) | **Linear Issue 생성**: Linear MCP로 Issue 생성 — title, description, labels(type + 태그), project(마일스톤), state: Backlog |
 | 4 (G3) | **Linear Issue ID 획득**: 응답에서 `PRJ-N` 형식의 ID + URL 추출 |
 | 5 (G3) | **Git 폴더 생성**: `docs/issue/{LINEAR-ID}/` 디렉토리 생성 |
-| 6 (G3) | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지). spec 레퍼런스가 있으면 Documents 테이블에 Spec 행 추가 |
-| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Git Documents` 섹션에 `docs/issue/{LINEAR-ID}/_index.md` 경로 기록. spec 레퍼런스 존재 시 spec 경로도 삽입 |
+| 6 (G3) | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지). 참조 문서가 있으면 Documents 테이블에 해당 행 추가 |
+| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Documents` 섹션에 `docs/issue/{LINEAR-ID}/_index.md` 경로 기록. 참조 문서 존재 시 해당 경로도 삽입 |
 
 ## Output
 
@@ -65,6 +66,6 @@
 | Project 목록 조회 | `list_projects` | 활성 Project 목록 획득 → 마일스톤 추천 기반 |
 | Team 확인 | `list_teams` | 팀 ID 확인 (필요 시) |
 | Issue 생성 | `save_issue` (id 미지정) | title, description, labels, project, state, blockedBy, blocks, relatedTo, parentId 지정 |
-| description 갱신 | `save_issue` (id 지정) | Git Documents 경로 삽입 |
+| description 갱신 | `save_issue` (id 지정) | Documents 경로 삽입 |
 
 > Label/Project 조회는 G0 단계에서 **병렬** 호출. 배치 모드에서 캐싱 데이터가 전달되면 생략.

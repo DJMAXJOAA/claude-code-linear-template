@@ -76,8 +76,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |------|---------|------------|
 | 파이프라인 단계 전환 | `_index.md` Documents 테이블 상태 갱신 | state 전이 |
 | Plan 완료 | `plan.md` + `cl.md` 파일 생성 | state: Backlog → Planning |
-| 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done |
-| feature-close | `_index.md` 구현 결과 섹션 기록 | state → Done + 완료 comment |
+| 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done + 태스크 완료 comment |
+| feature-close | `_index.md` 구현 결과 섹션 기록 | state → Done + 완료 comment + description 최종 미러링 |
 
 ### 2-3a. _index.md 갱신 주체 원칙
 
@@ -88,8 +88,9 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | Documents 테이블 | gen-hub(초기, Spec 행 포함), gen-plan(plan/cl 행), investigation(보고서 행), feature-close(Spec 갱신) | 파일 생성/삭제 시 |
 | ## Decisions | dev-pipeline (Pre-Plan Q/A) | 설계 결정 확정 시 |
 | ## Notes | feedback, triage, feature-close | 피드백/triage/환류 발생 시 |
-| ## Task Log | implement | 태스크 완료 시 |
 | ## 구현 결과 | feature-close | 완료 처리 시 |
+
+> 태스크 완료 로그는 `_index.md`가 아닌 **Linear comment**로 기록한다 (implement 스킬).
 
 > 각 스킬은 자신이 담당하는 섹션만 갱신한다. 타 스킬 담당 섹션을 직접 수정하지 않는다.
 
@@ -127,8 +128,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 트리거 | Linear 행동 | 비고 |
 |--------|------------|------|
 | 파이프라인 단계 전환 | Issue 상태 전이 | §1 상태 흐름에 따라 |
-| 태스크 시작/완료 | sub-issue 상태 갱신 | Micro-tasking 연동 |
-| feature-close | 상태 → Done + 완료 comment | 최종 완료 처리 |
+| 태스크 시작/완료 | sub-issue 상태 갱신 + 태스크 완료 comment | Micro-tasking 연동 |
+| feature-close | 상태 → Done + 완료 comment + description 최종 미러링 | 최종 완료 처리 (1회성 스냅샷) |
 | /점검 결과 기록 | comment 추가 | Git _index.md Notes와 이중 기록 |
 
 > 구체적 MCP 도구명과 파라미터는 NF-1 검증 결과의 MCP 매핑 테이블을 참조. 스킬별 `### Linear MCP` 섹션에 명시.

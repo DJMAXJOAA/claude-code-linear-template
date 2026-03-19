@@ -64,7 +64,6 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|------|
 | Decisions 기록 필요 | `_index.md` 존재 | `_index.md > ## Decisions` 섹션에 기록 |
 | Notes 기록 필요 | `_index.md` 존재 | `_index.md > ## Notes` 섹션에 기록 (하위 ### 섹션 자동 생성) |
-| Task Log 기록 필요 | `_index.md` 존재 | `_index.md > ## Task Log` 섹션에 기록 |
 | _index.md Documents 갱신 | lazy 파일 신규 생성 | Documents 테이블에서 `—` → 상대경로 링크 + ✅ |
 
 ---
