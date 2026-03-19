@@ -56,7 +56,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 
 | 규칙 | 내용 |
 |------|------|
-| 보고서 대상 | 조사 보고서 (태스크별 L2 보고서는 `_index.md > ## Task Log`로 대체) |
+| 보고서 대상 | 조사 보고서 (태스크별 L2 보고서는 Linear comment로 대체) |
 | 보고서 경로 | `docs/issue/{LINEAR-ID}/RPT-*.md` |
 | 보고서 frontmatter | `linear_id`, `title`, `type: report`, `created` |
 | 보고서 링킹 | 보고서 → _index.md 역참조 Nav Link 필수 |
