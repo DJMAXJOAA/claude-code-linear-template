@@ -37,7 +37,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 1-4. Type별 스킬 분기
 
-> Type별 스킬 분기 상세: [dev-pipeline SKILL.md](../.claude/skills/dev-pipeline/SKILL.md) 라우팅 테이블 참조
+> Type별 스킬 분기 상세: [dev-pipeline SKILL.md](../skills/dev-pipeline/SKILL.md) 라우팅 테이블 참조
 
 ### 1-5. 상태 전이 규칙
 
@@ -117,7 +117,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 게이트 연계 | 태스크 완료 후 4단계 게이트(§2)를 경유하여 다음 태스크로 이동 |
 | 금지 패턴 | 여러 단계 일괄 지시, "알아서 다 처리해" 식 실행, 같은 파일을 수정하는 태스크 동시 실행 |
 
-> 의존성 기반 실행 + sub-issue 동기화 상세: [implement SKILL.md](../.claude/skills/implement/SKILL.md) 참조
+> 의존성 기반 실행 + sub-issue 동기화 상세: [implement SKILL.md](../skills/implement/SKILL.md) 참조
 
 ---
 
@@ -187,13 +187,13 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ## §6 Pre-Plan Q/A + Post-Plan Q/A
 
-> Pre-Plan Q/A / Post-Plan Q/A 상세: [dev-pipeline SKILL.md](../.claude/skills/dev-pipeline/SKILL.md) 참조
+> Pre-Plan Q/A / Post-Plan Q/A 상세: [dev-pipeline SKILL.md](../skills/dev-pipeline/SKILL.md) 참조
 
 ---
 
 ## §7 피드백 기록
 
-> 피드백 기록 상세: [feedback SKILL.md](../.claude/skills/feedback/SKILL.md) 참조
+> 피드백 기록 상세: [feedback SKILL.md](../skills/feedback/SKILL.md) 참조
 
 ---
 
@@ -206,7 +206,6 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 검증 실패 시 임의 우회 | 계획 수정 후 재구현 |
 | 계획 범위 외 코드 수정 | 범위 초과 금지 |
 | Linear 상태를 Git 파일에 복제 | 상태 SSOT = Linear. Git에 status 속성 금지 |
-| `docs/archive/feature-roadmap/` 마일스톤 문서 참조 | 절대 금지. 사용 불가 |
 
 ---
 

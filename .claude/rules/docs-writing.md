@@ -35,7 +35,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 ## §2 _index.md 템플릿
 
-> _index.md 템플릿 SSOT: [gen-hub templates/index-templates.md](../.claude/skills/gen-hub/templates/index-templates.md)
+> _index.md 템플릿 SSOT: [gen-hub templates/index-templates.md](../skills/gen-hub/templates/index-templates.md)
 
 ### 2-1. 핵심 규칙 (요약)
 
@@ -45,7 +45,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | Linear Issue 링크 | gen-hub이 Linear API 응답 URL 직접 삽입. 수동 URL 조합 금지 |
 | 구현 결과 섹션 | feature-close 시 lazy-creation |
 
-> 전체 템플릿 규칙 + type별 변형: [gen-hub templates/index-templates.md](../.claude/skills/gen-hub/templates/index-templates.md) 참조
+> 전체 템플릿 규칙 + type별 변형: [gen-hub templates/index-templates.md](../skills/gen-hub/templates/index-templates.md) 참조
 
 ---
 
@@ -179,7 +179,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|
 | 보고서 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 |
 
-> 보고서 생성 규칙 상세: [investigation SKILL.md](../.claude/skills/investigation/SKILL.md) 참조
+> 보고서 생성 규칙 상세: [investigation SKILL.md](../skills/investigation/SKILL.md) 참조
 
 ---
 
@@ -196,4 +196,4 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `updated` 갱신 | spec 문서 변경 시 frontmatter `updated` 날짜 반드시 갱신 |
 | 글로벌 _index.md 자동 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
 
-> spec 생성 규칙 상세: [spec SKILL.md](../.claude/skills/spec/SKILL.md) 참조
+> spec 생성 규칙 상세: [spec SKILL.md](../skills/spec/SKILL.md) 참조
