@@ -26,14 +26,16 @@
 | 3 (G1) | **검증 실행**: 각 SC/S3 항목에 대해 테스트 실행, 코드 확인, 빌드 검증 |
 | 4 (G1) | **검증 결과 정리**: PASS/FAIL 판정 + 근거 |
 | 5 (G2) | **사용자에게 결과 제시**: `AskUserQuestion`으로 검토 |
-| 6a (G4) | **PASS**: 검증 결과(PASS)를 반환. dev-pipeline이 feature-close 후속 결정 |
-| 6b (G4) | **FAIL**: 실패 항목 목록 + 수정 방안 제시. 검증 결과(FAIL)를 반환. dev-pipeline이 implement 복귀 후속 결정 |
+| 6 (G3) | **Linear comment 기록**: Linear MCP로 검증 결과 comment (PASS/FAIL + 항목별 요약 1~3줄) |
+| 7a (G4) | **PASS**: 검증 결과(PASS)를 반환. dev-pipeline이 feature-close 후속 결정 |
+| 7b (G4) | **FAIL**: 실패 항목 목록 + 수정 방안 제시. 검증 결과(FAIL)를 반환. dev-pipeline이 implement 복귀 후속 결정 |
 
 ## Output
 
 | 항목 | 내용 |
 |------|------|
 | 검증 결과 | PASS/FAIL 판정 + 항목별 근거 |
+| Linear comment | 검증 결과 요약 기록 |
 
 > verify는 Linear 상태 전이를 수행하지 않는다. 호출자(implement/dev-pipeline)가 PASS 시 In Review로 전이.
 
@@ -67,3 +69,4 @@
 | 시점 | MCP 도구 | 용도 |
 |------|---------|------|
 | SC 조회 | `get_issue` | Issue description에서 SC 추출 (단일 Issue) |
+| 검증 결과 기록 | `save_comment` | 검증 결과(PASS/FAIL) 요약 comment |

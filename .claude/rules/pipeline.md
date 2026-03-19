@@ -145,6 +145,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |--------|------------|------|
 | 파이프라인 단계 전환 | Issue 상태 전이 | §1 상태 흐름에 따라 |
 | 태스크 시작/완료 | sub-issue 상태 갱신 + 태스크 완료 comment | Micro-tasking 연동 |
+| Plan 완료 | comment 추가 (태스크 수, 주요 설계 결정) | gen-plan이 기록 |
+| verify 완료 | comment 추가 (PASS/FAIL + 항목별 요약) | verify가 기록 |
 | verify PASS | 상태 → In Review | implement/dev-pipeline이 전이 수행 |
 | feature-close | 상태 → Done + 완료 comment + description 최종 미러링 | 최종 완료 처리 (1회성 스냅샷) |
 | /점검 결과 기록 | comment 추가 | Git _index.md Notes와 이중 기록 |
