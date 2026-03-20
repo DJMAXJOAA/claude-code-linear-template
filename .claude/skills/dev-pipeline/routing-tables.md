@@ -9,6 +9,8 @@ type별 라우팅 상세 + bug 수정 프로세스.
 | Todo | **Linear → Planning 즉시 전이** → **Pre-Plan Q/A** → gen-plan | Planning |
 | Planning (plan.md 존재) | **Post-Plan Q/A** → implement | In Progress |
 | In Progress | implement Skill | In Progress (태스크 진행) |
+| In Progress (점검 P1) | dev-pipeline: plan/cl 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
+| In Progress (점검 plan-L3) | `/등록` (sub-issue) → 블로킹 라이프사이클 | In Progress (블로킹) |
 | In Progress (모든 태스크 done) | verify 자동 호출 → PASS 시 In Review 전이 | In Review |
 | In Review | 사용자 직접 확인 → 승인 시 feature-close 자동 호출 | Done |
 | Done | 완료 안내 | — |

@@ -54,7 +54,13 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | 규칙 | 내용 |
 |------|------|
-| 전이 방향 | 항상 앞으로만 진행. 역방향 전이 금지 (재작업 시 새 Issue 등록) |
+| 전이 방향 | 항상 앞으로만 진행. 역방향 전이 금지 (재작업 시 새 Issue 등록). **예외: P1 계획수정** — 아래 참조 |
+
+> **예외: P1 계획수정**
+> 점검(triage)에서 P1(자체수정)으로 판정되고 G2 승인된 경우에 한하여,
+> In Progress 내에서 done 태스크의 선별적 리셋을 허용한다.
+> 조건: (1) SC 변경 없음, (2) CL S1 태스크 1~2개 수정/추가, (3) 수정 라인 < 30%.
+> 이 예외는 P1에만 적용되며, 조건 미충족 시 반드시 L3(sub-issue)로 전환한다.
 | 스킵 자동화 | type에 `—`인 상태는 dev-pipeline이 자동으로 다음 상태로 건너뜀 |
 | 전이 시 행동 | 모든 상태 전이는 §4 Linear sync 프로토콜을 경유 |
 | 전이 트리거 | 스킬 완료 시 자동 전이. 사용자가 수동 전이하지 않음 |
@@ -96,6 +102,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | verify 완료 | 미커밋 변경사항 커밋 | Linear comment 1회 (전체 작업 요약) |
 | implement 완료 | verify 자동 호출 → PASS 시 | state → In Review |
 | feature-close | `_index.md` 구현 결과 섹션 기록 (bug: Linear comment만) | state → Done + 완료 comment + description 최종 미러링 |
+| 점검 P1 plan 수정 | plan.md + cl.md 수정 커밋 (docs:) → 구현 수정 커밋 (feat:/fix:) | Linear comment (plan 수정 사유 + 변경 요약) |
 
 ### 2-3a. _index.md 갱신 주체 원칙
 
@@ -135,6 +142,12 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 게이트 연계 | 태스크 완료 후 4단계 게이트(§2)를 경유하여 다음 태스크로 이동 |
 | 금지 패턴 | 여러 단계 일괄 지시, "알아서 다 처리해" 식 실행, 같은 파일을 수정하는 태스크 동시 실행 |
 
+#### Plan 수정 시 CL S1 갱신 (P1 전용)
+- plan 수정의 영향을 받는 done 태스크만 선별적으로 `pending` 리셋
+- 영향 없는 done 태스크는 그대로 유지
+- 새 태스크 추가 시 기존 시퀀스 이어서 부여 (예: T-PRJ-47-05 → T-PRJ-47-06)
+- P1 수정 후 verify 재실행 필수 (verify PASS 전까지 In Review 전이 불가)
+
 > 의존성 기반 실행 + sub-issue 동기화 상세: [implement SKILL.md](../skills/implement/SKILL.md) 참조
 
 ---
@@ -172,6 +185,25 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | CL 선택적 읽기 | 구현 단계: S1(태스크 목록)만. 검증 단계: S3(검증 조건)만 |
 | _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 feature-close 시에만. bug는 _index.md 없음 |
 | Linear 조회 최소화 | /활성화 시 1회 상태 조회 후 세션 내 상태는 내부 추적. 매 태스크마다 재조회 금지 |
+
+#### plan scope L3 블로킹 라이프사이클
+
+plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
+
+1. **블로킹 진입**: sub-issue 생성 시
+   - 현재 이슈: Linear 상태 In Progress 유지
+   - _index.md Notes에 블로킹 기록: `### Blocking: {sub-issue ID}` + 사유
+   - CL Handoff에 블로킹 상태 기록
+   - 영향 없는 나머지 태스크는 계속 진행 가능
+
+2. **블로킹 해제**: 다음 `/활성화` 시 자동 감지
+   - dev-pipeline이 _index.md의 Blocking 섹션 확인
+   - sub-issue 상태를 Linear API로 조회 (`get_issue`)
+   - sub-issue가 Done이면 → 블로킹 해제, _index.md 기록 갱신, 정상 진행
+   - sub-issue가 미완료면 → 사용자에게 블로킹 상태 안내
+
+3. **Linear 상태**: 현재 이슈는 In Progress 유지 (별도 "Blocked" 상태 미사용)
+   - 블로킹 가시성은 _index.md + Linear comment로 확보
 
 ---
 
