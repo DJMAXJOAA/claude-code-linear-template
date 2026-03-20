@@ -25,9 +25,11 @@ created: {YYYY-MM-DD}
 
 ## S3. Verification
 
-| # | 검증 항목 | 방법 | 기대 결과 |
-|---|----------|------|----------|
-| 1 | {항목} | {방법} | {결과} |
+| # | FR-ID | 검증 항목 | 방법 | 기대 결과 |
+|---|-------|----------|------|----------|
+| 1 | FR-001 | {항목} | {방법} | {결과} |
+
+> FR-ID 규칙: spec의 FR-NNN 참조. spec 미존재 또는 FR-ID 미보유(grandfathered) 시 `--` 기입. 복수 FR 매핑 가능: `FR-001, FR-003`. 다른 spec 참조 시: `{spec-name}:FR-NNN`.
 
 ## S4. Manual Testing Guide
 

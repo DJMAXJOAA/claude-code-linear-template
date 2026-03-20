@@ -29,6 +29,17 @@ created: {YYYY-MM-DD}
 1. {태스크 그룹 1 요약}
 2. {태스크 그룹 2 요약}
 
+## 3a. Requirements Traceability
+
+> Spec FR → Task/Verification 매핑. Spec 미존재 또는 FR-ID 미보유 시 이 섹션 생략.
+
+| FR-ID | 요구사항 요약 | Tasks | Verification |
+|-------|-------------|-------|-------------|
+| FR-001 | {EARS 1줄 요약} | T-{ID}-01, T-{ID}-03 | S3 #1, #2 |
+| FR-002 | {EARS 1줄 요약} | T-{ID}-02 | S3 #3 |
+
+> Traceability 테이블은 **Plan 생성 시점의 스냅샷**. P1 계획수정(pipeline.md §3 참조) 시 갱신 대상이 아니다. 태스크 추가/변경 시의 FR 매핑 최신화는 feature-close §7의 spec 연동 갱신에서 수행.
+
 ## 4. Verification
 
 > [cl.md](cl.md) S2/S3 참조
@@ -42,6 +53,6 @@ created: {YYYY-MM-DD}
 
 | type | Plan 작성 범위 |
 |------|--------------|
-| feature | 목표 + 상세 설계 (단일 plan.md) |
-| improvement | 목표 + 접근 방식 + 변경 범위 + 리스크. 간략 설계 |
+| feature | 목표 + 상세 설계 (단일 plan.md) + 3a. Requirements Traceability (Spec + FR-ID 존재 시) |
+| improvement | 목표 + 접근 방식 + 변경 범위 + 리스크. 간략 설계 + 3a. Requirements Traceability (Spec + FR-ID 존재 시, 간략) |
 | bug | plan.md 미생성 — `_index.md > ## Notes`에 Root Cause 분석 기록 |

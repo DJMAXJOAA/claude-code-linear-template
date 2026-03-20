@@ -18,8 +18,26 @@
 | 마일스톤 | Linear Project에 매핑할 마일스톤 (선택) |
 | Priority | High / Medium / Low (선택, 기본값: Medium) |
 | 참조 문서 | 관련 spec 문서, 스크립트, 설정 등의 경로 (선택, 복수 가능). 예: `docs/spec/combat-system/`, `scripts/migrate.ts` |
+| `--from-spec` | (선택) `docs/spec/{spec-name}` 디렉토리 경로. 지정 시 spec의 FR을 기반으로 Issue 배치 생성 |
 
 ## Process
+
+### --from-spec 배치 모드
+
+> `--from-spec` 옵션 지정 시 아래 프로세스 실행. 미지정 시 기존 단건/배치 등록 프로세스(아래) 실행.
+
+| 단계 | 행위 |
+|------|------|
+| 0a | **Spec 로드**: `--from-spec` 경로의 `_index.md` + 하위 문서 로드. FR 테이블에서 FR-ID 목록 수집 |
+| 0b | **FR 그루핑 제안**: FR-ID를 Issue 단위로 그루핑(도메인/의존성 기반) → `AskUserQuestion`으로 사용자 확인/수정 |
+| 0c | **배치 실행**: 승인된 그룹별로 기존 G0~G3 프로세스 반복. Label/Project 조회는 G0에서 1회 캐싱하여 재사용 |
+
+| 규칙 | 내용 |
+|------|------|
+| FR 그루핑 | AI가 도메인/의존성 기반 제안. 사용자 최종 결정 |
+| Issue description | Spec Summary에 FR-ID 목록 포함. Documents에 spec 경로 자동 삽입 |
+| relation 자동 설정 | 같은 spec 출처 Issue 간 `relatedTo` 자동 설정 |
+| Bidirectional 링크 | 생성된 Issue ID를 spec의 Related Issues 테이블에 역기록 |
 
 | 단계 | 행위 |
 |------|------|

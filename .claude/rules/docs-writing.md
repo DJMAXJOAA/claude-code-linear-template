@@ -169,7 +169,18 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 작성 스타일 | 테이블, 불릿 위주. 서술형 최소화 |
 | 설명 필요 시 | 표의 "설명" 컬럼 활용 |
 | 실행 스크립트 금지 | bash, python, JSON 스키마 등 코드 블록 포함 금지 (청사진 원칙) |
-| 예외 | frontmatter/템플릿 예시, plan.md의 인터페이스 스케치(의사코드 수준)는 코드 블록 허용 |
+| 예외 | frontmatter/템플릿 예시, plan.md의 인터페이스 스케치(의사코드 수준), Mermaid 다이어그램(§7-2 참조)은 코드 블록 허용 |
+
+### 7-2. Mermaid 다이어그램 가이드라인
+
+| 규칙 | 내용 |
+|------|------|
+| spec 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2 |
+| plan.md 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2, erDiagram |
+| 금지 유형 (전체) | gantt, pie, mindmap, classDiagram |
+| 크기 제한 | 노드 20개 이하, 엣지 30개 이하. 초과 시 분할 |
+| 사용 위치 | spec 하위 문서 (What 수준), plan.md Approach 섹션 (How 수준). _index.md/cl.md 금지 |
+| erDiagram 제한 사유 | ERD는 데이터 모델 설계(How 영역)이므로 spec(What/Why)에서는 사용 금지 |
 
 ---
 

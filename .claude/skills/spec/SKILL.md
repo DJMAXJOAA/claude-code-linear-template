@@ -15,7 +15,7 @@
 | 기능 설명 | What + Why (사용자 입력, 1~3문장) |
 | 기존 spec | `docs/spec/` 내 기존 디렉토리 확인 (중복 방지 + 재호출 감지) |
 
-## Process — 5-게이트 구조
+## Process — G3a 포함 게이트 구조
 
 모든 게이트에서 AI가 파악한 내용을 출력하고 유저 확인을 받은 후 다음으로 진행한다.
 
@@ -58,6 +58,28 @@
 
 > G3 출력: 프리필된 요구사항 전체 → `AskUserQuestion`으로 유저 확인/수정
 
+### G3a. Spec 품질 검증
+
+| 단계 | 행위 |
+|------|------|
+| 3a-1 | **자동 검증 실행**: G3 확정 요구사항에 대해 5개 검증 항목 자동 평가 |
+| 3a-2 | **결과 제시**: 검증 결과를 PASS/WARN/FAIL로 제시 |
+| 3a-3 | **실패 시 사용자 선택**: `AskUserQuestion`으로 (a) 자동 수정 적용 (AI 권장) (b) 수동 수정 (c) 무시하고 진행 (사유 기록 필수 — spec `_index.md` Notes에 `G3a override: {사유}` 자동 기입) |
+
+G3a 검증 항목:
+
+| # | 검증 항목 | 기준 | FAIL 조건 |
+|---|----------|------|-----------|
+| 1 | 완전성(Completeness) | 모든 필수 섹션(FR, Constraints, Tech Spec, Out of Scope) 존재 | 필수 섹션 누락 |
+| 2 | 일관성(Consistency) | FR 간 모순 없음, Constraints와 FR 충돌 없음 | 상호 모순 감지 |
+| 3 | 구현누출방지(No Implementation Leak) | FR이 How가 아닌 What만 기술 | 특정 라이브러리/함수명/구현 패턴 언급 |
+| 4 | 검증가능성(Verifiability) | 각 FR이 테스트 가능한 기준 포함. **#3에서 FAIL된 FR은 대상 제외** | "적절한", "빠른" 등 모호 표현 |
+| 5 | Constraints 분리 | 기술 제약이 FR에 혼입되지 않음 | FR 내 제약조건 기술 |
+
+> 검증 순서: #1→#2→#3→#4→#5. #3에서 구현 누출로 FAIL된 FR은 #4(검증가능성)에서 중복 경고하지 않는다.
+
+> G3a 출력: 검증 결과 (5항목 PASS/WARN/FAIL) + FAIL 항목 수정 제안 → `AskUserQuestion`으로 사용자 선택
+
 ### G4. 구조 확인
 
 | 단계 | 행위 |
@@ -70,7 +92,7 @@
 
 | 단계 | 행위 |
 |------|------|
-| 5-1 | **spec 문서 작성**: `templates/spec-template.md` 기반으로 `_index.md` + 하위 문서 작성. G2 보고서가 있으면 `references/` 하위에 보고서 파일도 작성 |
+| 5-1 | **spec 문서 작성**: `templates/spec-template.md` 기반으로 `_index.md` + 하위 문서 작성. G2 보고서가 있으면 `references/` 하위에 보고서 파일도 작성. Change Log는 확장된 4-컬럼 형식(날짜/FR-ID/변경유형/변경내용)을 사용 (spec-template.md 참조) |
 | 5-2 | **spec 디렉토리 저장**: `docs/spec/{spec-name}/` 디렉토리 + 전체 문서 저장 (kebab-case) |
 | 5-3 | **글로벌 _index.md 갱신**: `docs/spec/_index.md` 목록 테이블에 신규 행 추가 (디렉토리 링크, 제목, 생성일, 설명) |
 | 5-4 | **Linear Document 생성 (선택)**: 승인 시 Linear MCP로 Document 생성 |
