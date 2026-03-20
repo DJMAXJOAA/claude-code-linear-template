@@ -48,7 +48,7 @@
 | **SC 충족** | Linear Issue description의 모든 Success Criteria 충족 |
 | **CL S3** | cl.md S3 테이블의 모든 검증 항목 PASS |
 | **빌드** | 린트 + 타입체크 + 전체 테스트 통과 |
-| **코드 품질** | 프로젝트별 coding rules 준수 (`.claude/rules/coding.md`) |
+| **코드 품질** | 프로젝트별 coding rules 준수 (`.claude/rules/coding.md` — 미존재 시 해당 체크 스킵) |
 | **범위** | Plan 범위 외 변경 없음 |
 
 ---

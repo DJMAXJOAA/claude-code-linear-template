@@ -42,6 +42,6 @@ created: {YYYY-MM-DD}
 
 | type | Plan 작성 범위 |
 |------|--------------|
-| feature | 목표 + 상세 설계 (1+@ 문서). 200줄 초과 시 분할: `plan-{slug}.md` |
+| feature | 목표 + 상세 설계 (단일 plan.md) |
 | improvement | 목표 + 접근 방식 + 변경 범위 + 리스크. 간략 설계 |
 | bug | plan.md 미생성 — `_index.md > ## Notes`에 Root Cause 분석 기록 |
