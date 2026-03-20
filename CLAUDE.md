@@ -70,7 +70,7 @@
 
 ## Framework: Commands
 
-- 커맨드 10개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`, `/스펙`
+- 커맨드 11개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`, `/스펙`, `/릴리스`
 - 스킬 12개: 각 `.claude/skills/*/SKILL.md`에 정의
 - 커맨드 → 스킬 매핑은 각 커맨드 파일 내부에 명시
 
@@ -86,6 +86,7 @@
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `_index.md`(항상) + `plan.md`, `cl.md`(Planning 시)
 - Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + 하위 문서들)
+- FR-ID: `FR-NNN` (spec-local, 각 spec 내 순차). 외부 참조: `{spec-name}:FR-NNN`. EARS 형식 요구사항
 - 상세: [.claude/rules/docs-writing.md](.claude/rules/docs-writing.md)
 
 ## Framework: Rules Delegation

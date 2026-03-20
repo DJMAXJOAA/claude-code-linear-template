@@ -74,7 +74,7 @@ improvement는 간략 버전으로 수행한다.
 | 5 | **SC를 Linear description에 기록**: 확정된 SC를 Linear Issue description의 `## Success Criteria` 섹션에 삽입 |
 | 6 | **_index.md 갱신**: `## Decisions`에 설계 결정 기록, `## Notes`에 조사 결과 요약 + 스코프 범위 기록. gen-plan 호출 전 수집 정보를 Git에 선저장 |
 
-> §10 인터뷰 원칙 적용 (pipeline.md 참조)
+> §11 인터뷰 원칙 적용 (pipeline.md 참조)
 
 ## Post-Plan Q/A (feature / improvement 공통)
 

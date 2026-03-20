@@ -55,6 +55,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | Claude Code → Linear | 스킬의 `### Linear MCP` 섹션에 호출 패턴 정의 |
 | Claude Code → Git | 스킬이 `docs/issue/{ID}/` 하위 파일 직접 생성/갱신 |
 | Linear Document → Git spec | Document에 `docs/spec/{name}/{doc}.md#section` 앵커 링크. 디렉토리 진입점은 `docs/spec/{name}/`. 상세 결정은 Document에 작성 |
+| Spec FR-ID → Plan/CL | spec의 `FR-NNN` → plan.md 3a Traceability → CL S3 검증. `--from-spec` 옵션으로 FR 기반 Issue 배치 등록 |
 
 ---
 
@@ -81,5 +82,4 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 
 ## 5. 설계 이력
 
-> v8 프레임워크에서 마이그레이션한 경우 차용/변형/제거 상세는 `docs/migration/` 문서를 참조.
 > 이 프레임워크를 신규 도입하는 경우 이 섹션은 무시해도 됨.

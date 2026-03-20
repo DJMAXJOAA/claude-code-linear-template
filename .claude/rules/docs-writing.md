@@ -37,15 +37,9 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 > _index.md 템플릿 SSOT: [gen-hub templates/index-templates.md](../skills/gen-hub/templates/index-templates.md)
 
-### 2-1. 핵심 규칙 (요약)
+### 2-1. 핵심 규칙
 
-| 항목 | 규칙 |
-|------|------|
-| 생성 시점 | `/등록` 시 생성 (gen-hub). bug 제외 — bug는 Git 문서 미생성 |
-| Linear Issue 링크 | gen-hub이 Linear API 응답 URL 직접 삽입. 수동 URL 조합 금지 |
-| 구현 결과 섹션 | feature-close 시 lazy-creation |
-
-> 전체 템플릿 규칙 + type별 변형: [gen-hub templates/index-templates.md](../skills/gen-hub/templates/index-templates.md) 참조
+> _index.md 템플릿 SSOT + type별 변형: [gen-hub templates/index-templates.md](../skills/gen-hub/templates/index-templates.md) 참조
 
 ---
 
@@ -200,10 +194,10 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|
 | 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
 | 구조 | `docs/spec/{spec-name}/` 디렉토리. `_index.md`(허브) + N개 하위 문서 (도메인 단위 자유 분할) |
-| 초기 생성 | `/스펙` 스킬이 5-게이트 파이프라인(조사 → 프리필 인터뷰 → 구조 확인 → 작성+저장)으로 생성 |
+| 초기 생성 | `/스펙` 스킬이 5-게이트 파이프라인(조사 → 프리필 인터뷰 → G3a 품질 검증 → 구조 확인 → 작성+저장)으로 생성 |
 | references 디렉토리 | (선택) `docs/spec/{name}/references/` — G2 조사에서 보고서 생성 시에만. spec(SDD)과 역할 분리: spec = "What/Why" 명세, 보고서 = 조사 결과 레퍼런스 |
-| references 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 (§8 준용) |
-| 연동 갱신 | feature-close 시 링크된 spec의 Related Issues + Change Log 갱신 (경로/링크 없으면 무시, 필수 아님) |
+| references 불변 원칙 | §8 준용 |
+| 연동 갱신 | feature-close 시 링크된 spec의 Related Issues + Change Log 갱신. 4-컬럼 형식 (spec-template.md 참조). 경로/링크 없으면 무시 |
 | `updated` 갱신 | spec 문서 변경 시 frontmatter `updated` 날짜 반드시 갱신 |
 | 글로벌 _index.md 자동 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
 
