@@ -91,33 +91,16 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 2-3. G3 dual write 규칙
 
-| 대상 | Git 기록 | Linear 갱신 |
-|------|---------|------------|
-| 파이프라인 단계 전환 | `_index.md` Documents 테이블 상태 갱신 | state 전이 |
-| Pre-Plan 진입 | — (상태 전이만) | state: Todo → Planning (dev-pipeline이 Pre-Plan Q/A 시작 전 즉시 전이) |
-| Pre-Plan 완료 | `_index.md` Decisions·Notes 갱신 | — (dev-pipeline이 gen-plan 호출 직전에 수집 정보 선저장) |
-| Plan 완료 | `plan.md` + `cl.md` 파일 생성 | — (이미 Planning 상태) |
-| 구현 진입 | plan.md + cl.md + _index.md 미커밋 시 Git 커밋 (implement 호출 전) | state: Planning → In Progress |
-| 태스크 완료 | `cl.md` S1 체크박스 갱신 | sub-issue 상태 Done |
-| verify 완료 | 미커밋 변경사항 커밋 | Linear comment 1회 (전체 작업 요약) |
-| implement 완료 | verify 자동 호출 → PASS 시 | state → In Review |
-| feature-close | `_index.md` 구현 결과 섹션 기록 (bug: Linear comment만) | state → Done + 완료 comment + description 최종 미러링 |
-| 점검 P1 plan 수정 | plan.md + cl.md 수정 커밋 (docs:) → 구현 수정 커밋 (feat:/fix:) | Linear comment (plan 수정 사유 + 변경 요약) |
+| 원칙 | 내용 |
+|------|------|
+| dual write 필수 | G3에서는 Git 기록 + Linear 갱신을 반드시 함께 수행 |
+| 부분 실행 금지 | Git만 저장하고 Linear 미갱신 (또는 그 반대) 금지 |
+| 장애 시 fallback | Linear 실패 시 §4 fallback 적용. Git은 정상 진행 |
+| 스킬별 상세 | 각 스킬의 `## Linear MCP 호출 패턴` 섹션에서 구체적 행동 정의 |
 
 ### 2-3a. _index.md 갱신 주체 원칙
 
-> **원칙**: `_index.md`는 해당 섹션을 담당하는 스킬이 직접 갱신한다.
-
-| 섹션 | 갱신 주체 스킬 | 시점 |
-|------|-------------|------|
-| Documents 테이블 | gen-hub(초기, Spec 행 포함), gen-plan(plan/cl 행), investigation(보고서 행), feature-close(Spec 갱신) | 파일 생성/삭제 시 |
-| ## Decisions | dev-pipeline (Pre-Plan Q/A) | 설계 결정 확정 시 |
-| ## Notes | dev-pipeline(Pre-Plan Q/A), feedback, triage, feature-close | 조사 결과·스코프/피드백/triage/환류 발생 시 |
-| ## 구현 결과 | feature-close | 완료 처리 시 |
-
-> 태스크 완료 로그는 `_index.md`가 아닌 **Linear comment**로 기록한다 (implement 스킬).
-
-> 각 스킬은 자신이 담당하는 섹션만 갱신한다. 타 스킬 담당 섹션을 직접 수정하지 않는다.
+> **원칙**: 각 스킬은 자신이 담당하는 섹션만 갱신한다. 타 스킬 담당 섹션을 직접 수정하지 않는다. 갱신 주체는 각 스킬의 Output 섹션에서 자체 선언한다.
 
 ### 2-4. G3-terminal 스킬 패턴
 
@@ -126,6 +109,15 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 정의 | G1→G2→G3으로 완결. G4는 후속 Skill의 자체 게이트 사이클에 위임 |
 | 적용 대상 | feature-close |
 | 특징 | 스킬 자체는 Git 기록 + Linear 갱신(G3)으로 완료 |
+
+### 2-5. 인터뷰 원칙
+
+| 규칙 | 내용 |
+|------|------|
+| AskUserQuestion 필수 | 모든 인터뷰·Q/A·선택 요청은 AskUserQuestion 도구로 수행. 자유 텍스트 출력 후 암묵적 대기 금지 |
+| 전환점마다 인터뷰 | 단계 전환 시 AskUserQuestion으로 사용자에게 확인 |
+| AI 권장안 명시 | 질문 시 AI 추천 선택지를 `(AI 권장)` 라벨과 함께 제시 |
+| 가정 금지 | 모호한 요구사항은 AskUserQuestion으로 반드시 질문 |
 
 ---
 
@@ -264,31 +256,9 @@ plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
 
 ## §9 에이전트 라우팅
 
-> **전체 스킬에 적용**: 모든 스킬의 OMC 연동 섹션은 이 절의 규칙을 따른다. OMC 비활성 시 각 스킬의 OMC 섹션 대신 아래 fallback 규칙을 적용한다.
-
-| type | 기본 에이전트 모델 |
-|------|-----------------|
-| feature/improvement | opus (설계 단계) → sonnet (구현 단계) |
-| bug | sonnet (explore → debugger → executor) |
-
-각 스킬의 OMC 연동 섹션에 사용할 에이전트가 직접 명시된다. OMC는 항상 활성화 전제.
-
-> OMC가 활성화되지 않은 환경에서는 에이전트 라우팅을 스킵하고 기본 모델로 실행한다.
-> 만약 비활성화 상태가 감지되었다면, 반드시 알림을 출력하여 사용자에게 OMC 활성화 필요성을 인지시켜야 한다.
-
-### 스킬별 OMC 비활성 fallback
-
-| 스킬 | fallback 행동 |
-|------|-------------|
-| dev-pipeline | 기본 모델로 라우팅 수행. explore/critic 에이전트 대신 직접 코드 탐색/리뷰 |
-| bug-fix | 기본 모델로 직접 탐색/분석/수정. explore/debugger/executor 에이전트 대신 직접 수행 |
-| implement | 수동 모드(a)로 fallback. executor/ralph 위임 불가 |
-| triage | 기본 모델로 직접 분류. analyst 없이 사용자 입력 기반 판단 |
-| investigation | 기본 모델로 직접 조사. explore/scientist 에이전트 대신 직접 탐색 |
-| test | 기본 모델로 직접 테스트 전략 수립·실행 (파이프라인 자동 호출 없음, 사용자 요청 시 호출) |
-| verify | 기본 모델로 직접 검증 (implement/dev-pipeline에서 자동 호출) |
-| feedback, gen-hub, gen-plan, feature-close | 에이전트 연동 없음 — 영향 없음 |
-| spec | 기본 모델로 직접 조사/인터뷰. explore/scientist 에이전트 대신 직접 탐색 |
+- OMC(oh-my-claudecode) 에이전트 연동은 각 스킬의 `## OMC 에이전트 연동` 섹션에서 정의한다
+- OMC 비활성 시 각 스킬은 기본 모델로 직접 수행한다. 비활성이 감지되면 사용자에게 알린다
+- 에이전트 모델 기본값: 설계=opus, 구현=sonnet, 탐색=haiku
 
 ---
 
@@ -300,13 +270,3 @@ plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
 
 > 파이프라인 외부 스킬은 Linear Issue 상태 전이를 수행하지 않는다.
 
----
-
-## §11 인터뷰 원칙
-
-| 규칙 | 내용 |
-|------|------|
-| AskUserQuestion 필수 | 모든 인터뷰·Q/A·선택 요청은 AskUserQuestion 도구로 수행. 자유 텍스트 출력 후 암묵적 대기 금지 |
-| 전환점마다 인터뷰 | 단계 전환 시 AskUserQuestion으로 사용자에게 확인 |
-| AI 권장안 명시 | 질문 시 AI 추천 선택지를 `(AI 권장)` 라벨과 함께 제시 |
-| 가정 금지 | 모호한 요구사항은 AskUserQuestion으로 반드시 질문 |
