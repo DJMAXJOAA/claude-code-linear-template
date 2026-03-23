@@ -77,7 +77,7 @@
 ## Framework: Linear Integration
 
 **3영역 SSOT**: Linear(상태) · Git(지식) · Claude Code(실행). 교차 복제 금지.
-- MCP 도구 호출 패턴은 각 스킬의 `### Linear MCP` 섹션 참조
+- MCP 도구 호출 패턴은 각 스킬의 `## Linear MCP` 섹션 참조
 - 상세: [docs/guides/framework.md](docs/guides/framework.md)
 
 ## Framework: ID System
