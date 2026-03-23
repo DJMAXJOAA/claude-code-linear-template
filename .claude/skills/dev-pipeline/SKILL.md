@@ -67,7 +67,7 @@ improvement는 간략 버전으로 수행한다.
 |------|------|
 | 0 | **Linear 상태 갱신**: Linear MCP로 State → Planning 즉시 전이. Pre-Plan Q/A 시작을 Linear에 선반영 |
 | 1 | **컨텍스트 수집**: Linear MCP로 related issue 조회 + Label 기반 관련 Issue 필터링 |
-| 1a | **관련 문서 환류**: step 1에서 발견된 related issue의 Git 문서 읽기 (최대 5개). 각 `docs/issue/{RELATED-ID}/` 존재 확인 → `_index.md`(Decisions, Notes) + `plan.md`(존재 시) 읽기. 수집한 설계 결정·제약·조사 결과를 요약하여 step 2에서 인라인 제시. related issue가 없거나 Git 문서가 없는(bug 등) issue는 스킵. 구현 결과 섹션은 gen-plan step 2에서 별도 교차 참조하므로 이 단계에서는 읽지 않는다 |
+| 1a | **관련 문서 환류**: related issue의 `_index.md`(Decisions, Notes) + `plan.md` 읽기 (최대 5개). 요약하여 step 2에서 제시. 구현 결과 섹션은 gen-plan에서 별도 참조 |
 | 2 | **스코프/조사 인터뷰**: step 1a 환류 결과를 요약 제시한 뒤, `AskUserQuestion`으로 (a) explore 탐색 범위(전체/특정 모듈/최소) (b) `/조사`(investigation) 실행 여부를 확인 |
 | 3 | **코드베이스 조사**: 인터뷰 결과에 따라 `oh-my-claudecode:explore` 에이전트로 코드베이스 조사 위임. improvement는 핵심 파일만 확인. 조사 선택 시 investigation 스킬 호출 |
 | 4 | **How 인터뷰**: `AskUserQuestion`으로 각 항목 확인. feature는 5항목(SC, 스펙, Decisions, 리스크, 범위). improvement는 3항목(SC, 접근방식, 범위)으로 축소 |
