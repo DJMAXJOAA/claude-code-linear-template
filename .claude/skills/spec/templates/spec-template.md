@@ -167,31 +167,13 @@ updated: {YYYY-MM-DD}
 | FR-001 | Event-driven | When {trigger}, the system shall {action} | {비고} |
 ```
 
-## 템플릿: Reference 보고서 (선택)
+> Reference 보고서 템플릿: [spec-reference-template.md](./spec-reference-template.md)
 
-```markdown
----
-title: {보고서 제목}
-type: spec-reference
-parent-spec: {spec-name}
-created: {YYYY-MM-DD}
----
+## Mermaid 가이드라인
 
-> ← [_index.md](../_index.md)
-
-## 조사 배경
-
-{조사 목적 + 대상}
-
-## 조사 방법
-
-{사용한 도구/접근법}
-
-## 결과
-
-{핵심 발견 사항}
-
-## 결론
-
-{spec에 반영할 시사점}
-```
+| 규칙 | 내용 |
+|------|------|
+| 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2 |
+| 금지 유형 | gantt, pie, mindmap, classDiagram, erDiagram (ERD는 How 영역 — plan.md에서만 허용) |
+| 크기 제한 | 노드 20개 이하, 엣지 30개 이하. 초과 시 분할 |
+| 사용 위치 | spec 하위 문서 (What/Why 수준). _index.md 금지 |

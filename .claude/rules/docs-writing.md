@@ -89,47 +89,29 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 ## §4 문서 네이밍
 
-### 4-1. docs/issue/{LINEAR-ID}/ 하위 파일명
+### 4-1. 파일명 규칙
 
-| 파일 | 이름 규칙 | 예시 |
-|------|----------|------|
-| Issue 인덱스 | `_index.md` (고정) | `docs/issue/PRJ-47/_index.md` |
-| Plan | `plan.md` (고정) | `docs/issue/PRJ-47/plan.md` |
-| Checklist | `cl.md` (고정) | `docs/issue/PRJ-47/cl.md` |
+| 위치 | 파일 | 이름 규칙 | 예시 |
+|------|------|----------|------|
+| `docs/issue/{LINEAR-ID}/` | Issue 인덱스 | `_index.md` (고정) | `PRJ-47/_index.md` |
+| | Plan | `plan.md` (고정) | `PRJ-47/plan.md` |
+| | Checklist | `cl.md` (고정) | `PRJ-47/cl.md` |
+| `docs/adr/` | ADR 인덱스 | `_index.md` (고정) | `adr/_index.md` |
+| | ADR 문서 | `ADR-{NNNN}.md` (4자리 순번) | `adr/ADR-0001.md` |
+| `docs/shared/` | 도메인 지식 | `domain-{topic}.md` (kebab-case) | `shared/domain-networking.md` |
+| | 가이드 | `{topic}.md` (kebab-case) | `shared/error-handling-patterns.md` |
+| `docs/spec/{spec-name}/` | Spec 인덱스 | `_index.md` (고정) | `combat-system/_index.md` |
+| | Spec 하위 문서 | `{topic}.md` (kebab-case) | `combat-system/turn-system.md` |
+| | Spec Reference | `references/{topic}.md` (kebab-case) | `combat-system/references/protocol-analysis.md` |
 
-### 4-2. docs/adr/ 네이밍
+### 4-2. 폴더명 규칙
 
-| 파일 | 이름 규칙 | 예시 |
-|------|----------|------|
-| ADR 인덱스 | `_index.md` (고정) | `docs/adr/_index.md` |
-| ADR 문서 | `ADR-{NNNN}.md` (4자리 순번) | `docs/adr/ADR-0001.md` |
-
-### 4-3. docs/shared/ 네이밍
-
-| 파일 | 이름 규칙 | 예시 |
-|------|----------|------|
-| 도메인 지식 | `domain-{topic}.md` (kebab-case) | `docs/shared/domain-networking.md` |
-| 가이드 | `{topic}.md` (kebab-case) | `docs/shared/error-handling-patterns.md` |
-
-### 4-4. docs/spec/{spec-name}/ 네이밍
-
-| 파일 | 이름 규칙 | 예시 |
-|------|----------|------|
-| Spec 인덱스 | `_index.md` (고정) | `docs/spec/combat-system/_index.md` |
-| Spec 하위 문서 | `{topic}.md` (kebab-case, 도메인 단위 자유 분할) | `docs/spec/combat-system/turn-system.md` |
-| Spec Reference 보고서 | `references/{topic}.md` (kebab-case) | `docs/spec/combat-system/references/protocol-analysis.md` |
-
-### 4-5. 폴더명 규칙
-
-| 경로 | 규칙 | 비고 |
-|------|------|------|
-| `docs/issue/{LINEAR-ID}/` | Linear ID 그대로 사용 (대소문자 유지) | `docs/issue/PRJ-47/`, `docs/issue/PRJ-123/` |
-| `docs/adr/` | 고정 | 변경 불가 |
-| `docs/shared/` | 고정 | 변경 불가 |
-| `docs/spec/` | 고정 | 변경 불가 |
-| `docs/spec/{spec-name}/` | kebab-case | 2depth 제한. 예: `docs/spec/combat-system/` |
-| `docs/spec/{spec-name}/references/` | 고정 (선택적) | 보고서 존재 시에만 생성. 미존재 시 디렉토리 자체 없음 |
-| `docs/guides/` | 고정 | 변경 불가 |
+| 경로 | 규칙 |
+|------|------|
+| `docs/issue/{LINEAR-ID}/` | Linear ID 그대로 (대소문자 유지) |
+| `docs/adr/`, `docs/shared/`, `docs/spec/`, `docs/guides/` | 고정 (변경 불가) |
+| `docs/spec/{spec-name}/` | kebab-case, 2depth 제한 |
+| `docs/spec/{spec-name}/references/` | 고정 (선택적 — 보고서 존재 시에만 생성) |
 
 ---
 
@@ -154,18 +136,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 작성 스타일 | 테이블, 불릿 위주. 서술형 최소화 |
 | 설명 필요 시 | 표의 "설명" 컬럼 활용 |
 | 실행 스크립트 금지 | bash, python, JSON 스키마 등 코드 블록 포함 금지 (청사진 원칙) |
-| 예외 | frontmatter/템플릿 예시, plan.md의 인터페이스 스케치(의사코드 수준), Mermaid 다이어그램(§6-2 참조)은 코드 블록 허용 |
-
-### 6-2. Mermaid 다이어그램 가이드라인
-
-| 규칙 | 내용 |
-|------|------|
-| spec 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2 |
-| plan.md 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2, erDiagram |
-| 금지 유형 (전체) | gantt, pie, mindmap, classDiagram |
-| 크기 제한 | 노드 20개 이하, 엣지 30개 이하. 초과 시 분할 |
-| 사용 위치 | spec 하위 문서 (What 수준), plan.md Approach 섹션 (How 수준). _index.md/cl.md 금지 |
-| erDiagram 제한 사유 | ERD는 데이터 모델 설계(How 영역)이므로 spec(What/Why)에서는 사용 금지 |
+| 예외 | frontmatter/템플릿 예시, 의사코드, Mermaid는 허용. 상세: [plan-template.md](../skills/gen-plan/templates/plan-template.md), [spec-template.md](../skills/spec/templates/spec-template.md) |
 
 ---
 
@@ -173,8 +144,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 규칙 | 내용 |
 |------|------|
-| 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
 | `updated` 갱신 | spec 문서 변경 시 frontmatter `updated` 날짜 반드시 갱신 |
 | 글로벌 _index.md | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
 
-> 생성 프로세스 + 연동 갱신 상세: [spec SKILL.md](../skills/spec/SKILL.md) 참조
+> 생명주기 + 생성 프로세스 + 연동 갱신 상세: [spec SKILL.md](../skills/spec/SKILL.md) 참조

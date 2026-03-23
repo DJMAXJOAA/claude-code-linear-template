@@ -56,3 +56,12 @@ created: {YYYY-MM-DD}
 | feature | 목표 + 상세 설계 (단일 plan.md) + 3a. Requirements Traceability (Spec + FR-ID 존재 시) |
 | improvement | 목표 + 접근 방식 + 변경 범위 + 리스크. 간략 설계 + 3a. Requirements Traceability (Spec + FR-ID 존재 시, 간략) |
 | bug | plan.md 미생성 — `_index.md > ## Notes`에 Root Cause 분석 기록 |
+
+## Mermaid 가이드라인
+
+| 규칙 | 내용 |
+|------|------|
+| 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2, erDiagram |
+| 금지 유형 | gantt, pie, mindmap, classDiagram |
+| 크기 제한 | 노드 20개 이하, 엣지 30개 이하. 초과 시 분할 |
+| 사용 위치 | Approach 섹션 (How 수준). _index.md/cl.md 금지 |
