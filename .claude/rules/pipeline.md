@@ -150,15 +150,30 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 > 상세: [context.md](docs/guides/context.md) §2 참조
 
-### 4-4. plan scope L3 블로킹 라이프사이클
+### 4-4. Sub-issue 라이프사이클
 
-plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
+#### 4-4a. 블로킹 라이프사이클 (plan scope L3)
+
+plan scope에서 L3(sub-issue)로 분류되어 triage G4b에서 자동 등록된 경우에 적용:
 
 | 단계 | 행동 |
 |------|------|
 | **블로킹 진입** (sub-issue 생성 시) | In Progress 유지. `_index.md` Notes에 `### Blocking: {ID}` + 사유 기록. CL Handoff에 기록. 나머지 태스크 계속 진행 가능 |
 | **블로킹 해제** (다음 `/활성화` 시) | _index.md Blocking 섹션 확인 → `get_issue`로 sub-issue 상태 조회 → Done이면 해제+기록 갱신, 미완료면 사용자 안내 |
 | **Linear 상태** | 현재 이슈 In Progress 유지. 가시성은 _index.md + Linear comment로 확보 |
+
+#### 4-4b. 일반 sub-issue 확인
+
+triage에서 등록된 모든 sub-issue(L3/backlog)는 `/활성화` 시 상태를 확인한다:
+
+| 단계 | 행동 |
+|------|------|
+| **확인** | Linear MCP로 child sub-issue 전체 조회 → 미완료 목록 추출 |
+| **리마인딩** | dev-pipeline §Sub-issue 리마인딩 테이블로 출력 (생성 사유 + 블로킹 여부 포함) |
+| **진행 결정** | `AskUserQuestion`으로 사용자 선택 (계속/sub-issue 먼저/대기). 블로킹 항목은 강조 |
+| **Done 갱신** | sub-issue가 Done이면 _index.md Blocking 섹션 해제 + 기록 갱신 |
+
+> child sub-issue가 없으면 이 단계를 스킵.
 
 ## §5 참조 링크
 

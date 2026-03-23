@@ -6,6 +6,7 @@ type별 라우팅 상세 + bug 수정 프로세스.
 
 | 현재 State | 라우팅 대상 | 완료 후 State |
 |-----------|-----------|-------------|
+| (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
 | Todo | **Linear → Planning 즉시 전이** → **Pre-Plan Q/A** → gen-plan | Planning |
 | Planning (plan.md 존재) | **Post-Plan Q/A** → implement | In Progress |
 | In Progress | implement Skill | In Progress (태스크 진행) |
@@ -22,6 +23,7 @@ type별 라우팅 상세 + bug 수정 프로세스.
 
 | 현재 State | 라우팅 대상 | 완료 후 State |
 |-----------|-----------|-------------|
+| (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
 | Todo | bug-fix Skill 호출 | In Progress |
 | In Progress | bug-fix Skill (수정 + verify 자동 호출) | In Review |
 | In Review | 사용자 직접 확인 → 승인 시 feature-close(경량) 자동 호출 | Done |
