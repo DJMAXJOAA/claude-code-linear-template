@@ -143,6 +143,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | _index.md = 인덱스 원천 | Issue 폴더 내 문서 목록 + Linear ID 매핑 |
 | 중복 기술 금지 | 동일 정보를 여러 문서에 복제하지 않고 링크로 연결 |
 | Spec = 기능 명세 원천 | 기능 요구사항, 기술 명세는 spec 문서가 SSOT. plan.md는 "How" 설계, spec은 "What/Why" 명세 |
+| 보고서 = 불변 | 완료된 보고서(RPT-*, spec-reference)는 수정 금지 — 새 보고서로 대체 |
 
 ---
 
@@ -168,27 +169,12 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 ---
 
-## §7 보고서 참조 규칙
-
-| 규칙 | 내용 |
-|------|------|
-| 보고서 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 |
-
-> 보고서 생성 규칙 상세: [investigation SKILL.md](../skills/investigation/SKILL.md) 참조
-
----
-
-## §8 spec 갱신 규칙
+## §7 spec 갱신 규칙
 
 | 규칙 | 내용 |
 |------|------|
 | 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
-| 구조 | `docs/spec/{spec-name}/` 디렉토리. `_index.md`(허브) + N개 하위 문서 (도메인 단위 자유 분할) |
-| 초기 생성 | `/스펙` 스킬이 5-게이트 파이프라인(조사 → 프리필 인터뷰 → G3a 품질 검증 → 구조 확인 → 작성+저장)으로 생성 |
-| references 디렉토리 | (선택) `docs/spec/{name}/references/` — G2 조사에서 보고서 생성 시에만. spec(SDD)과 역할 분리: spec = "What/Why" 명세, 보고서 = 조사 결과 레퍼런스 |
-| references 불변 원칙 | §7 준용 |
-| 연동 갱신 | feature-close 시 링크된 spec의 Related Issues + Change Log 갱신. 4-컬럼 형식 (spec-template.md 참조). 경로/링크 없으면 무시 |
 | `updated` 갱신 | spec 문서 변경 시 frontmatter `updated` 날짜 반드시 갱신 |
-| 글로벌 _index.md 자동 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
+| 글로벌 _index.md | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
 
-> spec 생성 규칙 상세: [spec SKILL.md](../skills/spec/SKILL.md) 참조
+> 생성 프로세스 + 연동 갱신 상세: [spec SKILL.md](../skills/spec/SKILL.md) 참조
