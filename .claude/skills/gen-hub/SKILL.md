@@ -51,6 +51,45 @@
 | 6 (G3) | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지). 참조 문서가 있으면 Documents 테이블에 해당 행 추가 (**bug는 스킵**) |
 | 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Documents` 섹션에 `docs/issue/{LINEAR-ID}/_index.md` 경로 기록. 참조 문서 존재 시 해당 경로도 삽입 (**bug는 스킵** — Documents 섹션 자체 생략 또는 참조 문서만 기록) |
 
+## 배치 등록 모드
+
+### 트리거
+- 사용자 입력이 여러 줄 텍스트, 문서 경로, 복수 기능/버그 서술인 경우
+- `--from-spec` 옵션 지정 시
+
+### Process (배치)
+
+| 단계 | 행위 |
+|------|------|
+| B-0 | **Linear 컨텍스트 1회 캐싱**: `list_issue_labels` + `list_projects` 병렬 호출 |
+| B-1 | **텍스트 분석**: 입력에서 이슈 후보 추출 |
+| B-2 | **후보 목록 제시**: 아래 §후보 목록 형식으로 `AskUserQuestion` |
+| B-3 | **일괄 생성**: 의존 관계 순서대로 단건 Process(G0~G3) 순차 호출. 캐싱 데이터 전달 |
+
+### 후보 목록 형식
+
+| # | type | 제목 | 설명 (요약) | priority | labels | project | 관계 |
+|---|------|------|-------------|----------|--------|---------|------|
+
+### 이슈 관계 설정
+
+| 관계 유형 | 문법 | 설명 |
+|-----------|------|------|
+| `blockedBy` | `blockedBy: #2` 또는 `blockedBy: PRJ-42` | 선행 작업 |
+| `blocks` | `blocks: #3` | 후속 차단 |
+| `relatedTo` | `relatedTo: #1, PRJ-42` | 관련 이슈 |
+| `parentId` | `parent: #1` 또는 `parent: PRJ-42` | 상위 이슈 |
+
+> `#N`은 배치 내 번호 참조. 생성 후 실제 Linear ID로 치환.
+
+### 제약
+
+- 한 번에 최대 **10건**까지 등록. 초과 시 분할 안내
+- 순환 의존(A→B→A) 감지 시 사용자에게 경고 후 관계 수정 요청
+- `blockedBy`/`blocks` 관계가 있으면 선행 이슈를 먼저 생성하도록 순서 자동 정렬
+
+---
+
 ## Output
 
 | 항목 | 내용 |
