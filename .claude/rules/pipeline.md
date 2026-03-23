@@ -171,14 +171,9 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 4-3. 읽기 최적화 규칙
 
-| 규칙 | 내용 |
-|------|------|
-| 이름 기반 지정 | state/label은 이름(문자열)으로 직접 지정. ID 캐싱 불필요 |
-| CL 선택적 읽기 | 구현 단계: S1(태스크 목록)만. 검증 단계: S3(검증 조건)만 |
-| _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 feature-close 시에만. bug는 _index.md 없음 |
-| Linear 조회 최소화 | /활성화 시 1회 상태 조회 후 세션 내 상태는 내부 추적. 매 태스크마다 재조회 금지 |
+> 상세: [context.md](docs/guides/context.md) §2 참조
 
-#### plan scope L3 블로킹 라이프사이클
+### 4-4. plan scope L3 블로킹 라이프사이클
 
 plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
 
