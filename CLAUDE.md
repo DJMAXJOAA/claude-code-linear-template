@@ -58,6 +58,7 @@
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
 - 구현: CL S1 기반 Micro-tasking (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)
 - In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → Done
+- 사후 문서화: `/정리` — 파이프라인 없이 작업 후 문서화. 상세: [.claude/skills/cleanup/SKILL.md](.claude/skills/cleanup/SKILL.md)
 - 상세: [.claude/rules/pipeline.md](.claude/rules/pipeline.md)
 
 ## Framework: Context Management
@@ -70,8 +71,8 @@
 
 ## Framework: Commands
 
-- 커맨드 11개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`, `/스펙`, `/릴리스`
-- 스킬 12개: 각 `.claude/skills/*/SKILL.md`에 정의
+- 커맨드 12개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`, `/스펙`, `/릴리스`, `/정리`
+- 스킬 13개: 각 `.claude/skills/*/SKILL.md`에 정의
 - 커맨드 → 스킬 매핑은 각 커맨드 파일 내부에 명시
 
 ## Framework: Linear Integration
