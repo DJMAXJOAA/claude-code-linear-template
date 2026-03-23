@@ -48,7 +48,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 | 코드 탐색 | `oh-my-claudecode:explore` | haiku |
 | 심층 분석 | `oh-my-claudecode:scientist` | opus — 조사 범위가 넓거나 기술적 판단이 필요할 때 호출. Process 2 단계에서 explore 결과를 전달하여 분석 수행 |
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
@@ -64,9 +64,9 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| Issue 정보 조회 | `get_issue` | description (Scope, Deliverables) 읽기 (단일 Issue) |
-| 상태 전이 | `save_issue` (id 지정) | State → In Progress (조사 시작 시) |
+| 행동 | 상세 |
+|------|------|
+| Issue description(Scope, Deliverables) 조회 | 조사 범위 확인 시 1회 |
+| State → In Progress 전이 | 조사 시작 시 |

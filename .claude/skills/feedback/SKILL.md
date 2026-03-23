@@ -45,15 +45,17 @@
 
 ## 대상 문서 맵
 
-| 영역 | 대상 문서 | 예시 피드백 |
-|------|---------|-----------|
-| 코딩 컨벤션 | `.claude/rules/coding.md` | 네이밍 규칙, 에러 처리 방식 |
-| 문서 작성 규칙 | `.claude/rules/docs-writing.md` | frontmatter 규칙, 링킹 방식 |
-| 파이프라인 규칙 | `.claude/rules/pipeline.md` | 게이트 규칙, 커밋 규칙 |
-| 프레임워크 가이드 | `docs/guides/*.md` | 원칙 추가, 컨텍스트 관리 |
-| 프로젝트 허브 | `CLAUDE.md` | 금지 항목, 전역 규칙 (200줄 제한 주의) |
-| Known Limitations | `docs/issue/{LINEAR-ID}/_index.md > ## Notes` | 현재 구현의 제약, 임시 구현 |
-| 새 규칙 파일 | `.claude/rules/{new}.md` | 기존 문서에 맞지 않는 새 도메인 |
+| 영역 | 대상 문서 | 수정 가능 | 예시 피드백 |
+|------|---------|:---------:|-----------|
+| 코딩 컨벤션 | `.claude/rules/coding.md` | ✅ 프로젝트 | 네이밍 규칙, 에러 처리 방식 |
+| 프로젝트 허브 | `CLAUDE.md` PROJECT 섹션 | ✅ 프로젝트 | 금지 항목, 전역 규칙 (200줄 제한 주의) |
+| Known Limitations | `docs/issue/{LINEAR-ID}/_index.md > ## Notes` | ✅ 프로젝트 | 현재 구현의 제약, 임시 구현 |
+| 새 규칙 파일 | `.claude/rules/{new}.md` | ✅ 프로젝트 | 기존 문서에 맞지 않는 새 도메인 |
+| 파이프라인 규칙 | `.claude/rules/pipeline.md` | ⛔ 프레임워크 고정 | → backlog Issue로 등록 |
+| 문서 작성 규칙 | `.claude/rules/docs-writing.md` | ⛔ 프레임워크 고정 | → backlog Issue로 등록 |
+| 프레임워크 가이드 | `docs/guides/*.md` | ⛔ 프레임워크 고정 | → backlog Issue로 등록 |
+
+> 프레임워크 고정 파일(⛔)에 대한 피드백은 `directive` 대신 `backlog` 유형으로 자동 전환하여 프레임워크 개선 Issue로 등록한다. 직접 수정하지 않는다.
 
 ---
 
@@ -61,12 +63,12 @@
 
 > feedback 자체는 에이전트 연동 없음.
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| backlog Issue 생성 | `save_issue` (id 미지정, gen-hub 경유) | 새 Issue 생성 |
+| 행동 | 상세 |
+|------|------|
+| backlog Issue 생성 | gen-hub 경유 |

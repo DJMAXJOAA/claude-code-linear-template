@@ -102,14 +102,14 @@ Planning 상태에서 plan.md + cl.md 존재 확인 후, 다음 행동을 사용
 | bug | Root Cause 분석 | `oh-my-claudecode:debugger` (sonnet) |
 | bug | 코드 수정 | `oh-my-claudecode:executor` (sonnet) |
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| 상태 조회 | `get_issue` | Issue의 현재 State + type(Label) + assignee 조회 (단일 Issue) |
-| Pre-Plan 상태 전이 | `save_issue` (id 지정) | State → Planning (Pre-Plan Q/A 시작 전 즉시) |
-| 관련 Issue 조회 | `list_issues` (Label 필터) | Pre-Plan Q/A 컨텍스트 수집 (다수 검색) |
+| 행동 | 상세 |
+|------|------|
+| Issue 상태·type·assignee 조회 | `/활성화` 시 1회 |
+| State → Planning 전이 | Pre-Plan Q/A 시작 전 즉시 |
+| Label 기반 관련 Issue 검색 | 컨텍스트 수집용 (다수) |

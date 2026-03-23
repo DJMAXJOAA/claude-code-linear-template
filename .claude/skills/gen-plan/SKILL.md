@@ -73,14 +73,14 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 
 > gen-plan 자체는 에이전트 연동 없음. Plan 리뷰는 dev-pipeline의 Post-Plan Q/A에서 `oh-my-claudecode:critic` 사용.
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| Issue 정보 조회 | `get_issue` | description, type, relations 읽기 (단일 Issue) |
-| Plan 완료 comment | `save_comment` | Plan 완료 요약 comment (태스크 수, 주요 설계 결정) |
-| Sub-issue 생성 (best-effort) | `save_issue` (parentId 지정) | CL S1 태스크를 Linear Sub-issue로 미러링. 실패 시 진행 중단 안 함 |
+| 행동 | 상세 |
+|------|------|
+| Issue description·type·relations 조회 | 플랜 작성 전 1회 |
+| Plan 완료 요약 comment | 태스크 수 + 주요 설계 결정 1~2줄 |
+| CL S1 태스크를 Sub-issue로 미러링 | best-effort. 실패 시 진행 중단 안 함 |

@@ -60,13 +60,13 @@
 | 검증 실행 | `oh-my-claudecode:verifier` | sonnet |
 | 코드 리뷰 | `oh-my-claudecode:code-reviewer` | opus (선택) |
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| SC 조회 | `get_issue` | Issue description에서 SC 추출 (단일 Issue) |
-| 검증 결과 기록 | `save_comment` | 검증 결과(PASS/FAIL) 요약 comment |
+| 행동 | 상세 |
+|------|------|
+| Issue description에서 SC 조회 | 검증 시작 전 1회 |
+| 검증 결과(PASS/FAIL) comment 기록 | G3 단계 |

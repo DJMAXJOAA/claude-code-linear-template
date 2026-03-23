@@ -111,18 +111,16 @@
 
 > gen-hub 자체는 에이전트 연동 없음.
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| Label 목록 조회 | `list_issue_labels` | 기존 Label 목록 획득 → 태그 추천 기반 |
-| Project 목록 조회 | `list_projects` | 활성 Project 목록 획득 → 마일스톤 추천 기반 |
-| Team 확인 | `list_teams` | 팀 ID 확인 (필요 시) |
-| Issue 생성 | `save_issue` (id 미지정) | title, description, labels, project, state, blockedBy, blocks, relatedTo, parentId 지정 |
-| description 갱신 | `save_issue` (id 지정) | Documents 경로 삽입 |
-
-> Label/Project 조회는 G0 단계에서 **병렬** 호출. 배치 모드에서 캐싱 데이터가 전달되면 생략.
+| 행동 | 상세 |
+|------|------|
+| Label 목록 조회 | G0 단계, 태그 추천 기반. Project 조회와 **병렬** 호출 |
+| Project 목록 조회 | G0 단계, 마일스톤 추천 기반. 배치 모드 캐싱 시 생략 |
+| Team ID 확인 | 필요 시 |
+| Issue 생성 | title, description, labels, project, state, 관계 지정 |
+| description에 Documents 경로 삽입 | Issue 생성 후 |

@@ -119,16 +119,16 @@ G3a 검증 항목:
 | 코드 탐색 (G2) | `oh-my-claudecode:explore` | haiku |
 | 심층 분석 (G2) | `oh-my-claudecode:scientist` | opus — 기술 스펙/외부 프로토콜 필요 시 |
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| Linear Document 생성 | `create_document` | `[Spec] {제목}` Document 생성. 본문에 Git spec 디렉토리 링크 + 하위 문서별 앵커 |
-| 관련 Issue 조회 | `list_issues` | Related Issues 섹션 자동 구성 |
+| 행동 | 상세 |
+|------|------|
+| `[Spec] {제목}` Document 생성 | G5 완료 후 선택적. Git spec 링크 + 앵커 포함 |
+| 관련 Issue 목록 조회 | Related Issues 섹션 자동 구성 |
 
 ---
 

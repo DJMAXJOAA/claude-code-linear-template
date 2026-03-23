@@ -135,14 +135,14 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | executor 위임 | `oh-my-claudecode:executor` | sonnet |
 | ralph 루프 | `oh-my-claudecode:ralph` | (자체 모델 선택) |
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
-| 시점 | MCP 도구 | 용도 |
-|------|---------|------|
-| 태스크 완료마다 | `save_issue` (id 지정) | Sub-issue State → Done |
-| verify PASS 시 | `save_comment` | 전체 작업 내용 간략 요약 comment 1회 |
-| verify PASS 시 | `save_issue` (id 지정) | parent Issue State 전이 (In Progress → In Review) |
+| 행동 | 상세 |
+|------|------|
+| Sub-issue State → Done | 태스크 완료마다 |
+| 전체 작업 내용 요약 comment | verify PASS 시 1회 |
+| parent Issue State → In Review | verify PASS 시 |

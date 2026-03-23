@@ -68,10 +68,10 @@
 |------|---------|------|
 | 테스트 작성/실행 | `oh-my-claudecode:test-engineer` | sonnet |
 
-> OMC 비활성 시 pipeline.md §9 참조.
+> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
 ---
 
-## Linear MCP 호출 패턴
+## Linear MCP
 
 > 파이프라인 상태 전이 없음. Linear MCP 호출 없음.
