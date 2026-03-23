@@ -63,21 +63,37 @@ jobs:
           git archive --format=tar.gz --prefix=${REPO_NAME}-${TAG}/ -o release-${TAG}.tar.gz HEAD
           git archive --format=zip --prefix=${REPO_NAME}-${TAG}/ -o release-${TAG}.zip HEAD
 
+      - name: Build release notes
+        run: |
+          TAG=${GITHUB_REF_NAME}
+          NOTES_FILE=$(mktemp)
+          echo "NOTES_FILE=$NOTES_FILE" >> "$GITHUB_ENV"
+
+          # tag annotation을 파일로 추출 (shell 변수 경유 시 UTF-8/개행 깨짐 방지)
+          git tag -l --format='%(contents)' "$TAG" | sed '/^$/d' > "$NOTES_FILE"
+
+          if [ -s "$NOTES_FILE" ]; then
+            # annotation이 있으면 하단에 Full Changelog 링크 추가
+            PREV_TAG=$(git tag --sort=-v:refname | grep -v "^${TAG}$" | head -1)
+            if [ -n "$PREV_TAG" ]; then
+              printf '\n\n---\n\n**Full Changelog**: https://github.com/%s/compare/%s...%s\n' \
+                "$GITHUB_REPOSITORY" "$PREV_TAG" "$TAG" >> "$NOTES_FILE"
+            fi
+          else
+            # annotation이 없으면 GitHub API로 auto-generated notes 생성
+            gh api "repos/$GITHUB_REPOSITORY/releases/generate-notes" \
+              -f tag_name="$TAG" -q .body > "$NOTES_FILE"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create release
         run: |
           TAG=${GITHUB_REF_NAME}
-          # tag annotation에서 사람이 작성한 릴리스 요약 추출
-          ANNOTATION=$(git tag -l --format='%(contents)' "$TAG" | sed '/^$/d')
-          # auto-generated notes로 릴리스 생성 후, tag annotation을 상단에 삽입
           gh release create "$TAG" \
             --title "$TAG" \
-            --generate-notes \
+            --notes-file "$NOTES_FILE" \
             release-${TAG}.tar.gz \
             release-${TAG}.zip
-          if [ -n "$ANNOTATION" ]; then
-            CURRENT=$(gh release view "$TAG" --json body -q .body)
-            COMBINED=$(printf '%s\n\n---\n\n%s' "$ANNOTATION" "$CURRENT")
-            gh release edit "$TAG" --notes "$COMBINED"
-          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
