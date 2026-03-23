@@ -30,42 +30,25 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | In Progress | `started` | implement + auto-verify |
 | In Review | `started` | 사용자 직접 확인 |
 | Done | `completed` | 완료 |
-| Canceled | `canceled` | 취소 |
-| (Duplicate) | `canceled` | 중복 |
+| Canceled / (Duplicate) | `canceled` | 취소/중복 |
 
-### 1-3. Type별 사용 상태
-
-| State | feature/improvement | bug |
-|-------|:------------------:|:---:|
-| Backlog | O | O |
-| Todo | O | O |
-| Planning | O | — |
-| In Progress | O | O |
-| In Review | O | O |
-| Done | O | O |
-
-- `—` = 해당 type에서 스킵 (자동으로 다음 상태로 전이)
-
-### 1-4. Type별 스킬 분기
+### 1-3. Type별 스킬 분기
 
 > Type별 스킬 분기 상세: [dev-pipeline SKILL.md](../skills/dev-pipeline/SKILL.md) 라우팅 테이블 참조
 
-### 1-5. 상태 전이 규칙
+### 1-4. 상태 전이 규칙
 
 | 규칙 | 내용 |
 |------|------|
 | 전이 방향 | 항상 앞으로만 진행. 역방향 전이 금지 (재작업 시 새 Issue 등록). **예외: P1 계획수정** — 아래 참조 |
-
-> **예외: P1 계획수정**
-> 점검(triage)에서 P1(자체수정)으로 판정되고 G2 승인된 경우에 한하여,
-> In Progress 내에서 done 태스크의 선별적 리셋을 허용한다.
-> 조건: (1) SC 변경 없음, (2) CL S1 태스크 1~2개 수정/추가, (3) 수정 라인 < 30%.
-> 이 예외는 P1에만 적용되며, 조건 미충족 시 반드시 L3(sub-issue)로 전환한다.
 | 스킵 자동화 | type에 `—`인 상태는 dev-pipeline이 자동으로 다음 상태로 건너뜀 |
 | 전이 시 행동 | 모든 상태 전이는 §4 Linear sync 프로토콜을 경유 |
 | 전이 트리거 | 스킬 완료 시 자동 전이. 사용자가 수동 전이하지 않음 |
 | auto-verify | In Progress 완료 후 verify 스킬 자동 호출. 별도 상태 없음 |
 | In Review 전이 | verify PASS 후 호출 스킬(implement/dev-pipeline)이 In Review로 전이 |
+
+> **예외: P1 계획수정** — triage에서 P1 판정 + G2 승인 시에만 In Progress 내 done 태스크 선별 리셋 허용.
+> 조건: SC 변경 없음, CL S1 태스크 1~2개 수정/추가, 수정 라인 < 30%. 조건 미충족 시 L3(sub-issue) 전환.
 
 ---
 
@@ -125,22 +108,17 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 3-1. 핵심 규칙
 
+**에이전트 당 1개 태스크**만 진행 → 결과 검수 → 다음 이동.
 | 항목 | 내용 |
 |------|------|
-| 핵심 규칙 | **에이전트 당 1개 태스크**만 진행 → 결과 검수 → 다음 이동 |
 | 태스크 단위 | CL 문서의 S1 태스크 목록 |
 | 체크리스트 갱신 | 태스크 완료 직후 CL S1 체크박스 즉시 갱신 |
-| 커밋 규칙 | verify 완료 후 커밋. 작업 규모가 크면 중간 커밋 허용. Conventional Commits (`feat:`, `fix:`, `docs:` 등). `/커밋` command 참조 |
+| 커밋 규칙 | verify 완료 후 커밋. 규모가 크면 중간 커밋 허용. Conventional Commits. `/커밋` 참조 |
 | 게이트 연계 | 태스크 완료 후 4단계 게이트(§2)를 경유하여 다음 태스크로 이동 |
 | 금지 패턴 | 여러 단계 일괄 지시, "알아서 다 처리해" 식 실행, 같은 파일을 수정하는 태스크 동시 실행 |
 
-#### Plan 수정 시 CL S1 갱신 (P1 전용)
-- plan 수정의 영향을 받는 done 태스크만 선별적으로 `pending` 리셋
-- 영향 없는 done 태스크는 그대로 유지
-- 새 태스크 추가 시 기존 시퀀스 이어서 부여 (예: T-PRJ-47-05 → T-PRJ-47-06)
-- P1 수정 후 verify 재실행 필수 (verify PASS 전까지 In Review 전이 불가)
-
-> 의존성 기반 실행 + sub-issue 동기화 상세: [implement SKILL.md](../skills/implement/SKILL.md) 참조
+> **P1 plan 수정**: 영향받은 done 태스크만 선별 리셋. 새 태스크는 기존 시퀀스 이어서 부여. 수정 후 verify 재실행 필수.
+> 의존성 기반 실행 + sub-issue 동기화: [implement SKILL.md](../skills/implement/SKILL.md) 참조
 
 ---
 
@@ -148,26 +126,25 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 4-1. 상태 전이 호출 규칙
 
-| 트리거 | Linear 행동 | 비고 |
-|--------|------------|------|
-| 파이프라인 단계 전환 | Issue 상태 전이 | §1 상태 흐름에 따라 |
-| 태스크 시작/완료 | sub-issue 상태 갱신 | Micro-tasking 연동 |
-| Plan 완료 | comment 추가 (태스크 수, 주요 설계 결정) | gen-plan이 기록 |
-| verify 완료 | comment 추가 (PASS/FAIL + 항목별 요약) | verify가 기록 |
-| verify PASS | 상태 → In Review | implement/dev-pipeline이 전이 수행 |
-| feature-close | 상태 → Done + 완료 comment + description 최종 미러링 | 최종 완료 처리 (1회성 스냅샷) |
-| /점검 결과 기록 | comment 추가 | Git _index.md Notes와 이중 기록 |
+| 트리거 | Linear 행동 |
+|--------|------------|
+| 파이프라인 단계 전환 | Issue 상태 전이 (§1 상태 흐름) |
+| 태스크 시작/완료 | sub-issue 상태 갱신 |
+| Plan 완료 | comment 추가 (태스크 수, 주요 설계 결정) |
+| verify 완료 | comment 추가 (PASS/FAIL + 항목별 요약) |
+| verify PASS | 상태 → In Review |
+| feature-close | 상태 → Done + 완료 comment + description 미러링 |
+| /점검 결과 기록 | comment 추가 |
 
-> 구체적 MCP 도구명과 파라미터는 NF-1 검증 결과의 MCP 매핑 테이블을 참조. 스킬별 `### Linear MCP` 섹션에 명시.
+> 구체적 MCP 파라미터는 각 스킬의 `### Linear MCP` 섹션에 명시.
 
 ### 4-2. 장애 시 fallback
 
 | 상황 | 행동 |
 |------|------|
-| Linear API 호출 실패 (네트워크/인증) | 경고 메시지 출력 → Git 기록은 정상 진행 → 사용자에게 수동 Linear 갱신 안내 |
-| Linear MCP 서버 미응답 | 동일 fallback — 경고 출력 + Git 진행 + 수동 안내 |
-| 부분 실패 (상태 전이 성공, comment 실패) | 성공 부분 유지 + 실패 부분 경고 출력 |
-| 재시도 정책 | 자동 재시도 없음. 1회 시도 후 실패 시 즉시 fallback |
+| API 실패 / MCP 미응답 | 경고 출력 → Git 정상 진행 → 수동 Linear 갱신 안내 |
+| 부분 실패 | 성공 부분 유지 + 실패 부분 경고 출력 |
+| 재시도 | 자동 재시도 없음. 1회 후 즉시 fallback |
 
 ### 4-3. 읽기 최적화 규칙
 
@@ -177,71 +154,27 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
 
-1. **블로킹 진입**: sub-issue 생성 시
-   - 현재 이슈: Linear 상태 In Progress 유지
-   - _index.md Notes에 블로킹 기록: `### Blocking: {sub-issue ID}` + 사유
-   - CL Handoff에 블로킹 상태 기록
-   - 영향 없는 나머지 태스크는 계속 진행 가능
-
-2. **블로킹 해제**: 다음 `/활성화` 시 자동 감지
-   - dev-pipeline이 _index.md의 Blocking 섹션 확인
-   - sub-issue 상태를 Linear API로 조회 (`get_issue`)
-   - sub-issue가 Done이면 → 블로킹 해제, _index.md 기록 갱신, 정상 진행
-   - sub-issue가 미완료면 → 사용자에게 블로킹 상태 안내
-
-3. **Linear 상태**: 현재 이슈는 In Progress 유지 (별도 "Blocked" 상태 미사용)
-   - 블로킹 가시성은 _index.md + Linear comment로 확보
-
----
-
-## §5 Pre-Compaction
-
-### 5-1. 50% 규칙
-
-| 유형 | 조건 | 행동 |
-|------|------|------|
-| **자동** | 컨텍스트 윈도우 50% 도달 | 사용자에게 알림 → 판단으로 실행 여부 결정 |
-| **수동** | 사용자 직접 지시 | 언제든 실행 가능 |
-
-### 5-2. Checkpoint 행동
-
 | 단계 | 행동 |
 |------|------|
-| 1. Git 저장 | CL S1 진행 상태 저장 (체크박스 최신화) |
-| 2. Linear 동기화 | 현재 상태가 Linear에 반영되었는지 확인. 미반영 시 sync |
-| 3. CL Handoff 작성 | CL 문서 하단에 Handoff 섹션 추가 — 현재 진행 태스크, 다음 태스크, 주의사항 |
-| 4. 다음 시작점 명시 | Handoff에 `/활성화 {LINEAR-ID}` 재개 명령 기록 |
+| **블로킹 진입** (sub-issue 생성 시) | In Progress 유지. `_index.md` Notes에 `### Blocking: {ID}` + 사유 기록. CL Handoff에 기록. 나머지 태스크 계속 진행 가능 |
+| **블로킹 해제** (다음 `/활성화` 시) | _index.md Blocking 섹션 확인 → `get_issue`로 sub-issue 상태 조회 → Done이면 해제+기록 갱신, 미완료면 사용자 안내 |
+| **Linear 상태** | 현재 이슈 In Progress 유지. 가시성은 _index.md + Linear comment로 확보 |
 
-**Checkpoint = Git 저장 + Linear sync 확인 + CL Handoff + 다음 시작점 명시**
+## §5 참조 링크
 
-### 5-3. /clear 타이밍
-
-| 시점 | 권장 여부 | 이유 |
-|------|----------|------|
-| Plan 완료 후 (Post-Plan Q/A 직후) | 권장 | Planning 컨텍스트 해제, 구현 컨텍스트 확보 |
-| 태스크 3~5개 연속 완료 후 | 권장 | 누적 코드 컨텍스트 해제 |
-| In Progress → In Review 전환 시 | 권장 | 구현 컨텍스트 해제 |
-| 단일 태스크 중간 | 비권장 | 작업 연속성 손실 위험 |
+| 항목 | 상세 문서 |
+|------|---------|
+| Pre-Compaction / 50% 규칙 | [context.md](docs/guides/context.md) §3 |
+| Pre-Plan Q/A / Post-Plan Q/A | [dev-pipeline SKILL.md](../skills/dev-pipeline/SKILL.md) |
+| 피드백 기록 | [feedback SKILL.md](../skills/feedback/SKILL.md) |
 
 ---
 
-## §6 Pre-Plan Q/A + Post-Plan Q/A
-
-> Pre-Plan Q/A / Post-Plan Q/A 상세: [dev-pipeline SKILL.md](../skills/dev-pipeline/SKILL.md) 참조
-
----
-
-## §7 피드백 기록
-
-> 피드백 기록 상세: [feedback SKILL.md](../skills/feedback/SKILL.md) 참조
-
----
-
-## §8 파이프라인 금지사항
+## §6 파이프라인 금지사항
 
 | 금지 | 이유 |
 |------|------|
-| Issue 구현 중 프레임워크 문서 업데이트 | 범위 분리. 단, 링크된 spec 디렉토리(`docs/spec/{name}/`)의 Related Issues/Change Log 갱신은 feature-close에서 허용 (경로/링크 없으면 무시) |
+| Issue 구현 중 프레임워크 문서 업데이트 | 범위 분리. 단, 링크된 spec의 Related Issues/Change Log 갱신은 feature-close에서 허용 |
 | 리뷰 단계에서 즉시 코드 수정 | 메모만 — 계획 우선 |
 | 검증 실패 시 임의 우회 | 계획 수정 후 재구현 |
 | 계획 범위 외 코드 수정 | 범위 초과 금지 |
@@ -249,7 +182,7 @@ plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
 
 ---
 
-## §9 에이전트 라우팅
+## §7 에이전트 라우팅
 
 - OMC(oh-my-claudecode) 에이전트 연동은 각 스킬의 `## OMC 에이전트 연동` 섹션에서 정의한다
 - OMC 비활성 시 각 스킬은 기본 모델로 직접 수행한다. 비활성이 감지되면 사용자에게 알린다
@@ -257,11 +190,10 @@ plan scope에서 L3(sub-issue)로 분류되어 `/등록`된 경우에 적용:
 
 ---
 
-## §10 파이프라인 외부 스킬
+## §8 파이프라인 외부 스킬
 
 | 스킬 | 설명 |
 |------|------|
-| `/스펙` (spec) | SDD Spec 문서(들) 생성. 5-게이트 파이프라인으로 디렉토리(`docs/spec/{name}/`) 단위 출력. Issue 파이프라인(`/등록`→`/활성화`)과 독립. `/등록` 시 spec 레퍼런스를 프롬프트로 전달하여 연동 |
+| `/스펙` (spec) | SDD Spec 문서 생성. 5-게이트 파이프라인, `docs/spec/{name}/` 단위 출력. Issue 파이프라인과 독립 |
 
 > 파이프라인 외부 스킬은 Linear Issue 상태 전이를 수행하지 않는다.
-

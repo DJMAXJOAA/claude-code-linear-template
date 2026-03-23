@@ -54,28 +54,36 @@ created: 2026-03-17
 
 ## 3. 50% 규칙 + Pre-Compaction
 
-> 상세: [pipeline.md](../../.claude/rules/pipeline.md) §5
+### 3-1. 50% 규칙
 
-- **50% 도달 시** 사용자에게 알림 → Checkpoint 실행 여부 판단
-- **Checkpoint** = Git 저장 + Linear sync 확인 + CL Handoff + `/활성화 {LINEAR-ID}` 시작점 명시
-- 수동 실행도 가능 — 언제든 "Checkpoint 실행"으로 트리거
+| 유형 | 조건 | 행동 |
+|------|------|------|
+| **자동** | 컨텍스트 윈도우 50% 도달 | 사용자에게 알림 → 판단으로 실행 여부 결정 |
+| **수동** | 사용자 직접 지시 | 언제든 실행 가능 |
+
+### 3-2. Checkpoint 행동
+
+| 단계 | 행동 |
+|------|------|
+| 1. Git 저장 | CL S1 진행 상태 저장 (체크박스 최신화) |
+| 2. Linear 동기화 | 현재 상태가 Linear에 반영되었는지 확인. 미반영 시 sync |
+| 3. CL Handoff 작성 | CL 문서 하단에 Handoff 섹션 추가 |
+| 4. 다음 시작점 명시 | Handoff에 `/활성화 {LINEAR-ID}` 재개 명령 기록 |
+
+**Checkpoint = Git 저장 + Linear sync 확인 + CL Handoff + 다음 시작점 명시**
+
+### 3-3. /clear 타이밍
+
+| 시점 | 권장 여부 | 이유 |
+|------|----------|------|
+| Plan 완료 후 | 권장 | Planning 컨텍스트 해제, 구현 컨텍스트 확보 |
+| 태스크 3~5개 완료 후 | 권장 | 누적 코드 컨텍스트 해제 |
+| In Progress → In Review 전환 | 권장 | 구현 컨텍스트 해제 |
+| 단일 태스크 중간 | 비권장 | 작업 연속성 손실 위험 |
 
 ---
 
-## 4. /clear 타이밍
-
-> 상세: [pipeline.md](../../.claude/rules/pipeline.md) §5-3
-
-- **권장**: Plan 완료 후, 태스크 3~5개 완료 후, 단계 전환 시
-- **비권장**: 단일 태스크 중간 (연속성 손실 위험)
-
----
-
-## 5. Linear 컨텍스트 로딩
-
-### 읽기 최적화 규칙
-
-> 상세: [pipeline.md](../../.claude/rules/pipeline.md) §4-3
+## 4. Linear 컨텍스트 로딩
 
 ### Linear가 개선하는 토큰 효율
 
@@ -88,9 +96,9 @@ created: 2026-03-17
 
 ---
 
-## 6. 장애 시 Fallback
+## 5. 장애 시 Fallback
 
-> 상세: [pipeline.md](../../.claude/rules/pipeline.md) §4-3
+> 상세: [pipeline.md](../../.claude/rules/pipeline.md) §4-2
 
 - Linear 실패 시: 경고 출력 → Git 기록은 정상 진행 → 사용자에게 수동 갱신 안내
 - 재시도 없음 — 1회 시도 후 즉시 fallback
