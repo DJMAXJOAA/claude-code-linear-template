@@ -53,7 +53,8 @@
 ## Framework: Pipeline
 
 `/등록` → `/활성화` → type별 워크플로우 분기 → 완료
-- feature/improvement(통합): Todo → Planning → In Progress → In Review → Done
+- feature: Todo → Planning → In Progress → In Review → Done
+- improvement: size별 분기 — light(bug 수준, In Progress 직행) / standard(Planning → In Progress). 상세: [.claude/skills/improvement-fix/SKILL.md](.claude/skills/improvement-fix/SKILL.md)
 - bug(경량): Todo → In Progress → In Review → Done (Git 문서 미생성, Linear only)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
 - 구현: CL S1 기반 Micro-tasking (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)

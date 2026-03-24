@@ -71,8 +71,8 @@
 | A-2 | gen-hub 템플릿([skills/gen-hub/templates/issue-descriptions.md](../gen-hub/templates/issue-descriptions.md)) 참조하여 Linear Issue description 구성 (diff 추론 결과로 Overview/SC 자동 채움) |
 | A-3 | `AskUserQuestion`: description 확인/수정 |
 | A-4 | Linear Issue 생성 (state: **Done** — 이미 완료된 작업이므로) |
-| A-5 | _index.md 생성: gen-hub 템플릿([skills/gen-hub/templates/index-templates.md](../gen-hub/templates/index-templates.md)) 참조. **feature/improvement만. bug는 스킵** (기존 bug 축약 패턴과 동일 — Linear comment로 기록) |
-| A-6 | 구현 결과 섹션 즉시 기록: feature-close 템플릿([skills/feature-close/templates/implementation-result.md](../feature-close/templates/implementation-result.md)) 참조. **bug는 스킵** — A-7의 Linear comment에 수정 결과 포함 |
+| A-5 | _index.md 생성: gen-hub 템플릿([skills/gen-hub/templates/index-templates.md](../gen-hub/templates/index-templates.md)) 참조. **feature / improvement-standard만. bug 및 improvement-light는 스킵** (기존 bug 축약 패턴과 동일 — Linear comment로 기록) |
+| A-6 | 구현 결과 섹션 즉시 기록: feature-close 템플릿([skills/feature-close/templates/implementation-result.md](../feature-close/templates/implementation-result.md)) 참조. **bug 및 improvement-light는 스킵** — A-7의 Linear comment에 수정 결과 포함 |
 | A-7 | Linear Done comment 기록 (feature/improvement: 완료 요약. bug: Root Cause + 수정 방법 + 영향 범위) |
 
 > 기존 gen-hub 스킬을 직접 호출하지 않고, 템플릿 파일만 런타임 참조하여 동적 구성한다 (복제 금지).

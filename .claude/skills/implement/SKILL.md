@@ -5,7 +5,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 
 ## Trigger
 
-- dev-pipeline에서 In Progress 단계 진입 시 (feature/improvement 통합)
+- dev-pipeline에서 In Progress 단계 진입 시 (feature / improvement-standard)
 - `/활성화`에서 In Progress 상태 재개 시
 
 ## Input
@@ -15,7 +15,7 @@ CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S1 태스크 목록, S2 완료 기준, S3 검증 조건 |
 | plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 참조 (필요 시에만 읽기) |
-| type | `feature` / `improvement` (통합 처리) — bug는 implement를 사용하지 않음 |
+| type | `feature` / `improvement` (standard) — bug 및 improvement-light는 implement를 사용하지 않음 |
 
 ## Process
 
