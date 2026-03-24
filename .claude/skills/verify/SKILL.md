@@ -14,7 +14,7 @@
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description의 Success Criteria (feature/improvement) 또는 Acceptance Criteria (bug) |
-| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S3 검증 조건 (feature/improvement만. bug는 없음) |
+| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S3 검증 조건 (feature / improvement-standard만. bug 및 improvement-light는 없음) |
 | 코드 변경 | 구현된 코드 (git diff 기반) |
 
 ## Process
@@ -46,10 +46,10 @@
 | 카테고리 | 검증 항목 |
 |----------|---------|
 | **SC 충족** | Linear Issue description의 모든 Success Criteria 충족 |
-| **CL S3** | cl.md S3 테이블의 모든 검증 항목 PASS |
+| **CL S3** | cl.md S3 테이블의 모든 검증 항목 PASS (improvement-light / bug는 CL S3 없음 → SC 기반 검증으로 fallback) |
 | **빌드** | 린트 + 타입체크 + 전체 테스트 통과 |
 | **코드 품질** | 프로젝트별 coding rules 준수 (`.claude/rules/coding.md` — 미존재 시 해당 체크 스킵) |
-| **범위** | Plan 범위 외 변경 없음 |
+| **범위** | Plan 범위 외 변경 없음 (improvement-light는 Linear description의 변경 의도 기준) |
 
 ---
 

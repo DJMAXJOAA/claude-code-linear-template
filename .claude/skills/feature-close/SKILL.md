@@ -23,7 +23,8 @@ verify PASS 후(feature/improvement/bug) 호출되어, `_index.md`에 구현 결
 |------|------|
 | 1 (G1) | **구현 결과 수집**: plan.md 설계 결정 vs 실제 구현 비교. 설계 이탈, 미해결 이슈, 실제 인터페이스 요약 수집 |
 
-> **bug 축약 경로**: bug는 단계 1→3→4→5만 수행. (1) Linear comment에서 수정 결과 요약 수집, (3) 사용자 확인, (4) State → Done, (5) Linear comment 기록. 단계 2(_index.md 갱신), 5a(description 미러링 — Acceptance Criteria 충족만 간략 반영), 6(후행 Issue 환류), 7(spec 연동)은 bug에서 스킵.
+> **bug / improvement-light 축약 경로**: bug 및 improvement + Size: light (description Overview 기반)는 단계 1→3→4→5만 수행. (1) Linear comment에서 수정 결과 요약 수집, (3) 사용자 확인, (4) State → Done, (5) Linear comment 기록. 단계 2(_index.md 갱신), 5a(description 미러링 — SC 충족만 간략 반영), 6(후행 Issue 환류), 7(spec 연동)은 bug/improvement-light에서 스킵.
+> **improvement-standard 경로**: _index.md가 존재하므로 기존 improvement 경로(단계 1~6) 유지. 단, spec 연동(§7)은 스킵 (improvement는 spec과 직접 연동하지 않음).
 | 2 (G1) | **_index.md에 "구현 결과" 섹션 lazy-create**: 아래 §구현 결과 섹션 템플릿으로 생성. 이미 존재하면 갱신 |
 | 3 (G2) | **검토**: 구현 결과 요약을 사용자에게 제시 → `AskUserQuestion`으로 확인 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |

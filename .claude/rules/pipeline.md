@@ -13,10 +13,11 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | Type | 설명 | 워크플로우 |
 |------|------|-----------|
-| `feature` / `improvement` | 새 기능 개발 / 기존 기능 개선·리팩토링 | Planning → In Progress → In Review → Done |
+| `feature` | 새 기능 개발 | Planning → In Progress → In Review → Done |
+| `improvement` | 기존 기능 개선·리팩토링 | size별 분기: light(In Progress 직행) / standard(Planning → In Progress → In Review → Done) |
 | `bug` | 버그 수정 | In Progress → In Review → Done |
 
-> feature와 improvement는 동일 파이프라인. 차이는 Pre-Plan Q/A 깊이뿐.
+> improvement는 dev-pipeline에서 size 판별(AskUserQuestion 1회) 후 improvement-fix 스킬로 라우팅. 상세: [improvement-fix SKILL.md](../skills/improvement-fix/SKILL.md)
 
 ### 1-2. 통합 상태 흐름 (Linear Workflow States)
 
@@ -40,15 +41,16 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | 규칙 | 내용 |
 |------|------|
-| 전이 방향 | 항상 앞으로만 진행. 역방향 전이 금지 (재작업 시 새 Issue 등록). **예외: P1 계획수정** — 아래 참조 |
+| 전이 방향 | 항상 앞으로만 진행. 역방향 전이 금지 (재작업 시 새 Issue 등록). **예외: P1 계획수정, improvement light→standard 에스컬레이션** — 아래 참조 |
 | 스킵 자동화 | type에 `—`인 상태는 dev-pipeline이 자동으로 다음 상태로 건너뜀 |
 | 전이 시 행동 | 모든 상태 전이는 §4 Linear sync 프로토콜을 경유 |
 | 전이 트리거 | 스킬 완료 시 자동 전이. 사용자가 수동 전이하지 않음 |
 | auto-verify | In Progress 완료 후 verify 스킬 자동 호출. 별도 상태 없음 |
 | In Review 전이 | verify PASS 후 호출 스킬(implement/dev-pipeline)이 In Review로 전이 |
 
-> **예외: P1 계획수정** — triage에서 P1 판정 + G2 승인 시에만 In Progress 내 done 태스크 선별 리셋 허용.
+> **예외 1: P1 계획수정** — triage에서 P1 판정 + G2 승인 시에만 In Progress 내 done 태스크 선별 리셋 허용.
 > 조건: SC 변경 없음, CL S1 태스크 1~2개 수정/추가, 수정 라인 < 30%. 조건 미충족 시 L3(sub-issue) 전환.
+> **예외 2: improvement light→standard 에스컬레이션** — 코드 수정 전(승인~코드수정 사이)에만 In Progress 내에서 Planning 진입 허용. 코드 수정 시작 후에는 새 Issue 등록. 상세: [improvement-fix SKILL.md](../skills/improvement-fix/SKILL.md)
 
 ---
 

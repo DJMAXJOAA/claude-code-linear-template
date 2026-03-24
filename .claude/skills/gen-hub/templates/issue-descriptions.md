@@ -2,7 +2,7 @@
 
 gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 템플릿.
 
-## feature / improvement 공통
+## feature
 
 ```markdown
 ## Overview
@@ -37,6 +37,40 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 | {기타} | {경로} | {참조 문서, 스크립트, 설정 등} |
 
 > - Spec 행: 참조 spec 미존재 시 행 자체 생략
+> - 기타 행: 추가 참조 문서 없으면 행 자체 생략
+```
+
+## improvement
+
+```markdown
+## Overview
+| 항목 | 내용 |
+|------|------|
+| What | {변경 대상 한 줄} |
+| Why | {변경 이유} |
+| Size | {light / standard} |
+| Priority | {High/Medium/Low} |
+
+---
+
+## Change Scope
+{영향받는 모듈/파일 요약 — AI 추론 초안 → 사용자 확인}
+
+---
+
+## Success Criteria
+1. {AI 추론 초안 → 사용자 확인}
+
+---
+
+## Documents
+| 유형 | 경로 | 설명 |
+|------|------|------|
+| Index | `docs/issue/{LINEAR-ID}/_index.md` | Issue 허브 (standard만) |
+| {기타} | {경로} | {참조 문서, 스크립트, 설정 등} |
+
+> - light는 Documents 섹션 자체 생략 (Git 문서 미생성)
+> - standard만 Index 행 표시
 > - 기타 행: 추가 참조 문서 없으면 행 자체 생략
 ```
 

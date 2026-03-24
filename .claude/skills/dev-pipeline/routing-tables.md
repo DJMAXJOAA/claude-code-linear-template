@@ -2,7 +2,7 @@
 
 type별 라우팅 상세 + bug 수정 프로세스.
 
-## feature / improvement (통합)
+## feature
 
 | 현재 State | 라우팅 대상 | 완료 후 State |
 |-----------|-----------|-------------|
@@ -16,8 +16,40 @@ type별 라우팅 상세 + bug 수정 프로세스.
 | In Review | 사용자 직접 확인 → 승인 시 feature-close 자동 호출 | Done |
 | Done | 완료 안내 | — |
 
-> feature와 improvement는 동일 파이프라인. Pre-Plan Q/A에서 improvement는 간략 버전(3항목)으로 수행.
 > implement가 verify 호출 → PASS 확인 → Linear State `In Review` 전이까지 수행.
+
+## improvement
+
+size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improvement-fix 스킬이 오케스트레이션.
+
+### improvement (light)
+
+| 현재 State | 라우팅 대상 | 완료 후 State |
+|-----------|-----------|-------------|
+| (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
+| Todo | **size 판별** → improvement-fix (light) 호출 | In Progress |
+| In Progress | improvement-fix (light) Skill | In Progress (수정 진행) |
+| In Progress (모든 수정 done) | verify 자동 호출 (bug-like fallback) → PASS 시 In Review 전이 | In Review |
+| In Review | 사용자 직접 확인 → 승인 시 feature-close(경량) 자동 호출 | Done |
+| Done | 완료 안내 | — |
+
+> light는 Planning 상태를 건너뛴다. Git 문서(`docs/issue/`) 미생성.
+> light → standard 에스컬레이션(코드 수정 전): In Progress 내에서 Planning 진입 (§1-4 예외).
+
+### improvement (standard)
+
+| 현재 State | 라우팅 대상 | 완료 후 State |
+|-----------|-----------|-------------|
+| (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
+| Todo | **size 판별** → improvement-fix (standard): **Pre-Plan 인터뷰(4항목)** → gen-plan | Planning |
+| Planning (plan.md 존재) | **Post-Plan 확인** → implement | In Progress |
+| In Progress | implement Skill (기존 재활용) | In Progress (태스크 진행) |
+| In Progress (점검 P1) | dev-pipeline: plan/cl 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
+| In Progress (모든 태스크 done) | verify 자동 호출 → PASS 시 In Review 전이 | In Review |
+| In Review | 사용자 직접 확인 → 승인 시 feature-close(경량) 자동 호출 | Done |
+| Done | 완료 안내 | — |
+
+> standard는 기존 gen-plan + implement 스킬을 그대로 재활용한다.
 
 ## bug
 
