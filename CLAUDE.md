@@ -73,7 +73,7 @@
 ## Framework: Commands
 
 - 커맨드 12개: `/등록`, `/활성화`, `/점검`, `/커밋`, `/피드백`, `/조사`, `/검증`, `/병합`, `/현황`, `/스펙`, `/릴리스`, `/정리`
-- 스킬 13개: 각 `.claude/skills/*/SKILL.md`에 정의
+- 스킬 14개: 각 `.claude/skills/*/SKILL.md`에 정의
 - 커맨드 → 스킬 매핑은 각 커맨드 파일 내부에 명시
 
 ## Framework: Linear Integration

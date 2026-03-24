@@ -40,6 +40,7 @@ created: 2026-03-17
 | 구현 | CL S1 (태스크 목록만), plan.md (필요 시) | CL S2/S3, 다른 태스크 보고서 |
 | 테스트 | CL S3 (검증 조건만), S4 (수동 테스트) | CL S1, plan.md |
 | 검증 | Linear SC (description), CL S3 | plan.md 본문 |
+| 완료 처리 (feature-close) | _index.md, plan.md (설계 이탈 비교), cl.md (태스크 완료 확인), 검증 결과 | 다른 Issue 문서 |
 
 ### 읽기 최적화 규칙
 
