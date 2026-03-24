@@ -1,6 +1,6 @@
 # Linear 기반 Claude Code 프레임워크
 
-> 버전: v2.4.0
+> 버전: v2.4.1
 
 Linear를 상태 SSOT로, Git을 지식 SSOT로 사용하는 **Claude Code 개발 프레임워크 템플릿**.
 
