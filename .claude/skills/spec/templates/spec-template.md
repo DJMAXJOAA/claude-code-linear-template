@@ -30,7 +30,7 @@
 
 | 문서 | 필수 | 성격 | 핵심 질문 | 금지 |
 |------|:----:|------|----------|------|
-| `_index.md` | O | 허브 / Overview | 이 기능은 무엇이고 왜 필요한가? | 상세 명세 |
+| `_index.md` | O | 허브 / Overview / Decisions | 이 기능은 무엇이고 왜 필요한가? 어떤 결정을 내렸는가? | 상세 명세 |
 | `requirements.md` | O | 기능 요구사항 | 시스템이 무엇을 해야 하는가? | How(구현), 라이브러리명, 인터페이스 설계 |
 | `technical.md` | O | 기술 설계 | 어떤 구조로 만들 것인가? | 내부 로직/알고리즘 상세 |
 | `roadmap.md` | △ | 구현 로드맵 | 어떤 순서로 나눠서 만들 것인가? | 태스크 수준 상세 계획 |
@@ -43,7 +43,7 @@
 
 | 항목 | 규칙 |
 |------|------|
-| 역할 | Overview + Out of Scope + 문서 목록 + 변경 이력. standalone readable |
+| 역할 | Overview + Out of Scope + 문서 목록 + Decisions(선택) + 변경 이력. standalone readable |
 | frontmatter | `title`, `type: spec`, `created`, `updated` |
 | Nav Link | `> ← [Spec Index](../_index.md)` |
 | 템플릿 | [spec-index-template.md](./spec-index-template.md) |
@@ -143,6 +143,10 @@ technical.md는 **계약 수준(contract-level)** 설계만 기술한다.
 
 > **시그니처 변경 규칙**: 구현 중 시그니처가 변경되어도 spec 즉시 수정 불필요. Issue 완료 후 feature-close에서 반영하거나, `/정리`에서 소급 갱신.
 
+## Constraints 소속 규칙
+
+> **Constraints & Dependencies는 `requirements.md`에만 위치 (SSOT)**. `_index.md`의 Decisions에서 Constraints를 참조할 때는 `requirements.md`로의 링크를 사용한다. `_index.md`에 Constraints를 중복 기재하지 않는다.
+
 ## Mermaid 가이드라인
 
 | 규칙 | 내용 |
@@ -151,3 +155,12 @@ technical.md는 **계약 수준(contract-level)** 설계만 기술한다.
 | 금지 유형 | gantt, pie, mindmap, classDiagram (erDiagram은 technical.md에서만 예외 허용) |
 | 크기 제한 | 노드 20개 이하, 엣지 30개 이하. 초과 시 분할 |
 | 사용 위치 | technical.md, roadmap.md. _index.md, requirements.md 금지. (plan.md는 별도 규칙 — [plan-template.md](../../gen-plan/templates/plan-template.md) 참조) |
+
+### 설계 요소별 권장 Mermaid 패턴
+
+| 설계 요소 | 권장 Mermaid | 용도 | 비고 |
+|----------|-------------|------|------|
+| 인터페이스 계층 | `flowchart TB` | 상속/구현 관계 시각화 | classDiagram 금지 → flowchart로 대체 |
+| 이벤트 흐름 | `sequenceDiagram` | 컴포넌트 간 호출 순서 | alt/else로 분기 표현 |
+| 상태 전이 | `stateDiagram-v2` | 생명주기, FSM | |
+| 의존성 관계 | `flowchart LR` | Issue 간, 모듈 간 의존 | roadmap.md에서 주로 사용 |

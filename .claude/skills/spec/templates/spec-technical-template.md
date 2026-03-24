@@ -44,6 +44,8 @@ updated: {YYYY-MM-DD}
 
 > **상세도 기준**: "이 인터페이스가 존재하고, 이런 역할이다"를 전달할 수 있으면 충분. 구현 세부사항은 각 Issue plan.md에서 확정.
 
+> **Mermaid 권장**: 인터페이스 계층은 `flowchart TB`, 이벤트 흐름은 `sequenceDiagram`, 상태 전이는 `stateDiagram-v2`로 시각화. 상세: [spec-template.md](./spec-template.md) Mermaid 가이드라인 참조.
+
 ## 섹션 규칙
 
 | 섹션 | 필수 | 비고 |

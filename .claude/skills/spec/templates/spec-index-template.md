@@ -44,6 +44,15 @@ updated: {YYYY-MM-DD}
 |--------|------|
 | [references/{report-name}.md](./references/{report-name}.md) | {조사 대상 요약} |
 
+## Decisions
+
+{설계 결정이 있을 때만. 없으면 섹션 생략}
+
+| ID | 결정 | 근거 | 대안 (기각 사유) |
+|----|------|------|-----------------|
+
+> Constraints & Dependencies는 [requirements.md](./requirements.md#constraints--dependencies) 참조 (SSOT)
+
 ## Related Issues
 
 | Linear ID | 제목 | 상태 |
@@ -64,5 +73,6 @@ updated: {YYYY-MM-DD}
 | Out of Scope | O | 경계 명확화. 불릿 목록. **이 섹션은 _index.md에만 존재** (SSOT 단일화) |
 | Documents | O | 고정 3파일 + roadmap 선택 표기 |
 | References | △ | G2 보고서 존재 시에만 |
+| Decisions | △ | 설계 결정 테이블. 4-컬럼: ID / 결정 / 근거 / 대안. Constraints는 `requirements.md`로 링크 (SSOT) |
 | Related Issues | O | feature-close 시 자동 갱신 |
 | Change Log | O | 4-컬럼: 날짜 / FR-ID / 변경 유형(added/modified/removed) / 요약. FR 무관 시 `--` |
