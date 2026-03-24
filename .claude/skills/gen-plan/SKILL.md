@@ -14,7 +14,8 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 | Linear Issue 정보 | description (Overview, SC), type, labels, relations |
 | _index.md | `docs/issue/{LINEAR-ID}/_index.md` — 기존 문서 목록 확인 |
 | 코드베이스 조사 결과 | Pre-Plan Q/A Phase 0에서 수집된 관련 파일, 아키텍처 가이드 |
-| How 인터뷰 결과 | Pre-Plan Q/A Phase 1에서 확정된 SC, 스펙, Decisions, 리스크, 범위 |
+| 설계 인터뷰 결과 | Pre-Plan Q/A Step 4에서 확정된 스펙, Decisions, 리스크, 범위 |
+| SC 확정 결과 | Pre-Plan Q/A Step 5에서 설계 결정 반영하여 최종 확정된 SC |
 
 ## Process
 
