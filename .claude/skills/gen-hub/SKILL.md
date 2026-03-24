@@ -28,7 +28,7 @@
 
 | 단계 | 행위 |
 |------|------|
-| 0a | **Spec 로드**: `--from-spec` 경로의 `_index.md` + 하위 문서 로드. FR 테이블에서 FR-ID 목록 수집 |
+| 0a | **Spec 로드**: `--from-spec` 경로의 `_index.md` + `requirements.md` 로드. FR 테이블에서 FR-ID 목록 수집 |
 | 0b | **FR 그루핑 제안**: FR-ID를 Issue 단위로 그루핑(도메인/의존성 기반) → `AskUserQuestion`으로 사용자 확인/수정 |
 | 0c | **배치 실행**: 승인된 그룹별로 기존 G0~G3 프로세스 반복. Label/Project 조회는 G0에서 1회 캐싱하여 재사용 |
 

@@ -27,8 +27,10 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `cl.md` (태스크/검증 SSOT) | `linear_id`, `title`, `type: checklist`, `created` | title = "CL: {Issue 제목}" |
 | ADR (`docs/adr/`) | `title`, `type: adr`, `created` | linear_id 없음 (cross-cutting) |
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
-| Spec `_index.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). 디렉토리 허브 (Overview + 하위 문서 목록) |
-| Spec 하위 문서 (`docs/spec/{name}/`) | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` | `parent-spec`으로 소속 명시 |
+| Spec `_index.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). 디렉토리 허브 (Overview + 고정 문서 목록) |
+| Spec `requirements.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` | 기능 요구사항 (FR, Constraints) |
+| Spec `technical.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` | 기술 설계 (계약 수준) |
+| Spec `roadmap.md` (`docs/spec/{name}/`) △ | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` | 구현 로드맵 (2+ Issue 분할 시에만) |
 | Spec Reference (`docs/spec/{name}/references/`) | `title`, `type: spec-reference`, `parent-spec: {spec-name}`, `created` | 조사 보고서. 선택적. `updated` 없음 (불변) |
 
 ---
@@ -40,7 +42,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `_index.md` | `/등록` | 생성 (bug 제외) |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
 | `cl.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (plan.md와 동시) |
-| `docs/spec/{name}/` | `/스펙` | 디렉토리 + `_index.md` + N개 하위 문서 생성 |
+| `docs/spec/{name}/` | `/스펙` | 디렉토리 + `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택) 생성 |
 
 ### Lazy-creation 행동 치환표
 
@@ -80,7 +82,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | plan.md, cl.md | `> ← [_index.md](./_index.md) \| [Linear Issue]({URL})` — 상위 인덱스 + Linear |
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
 | Spec `_index.md` | `> ← [Spec Index](../_index.md)` — 글로벌 spec 인덱스 |
-| Spec 하위 문서 | `> ← [_index.md](./_index.md)` — 소속 spec 인덱스 |
+| Spec `requirements.md` / `technical.md` / `roadmap.md` | `> ← [_index.md](./_index.md)` — 소속 spec 인덱스 |
 | Spec Reference 보고서 | `> ← [_index.md](../_index.md)` — 소속 spec 인덱스 (references/ 하위이므로 `../`) |
 
 > 테이블 내 `\|`는 마크다운 이스케이프. 실제 파일에는 `|`로 기록.
@@ -101,7 +103,9 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | `docs/shared/` | 도메인 지식 | `domain-{topic}.md` (kebab-case) | `shared/domain-networking.md` |
 | | 가이드 | `{topic}.md` (kebab-case) | `shared/error-handling-patterns.md` |
 | `docs/spec/{spec-name}/` | Spec 인덱스 | `_index.md` (고정) | `combat-system/_index.md` |
-| | Spec 하위 문서 | `{topic}.md` (kebab-case) | `combat-system/turn-system.md` |
+| | 기능 요구사항 | `requirements.md` (고정) | `combat-system/requirements.md` |
+| | 기술 설계 | `technical.md` (고정) | `combat-system/technical.md` |
+| | 구현 로드맵 (선택) | `roadmap.md` (고정) | `combat-system/roadmap.md` |
 | | Spec Reference | `references/{topic}.md` (kebab-case) | `combat-system/references/protocol-analysis.md` |
 
 ### 4-2. 폴더명 규칙

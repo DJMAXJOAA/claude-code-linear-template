@@ -1,6 +1,6 @@
 # plan.md 템플릿
 
-> docs-writing.md §4-3 Nav Link 규칙 참조
+> docs-writing.md §3-3 Nav Link 규칙 참조
 
 ```markdown
 ---

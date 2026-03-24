@@ -24,7 +24,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 | 1 (G1) | **Linear Issue 정보 읽기**: Linear MCP로 description(Overview, SC), type, relations 조회 |
 | 2 (G1) | **Related Issue Known Limitations 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/issue/{ID}/_index.md`에서 `## 구현 결과` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
 | 3 (G1) | **plan.md 작성**: 아래 §plan.md 구조에 따라 작성. type에 따라 작성 범위 결정 |
-| 4 (G1) | **cl.md 작성**: 아래 §cl.md 구조에 따라 작성. Plan의 접근 방식에서 태스크 추출 (S1). **Spec 연결 확인**: `_index.md` Documents 테이블에 Spec 행 존재 시, 해당 spec 하위 문서의 FR 테이블을 읽어 S3 검증 항목 초안을 EARS 패턴에서 파생. Spec 미존재 또는 FR-ID 미보유(grandfathered) 시 기존 방식(plan 기반 추출) 유지 |
+| 4 (G1) | **cl.md 작성**: 아래 §cl.md 구조에 따라 작성. Plan의 접근 방식에서 태스크 추출 (S1). **Spec 연결 확인**: `_index.md` Documents 테이블에 Spec 행 존재 시, 해당 spec의 `requirements.md` FR 테이블을 읽어 S3 검증 항목 초안을 EARS 패턴에서 파생. Spec 미존재 또는 FR-ID 미보유(grandfathered) 시 기존 방식(plan 기반 추출) 유지 |
 | 5 (G2) | **Plan+CL 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
 | 6 (G3) | **_index.md Documents 테이블 갱신**: Plan, Checklist 행의 경로와 상태를 갱신 |
 | 7 (G3) | **Linear comment 기록**: Linear MCP로 Plan 완료 요약 comment (태스크 수, 주요 설계 결정 1~2줄) |

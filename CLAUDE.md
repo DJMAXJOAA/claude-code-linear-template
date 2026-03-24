@@ -87,7 +87,7 @@
 - Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서 (bug 제외 — bug는 Git 문서 미생성). `issue_type` frontmatter로 feature/improvement 구분
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `_index.md`(항상) + `plan.md`, `cl.md`(Planning 시)
-- Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + 하위 문서들)
+- Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택))
 - FR-ID: `FR-NNN` (spec-local, 각 spec 내 순차). 외부 참조: `{spec-name}:FR-NNN`. EARS 형식 요구사항
 - 상세: [.claude/rules/docs-writing.md](.claude/rules/docs-writing.md)
 
