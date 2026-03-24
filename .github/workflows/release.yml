@@ -69,8 +69,12 @@ jobs:
           NOTES_FILE=$(mktemp)
           echo "NOTES_FILE=$NOTES_FILE" >> "$GITHUB_ENV"
 
-          # tag annotation을 파일로 추출 (shell 변수 경유 시 UTF-8/개행 깨짐 방지)
-          git tag -l --format='%(contents)' "$TAG" | sed '/^$/d' > "$NOTES_FILE"
+          # annotated tag의 메시지를 추출 (%(contents)는 커밋 메시지를 반환하는 버그가 있어 cat-file 사용)
+          TAG_TYPE=$(git cat-file -t "$TAG" 2>/dev/null || echo "unknown")
+          if [ "$TAG_TYPE" = "tag" ]; then
+            # annotated tag: 헤더(object/type/tag/tagger) 이후 빈 줄 다음부터가 메시지
+            git cat-file -p "$TAG" | sed '1,/^$/d' | sed '/^$/d' > "$NOTES_FILE"
+          fi
 
           if [ -s "$NOTES_FILE" ]; then
             # annotation이 있으면 하단에 Full Changelog 링크 추가
