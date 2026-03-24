@@ -36,7 +36,7 @@ jobs:
 
           # 필수 스킬 존재 확인 (이름 기반)
           REQUIRED_SKILLS=(
-            "dev-pipeline" "gen-hub" "gen-plan" "implement" "feature-close"
+            "dev-pipeline" "gen-hub" "gen-plan" "implement" "issue-close"
             "triage" "feedback" "investigation" "verify" "test"
           )
           for s in "${REQUIRED_SKILLS[@]}"; do

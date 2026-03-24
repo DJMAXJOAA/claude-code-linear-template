@@ -20,7 +20,7 @@
 | references 디렉토리 | (선택) `docs/spec/{name}/references/` — G2 조사에서 보고서 생성 시에만. 보고서 없으면 디렉토리 자체 미생성 |
 | 깊이 제한 | 2depth (`docs/spec/{name}/{doc}.md`), references는 예외 (`docs/spec/{name}/references/{report}.md`) |
 | 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
-| 갱신 주체 | `/스펙`(초기 생성/재호출), feature-close(Issue 완료 시 연동 갱신 — 경로/링크 없으면 무시) |
+| 갱신 주체 | `/스펙`(초기 생성/재호출), issue-close(Issue 완료 시 연동 갱신 — 경로/링크 없으면 무시) |
 | 글로벌 _index.md 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 자동 갱신 |
 | 앵커 참조 | 각 문서의 `##` 헤딩이 Linear Document에서 앵커로 링크 가능 (GitHub 호환) |
 
@@ -141,7 +141,7 @@ technical.md는 **계약 수준(contract-level)** 설계만 기술한다.
 | 데이터 모델 | 엔티티 관계 + 핵심 필드 | 상세 스키마, 마이그레이션 |
 | 통신 패턴 | 방식 명시 (예: "delta sync") | 프로토콜 세부 구현 |
 
-> **시그니처 변경 규칙**: 구현 중 시그니처가 변경되어도 spec 즉시 수정 불필요. Issue 완료 후 feature-close에서 반영하거나, `/정리`에서 소급 갱신.
+> **시그니처 변경 규칙**: 구현 중 시그니처가 변경되어도 spec 즉시 수정 불필요. Issue 완료 후 issue-close에서 반영하거나, `/정리`에서 소급 갱신.
 
 ## Constraints 소속 규칙
 

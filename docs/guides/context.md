@@ -40,7 +40,7 @@ created: 2026-03-17
 | 구현 | CL S1 (태스크 목록만), plan.md (필요 시) | CL S2/S3, 다른 태스크 보고서 |
 | 테스트 | CL S3 (검증 조건만), S4 (수동 테스트) | CL S1, plan.md |
 | 검증 | Linear SC (description), CL S3 | plan.md 본문 |
-| 완료 처리 (feature-close) | _index.md, plan.md (설계 이탈 비교), cl.md (태스크 완료 확인), 검증 결과 | 다른 Issue 문서 |
+| 완료 처리 (issue-close) | _index.md, plan.md (설계 이탈 비교), cl.md (태스크 완료 확인), 검증 결과 | 다른 Issue 문서 |
 
 ### 읽기 최적화 규칙
 
@@ -48,7 +48,7 @@ created: 2026-03-17
 |------|------|
 | 이름 기반 지정 | state/label은 이름(문자열)으로 직접 지정. ID 캐싱 불필요 |
 | CL 선택적 읽기 | 구현 단계: S1만. 검증 단계: S3만 |
-| _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 feature-close 시에만 |
+| _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 issue-close 시에만 |
 | Linear 조회 최소화 | /활성화 시 1회 조회 후 세션 내 추적. 매 태스크마다 재조회 금지 |
 
 ---

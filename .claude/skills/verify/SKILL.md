@@ -27,7 +27,7 @@
 | 4 (G1) | **검증 결과 정리**: PASS/FAIL 판정 + 근거 |
 | 5 (G2) | **사용자에게 결과 제시**: `AskUserQuestion`으로 검토 |
 | 6 (G3) | **Linear comment 기록**: Linear MCP로 검증 결과 comment (PASS/FAIL + 항목별 요약 1~3줄) |
-| 7a (G4) | **PASS**: 검증 결과(PASS)를 반환. dev-pipeline이 feature-close 후속 결정 |
+| 7a (G4) | **PASS**: 검증 결과(PASS)를 반환. dev-pipeline이 issue-close 후속 결정 |
 | 7b (G4) | **FAIL**: 실패 항목 목록 + 수정 방안 제시. 검증 결과(FAIL)를 반환. dev-pipeline이 implement 복귀 후속 결정 |
 
 ## Output

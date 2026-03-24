@@ -9,7 +9,7 @@
 | 생성 시점 | `/등록` 시 생성 (gen-hub). **bug 제외** — bug는 Git 문서 미생성 |
 | Linear Issue 링크 | gen-hub이 Linear API 응답의 URL을 직접 삽입. 수동 URL 조합 금지 |
 | Documents 테이블 | 존재하는 파일은 상대경로 링크 + ✅. 미생성 파일은 `—` + `미생성` |
-| 구현 결과 섹션 | feature-close 시 lazy-creation. 최초 생성 시 빈 placeholder |
+| 구현 결과 섹션 | issue-close 시 lazy-creation. 최초 생성 시 빈 placeholder |
 | 상태 컬럼 갱신 | 파일 생성/삭제 시 Documents 테이블 갱신 |
 | Decisions 섹션 | Pre-Plan Q/A Phase 1에서 Decisions 항목 확정 시 기록. 구현 중 설계 결정 발생 시 추가 |
 | Notes 섹션 | 피드백(limitation), triage log, Known Limitations 발생 시 기록 |
@@ -51,7 +51,7 @@ created: {YYYY-MM-DD}
 
 ## 구현 결과
 
-{feature-close 시 lazy-creation}
+{issue-close 시 lazy-creation}
 ```
 
 ## bug

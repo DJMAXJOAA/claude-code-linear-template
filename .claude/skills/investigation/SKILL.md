@@ -23,7 +23,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 | 3 (G1) | **조사 보고서 작성**: `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` 생성 |
 | 4 (G2) | **사용자에게 결과 요약 + 확인**: `AskUserQuestion`으로 검토 |
 | 5 (G3) | **_index.md Documents 테이블 갱신**: 조사 보고서 행 추가 |
-| 6 (G4) | **완료 결과를 반환**: 승인 시 완료 결과를 반환. dev-pipeline이 feature-close 결정 |
+| 6 (G4) | **완료 결과를 반환**: 승인 시 완료 결과를 반환. dev-pipeline이 issue-close 결정 |
 
 ## Output
 
@@ -31,7 +31,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 |------|------|
 | 조사 보고서 | `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` |
 | _index.md | Documents 테이블에 보고서 행 추가 |
-| Linear | State 전이는 feature-close에서 처리 |
+| Linear | State 전이는 issue-close에서 처리 |
 
 ---
 

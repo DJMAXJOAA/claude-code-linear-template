@@ -38,7 +38,7 @@ created: {YYYY-MM-DD}
 | FR-001 | {EARS 1줄 요약} | T-{ID}-01, T-{ID}-03 | S3 #1, #2 |
 | FR-002 | {EARS 1줄 요약} | T-{ID}-02 | S3 #3 |
 
-> Traceability 테이블은 **Plan 생성 시점의 스냅샷**. P1 계획수정(pipeline.md §3 참조) 시 갱신 대상이 아니다. 태스크 추가/변경 시의 FR 매핑 최신화는 feature-close §7의 spec 연동 갱신에서 수행.
+> Traceability 테이블은 **Plan 생성 시점의 스냅샷**. P1 계획수정(pipeline.md §3 참조) 시 갱신 대상이 아니다. 태스크 추가/변경 시의 FR 매핑 최신화는 issue-close §7의 spec 연동 갱신에서 수행.
 
 ## 4. Verification
 

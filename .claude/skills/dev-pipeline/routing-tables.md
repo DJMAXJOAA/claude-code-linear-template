@@ -13,7 +13,7 @@ type별 라우팅 상세 + bug 수정 프로세스.
 | In Progress (점검 P1) | dev-pipeline: plan/cl 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
 | In Progress (점검 plan-L3) | `/등록` (sub-issue) → 블로킹 라이프사이클 | In Progress (블로킹) |
 | In Progress (모든 태스크 done) | verify 자동 호출 → PASS 시 In Review 전이 | In Review |
-| In Review | 사용자 직접 확인 → 승인 시 feature-close 자동 호출 | Done |
+| In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 | Done |
 | Done | 완료 안내 | — |
 
 > implement가 verify 호출 → PASS 확인 → Linear State `In Review` 전이까지 수행.
@@ -30,7 +30,7 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | Todo | **size 판별** → improvement-fix (light) 호출 | In Progress |
 | In Progress | improvement-fix (light) Skill | In Progress (수정 진행) |
 | In Progress (모든 수정 done) | verify 자동 호출 (bug-like fallback) → PASS 시 In Review 전이 | In Review |
-| In Review | 사용자 직접 확인 → 승인 시 feature-close(경량) 자동 호출 | Done |
+| In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (축약 경로) | Done |
 | Done | 완료 안내 | — |
 
 > light는 Planning 상태를 건너뛴다. Git 문서(`docs/issue/`) 미생성.
@@ -46,7 +46,7 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | In Progress | implement Skill (기존 재활용) | In Progress (태스크 진행) |
 | In Progress (점검 P1) | dev-pipeline: plan/cl 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
 | In Progress (모든 태스크 done) | verify 자동 호출 → PASS 시 In Review 전이 | In Review |
-| In Review | 사용자 직접 확인 → 승인 시 feature-close(경량) 자동 호출 | Done |
+| In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (improvement-standard 경로) | Done |
 | Done | 완료 안내 | — |
 
 > standard는 기존 gen-plan + implement 스킬을 그대로 재활용한다.
@@ -58,7 +58,7 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
 | Todo | bug-fix Skill 호출 | In Progress |
 | In Progress | bug-fix Skill (수정 + verify 자동 호출) | In Review |
-| In Review | 사용자 직접 확인 → 승인 시 feature-close(경량) 자동 호출 | Done |
+| In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (축약 경로) | Done |
 | Done | 완료 안내 | — |
 
 ## bug 수정 프로세스
@@ -73,5 +73,5 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | 단계 | 행위 |
 |------|------|
 | 1 | 사용자에게 수동 확인 안내 (수동 테스트, 코드 리뷰 등) |
-| 2 | 사용자 승인 시 feature-close 자동 호출 → Done |
+| 2 | 사용자 승인 시 issue-close 자동 호출 → Done |
 | 3 | 사용자가 문제 발견 시 → 새 Issue 등록 (역방향 전이 금지) |

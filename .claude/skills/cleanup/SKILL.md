@@ -34,7 +34,7 @@
 | cl.md 생성 | 태스크 체크리스트는 구현 전 계획의 산출물 |
 | Micro-tasking (태스크별 순차 실행) | 이미 완료된 작업이므로 실행 오케스트레이션 불필요 |
 | verify (코드 품질 검증) | 사후 기록 시점에서 코드 검증은 범위 외. 필요 시 유저가 별도 `/검증` 호출 |
-| spec 문서 생성/갱신 | spec은 `/스펙` 스킬의 영역. feature-close 경유 시에만 연동 |
+| spec 문서 생성/갱신 | spec은 `/스펙` 스킬의 영역. issue-close 경유 시에만 연동 |
 
 ## Process (게이트 면제 — 자체 6단계)
 
@@ -72,7 +72,7 @@
 | A-3 | `AskUserQuestion`: description 확인/수정 |
 | A-4 | Linear Issue 생성 (state: **Done** — 이미 완료된 작업이므로) |
 | A-5 | _index.md 생성: gen-hub 템플릿([skills/gen-hub/templates/index-templates.md](../gen-hub/templates/index-templates.md)) 참조. **feature / improvement-standard만. bug 및 improvement-light는 스킵** (기존 bug 축약 패턴과 동일 — Linear comment로 기록) |
-| A-6 | 구현 결과 섹션 즉시 기록: feature-close 템플릿([skills/feature-close/templates/implementation-result.md](../feature-close/templates/implementation-result.md)) 참조. **bug 및 improvement-light는 스킵** — A-7의 Linear comment에 수정 결과 포함 |
+| A-6 | 구현 결과 섹션 즉시 기록: issue-close 템플릿([skills/issue-close/templates/implementation-result.md](../issue-close/templates/implementation-result.md)) 참조. **bug 및 improvement-light는 스킵** — A-7의 Linear comment에 수정 결과 포함 |
 | A-7 | Linear Done comment 기록 (feature/improvement: 완료 요약. bug: Root Cause + 수정 방법 + 영향 범위) |
 
 > 기존 gen-hub 스킬을 직접 호출하지 않고, 템플릿 파일만 런타임 참조하여 동적 구성한다 (복제 금지).
@@ -122,7 +122,7 @@ cleanup 스킬은 "사후 문서화" 컨텍스트에서 다음 섹션의 생성/
 | 문서 | 섹션 | 권한 | 정규 소유자 | 예외 근거 |
 |------|------|------|------------|----------|
 | _index.md | 전체 (경로 A 신규 생성 시) | 생성 | gen-hub | 사후 문서화는 파이프라인 외부 흐름. gen-hub의 Todo 생성과 cleanup의 Done 생성은 프로세스가 상이 |
-| _index.md | `## 구현 결과` | 생성/갱신 | feature-close | 사후 문서화 시 feature-close 미경유. cleanup이 동일 템플릿을 참조하여 직접 기록 |
+| _index.md | `## 구현 결과` | 생성/갱신 | issue-close | 사후 문서화 시 issue-close 미경유. cleanup이 동일 템플릿을 참조하여 직접 기록 |
 | _index.md | `## Notes` | 갱신 (append) | 각 스킬 자체 | 기존 규칙과 동일 — Notes는 다수 스킬이 append 가능 |
 
 > 정규 소유자의 템플릿 파일을 SSOT로 참조한다 (복제 금지). 템플릿 형식 변경 시 cleanup도 자동 반영.

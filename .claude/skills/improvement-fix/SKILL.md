@@ -35,6 +35,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 7 (G4) | **커밋**: `refactor: ...` or `chore: ...` (Conventional Commits) |
 | 8 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — cl.md 없이 Linear SC 기반) |
 | 9 (G3) | verify PASS 시: **Linear State → In Review** + 변경 요약 **Linear comment** 기록 |
+| 10 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** (축약 경로: 검토→Done→comment→참조 문서 동기화) |
 
 > verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀
 
@@ -56,7 +57,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 5 (G2) | **Post-Plan 확인**: plan 요약 제시 → `AskUserQuestion` (바로 구현 / Q&A / AI 리뷰) |
 | 6 (G3) | **Linear → In Progress** |
 | 7 (G4) | **implement 호출**: CL S1 기반 micro-tasking (기존 implement 스킬 재활용) |
-| 8 | verify → In Review → feature-close(경량) |
+| 8 | verify → In Review → **issue-close 자동 호출** (improvement-standard 경로: 검토→_index.md 기록→Done→comment→미러링→환류→참조 문서 동기화) |
 
 > standard는 **기존 gen-plan 스킬 + 기존 템플릿**을 그대로 사용한다.
 > plan.md/cl.md는 "AI 작업 지침서"이므로 feature와 동일 구조가 적합.
