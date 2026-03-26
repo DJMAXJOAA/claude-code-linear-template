@@ -1,3 +1,9 @@
+---
+name: triage
+description: "수동 테스트 결과를 분석하여 8유형으로 분류하고 라우팅하는 순수 분류기. /점검 커맨드에서 호출."
+disable-model-invocation: true
+---
+
 # triage — 수동 테스트 결과 분류 및 라우팅
 
 수동 테스트 결과를 분석하여 8유형으로 분류하고, G2 Approval Table을 통해 사용자 승인을 받은 뒤 분류 결과를 반환하는 **순수 분류기(Pure Classifier)**.

@@ -1,3 +1,9 @@
+---
+name: improvement-fix
+description: "improvement type Issue의 수정 프로세스 오케스트레이터. light/standard 2분할로 작업 규모에 맞는 프로세스 제공."
+disable-model-invocation: true
+---
+
 # improvement-fix — 개선 작업 오케스트레이터
 
 improvement type Issue의 수정 프로세스를 오케스트레이션한다. light/standard 2분할로 작업 규모에 맞는 프로세스를 제공한다.
@@ -113,7 +119,8 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | light | 코드 수정 | `oh-my-claudecode:executor` | sonnet |
 | light | 검증 | verify 스킬 (`oh-my-claudecode:verifier`) | sonnet |
 | standard | 코드베이스 조사 | `oh-my-claudecode:explore` | haiku |
-| standard | Post-Plan AI 리뷰 | `oh-my-claudecode:critic` | opus |
+| standard | Post-Plan 합의 리뷰 (R1) | `oh-my-claudecode:architect` | opus |
+| standard | Post-Plan 합의 리뷰 (R2) | `oh-my-claudecode:critic` | opus |
 | standard | 구현 | implement 스킬 → `oh-my-claudecode:executor` | sonnet |
 | standard | 검증 | verify 스킬 (`oh-my-claudecode:verifier`) | sonnet |
 

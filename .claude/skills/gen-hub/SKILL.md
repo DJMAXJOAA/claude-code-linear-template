@@ -1,3 +1,8 @@
+---
+name: gen-hub
+description: "Linear Issue 생성 및 Git docs/issue 폴더 + _index.md 생성. /등록 커맨드 또는 Issue 등록 요청 시 호출."
+---
+
 # gen-hub — _index.md + Linear Issue 생성
 
 `/등록` 커맨드에서 호출되어, Linear Issue를 생성하고 Git에 `docs/issue/{LINEAR-ID}/` 폴더 + `_index.md`를 생성한다.

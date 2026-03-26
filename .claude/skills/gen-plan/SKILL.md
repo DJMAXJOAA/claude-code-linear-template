@@ -1,3 +1,9 @@
+---
+name: gen-plan
+description: "plan.md + cl.md 동시 생성. dev-pipeline에서 Planning 단계 진입 시 호출."
+disable-model-invocation: true
+---
+
 # gen-plan — plan.md + cl.md 생성
 
 dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-ID}/plan.md`와 `cl.md`를 동시 생성한다.
@@ -72,7 +78,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 
 ## OMC 에이전트 연동
 
-> gen-plan 자체는 에이전트 연동 없음. Plan 리뷰는 dev-pipeline의 Post-Plan Q/A에서 `oh-my-claudecode:critic` 사용.
+> gen-plan 자체는 에이전트 연동 없음. Plan 리뷰는 dev-pipeline의 Post-Plan Q/A에서 `oh-my-claudecode:architect` + `oh-my-claudecode:critic` 합의 리뷰 사용.
 
 > OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 

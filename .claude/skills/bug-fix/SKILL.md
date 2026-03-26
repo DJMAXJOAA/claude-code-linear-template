@@ -1,3 +1,9 @@
+---
+name: bug-fix
+description: "bug type Issue의 수정 프로세스 오케스트레이터. CL/plan 없이 직접 수정하며 Git 문서를 생성하지 않음."
+disable-model-invocation: true
+---
+
 # bug-fix — 버그 수정 오케스트레이터
 
 bug type Issue의 수정 프로세스를 오케스트레이션한다. CL/plan 없이 직접 수정하며, Git 문서(`docs/issue/`)는 생성하지 않는다. Linear issue만을 원천으로 사용한다.

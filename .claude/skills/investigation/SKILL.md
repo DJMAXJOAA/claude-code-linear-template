@@ -1,3 +1,9 @@
+---
+name: investigation
+description: "Issue 또는 주제에 대한 조사를 수행하고 보고서를 생성. 모든 type의 Issue에서 호출 가능."
+disable-model-invocation: true
+---
+
 # investigation — 조사 수행 및 보고서 생성
 
 Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서 호출 가능하다. 조사 범위 확인 → 수행 → 보고서 작성 → _index.md 갱신 → 사용자 확인 → 완료 결과 반환.

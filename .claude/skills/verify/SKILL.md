@@ -1,3 +1,9 @@
+---
+name: verify
+description: "구현 완료 후 Success Criteria, CL S3 검증 조건, 코드 품질을 종합 검증. PASS/FAIL 결과 반환."
+disable-model-invocation: true
+---
+
 # verify — 구현 완전성 검증
 
 구현 완료 후 Success Criteria, CL S3 검증 조건, 코드 품질을 종합 검증한다. 검증 결과(PASS/FAIL)를 반환하며, 후속 처리는 dev-pipeline이 결정한다.

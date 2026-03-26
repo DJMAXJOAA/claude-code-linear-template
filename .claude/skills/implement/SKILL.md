@@ -1,3 +1,9 @@
+---
+name: implement
+description: "CL S1 태스크 목록 기준 Micro-tasking 오케스트레이터. dev-pipeline에서 In Progress 단계 진입 시 호출."
+disable-model-invocation: true
+---
+
 # implement — Micro-tasking 오케스트레이터
 
 CL S1 태스크 목록을 기준으로 Micro-tasking을 오케스트레이션한다.
