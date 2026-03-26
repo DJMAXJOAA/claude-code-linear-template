@@ -1,7 +1,6 @@
 ---
 name: gen-plan
 description: "plan.md + cl.md 동시 생성. dev-pipeline에서 Planning 단계 진입 시 호출."
-disable-model-invocation: true
 ---
 
 # gen-plan — plan.md + cl.md 생성

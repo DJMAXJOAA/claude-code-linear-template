@@ -1,7 +1,6 @@
 ---
 name: issue-close
 description: "verify PASS 후 완료 처리(전 type 공통). 구현 결과 기록 및 Linear Issue를 Done으로 전이."
-disable-model-invocation: true
 ---
 
 # issue-close — 완료 처리 (전 type 공통)

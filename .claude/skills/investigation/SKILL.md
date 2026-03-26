@@ -1,7 +1,6 @@
 ---
 name: investigation
 description: "Issue 또는 주제에 대한 조사를 수행하고 보고서를 생성. 모든 type의 Issue에서 호출 가능."
-disable-model-invocation: true
 ---
 
 # investigation — 조사 수행 및 보고서 생성

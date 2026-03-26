@@ -1,7 +1,6 @@
 ---
 name: dev-pipeline
 description: "Linear Issue 상태(State)와 type(Label)을 조회하여 적합한 스킬로 라우팅하는 통합 파이프라인 라우터."
-disable-model-invocation: true
 ---
 
 # dev-pipeline — 통합 파이프라인 라우터

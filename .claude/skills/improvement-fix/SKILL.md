@@ -1,7 +1,6 @@
 ---
 name: improvement-fix
 description: "improvement type Issue의 수정 프로세스 오케스트레이터. light/standard 2분할로 작업 규모에 맞는 프로세스 제공."
-disable-model-invocation: true
 ---
 
 # improvement-fix — 개선 작업 오케스트레이터

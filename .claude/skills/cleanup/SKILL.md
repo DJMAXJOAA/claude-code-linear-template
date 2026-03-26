@@ -1,7 +1,6 @@
 ---
 name: cleanup
 description: "사후 문서화. 자유롭게 수정한 작업 내용을 사후에 정리하여 문서화. 파이프라인 역방향 플로우."
-disable-model-invocation: true
 ---
 
 # cleanup — 사후 문서화
