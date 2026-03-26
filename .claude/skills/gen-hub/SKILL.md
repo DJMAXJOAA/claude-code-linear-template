@@ -37,7 +37,6 @@
 | FR 그루핑 | AI가 도메인/의존성 기반 제안. 사용자 최종 결정 |
 | Issue description | Spec Summary에 FR-ID 목록 포함. Documents에 spec 경로 자동 삽입 |
 | relation 자동 설정 | 같은 spec 출처 Issue 간 `relatedTo` 자동 설정 |
-| Bidirectional 링크 | 생성된 Issue ID를 spec의 Related Issues 테이블에 역기록 |
 
 | 단계 | 행위 |
 |------|------|

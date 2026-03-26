@@ -33,7 +33,7 @@ G1 재호출/재생성 경로:
 |------|------|------|
 | **덮어쓰기** | 동일 이름 디렉토리 존재 | 기존 파일 목록 diff 제시 → 유저 확인 후 덮어쓰기 |
 | **새 디렉토리로 재생성** | 기존 spec 내용을 기반으로 새 구조로 재작성 | 새 kebab-case 디렉토리명 결정 → 기존 spec과 독립된 문서 생성. 기존 spec은 유지/삭제 유저 선택 |
-| **마이그레이션** | 기존 spec이 도메인별 분할(레거시) | 새 고정 구조로 내용 재분류. 기존 _index.md의 Related Issues, Change Log 보존 |
+| **마이그레이션** | 기존 spec이 도메인별 분할(레거시) | 새 고정 구조로 내용 재분류. 기존 _index.md의 Change Log 보존 |
 
 > G1 출력: 기능 제목, 설명, 기존 spec 상태(신규/재호출/재생성/관련 존재), 선택된 경로 → `AskUserQuestion`으로 유저 확인
 
@@ -146,7 +146,6 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 | 행동 | 상세 |
 |------|------|
 | `[Spec] {제목}` Document 생성 | G5 완료 후 선택적. Git spec 링크 + 앵커 포함 |
-| 관련 Issue 목록 조회 | Related Issues 섹션 자동 구성 |
 
 ---
 
@@ -183,5 +182,5 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 |------|------|
 | 구조 변환 | 기존 도메인별 하위 문서 → 고정 구조(requirements.md, technical.md)로 내용 재분류 |
 | roadmap 스킵 | 기존 하위 문서에서 roadmap에 해당하는 내용이 없으면 roadmap.md 생성 스킵 |
-| _index.md 유지 | 기존 _index.md의 Related Issues, Change Log는 보존 |
+| _index.md 유지 | 기존 _index.md의 Change Log는 보존 |
 | references 유지 | 기존 references/ 디렉토리가 있으면 그대로 유지 |

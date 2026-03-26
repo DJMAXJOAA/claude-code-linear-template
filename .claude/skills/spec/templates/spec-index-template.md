@@ -53,11 +53,6 @@ updated: {YYYY-MM-DD}
 
 > Constraints & Dependencies는 [requirements.md](./requirements.md#constraints--dependencies) 참조 (SSOT)
 
-## Related Issues
-
-| Linear ID | 제목 | 상태 |
-|-----------|------|------|
-
 ## Change Log
 
 | 날짜 | FR-ID | 변경 유형 | 변경 내용 |
@@ -74,5 +69,4 @@ updated: {YYYY-MM-DD}
 | Documents | O | 고정 3파일 + roadmap 선택 표기 |
 | References | △ | G2 보고서 존재 시에만 |
 | Decisions | △ | 설계 결정 테이블. 4-컬럼: ID / 결정 / 근거 / 대안. Constraints는 `requirements.md`로 링크 (SSOT) |
-| Related Issues | O | issue-close 시 자동 갱신 |
 | Change Log | O | 4-컬럼: 날짜 / FR-ID / 변경 유형(added/modified/removed) / 요약. FR 무관 시 `--` |
