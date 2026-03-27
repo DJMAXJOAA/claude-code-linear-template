@@ -185,6 +185,7 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
 | 규칙 | 내용 |
 |------|------|
+| **전 경로 공통** | **기존 `_index.md`의 Change Log는 보존한다 (덮어쓰기/마이그레이션 모두 적용)** |
 | 구조 변환 | 기존 도메인별 하위 문서 → 고정 구조(requirements.md, technical.md)로 내용 재분류 |
 | roadmap 스킵 | 기존 하위 문서에서 roadmap에 해당하는 내용이 없으면 roadmap.md 생성 스킵 |
 | _index.md 유지 | 기존 _index.md의 Change Log는 보존 |

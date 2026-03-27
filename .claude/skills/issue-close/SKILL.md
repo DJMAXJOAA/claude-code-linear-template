@@ -30,8 +30,8 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 |------|----------|----------------|--------------------|--------------------|----------|----------|
 | **feature** | 1→2→3→3a→4→5→5a→6→7→8 (전체) | ✅ 기록 | ✅ append | ✅ | ✅ | ✅ |
 | **improvement-standard** | 1→2→3→3a→4→5→5a→6→7→8 | ✅ 기록 | ✅ append | ✅ | ✅ | ✅ (Spec 참조 존재 시) |
-| **improvement-light** | 1→2→3→3a→4→5→8 | ❌ 없음 | ✅ append | ❌ | ❌ | ❌ |
-| **bug** | 1→2→3→3a→4→5→8 | ❌ (plan.md 없으면) | ✅ append | ❌ | ❌ | ❌ |
+| **improvement-light** | 1→2→3→3a→4→5→**6**→8 | ❌ 없음 | ✅ append | ❌ | ✅ (blocked-by 역참조 존재 시) | ❌ |
+| **bug** | 1→2→3→3a→4→5→**6**→8 | ❌ (plan.md 없으면) | ✅ append | ❌ | ✅ (blocked-by 역참조 존재 시) | ❌ |
 
 ### 단계별 프로세스
 
@@ -165,7 +165,7 @@ issue-close 시 plan.md Outcome + 구현 결과를 Linear Issue description에 1
 
 ## 후행 Issue 환류
 
-> **적용 대상**: feature, improvement-standard만. bug/improvement-light는 스킵.
+> **적용 대상**: 전 type (blocked-by 역참조 존재 시). feature/improvement-standard는 항상 수행. bug/improvement-light는 blocked-by 역참조가 존재하는 경우에만 수행.
 
 | 단계 | 행위 |
 |------|------|

@@ -60,7 +60,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 1 (G1) | **Pre-Plan 인터뷰** (4항목): SC, 변경 범위, 파급 분석, 접근방식. `AskUserQuestion`으로 각 항목 확인 |
 | 2 (G1) | **코드베이스 조사**: `oh-my-claudecode:explore` 에이전트로 영향 범위 탐색 |
 | 3 (G1) | **prd.md + plan.md 생성**: **기존 gen-plan 스킬 호출** (기존 템플릿 그대로 사용) |
-| 5 (G2) | **Post-Plan 확인**: plan 요약 제시 → `AskUserQuestion` (바로 구현 / Q&A / AI 리뷰) |
+| 5 (G2) | **Post-Plan 확인**: plan 요약 제시 → `AskUserQuestion` (바로 구현 / Q&A / 합의 리뷰) |
 | 6 (G3) | **Linear → In Progress** |
 | 7 (G4) | **implement 호출**: plan.md Tasks 기반 micro-tasking (기존 implement 스킬 재활용) |
 | 8 | verify → In Review → **issue-close 자동 호출** (improvement-standard 경로: 검토→note.md 기록→Done→comment→미러링→환류→참조 문서 동기화) |
@@ -80,7 +80,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | standard → feature | 아키텍처 변경 수준으로 판단 | 언제든 | `AskUserQuestion`: feature type 전환 제안 → 승인 시 새 Issue 등록 |
 | bug → improvement | 기존 bug-fix complexity 전환 | 언제든 | Label 변경 → improvement-fix로 라우팅 |
 
-> **light → standard 전환(코드 수정 전)**: In Progress → Planning 역전이 수행 (pipeline.md §1-4 예외 2).
+> **light → standard 전환(코드 수정 전)**: In Progress → Planning 역전이 수행 (pipeline.md §1-4 예외 2). 기존 note.md 내용 보존 — standard gen-plan은 기존 note.md에 append (덮어쓰기 금지).
 > **light → 복잡(코드 수정 후)**: 역방향 전이 금지 원칙에 따라 **새 Issue 등록**. 기존 커밋은 현재 Issue에 남고, 나머지 작업은 새 Issue에서 진행.
 > **standard → feature 전환**: **새 Issue 등록** (역방향 전이 금지 원칙 준수).
 
@@ -136,7 +136,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | description 변경 의도 기록 | light | G3 단계 |
 | State → In Review 전이 | light | verify PASS 시 |
 | 변경 요약 comment | light | verify PASS 후 |
-| State → Planning 전이 | standard | Pre-Plan Q/A 시작 전 |
+| State → Planning 전이 | standard | Pre-Plan 인터뷰 시작 전 |
 | State → Planning 전이 (에스컬레이션) | light→standard | 전환 승인 시 |
 | description Size 갱신 | light→standard | 전환 승인 시 `light` → `standard` |
 | State → In Progress 전이 | standard | Post-Plan 후 |
