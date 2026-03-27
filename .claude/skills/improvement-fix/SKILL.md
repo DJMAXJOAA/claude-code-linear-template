@@ -118,8 +118,8 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | light | 코드 수정 | `oh-my-claudecode:executor` | sonnet |
 | light | 검증 | verify 스킬 (`oh-my-claudecode:verifier`) | sonnet |
 | standard | 코드베이스 조사 | `oh-my-claudecode:explore` | haiku |
-| standard | Post-Plan 합의 리뷰 (R1) | `oh-my-claudecode:architect` | opus |
-| standard | Post-Plan 합의 리뷰 (R2) | `oh-my-claudecode:critic` | opus |
+| standard | Post-Plan 합의 리뷰 (R1-a, 병렬) | `oh-my-claudecode:architect` | opus |
+| standard | Post-Plan 합의 리뷰 (R1-b, 병렬) | `oh-my-claudecode:critic` | opus |
 | standard | 구현 | implement 스킬 → `oh-my-claudecode:executor` | sonnet |
 | standard | 검증 | verify 스킬 (`oh-my-claudecode:verifier`) | sonnet |
 

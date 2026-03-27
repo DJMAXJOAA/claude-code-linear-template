@@ -128,12 +128,14 @@ Planning 상태에서 plan.md + cl.md 존재 확인 후, 다음 행동을 사용
 
 ### 합의 리뷰 프로세스
 
-선택지 (c) 선택 시 Architect→Critic 순차 합의 리뷰를 수행한다.
+선택지 (c) 선택 시 Architect + Critic 병렬 합의 리뷰를 수행한다.
 
 | 단계 | 행위 |
 |------|------|
-| R1 | **Architect 리뷰**: `oh-my-claudecode:architect` (opus). 아키텍처 건전성 + steelman antithesis(최강 반론) + 실질적 tradeoff tension. plan.md + cl.md + Linear description을 입력으로 전달. **R2 시작 전 완료 대기 필수** |
-| R2 | **Critic 리뷰**: `oh-my-claudecode:critic` (opus). Architect 피드백을 포함하여 품질 기준 평가 — 원칙-옵션 일관성, 리스크 완화, 검증 가능한 수락 기준. 판정 반환: **APPROVE** / **ITERATE** / **REJECT** |
+| R1 | **Architect + Critic 병렬 리뷰**: 두 에이전트를 동시에 호출하여 독립 리뷰를 수행한다. 각 에이전트는 plan.md + cl.md + Linear description을 입력으로 받는다 |
+| R1-a | `oh-my-claudecode:architect` (opus) — 아키텍처 건전성 + steelman antithesis(최강 반론) + 실질적 tradeoff tension |
+| R1-b | `oh-my-claudecode:critic` (opus) — 품질 기준 평가: 원칙-옵션 일관성, 리스크 완화, 검증 가능한 수락 기준 |
+| R2 | **합의 병합**: 양측 리뷰 결과를 수신한 뒤, 피드백을 종합하여 단일 합의안을 도출한다. 판정 규칙: **(1)** 양측 모두 이슈 없음 → **APPROVE** **(2)** 한쪽이라도 수정 필요 → **ITERATE** (양측 피드백 합산) **(3)** 한쪽이라도 근본적 거부 → **REJECT** |
 | R3 | **판정 분기**: 아래 참조 |
 
 **판정 분기:**
@@ -146,7 +148,7 @@ Planning 상태에서 plan.md + cl.md 존재 확인 후, 다음 행동을 사용
 
 > **루프 상한**: ITERATE 3회 소진 시 최종 피드백을 첨부하여 Post-Plan Q/A 2단계로 복귀. "합의 리뷰 3회 완료" 메시지와 함께 사용자가 최종 판단.
 > **반복 횟수 표시**: 각 ITERATE 시 "합의 리뷰 iteration N/3" 을 사용자 프롬프트 + Linear comment에 표시.
-> **순차 실행 필수**: R1(Architect) 완료 후 R2(Critic) 실행. 동시 호출 금지.
+> **병렬 실행 필수**: R1-a(Architect)와 R1-b(Critic)를 동시에 호출. 순차 호출 금지.
 
 ---
 
@@ -187,8 +189,8 @@ Planning 상태에서 plan.md + cl.md 존재 확인 후, 다음 행동을 사용
 | type | 단계 | 에이전트 |
 |------|------|---------|
 | feature | Pre-Plan Q/A 코드 조사 | `oh-my-claudecode:explore` (haiku) |
-| feature | Post-Plan Q/A 합의 리뷰 (R1) | `oh-my-claudecode:architect` (opus) |
-| feature | Post-Plan Q/A 합의 리뷰 (R2) | `oh-my-claudecode:critic` (opus) |
+| feature | Post-Plan Q/A 합의 리뷰 (R1-a, 병렬) | `oh-my-claudecode:architect` (opus) |
+| feature | Post-Plan Q/A 합의 리뷰 (R1-b, 병렬) | `oh-my-claudecode:critic` (opus) |
 | feature | 설계 단계 | opus |
 | feature | 구현 단계 | sonnet (executor) |
 | improvement | size 판별 + 라우팅 | dev-pipeline 직접 수행 |
