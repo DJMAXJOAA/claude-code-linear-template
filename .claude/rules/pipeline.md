@@ -123,7 +123,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 게이트 연계 | 태스크 완료 후 4단계 게이트(§2)를 경유하여 다음 태스크로 이동 |
 | 금지 패턴 | 여러 단계 일괄 지시, "알아서 다 처리해" 식 실행, 같은 파일을 수정하는 태스크 동시 실행 |
 
-> **P1 plan 수정**: 영향받은 done 태스크만 선별 리셋. 새 태스크는 기존 시퀀스 이어서 부여. 수정 후 verify 재실행 필수.
+> **P1 plan 수정**: 영향받은 done 태스크만 선별 리셋. **리셋 기준**: (1) P1 수정 대상 태스크 자체 + (2) Dependencies 그래프에서 해당 태스크에 의존하는(하위) done 태스크. executor가 리셋 목록 도출 → `AskUserQuestion`으로 사용자 확인 후 리셋. 새 태스크는 기존 시퀀스 이어서 부여. 수정 후 verify 재실행 필수.
 > 의존성 기반 실행 + sub-issue 동기화: [implement SKILL.md](../skills/implement/SKILL.md) 참조
 > **갱신 원칙**: 태스크 완료 시 plan.md Tasks 상태 갱신과 note.md Work Log append를 병행 수행한다. 둘 중 하나만 갱신하는 부분 실행 금지.
 

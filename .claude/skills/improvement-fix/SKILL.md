@@ -34,7 +34,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 1 (G1) | **탐색**: `oh-my-claudecode:explore` 에이전트로 변경 대상 파일/모듈 식별 |
 | 2 (G1) | **수정 계획 제시**: 변경 의도 + 대상 파일 목록을 사용자에게 제시 |
 | 3 (G2) | **사용자 승인**: `AskUserQuestion`으로 수정 계획 확인. 승인 전 코드 수정 시작 금지 |
-| 3a (G3) | **Git 폴더 + note.md 생성**: `docs/issue/{LINEAR-ID}/` 폴더 + note.md 초기 생성 (gen-hub 템플릿 참조) |
+| 3a (G3) | **Git 폴더 + note.md 생성 (미존재 시에만)**: `docs/issue/{LINEAR-ID}/` 폴더 + note.md 초기 생성 (gen-hub 템플릿 참조). 이미 존재하면 스킵 |
 | 3b (G3) | **prd.md/plan.md 인터뷰**: `AskUserQuestion`으로 prd.md + plan.md 생성 여부 질문. 승인 시 간소화 생성 (변경 의도 + 대상 요약). 스킵 시 note.md만 유지 |
 | 4 (G3) | **Linear description 갱신**: 변경 의도 1~2줄을 description에 기록 |
 | 5 (G4) | **코드 수정**: `oh-my-claudecode:executor` 에이전트로 수정 구현 |
@@ -75,8 +75,8 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 
 | 방향 | 트리거 | 타이밍 | 행동 |
 |------|--------|--------|------|
-| light → standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전(step 3 승인 ~ step 5 사이)에만 가능** | `AskUserQuestion`: standard 전환 제안 → 승인 시 **Linear State → Planning 전이 수행** (pipeline.md §1-4 예외 2) |
-| light → (코드 수정 후 복잡) | 코드 수정 시작 후 복잡도 초과 | step 5 이후 | **새 Issue 등록** (역방향 전이 금지 원칙 준수). 기존 커밋은 유지 |
+| light → standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전(step 3 승인 ~ step 5 사이)에만 가능** | `AskUserQuestion`: standard 전환 제안 → 승인 시 **Linear State → Planning 전이 수행** (pipeline.md §1-4 예외 2) + Linear description Size `light` → `standard` 즉시 갱신 |
+| light → (코드 수정 후 복잡) | 코드 수정 시작 후 복잡도 초과 | step 5 이후 | **새 Issue 등록** (역방향 전이 금지 원칙 준수). 기존 커밋은 유지. 기존 Issue 처리: `AskUserQuestion`으로 사용자 선택 — (a) Done(부분 완료로 기록, description에 '에스컬레이션: {새 ID}으로 계속' 추기) `(AI 권장)` (b) Canceled(미완료 중단 기록) |
 | standard → feature | 아키텍처 변경 수준으로 판단 | 언제든 | `AskUserQuestion`: feature type 전환 제안 → 승인 시 새 Issue 등록 |
 | bug → improvement | 기존 bug-fix complexity 전환 | 언제든 | Label 변경 → improvement-fix로 라우팅 |
 
@@ -138,6 +138,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 변경 요약 comment | light | verify PASS 후 |
 | State → Planning 전이 | standard | Pre-Plan Q/A 시작 전 |
 | State → Planning 전이 (에스컬레이션) | light→standard | 전환 승인 시 |
+| description Size 갱신 | light→standard | 전환 승인 시 `light` → `standard` |
 | State → In Progress 전이 | standard | Post-Plan 후 |
 | Sub-issue 동기화 | standard | implement 스킬 위임 |
 | verify 결과 comment | standard | implement 완료 후 |

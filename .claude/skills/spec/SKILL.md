@@ -77,7 +77,7 @@ G1 재호출/재생성 경로:
 | 3a-1 | **자동 검증 실행**: G3 확정 요구사항에 대해 5개 검증 항목 자동 평가 |
 | 3a-2 | **결과 제시**: 검증 결과를 PASS/WARN/FAIL로 제시 |
 | 3a-3 | **전체 PASS 시**: 검증 결과를 출력하고 G4로 자동 진행. `AskUserQuestion` 불필요 |
-| 3a-4 | **FAIL 존재 시 사용자 선택**: `AskUserQuestion`으로 (a) 자동 수정 적용 (AI 권장) (b) 수동 수정 (c) 무시하고 진행 (사유 기록 필수 — `_index.md` Notes에 `G3a override: {사유}` 자동 기입) |
+| 3a-4 | **FAIL 존재 시 사용자 선택**: `AskUserQuestion`으로 (a) 자동 수정 적용 (AI 권장) → 수정 적용 후 **G3a 재검증 1회 자동 수행**. 재검증 전체 PASS → G4 진행. 재검증 FAIL → 사용자 선택으로 복귀. **재검증 루프 상한: 2회** (자동 수정 2회 소진 시 사용자에게 수동 수정/무시 선택) (b) 수동 수정 (c) 무시하고 진행 (사유 기록 필수 — `_index.md` Notes에 `G3a override: {사유}` 자동 기입) |
 
 G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
@@ -98,7 +98,7 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 | 단계 | 행위 |
 |------|------|
 | 4-1 | **technical.md 프리필**: G3 확정 요구사항 기반으로 계약 수준 기술 설계 초안 작성. [spec-technical-template.md](templates/spec-technical-template.md) 참조 |
-| 4-2 | **roadmap.md 프리필 (해당 시)**: G3 요구사항 규모/복잡도 기반으로 AI가 2+ Issue 분할 여부 판별 → `AskUserQuestion`으로 확인. 분할 불필요 시 스킵. [spec-roadmap-template.md](templates/spec-roadmap-template.md) 참조 |
+| 4-2 | **roadmap.md 프리필 (해당 시)**: G3 요구사항 규모/복잡도 기반으로 AI가 2+ Issue 분할 여부 판별 → `AskUserQuestion`으로 확인. 분할 불필요 시 스킵. roadmap.md는 **참조 문서**. Issue 분할 제안을 기록하지만 실제 Linear Issue 생성은 수행하지 않는다. 사용자가 `/등록`으로 개별 생성. [spec-roadmap-template.md](templates/spec-roadmap-template.md) 참조 |
 | 4-3 | **동시 리뷰**: technical.md + roadmap.md(해당 시) 초안을 한 번에 제시 |
 
 > G4 출력: technical.md 초안 + roadmap.md 초안(해당 시) → `AskUserQuestion`으로 유저 한 번에 리뷰/수정
@@ -128,7 +128,7 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
 | 항목 | 내용 |
 |------|------|
-| spec 디렉토리 | `docs/spec/{spec-name}/` — `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택) |
+| spec 디렉토리 | `docs/spec/{spec-name}/` — `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택, 참조 문서 — 실제 Issue 생성은 `/등록` 경유) |
 | references 디렉토리 | (선택) `docs/spec/{spec-name}/references/` — 조사 보고서. G2에서 보고서 생성 시에만 |
 | spec 글로벌 인덱스 | `docs/spec/_index.md` 자동 갱신 |
 | Linear Document | (선택) `[Spec] {제목}` — spec Git 링크 + 문서별 앵커 포함 |

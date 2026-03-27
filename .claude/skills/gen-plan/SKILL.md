@@ -22,6 +22,15 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 | 설계 결정 목록 | Pre-Plan Q/A Phase 2 항목별 인터뷰에서 사용자가 확정한 설계 결정 목록 |
 | SC 확정 결과 | Pre-Plan Q/A Phase 1 Step 3c에서 확정된 SC |
 
+### 호출자별 Input 매핑
+
+| 호출자 | 코드베이스 조사 결과 | 설계 결정 목록 | SC 확정 결과 |
+|--------|-------------------|--------------|-------------|
+| **feature** (dev-pipeline) | Pre-Plan Q/A Phase 1 탐색 결과 | Pre-Plan Q/A Phase 2 항목별 인터뷰 결과 | Phase 1 Step 3c SC |
+| **improvement-standard** (improvement-fix) | Pre-Plan 인터뷰 4항목 중 '변경 범위' + explore 탐색 결과 | Pre-Plan 인터뷰 4항목 중 '접근방식' 결정 | Pre-Plan 인터뷰 4항목 중 'SC' |
+
+> improvement-standard에서 미제공 필드(related issue 환류 등)는 gen-plan이 자체 수집.
+
 ## Process
 
 | 단계 | 행위 |

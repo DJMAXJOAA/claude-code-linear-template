@@ -73,7 +73,9 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 
 | Type | 워크플로우 | Planning | In Review |
 |------|-----------|:--------:|:---------:|
-| feature/improvement | Planning → In Progress → In Review → Done | O | O |
+| feature | Planning → In Progress → In Review → Done | O | O |
+| improvement-standard | Planning → In Progress → In Review → Done | O | O |
+| improvement-light | In Progress → In Review → Done | — | O |
 | bug | In Progress → In Review → Done | — | O |
 
 > 상세: [pipeline.md](../../.claude/rules/pipeline.md) §1

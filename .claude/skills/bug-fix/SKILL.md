@@ -27,7 +27,7 @@ bug type Issue의 수정 프로세스를 오케스트레이션한다. Git 폴더
 | 2 (G1) | **분석**: `oh-my-claudecode:debugger` 에이전트로 Root Cause 분석. 재현 경로, 원인 코드 위치 특정 |
 | 3 (G1) | **수정 계획 제시**: Root Cause + 수정 방안을 사용자에게 제시 |
 | 4 (G2) | **사용자 승인**: `AskUserQuestion`으로 수정 계획 확인. 승인 전 코드 수정 시작 금지 |
-| 4a (G3) | **Git 폴더 + note.md 생성**: `docs/issue/{LINEAR-ID}/` 폴더 + note.md 초기 생성 (gen-hub 템플릿 참조) |
+| 4a (G3) | **Git 폴더 + note.md 생성 (미존재 시에만)**: `docs/issue/{LINEAR-ID}/` 폴더 + note.md 초기 생성 (gen-hub 템플릿 참조). 이미 존재하면 스킵 |
 | 4b (G3) | **plan.md 인터뷰**: `AskUserQuestion`으로 plan.md 생성 여부 질문. 승인 시 간소화 생성 (Root Cause + 수정 방안 요약). 스킵 시 note.md만 유지 |
 | 5 (G4) | **코드 수정**: `oh-my-claudecode:executor` 에이전트로 수정 구현 + 테스트 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
