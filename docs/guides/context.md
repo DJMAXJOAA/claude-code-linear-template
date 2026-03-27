@@ -34,13 +34,13 @@ created: 2026-03-17
 
 | 단계 | 로드 대상 | 로드하지 않는 것 |
 |------|---------|---------------|
-| `/활성화` (라우팅) | Linear Issue 상태 1회 조회 + `_index.md` Documents 테이블 | plan.md 본문, 다른 Issue 문서 |
-| Pre-Plan Q/A | related issue의 `_index.md`(Decisions, Notes) + `plan.md`(존재 시). 최대 5개 issue, 요약만 활용 | related issue의 구현 결과 섹션 (gen-plan에서 별도 참조) |
-| Planning | plan.md, cl.md (작성 대상) | 이전 Issue 문서 |
+| `/활성화` (라우팅) | Linear Issue 상태 1회 조회 + note.md Handoff (존재 시) | plan.md 본문, 다른 Issue 문서 |
+| Pre-Plan Q/A | related issue의 `prd.md`(요구사항) + `plan.md`(존재 시). 최대 5개 issue, 요약만 활용 | related issue의 구현 결과 섹션 (gen-plan에서 별도 참조) |
+| Planning | prd.md, technical.md(조건부), plan.md (작성 대상) | 이전 Issue 문서 |
 | 구현 | plan.md Tasks (태스크 목록만), plan.md (필요 시) | plan.md Verification, 다른 태스크 보고서 |
 | 테스트 | plan.md Verification (검증 조건만), 수동 테스트 시나리오 | plan.md Tasks, plan.md 본문 |
 | 검증 | Linear SC (description), plan.md Verification | plan.md 본문 |
-| 완료 처리 (issue-close) | _index.md, plan.md (설계 이탈 비교), cl.md (태스크 완료 확인), 검증 결과 | 다른 Issue 문서 |
+| 완료 처리 (issue-close) | prd.md, plan.md (설계 이탈 비교), note.md (작업 이력 확인), 검증 결과 | 다른 Issue 문서 |
 
 ### 읽기 최적화 규칙
 
@@ -48,7 +48,7 @@ created: 2026-03-17
 |------|------|
 | 이름 기반 지정 | state/label은 이름(문자열)으로 직접 지정. ID 캐싱 불필요 |
 | plan.md 선택적 읽기 | 구현 단계: Tasks만. 검증 단계: Verification만 |
-| _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 issue-close 시에만 |
+| note.md 선택적 읽기 | Handoff 섹션만 확인 (재개 시). Work Log는 필요 시에만 |
 | Linear 조회 최소화 | /활성화 시 1회 조회 후 세션 내 추적. 매 태스크마다 재조회 금지 |
 
 ---
