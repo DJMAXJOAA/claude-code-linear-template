@@ -39,8 +39,8 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 4 (G3) | **Linear description 갱신**: 변경 의도 1~2줄을 description에 기록 |
 | 5 (G4) | **코드 수정**: `oh-my-claudecode:executor` 에이전트로 수정 구현 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
-| 7 (G4) | **커밋**: `refactor: ...` or `chore: ...` (Conventional Commits) |
-| 8 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — plan.md 없으면 Linear SC 기반) |
+| 7 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — plan.md 없으면 Linear SC 기반) |
+| 8 (G4) | verify PASS 시 **커밋**: `refactor: ...` or `chore: ...` (Conventional Commits) |
 | 9 (G3) | verify PASS 시: **Linear State → In Review** + 변경 요약 **Linear comment** 기록 |
 | 10 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** (축약 경로: 검토→Done→comment→참조 문서 동기화) |
 
@@ -75,12 +75,12 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 
 | 방향 | 트리거 | 타이밍 | 행동 |
 |------|--------|--------|------|
-| light → standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전(step 3 승인 ~ step 5 사이)에만 가능** | `AskUserQuestion`: standard 전환 제안 → 승인 시 Planning 진입 |
+| light → standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전(step 3 승인 ~ step 5 사이)에만 가능** | `AskUserQuestion`: standard 전환 제안 → 승인 시 **Linear State → Planning 전이 수행** (pipeline.md §1-4 예외 2) |
 | light → (코드 수정 후 복잡) | 코드 수정 시작 후 복잡도 초과 | step 5 이후 | **새 Issue 등록** (역방향 전이 금지 원칙 준수). 기존 커밋은 유지 |
 | standard → feature | 아키텍처 변경 수준으로 판단 | 언제든 | `AskUserQuestion`: feature type 전환 제안 → 승인 시 새 Issue 등록 |
 | bug → improvement | 기존 bug-fix complexity 전환 | 언제든 | Label 변경 → improvement-fix로 라우팅 |
 
-> **light → standard 전환(코드 수정 전)**: In Progress 내에서 Planning 진입 (역방향 전이 예외). pipeline.md §1-4 예외 목록 참조.
+> **light → standard 전환(코드 수정 전)**: In Progress → Planning 역전이 수행 (pipeline.md §1-4 예외 2).
 > **light → 복잡(코드 수정 후)**: 역방향 전이 금지 원칙에 따라 **새 Issue 등록**. 기존 커밋은 현재 Issue에 남고, 나머지 작업은 새 Issue에서 진행.
 > **standard → feature 전환**: **새 Issue 등록** (역방향 전이 금지 원칙 준수).
 
@@ -137,6 +137,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | State → In Review 전이 | light | verify PASS 시 |
 | 변경 요약 comment | light | verify PASS 후 |
 | State → Planning 전이 | standard | Pre-Plan Q/A 시작 전 |
+| State → Planning 전이 (에스컬레이션) | light→standard | 전환 승인 시 |
 | State → In Progress 전이 | standard | Post-Plan 후 |
 | Sub-issue 동기화 | standard | implement 스킬 위임 |
 | verify 결과 comment | standard | implement 완료 후 |

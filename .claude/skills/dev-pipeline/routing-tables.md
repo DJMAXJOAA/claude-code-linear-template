@@ -27,7 +27,7 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | 현재 State | 라우팅 대상 | 완료 후 State |
 |-----------|-----------|-------------|
 | (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
-| Todo | **size 판별** → improvement-fix (light) 호출 | In Progress |
+| Todo | **size 판별** → improvement-fix (light) 호출 | In Progress (dev-pipeline이 전이) |
 | In Progress | improvement-fix (light) Skill | In Progress (수정 진행) |
 | In Progress (모든 수정 done) | verify 자동 호출 (bug-like fallback) → PASS 시 In Review 전이 | In Review |
 | In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (축약 경로) | Done |
@@ -56,7 +56,7 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | 현재 State | 라우팅 대상 | 완료 후 State |
 |-----------|-----------|-------------|
 | (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
-| Todo | bug-fix Skill 호출 | In Progress |
+| Todo | bug-fix Skill 호출 | In Progress (dev-pipeline이 전이) |
 | In Progress | bug-fix Skill (수정 + verify 자동 호출) | In Review |
 | In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (축약 경로) | Done |
 | Done | 완료 안내 | — |
@@ -74,4 +74,4 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 |------|------|
 | 1 | 사용자에게 수동 확인 안내 (수동 테스트, 코드 리뷰 등) |
 | 2 | 사용자 승인 시 issue-close 자동 호출 → Done |
-| 3 | 사용자가 문제 발견 시 → 새 Issue 등록 (역방향 전이 금지) |
+| 3 | 사용자가 문제 발견 시 → `/점검`으로 triage 분류. rework 판정 시 In Progress 복귀 (pipeline.md §1-4 예외 3). 그 외(L3/backlog) → 새 Issue 등록 |

@@ -31,8 +31,8 @@ bug type Issue의 수정 프로세스를 오케스트레이션한다. Git 폴더
 | 4b (G3) | **plan.md 인터뷰**: `AskUserQuestion`으로 plan.md 생성 여부 질문. 승인 시 간소화 생성 (Root Cause + 수정 방안 요약). 스킵 시 note.md만 유지 |
 | 5 (G4) | **코드 수정**: `oh-my-claudecode:executor` 에이전트로 수정 구현 + 테스트 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
-| 7 (G4) | **코드 수정 완료 + 커밋**: `fix: ...` (Conventional Commits) |
-| 8 (G4) | **verify 자동 호출**: verify 스킬로 Acceptance Criteria 검증 |
+| 7 (G4) | **verify 자동 호출**: verify 스킬로 Acceptance Criteria 검증 |
+| 8 (G4) | verify PASS 시 **커밋**: `fix: ...` (Conventional Commits) |
 | 9 (G3) | verify PASS 시: **Linear State → In Review** + Root Cause + fix 요약 **Linear comment** 기록 |
 | 10 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** (축약 경로: 검토→note.md Checkpoints 환류→Done→comment→참조 문서 동기화) |
 

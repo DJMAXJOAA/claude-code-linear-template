@@ -43,7 +43,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 | 규칙 | 내용 |
 |------|------|
-| 전이 방향 | 항상 앞으로만 진행. 역방향 전이 금지 (재작업 시 새 Issue 등록). **예외: P1 계획수정, improvement light→standard 에스컬레이션** — 아래 참조 |
+| 전이 방향 | 항상 앞으로만 진행. 역방향 전이 금지 (재작업 시 새 Issue 등록). **예외: P1 계획수정, improvement light→standard 에스컬레이션, rework** — 아래 참조 |
 | 스킵 자동화 | type에 `—`인 상태는 dev-pipeline이 자동으로 다음 상태로 건너뜀 |
 | 전이 시 행동 | 모든 상태 전이는 §4 Linear sync 프로토콜을 경유 |
 | 전이 트리거 | 스킬 완료 시 자동 전이. 사용자가 수동 전이하지 않음 |
@@ -53,7 +53,8 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 > **예외 1: P1 계획수정** — triage에서 P1 판정 + G2 승인 시에만 In Progress 내 done 태스크 선별 리셋 허용.
 > 조건: SC 변경 없음, plan.md Tasks 1~2개 수정/추가, 수정 라인 < 30%. 조건 미충족 시 L3(sub-issue) 전환.
-> **예외 2: improvement light→standard 에스컬레이션** — 코드 수정 전(승인~코드수정 사이)에만 In Progress 내에서 Planning 진입 허용. 코드 수정 시작 후에는 새 Issue 등록. 상세: [improvement-fix SKILL.md](../skills/improvement-fix/SKILL.md)
+> **예외 2: improvement light→standard 에스컬레이션** — 코드 수정 전(승인~코드수정 사이)에만 In Progress → Planning 역전이 허용. improvement-fix가 Linear State → Planning 전이 수행. 코드 수정 시작 후에는 새 Issue 등록. 상세: [improvement-fix SKILL.md](../skills/improvement-fix/SKILL.md)
+> **예외 3: rework** — In Review 사용자 점검(`/점검` 경유 필수)에서 in-scope defect(rework) 발견 시, triage G2 승인 후 plan.md Tasks에 정리 태스크 추가 + In Progress 복귀 허용.
 
 ---
 
@@ -164,8 +165,9 @@ plan scope에서 L3(sub-issue)로 분류되어 triage G4b에서 자동 등록된
 
 | 단계 | 행동 |
 |------|------|
-| **블로킹 진입** (sub-issue 생성 시) | In Progress 유지. Linear comment에 `Blocking: {ID}` + 사유 기록. note.md Work Log에 기록. note.md Handoff에 기록. 나머지 태스크 계속 진행 가능 |
-| **블로킹 해제** (다음 `/활성화` 시) | Linear comment 확인 + note.md 확인 → `get_issue`로 sub-issue 상태 조회 → Done이면 해제+기록 갱신, 미완료면 사용자 안내 |
+| **블로킹 진입** (sub-issue 생성 시) | In Progress 유지. Linear comment에 `Blocking: {ID}` + 사유 기록. note.md Work Log에 기록. note.md Handoff에 기록. 나머지 태스크 계속 진행 가능. **의존 태스크 처리**: 블로킹 태스크에 Dependencies로 의존하는 태스크는 자동 스킵 (Dependencies 미충족). 독립 태스크만 실행 가능 |
+| **대기 상태** (독립 태스크 모두 done + 블로킹 미완료) | 독립 태스크 모두 done + 블로킹 sub-issue 미완료 → implement 대기 상태. verify 미호출. note.md Handoff에 '대기: Blocking {ID} 미완료' 기록 → 세션 종료. 블로킹 해제 후 `/활성화`로 재개 시 verify 수행 |
+| **블로킹 해제** (다음 `/활성화` 시) | Linear comment 확인 + note.md 확인 → `get_issue`로 sub-issue 상태 조회 → Done이면 해제+기록 갱신, 미완료면 사용자 안내. **해제 후 재처리**: L3 수정이 parent plan.md에 영향 없으면 잔여 태스크 재개 + verify 수행. 영향 있으면 `AskUserQuestion`으로 P1 유사 리셋 여부 확인 (§3 P1 리셋 기준 적용) |
 | **Linear 상태** | 현재 이슈 In Progress 유지. 가시성은 note.md + Linear comment로 확보 |
 
 #### 4-4b. 일반 sub-issue 확인
