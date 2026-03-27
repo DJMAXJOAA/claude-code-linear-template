@@ -14,17 +14,18 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|:----:|------|
 | `linear_id` | 문자열 (예: `PRJ-47`) | O | Linear Issue ID. 해당 Issue와 무관한 문서(ADR, shared)는 제외 |
 | `title` | 문자열 | O | 문서 제목 |
-| `type` | `index` / `plan` / `checklist` / `report` / `adr` / `shared` / `spec` / `spec-reference` | O | 문서 유형 |
-| `issue_type` | `feature` / `bug` / `improvement` | △ | Issue 유형. `_index.md`에만 필수 |
+| `type` | `prd` / `technical` / `plan` / `note` / `report` / `adr` / `shared` / `spec` / `spec-reference` | O | 문서 유형 |
+| `issue_type` | `feature` / `bug` / `improvement` | △ | Issue 유형. `prd.md`에만 필수 |
 | `created` | ISO 날짜 (예: `2026-03-17`) | O | 작성일 |
 
 ### 1-2. 문서 유형별 속성
 
 | 문서 유형 | 속성 | 비고 |
 |----------|------|------|
-| `_index.md` (Issue 인덱스) | `linear_id`, `title`, `type`, `issue_type`, `created` | `type: index`, `issue_type: feature/bug/improvement`. 템플릿 SSOT: [gen-hub templates/index-templates.md](../skills/gen-hub/templates/index-templates.md) |
-| `plan.md` (설계 SSOT) | `linear_id`, `title`, `type: plan`, `created` | title = "Plan: {Issue 제목}" |
-| `cl.md` (태스크/검증 SSOT) | `linear_id`, `title`, `type: checklist`, `created` | title = "CL: {Issue 제목}" |
+| `prd.md` (What/Why 원천) | `linear_id`, `title`, `type: prd`, `issue_type`, `created` | `issue_type: feature/bug/improvement`. 템플릿 SSOT: gen-plan 참조 |
+| `technical.md` (기술 설계 원천, 조건부) | `linear_id`, `title`, `type: technical`, `created` | gen-plan 호출 시 조건부 생성 |
+| `plan.md` (실행 계획 원천) | `linear_id`, `title`, `type: plan`, `created` | title = "Plan: {Issue 제목}" |
+| `note.md` (작업 메모리 원천) | `linear_id`, `title`, `type: note`, `created` | title = "Note: {Issue 제목}" |
 | ADR (`docs/adr/`) | `title`, `type: adr`, `created` | linear_id 없음 (cross-cutting) |
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
 | Spec `_index.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). 디렉토리 허브 (Overview + 고정 문서 목록) |
@@ -39,18 +40,17 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 파일 | 트리거 | 조건 |
 |------|--------|------|
-| `_index.md` | `/등록` | 생성 (bug 제외) |
+| `note.md` | `/등록` | 전 type(feature, improvement, bug) 생성 |
+| `prd.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
+| `technical.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (조건부 — 기술 설계 필요 시) |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
-| `cl.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (plan.md와 동시) |
 | `docs/spec/{name}/` | `/스펙` | 디렉토리 + `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택) 생성 |
 
 ### Lazy-creation 행동 치환표
 
 | 상황 | 조건 | 행동 |
 |------|------|------|
-| Decisions 기록 필요 | `_index.md` 존재 | `_index.md > ## Decisions` 섹션에 기록 |
-| Notes 기록 필요 | `_index.md` 존재 | `_index.md > ## Notes` 섹션에 기록 (하위 ### 섹션 자동 생성) |
-| _index.md Documents 갱신 | lazy 파일 신규 생성 | Documents 테이블에서 `—` → 상대경로 링크 + ✅ |
+| Documents 목록 갱신 | lazy 파일 신규 생성 | Linear description의 Documents 섹션 갱신 |
 
 ---
 
@@ -69,7 +69,6 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 위치 | 형식 | 예시 |
 |------|------|------|
-| `_index.md` blockquote | `> [Linear Issue]({URL})` — gen-hub이 삽입한 URL 사용 | `> [Linear Issue](https://linear.app/ws/issue/PRJ-47)` |
 | 문서 본문 내 참조 | `[{LINEAR-ID}]({URL})` — Linear API 응답 URL 사용 | `[PRJ-48](https://linear.app/ws/issue/PRJ-48)` |
 | 다른 Issue 문서 참조 | Git 상대경로 우선 | `[PRJ-48 Plan](../PRJ-48/plan.md)` |
 
@@ -78,8 +77,10 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 항목 | 규칙 |
 |------|------|
 | 위치 | frontmatter `---` 닫힌 직후, `#` 제목 또는 본문 직전 (빈 줄로 분리) |
-| _index.md | `> [Linear Issue]({URL})` — Linear Issue 링크 |
-| plan.md, cl.md | `> ← [_index.md](./_index.md) \| [Linear Issue]({URL})` — 상위 인덱스 + Linear |
+| plan.md | `> [Linear Issue]({URL})` |
+| prd.md | `> [Linear Issue]({URL})` |
+| technical.md | `> [Linear Issue]({URL})` |
+| note.md | `> [Linear Issue]({URL})` |
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
 | Spec `_index.md` | `> ← [Spec Index](../_index.md)` — 글로벌 spec 인덱스 |
 | Spec `requirements.md` / `technical.md` / `roadmap.md` | `> ← [_index.md](./_index.md)` — 소속 spec 인덱스 |
@@ -95,9 +96,10 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 위치 | 파일 | 이름 규칙 | 예시 |
 |------|------|----------|------|
-| `docs/issue/{LINEAR-ID}/` | Issue 인덱스 | `_index.md` (고정) | `PRJ-47/_index.md` |
+| `docs/issue/{LINEAR-ID}/` | PRD | `prd.md` (고정) | `PRJ-47/prd.md` |
+| | 기술 설계 (조건부) | `technical.md` (고정) | `PRJ-47/technical.md` |
 | | Plan | `plan.md` (고정) | `PRJ-47/plan.md` |
-| | Checklist | `cl.md` (고정) | `PRJ-47/cl.md` |
+| | 작업 노트 | `note.md` (고정) | `PRJ-47/note.md` |
 | `docs/adr/` | ADR 인덱스 | `_index.md` (고정) | `adr/_index.md` |
 | | ADR 문서 | `ADR-{NNNN}.md` (4자리 순번) | `adr/ADR-0001.md` |
 | `docs/shared/` | 도메인 지식 | `domain-{topic}.md` (kebab-case) | `shared/domain-networking.md` |
@@ -123,10 +125,11 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 원칙 | 내용 |
 |------|------|
-| Plan = 설계 원천 | 다른 문서는 Plan을 참조하지 복제하지 않음 |
-| CL = 태스크/검증 원천 | 태스크 목록, 완료 기준, 검증 조건은 CL 문서가 SSOT |
+| prd.md = What/Why 원천 | 요구사항, 스코프, 성공 기준의 SSOT. 다른 문서는 prd.md를 참조하지 복제하지 않음 |
+| plan.md = 실행 계획 원천 | 태스크 목록(Tasks), 검증 조건(Verification), 실행 순서의 SSOT |
+| technical.md = 기술 설계 원천 | 아키텍처, 인터페이스, 데이터 모델의 SSOT (조건부 생성) |
+| note.md = 작업 메모리 원천 | Handoff, Work Log, Checkpoints의 SSOT |
 | Linear = 상태 원천 | 진행 상태, 라벨, 프로젝트, relation은 Linear가 SSOT. Git에 상태 복제 금지 |
-| _index.md = 인덱스 원천 | Issue 폴더 내 문서 목록 + Linear ID 매핑 |
 | 중복 기술 금지 | 동일 정보를 여러 문서에 복제하지 않고 링크로 연결 |
 | Spec = 기능 명세 원천 | 기능 요구사항, 기술 명세는 spec 문서가 SSOT. plan.md는 "How" 설계, spec은 "What/Why" 명세 |
 | 보고서 = 불변 | 완료된 보고서(RPT-*, spec-reference)는 수정 금지 — 새 보고서로 대체 |
@@ -152,3 +155,17 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 글로벌 _index.md | spec 생성/갱신 시 `docs/spec/_index.md` 목록 테이블 자동 갱신 |
 
 > 생명주기 + 생성 프로세스 + 연동 갱신 상세: [spec SKILL.md](../skills/spec/SKILL.md) 참조
+
+---
+
+## §8 Mermaid 다이어그램 가이드
+
+| 다이어그램 | 허용 위치 |
+|-----------|----------|
+| `sequenceDiagram` | prd(이슈), spec(도메인), technical, plan |
+| `flowchart` | prd(이슈), spec(도메인), technical, plan |
+| `classDiagram` | technical만 |
+| `erDiagram` | technical만 |
+| `stateDiagram` | prd(이슈), spec(도메인), technical |
+
+> prd(이슈)/spec(도메인): 역할명 사용. technical/plan: 클래스명 허용.

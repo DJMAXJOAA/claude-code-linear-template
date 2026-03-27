@@ -22,6 +22,10 @@ updated: {YYYY-MM-DD}
 | FR-ID | 패턴 | 요구사항 | 비고 |
 |-------|------|---------|------|
 | FR-001 | Event-driven | When {trigger}, the system shall {action} | |
+| FR-002 | State-driven | While {state}, the system shall {action} | |
+| FR-003 | Unwanted | If {unwanted condition}, the system shall {action} | |
+| FR-004 | Optional | Where {feature is enabled}, the system shall {action} | |
+| FR-005 | Ubiquitous | The system shall {action} | |
 
 ## Constraints & Dependencies
 

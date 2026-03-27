@@ -10,9 +10,9 @@ created: 2026-03-17
 
 | 모드 | 증상 | 예방 |
 |------|------|------|
-| **Amnesia** (망각) | 이전 결정/맥락을 잊고 반복 질문 | CL Handoff에 진행 상태 기록. Linear에 상태 저장. Pre-Compaction 필수 |
+| **Amnesia** (망각) | 이전 결정/맥락을 잊고 반복 질문 | note.md Handoff에 진행 상태 기록. Linear에 상태 저장. Pre-Compaction 필수 |
 | **Confusion** (혼동) | 다른 Issue의 맥락이 현재 작업에 침투 | `/활성화` 시 Linear에서 해당 Issue만 조회. 불필요한 문서 로드 금지 |
-| **Contamination** (오염) | 오래된 정보가 갱신되지 않고 잔존 | CL S1이 SSOT. 상태는 Linear만 참조. Git 파일의 status 속성 금지 |
+| **Contamination** (오염) | 오래된 정보가 갱신되지 않고 잔존 | plan.md Tasks가 SSOT. 상태는 Linear만 참조. Git 파일의 status 속성 금지 |
 | **Overflow** (범람) | 컨텍스트 윈도우 포화로 성능 저하 | 50% 규칙, Progressive Disclosure, /clear 타이밍 준수 |
 
 ---
@@ -37,9 +37,9 @@ created: 2026-03-17
 | `/활성화` (라우팅) | Linear Issue 상태 1회 조회 + `_index.md` Documents 테이블 | plan.md 본문, 다른 Issue 문서 |
 | Pre-Plan Q/A | related issue의 `_index.md`(Decisions, Notes) + `plan.md`(존재 시). 최대 5개 issue, 요약만 활용 | related issue의 구현 결과 섹션 (gen-plan에서 별도 참조) |
 | Planning | plan.md, cl.md (작성 대상) | 이전 Issue 문서 |
-| 구현 | CL S1 (태스크 목록만), plan.md (필요 시) | CL S2/S3, 다른 태스크 보고서 |
-| 테스트 | CL S3 (검증 조건만), S4 (수동 테스트) | CL S1, plan.md |
-| 검증 | Linear SC (description), CL S3 | plan.md 본문 |
+| 구현 | plan.md Tasks (태스크 목록만), plan.md (필요 시) | plan.md Verification, 다른 태스크 보고서 |
+| 테스트 | plan.md Verification (검증 조건만), 수동 테스트 시나리오 | plan.md Tasks, plan.md 본문 |
+| 검증 | Linear SC (description), plan.md Verification | plan.md 본문 |
 | 완료 처리 (issue-close) | _index.md, plan.md (설계 이탈 비교), cl.md (태스크 완료 확인), 검증 결과 | 다른 Issue 문서 |
 
 ### 읽기 최적화 규칙
@@ -47,7 +47,7 @@ created: 2026-03-17
 | 규칙 | 내용 |
 |------|------|
 | 이름 기반 지정 | state/label은 이름(문자열)으로 직접 지정. ID 캐싱 불필요 |
-| CL 선택적 읽기 | 구현 단계: S1만. 검증 단계: S3만 |
+| plan.md 선택적 읽기 | 구현 단계: Tasks만. 검증 단계: Verification만 |
 | _index.md 최소 읽기 | linear_id + Documents 테이블만 확인. 구현 결과 섹션은 issue-close 시에만 |
 | Linear 조회 최소화 | /활성화 시 1회 조회 후 세션 내 추적. 매 태스크마다 재조회 금지 |
 
@@ -66,12 +66,12 @@ created: 2026-03-17
 
 | 단계 | 행동 |
 |------|------|
-| 1. Git 저장 | CL S1 진행 상태 저장 (체크박스 최신화) |
+| 1. Git 저장 | plan.md Tasks 진행 상태 저장 (체크박스 최신화) |
 | 2. Linear 동기화 | 현재 상태가 Linear에 반영되었는지 확인. 미반영 시 sync |
-| 3. CL Handoff 작성 | CL 문서 하단에 Handoff 섹션 추가 |
+| 3. note.md Handoff 작성 | note.md 하단에 Handoff 섹션 추가 |
 | 4. 다음 시작점 명시 | Handoff에 `/활성화 {LINEAR-ID}` 재개 명령 기록 |
 
-**Checkpoint = Git 저장 + Linear sync 확인 + CL Handoff + 다음 시작점 명시**
+**Checkpoint = Git 저장 + Linear sync 확인 + note.md Handoff + 다음 시작점 명시**
 
 ### 3-3. /clear 타이밍
 

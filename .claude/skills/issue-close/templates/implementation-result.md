@@ -1,22 +1,33 @@
 # 구현 결과 섹션 템플릿
 
-`_index.md`의 `## 구현 결과` 섹션에 삽입:
+`plan.md`의 `## 8. Outcome` 섹션에 삽입 + Linear description `## Changes` 섹션에 기록:
+
+### plan.md Outcome
 
 ```markdown
-## 구현 결과
+## 8. Outcome
 
 | 항목 | 내용 |
 |------|------|
-| 실제 구현 인터페이스 | {요약} |
+| 구현 요약 | {요약} |
 | 설계 대비 차이점 | {차이점 또는 "없음"} |
 | 미해결 이슈 | {이슈 목록 또는 "없음"} |
 | 완료일 | {YYYY-MM-DD} |
 ```
 
+### Linear description Changes
+
+```markdown
+## Changes
+- {주요 변경 1. 적용 내용 상세}
+- {주요 변경 2}
+```
+
 ### type별 구현 결과 내용
 
-| type | 구현 결과 기록 내용 |
-|------|------------------|
-| feature | 실제 인터페이스, 설계 이탈, 미해결 이슈 |
-| improvement | 변경 범위 요약, 설계 이탈 |
-| bug | Linear comment로 기록 (_index.md 미사용). Root Cause, 수정 방법, 영향 범위 |
+| type | 구현 결과 기록 |
+|------|-------------|
+| feature | plan.md Outcome + Linear Changes + comments |
+| improvement-standard | plan.md Outcome + Linear Changes + comments |
+| improvement-light | Linear Changes + comments (plan.md 있으면 Outcome 추가) |
+| bug | Linear Changes + comments (plan.md 있으면 Outcome 추가) |

@@ -1,14 +1,14 @@
 ---
 name: improvement-fix
-description: "improvement type Issue의 수정 프로세스 오케스트레이터. light/standard 2분할로 작업 규모에 맞는 프로세스 제공."
+description: "improvement type Issue의 수정 프로세스 오케스트레이터. light/standard 2분할로 작업 규모에 맞는 프로세스 제공. 전 경로 Git 폴더 + note.md 생성."
 ---
 
 # improvement-fix — 개선 작업 오케스트레이터
 
 improvement type Issue의 수정 프로세스를 오케스트레이션한다. light/standard 2분할로 작업 규모에 맞는 프로세스를 제공한다.
 
-- **light**: bug-fix 수준의 경량 프로세스. CL/plan 없이 직접 수정. Git 문서 미생성.
-- **standard**: 간소화된 plan/cl 기반 프로세스. 기존 gen-plan 스킬 + implement 스킬 재활용.
+- **light**: bug-fix 수준의 경량 프로세스. Git 폴더 + note.md 생성. prd.md/plan.md는 인터뷰 분기(선택).
+- **standard**: prd.md/plan.md 기반 프로세스. 기존 gen-plan 스킬 + implement 스킬 재활용.
 
 ## Trigger
 
@@ -34,18 +34,20 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 1 (G1) | **탐색**: `oh-my-claudecode:explore` 에이전트로 변경 대상 파일/모듈 식별 |
 | 2 (G1) | **수정 계획 제시**: 변경 의도 + 대상 파일 목록을 사용자에게 제시 |
 | 3 (G2) | **사용자 승인**: `AskUserQuestion`으로 수정 계획 확인. 승인 전 코드 수정 시작 금지 |
+| 3a (G3) | **Git 폴더 + note.md 생성**: `docs/issue/{LINEAR-ID}/` 폴더 + note.md 초기 생성 (gen-hub 템플릿 참조) |
+| 3b (G3) | **prd.md/plan.md 인터뷰**: `AskUserQuestion`으로 prd.md + plan.md 생성 여부 질문. 승인 시 간소화 생성 (변경 의도 + 대상 요약). 스킵 시 note.md만 유지 |
 | 4 (G3) | **Linear description 갱신**: 변경 의도 1~2줄을 description에 기록 |
 | 5 (G4) | **코드 수정**: `oh-my-claudecode:executor` 에이전트로 수정 구현 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
 | 7 (G4) | **커밋**: `refactor: ...` or `chore: ...` (Conventional Commits) |
-| 8 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — cl.md 없이 Linear SC 기반) |
+| 8 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — plan.md 없으면 Linear SC 기반) |
 | 9 (G3) | verify PASS 시: **Linear State → In Review** + 변경 요약 **Linear comment** 기록 |
 | 10 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** (축약 경로: 검토→Done→comment→참조 문서 동기화) |
 
 > verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀
 
-> **Git 문서 미생성**: `docs/issue/`, `_index.md`, `plan.md`, `cl.md` 생성하지 않는다. 모든 기록은 Linear description + comment로 관리.
-> **G3 예외**: light는 bug-fix 선례와 동일하게 **Linear-only write** (comment + state). Git 문서가 없으므로 dual-write 중 Git 측은 커밋으로 대체.
+> **Git 폴더 + note.md 생성**: `docs/issue/{LINEAR-ID}/` 폴더 + note.md를 생성한다. prd.md/plan.md는 인터뷰 분기(3b)에서 사용자 선택에 따라 생성.
+> **G3**: note.md + Linear dual-write. note.md Work Log에 변경 기록, Linear comment + state 갱신.
 
 ---
 
@@ -57,16 +59,15 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 |------|------|
 | 1 (G1) | **Pre-Plan 인터뷰** (4항목): SC, 변경 범위, 파급 분석, 접근방식. `AskUserQuestion`으로 각 항목 확인 |
 | 2 (G1) | **코드베이스 조사**: `oh-my-claudecode:explore` 에이전트로 영향 범위 탐색 |
-| 3 (G1) | **plan.md + cl.md 생성**: **기존 gen-plan 스킬 호출** (기존 템플릿 그대로 사용) |
-| 4 (G1) | **_index.md 생성**: gen-hub 템플릿 참조 |
+| 3 (G1) | **prd.md + plan.md 생성**: **기존 gen-plan 스킬 호출** (기존 템플릿 그대로 사용) |
 | 5 (G2) | **Post-Plan 확인**: plan 요약 제시 → `AskUserQuestion` (바로 구현 / Q&A / AI 리뷰) |
 | 6 (G3) | **Linear → In Progress** |
-| 7 (G4) | **implement 호출**: CL S1 기반 micro-tasking (기존 implement 스킬 재활용) |
-| 8 | verify → In Review → **issue-close 자동 호출** (improvement-standard 경로: 검토→_index.md 기록→Done→comment→미러링→환류→참조 문서 동기화) |
+| 7 (G4) | **implement 호출**: plan.md Tasks 기반 micro-tasking (기존 implement 스킬 재활용) |
+| 8 | verify → In Review → **issue-close 자동 호출** (improvement-standard 경로: 검토→note.md 기록→Done→comment→미러링→환류→참조 문서 동기화) |
 
 > standard는 **기존 gen-plan 스킬 + 기존 템플릿**을 그대로 사용한다.
-> plan.md/cl.md는 "AI 작업 지침서"이므로 feature와 동일 구조가 적합.
-> implement 스킬을 기존 그대로 재활용한다 (CL 기반 micro-tasking).
+> prd.md/plan.md는 "AI 작업 지침서"이므로 feature와 동일 구조가 적합.
+> implement 스킬을 기존 그대로 재활용한다 (plan.md Tasks 기반 micro-tasking).
 
 ---
 
@@ -92,18 +93,17 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 항목 | 내용 |
 |------|------|
 | 코드 변경 | 개선 수정 |
+| Git 문서 | `docs/issue/{LINEAR-ID}/` — note.md, prd.md(선택), plan.md(선택) |
 | 커밋 | `refactor: ...` / `chore: ...` (Conventional Commits) |
 | Linear comment | 변경 요약 |
 | Linear | State → In Review (verify PASS 시) |
-
-> Git 문서(`docs/issue/`, `_index.md`)는 생성하지 않는다. 모든 기록은 Linear comment + description으로 관리.
 
 ### standard
 
 | 항목 | 내용 |
 |------|------|
-| 코드 변경 | CL S1 태스크에 명시된 범위의 코드 + 테스트 |
-| Git 문서 | `docs/issue/{LINEAR-ID}/` — _index.md, plan.md, cl.md |
+| 코드 변경 | plan.md Tasks에 명시된 범위의 코드 + 테스트 |
+| Git 문서 | `docs/issue/{LINEAR-ID}/` — prd.md, plan.md, note.md |
 | 커밋 | Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | Linear comment | verify 완료 후 1회 |
 | Linear | Sub-issue 상태 Done + parent Issue State 전이 |

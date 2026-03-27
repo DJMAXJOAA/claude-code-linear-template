@@ -1,11 +1,11 @@
 ---
 name: gen-hub
-description: "Linear Issue 생성 및 Git docs/issue 폴더 + _index.md 생성. /등록 커맨드 또는 Issue 등록 요청 시 호출."
+description: "Linear Issue 생성 및 Git docs/issue 폴더 + note.md 초기 생성. /등록 커맨드 또는 Issue 등록 요청 시 호출."
 ---
 
-# gen-hub — _index.md + Linear Issue 생성
+# gen-hub — note.md + Linear Issue 생성
 
-`/등록` 커맨드에서 호출되어, Linear Issue를 생성하고 Git에 `docs/issue/{LINEAR-ID}/` 폴더 + `_index.md`를 생성한다.
+`/등록` 커맨드에서 호출되어, Linear Issue를 생성하고 Git에 `docs/issue/{LINEAR-ID}/` 폴더 + `note.md`를 생성한다. **전 type(feature, improvement, bug) 모두** 폴더와 note.md를 생성한다.
 
 ## Trigger
 
@@ -43,17 +43,19 @@ description: "Linear Issue 생성 및 Git docs/issue 폴더 + _index.md 생성. 
 | Issue description | Spec Summary에 FR-ID 목록 포함. Documents에 spec 경로 자동 삽입 |
 | relation 자동 설정 | 같은 spec 출처 Issue 간 `relatedTo` 자동 설정 |
 
+### 단건 등록 프로세스
+
 | 단계 | 행위 |
 |------|------|
 | 0 (G0) | **Linear 컨텍스트 조회**: `list_issue_labels` + `list_projects`를 **병렬** 호출하여 기존 Label/Project 목록 획득. 배치 모드에서 호출 시 캐싱 데이터가 전달되면 이 단계 생략 |
 | 1 (G1) | **사용자 입력 수집**: `AskUserQuestion`으로 제목, 설명, type 수집. 태그는 G0에서 조회한 기존 Label 목록 기반으로 AI 추천 후 승인. 마일스톤은 기존 Project 목록 기반 추천. 참조 문서는 사용자 직접 지정 또는 AI가 `docs/spec/` 등 탐색 후 추천. **외부 호출자가 title/description/type을 전달한 경우 이 단계 생략** |
-| 1a (G1) | **AI 추론**: 사용자 입력(제목+설명) 기반 초안 추론. feature/improvement: Spec Summary, Constraints, SC. bug: Acceptance Criteria만 |
-| 2 (G2) | **type별 description 구성 + 사용자 확인**: 아래 §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 (Spec Summary + Constraints + Success Criteria 초안 포함) → `AskUserQuestion`으로 전체 내용 확인/수정. **외부 호출자가 사용자 승인을 완료한 경우(예: triage G2 Approval Table) 이 단계 생략** |
+| 1a (G1) | **AI 추론**: 사용자 입력(제목+설명) 기반 초안 추론 — Summary, SC 초안 |
+| 2 (G2) | **type별 description 구성 + 사용자 확인**: §type별 description 템플릿에 따라 Linear Issue description 마크다운 조립 → `AskUserQuestion`으로 전체 내용 확인/수정. **외부 호출자가 사용자 승인을 완료한 경우 이 단계 생략** |
 | 3 (G3) | **Linear Issue 생성**: Linear MCP로 Issue 생성 — title, description, labels(type + 태그), project(마일스톤), state: Todo |
 | 4 (G3) | **Linear Issue ID 획득**: 응답에서 `PRJ-N` 형식의 ID + URL 추출 |
-| 5 (G3) | **Git 폴더 생성**: `docs/issue/{LINEAR-ID}/` 디렉토리 생성 (**bug는 스킵**) |
-| 6 (G3) | **_index.md 생성**: 아래 §_index.md 템플릿으로 파일 생성. Linear API 응답의 URL을 직접 사용 (수동 URL 조합 금지). 참조 문서가 있으면 Documents 테이블에 해당 행 추가 (**bug는 스킵**) |
-| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Documents` 섹션에 `docs/issue/{LINEAR-ID}/_index.md` 경로 기록. 참조 문서 존재 시 해당 경로도 삽입 (**bug는 스킵** — Documents 섹션 자체 생략 또는 참조 문서만 기록) |
+| 5 (G3) | **Git 폴더 생성**: `docs/issue/{LINEAR-ID}/` 디렉토리 생성 (전 type) |
+| 6 (G3) | **note.md 초기 생성**: note-template로 파일 생성. Linear API 응답의 URL을 Nav Link에 사용. Handoff 테이블은 빈 상태로 초기화 |
+| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Documents` 섹션에 `docs/issue/{LINEAR-ID}/note.md` 경로 기록. 참조 문서 존재 시 해당 경로도 삽입 |
 
 ## 배치 등록 모드
 
@@ -99,7 +101,7 @@ description: "Linear Issue 생성 및 Git docs/issue 폴더 + _index.md 생성. 
 | 항목 | 내용 |
 |------|------|
 | Linear Issue | Todo 상태의 새 Issue (type Label 부착) |
-| Git 파일 | `docs/issue/{LINEAR-ID}/_index.md` (bug는 미생성) |
+| Git 파일 | `docs/issue/{LINEAR-ID}/note.md` (전 type 생성) |
 
 ---
 
@@ -107,7 +109,7 @@ description: "Linear Issue 생성 및 Git docs/issue 폴더 + _index.md 생성. 
 
 ---
 
-> _index.md 템플릿 (SSOT): [templates/index-templates.md](templates/index-templates.md)
+> note.md 템플릿: [gen-plan/templates/note-template.md](../gen-plan/templates/note-template.md)
 
 ---
 

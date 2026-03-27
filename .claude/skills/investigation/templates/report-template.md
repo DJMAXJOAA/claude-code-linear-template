@@ -8,7 +8,7 @@ type: report
 created: {YYYY-MM-DD}
 ---
 
-> ← [_index.md](./_index.md)
+> [Linear Issue]({URL})
 
 ## 1. 조사 범위
 

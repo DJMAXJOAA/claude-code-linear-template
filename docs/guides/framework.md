@@ -13,10 +13,10 @@ created: 2026-03-17
 | 1 | **3영역 SSOT** | 상태=Linear, 지식=Git, 실행=Claude Code. 교차 복제 금지 |
 | 2 | **Hub = 지식 전용** | `_index.md`는 설계 결정, 제약, 한계, 구현 결과만. 상태/개요/SC는 Linear |
 | 3 | **토큰 절약** | Progressive Disclosure, 200줄 CLAUDE.md, paths 조건부 로드 유지 |
-| 4 | **Micro-tasking** | CL S1 의존성 그래프 기반. 에이전트 당 1개 태스크. Linear Sub-issue는 가시화 목적 |
+| 4 | **Micro-tasking** | plan.md Tasks 의존성 그래프 기반. 에이전트 당 1개 태스크. Linear Sub-issue는 가시화 목적 |
 | 5 | **4단계 게이트** | G1(계획)→G2(검토)→G3(저장)→G4(실행). G2 사용자 승인 필수. G3에서 Linear+Git dual write |
 | 6 | **Linear-first 상태** | 상태 조회/갱신은 항상 Linear API 경유. Git 파일에 상태 복제 금지 |
-| 7 | **CL = 실행 SSOT** | 태스크 의존성, 진행 상태, 검증 조건은 CL 파일이 SSOT. Linear Sub-issue는 미러 |
+| 7 | **plan.md = 실행 SSOT** | 태스크 의존성, 진행 상태, 검증 조건은 plan.md가 SSOT. Linear Sub-issue는 미러 |
 | 8 | **Pre-Compaction** | 컨텍스트 50% 규칙, Checkpoint 강제 저장 유지 |
 | 9 | **청사진 원칙** | 지침 문서에 실행 스크립트 금지. 키워드 맵 스타일 |
 | 10 | **경량 우선** | 500줄 미만 단일 파일, 예방적 분리 금지, 가장 단순한 구현 선택 |
@@ -30,7 +30,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 ├─ Issue State              ├─ Plan (plan.md)         ├─ 파이프라인 Skills
 ├─ Labels (type/tags)       ├─ CL (cl.md)             ├─ Commands
 ├─ Projects (milestones)    ├─ Decisions              ├─ Rules
-├─ Relations                ├─ Known Limitations      └─ CL S1 의존성 그래프
+├─ Relations                ├─ Known Limitations      └─ plan.md Tasks 의존성 그래프
 ├─ Priority                 ├─ Constraints
 ├─ Overview / SC            ├─ 구현 결과
 └─ Activity (자동 이력)     ├─ Spec (docs/spec/)
@@ -55,7 +55,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | Claude Code → Linear | 스킬의 `### Linear MCP` 섹션에 호출 패턴 정의 |
 | Claude Code → Git | 스킬이 `docs/issue/{ID}/` 하위 파일 직접 생성/갱신 |
 | Linear Document → Git spec | Document에 `docs/spec/{name}/{doc}.md#section` 앵커 링크. 디렉토리 진입점은 `docs/spec/{name}/`. 상세 결정은 Document에 작성 |
-| Spec FR-ID → Plan/CL | spec의 `FR-NNN` → plan.md 3a Traceability → CL S3 검증. `--from-spec` 옵션으로 FR 기반 Issue 배치 등록 |
+| Spec FR-ID → Plan | spec의 `FR-NNN` → plan.md 3a Traceability → plan.md Verification 검증. `--from-spec` 옵션으로 FR 기반 Issue 배치 등록 |
 
 ---
 

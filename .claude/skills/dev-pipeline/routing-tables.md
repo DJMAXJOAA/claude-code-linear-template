@@ -10,7 +10,7 @@ type별 라우팅 상세 + bug 수정 프로세스.
 | Todo | **Linear → Planning 즉시 전이** → **Pre-Plan Q/A** → gen-plan | Planning |
 | Planning (plan.md 존재) | **Post-Plan Q/A** → implement | In Progress |
 | In Progress | implement Skill | In Progress (태스크 진행) |
-| In Progress (점검 P1) | dev-pipeline: plan/cl 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
+| In Progress (점검 P1) | dev-pipeline: plan.md 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
 | In Progress (점검 plan-L3) | `/등록` (sub-issue) → 블로킹 라이프사이클 | In Progress (블로킹) |
 | In Progress (모든 태스크 done) | verify 자동 호출 → PASS 시 In Review 전이 | In Review |
 | In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 | Done |
@@ -33,7 +33,7 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (축약 경로) | Done |
 | Done | 완료 안내 | — |
 
-> light는 Planning 상태를 건너뛴다. Git 문서(`docs/issue/`) 미생성.
+> light는 Planning 상태를 건너뛴다. Git 폴더 + note.md 생성. prd.md/plan.md는 인터뷰 분기(선택).
 > light → standard 에스컬레이션(코드 수정 전): In Progress 내에서 Planning 진입 (§1-4 예외).
 
 ### improvement (standard)
@@ -44,7 +44,7 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | Todo | **size 판별** → improvement-fix (standard): **Pre-Plan 인터뷰(4항목)** → gen-plan | Planning |
 | Planning (plan.md 존재) | **Post-Plan 확인** → implement | In Progress |
 | In Progress | implement Skill (기존 재활용) | In Progress (태스크 진행) |
-| In Progress (점검 P1) | dev-pipeline: plan/cl 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
+| In Progress (점검 P1) | dev-pipeline: plan.md 수정 조율 → implement Skill 재호출 | In Progress (태스크 재진행) |
 | In Progress (모든 태스크 done) | verify 자동 호출 → PASS 시 In Review 전이 | In Review |
 | In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (improvement-standard 경로) | Done |
 | Done | 완료 안내 | — |

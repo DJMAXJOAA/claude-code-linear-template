@@ -17,7 +17,7 @@ description: "테스트 전략 수립 및 실행. 사용자 요청 시 또는 im
 | 항목 | 설명 |
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
-| cl.md | `docs/issue/{LINEAR-ID}/cl.md` — S3 검증 조건, S4 수동 테스트 가이드 |
+| plan.md Verification | `docs/issue/{LINEAR-ID}/plan.md` — Verification 검증 조건 + 실행 시나리오 |
 | plan.md | `docs/issue/{LINEAR-ID}/plan.md` — 설계 참조 |
 | 코드 변경 | 구현된 코드 (git diff 기반) |
 
@@ -25,7 +25,7 @@ description: "테스트 전략 수립 및 실행. 사용자 요청 시 또는 im
 
 | 단계 | 행위 |
 |------|------|
-| 1 (G1) | **테스트 범위 분석**: CL S3 + Plan에서 테스트 대상 도출 |
+| 1 (G1) | **테스트 범위 분석**: plan.md Verification + Plan에서 테스트 대상 도출 |
 | 2 (G1) | **테스트 전략 수립**: 아래 §테스트 분류 기준에 따라 단위/통합/E2E 테스트 계획 수립 |
 | 3 (G2) | **검토**: `AskUserQuestion`으로 테스트 전략 사용자 승인 |
 | 4 (G4) | **테스트 작성 및 실행**: `oh-my-claudecode:test-engineer`에 위임 |
