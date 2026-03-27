@@ -36,7 +36,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 | 8 (G1) | **plan.md 작성**: §plan.md 구조에 따라 작성. prd.md FR에서 Verification 초안 자동 파생. technical.md 존재 시 참조 |
 | 9 (G1) | **도메인 spec FR→Verification 보강**: Linear Documents에 spec 경로 존재 시, 해당 spec의 `requirements.md` FR 테이블에서 추가 Verification 항목 파생 |
 | 10 (G2) | **Plan 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
-| 11 (G3) | **Linear Documents 갱신**: description의 `## Documents` 섹션에 생성된 문서 경로(prd.md, technical.md, plan.md) 추가 |
+| 11 (G3) | **Git 커밋 + Linear Documents 갱신**: 생성된 문서(prd.md, technical.md, plan.md) Git 커밋 + description `## Documents` 섹션에 경로 추가 |
 | 12 (G3) | **Linear comment 기록**: Linear MCP로 Plan 완료 요약 comment (태스크 수, 주요 설계 결정 1~2줄) |
 | 13 (G4) | **완료 반환**: 문서 생성 완료. 리뷰는 dev-pipeline의 Post-Plan Q/A에서 처리 |
 

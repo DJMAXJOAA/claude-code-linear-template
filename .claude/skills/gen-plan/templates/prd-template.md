@@ -7,6 +7,7 @@
 linear_id: {LINEAR-ID}
 title: "PRD: {Issue 제목}"
 type: prd
+issue_type: {feature/bug/improvement}
 created: {YYYY-MM-DD}
 ---
 

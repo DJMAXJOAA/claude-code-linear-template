@@ -27,7 +27,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 | 2 (G1) | **코드베이스/외부 자료 조사**: `oh-my-claudecode:explore`로 코드 탐색 + 필요 시 외부 문서 참조. 심층 분석이 필요하면 `oh-my-claudecode:scientist`에 분석 위임 |
 | 3 (G1) | **조사 보고서 작성**: `docs/issue/{LINEAR-ID}/RPT-{LINEAR-ID}-{YYYYMMDD}.md` 생성 |
 | 4 (G2) | **사용자에게 결과 요약 + 확인**: `AskUserQuestion`으로 검토 |
-| 5 (G3) | **Linear description Documents 갱신**: 조사 보고서 경로 추가 |
+| 5 (G3) | **Git 커밋 + Linear 갱신**: 조사 보고서 Git 커밋 + Linear description Documents 섹션에 보고서 경로 추가 |
 | 6 (G4) | **완료 결과를 반환**: 승인 시 완료 결과를 반환. dev-pipeline이 issue-close 결정 |
 
 ## Output
