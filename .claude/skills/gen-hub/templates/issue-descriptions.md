@@ -62,7 +62,8 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 {close 시 추가. 초기 등록 시 이 섹션 없음}
 ```
 
-> - light/standard 모두 동일 템플릿 사용. Documents에 note.md 기본 포함
+> - light/standard 모두 동일 템플릿 사용. Size는 Label(`Size: light`/`Size: standard`)로 관리 — description 본문에 Size 정의 불필요
+> - Documents에 note.md 기본 포함
 > - light에서 prd/plan 생성 시 gen-plan이 Documents에 추가
 > - standard에서 prd/technical/plan 생성 시 gen-plan이 Documents에 추가
 > - 기타 행: 추가 참조 문서 없으면 행 자체 생략

@@ -75,7 +75,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 
 | 방향 | 트리거 | 타이밍 | 행동 |
 |------|--------|--------|------|
-| light → standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전(step 3 승인 ~ step 5 사이)에만 가능** | `AskUserQuestion`: standard 전환 제안 → 승인 시 **Linear State → Planning 전이 수행** (pipeline.md §1-4 예외 2) + Linear description Size `light` → `standard` 즉시 갱신 |
+| light → standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전(step 3 승인 ~ step 5 사이)에만 가능** | `AskUserQuestion`: standard 전환 제안 → 승인 시 **Linear State → Planning 전이 수행** (pipeline.md §1-4 예외 2) + Size Label `Size: light` → `Size: standard` 즉시 갱신 (`save_issue` labelIds) |
 | light → (코드 수정 후 복잡) | 코드 수정 시작 후 복잡도 초과 | step 5 이후 | **새 Issue 등록** (역방향 전이 금지 원칙 준수). 기존 커밋은 유지. 기존 Issue 처리: `AskUserQuestion`으로 사용자 선택 — (a) Done(부분 완료로 기록, description에 '에스컬레이션: {새 ID}으로 계속' 추기) `(AI 권장)` (b) Canceled(미완료 중단 기록) |
 | standard → feature | 아키텍처 변경 수준으로 판단 | 언제든 | `AskUserQuestion`: feature type 전환 제안 → 승인 시 새 Issue 등록 |
 | bug → improvement | 기존 bug-fix complexity 전환 | 언제든 | Label 변경 → improvement-fix로 라우팅 |
@@ -132,13 +132,13 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. li
 | 행동 | size | 상세 |
 |------|------|------|
 | Issue description에서 SC/Change Scope 조회 | 공통 | 수정 시작 전 1회 |
-| description Overview `Size` 행 기록 | 공통 | dev-pipeline에서 판별 후 기록 |
+| Size Label 부착 (`Size: light` / `Size: standard`) | 공통 | dev-pipeline에서 판별 후 Label 부착 |
 | description 변경 의도 기록 | light | G3 단계 |
 | State → In Review 전이 | light | verify PASS 시 |
 | 변경 요약 comment | light | verify PASS 후 |
 | State → Planning 전이 | standard | Pre-Plan 인터뷰 시작 전 |
 | State → Planning 전이 (에스컬레이션) | light→standard | 전환 승인 시 |
-| description Size 갱신 | light→standard | 전환 승인 시 `light` → `standard` |
+| Size Label 갱신 | light→standard | 전환 승인 시 `Size: light` → `Size: standard` Label 교체 |
 | State → In Progress 전이 | standard | Post-Plan 후 |
 | Sub-issue 동기화 | standard | implement 스킬 위임 |
 | verify 결과 comment | standard | implement 완료 후 |
