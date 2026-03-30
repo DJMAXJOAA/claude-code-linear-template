@@ -153,13 +153,26 @@ issue-close 시 plan.md Outcome + 구현 결과를 Linear Issue description에 1
 
 | description 섹션 | 미러링 행동 |
 |-----------------|------------|
-| Success Criteria | 검증 결과 반영 (충족/미충족/부분 충족) |
+| Success Criteria | SC 체크 처리 (아래 §SC 체크 처리 참조) |
 | Documents | 최종 경로 확정 (미생성 → 실제 경로 + 설명) |
 | + Decisions Summary | prd.md 설계 결정 내용 요약 추가 (있을 때만) |
 | + Implementation Result | plan.md Outcome 요약 추가 |
 | + Key Notes | note.md Checkpoints에서 핵심 항목만 추가 (있을 때만) |
 
 > 미러링 섹션은 요약 수준으로 유지. 상세 내용은 Git 문서 경로로 안내.
+
+### SC 체크 처리
+
+issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최종 갱신한다.
+
+| 항목 | 내용 |
+|------|------|
+| 대상 | Linear Issue description `## Success Criteria` 섹션의 체크박스 항목 |
+| 동작 | verify PASS로 충족 확인된 SC 항목을 `- [ ]` → `- [x]`로 체크 처리 |
+| 미충족 항목 | `- [ ]` 유지 + 사유 인라인 주석 (예: `- [ ] SC 3 <!-- 부분 충족: 사유 -->`) |
+| 적용 type | **전 type 공통**. feature/improvement-standard는 미러링(5a)에서 수행, bug/improvement-light는 별도 `save_issue`로 SC만 갱신 |
+| 갱신 시점 | 단계 5a (미러링 대상 type) 또는 단계 5 직후 (미러링 비대상 type) |
+| triage 선행 체크 | triage에서 이미 `- [x]` 처리된 항목은 유지. 단, **verify가 FAIL 판정한 SC는 `- [x]` → `- [ ]`로 되돌림** (verify 결과가 triage 선행 체크보다 우선) |
 
 ---
 
