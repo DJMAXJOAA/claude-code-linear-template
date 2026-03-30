@@ -39,9 +39,9 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 | 2 (G1) | **Related Issue 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/issue/{ID}/plan.md`에서 `## 8. Outcome` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
 | 3 (G1) | **prd.md 작성**: §prd.md 구조에 따라 작성. Linear description(Summary + SC) + 도메인 spec(연결 시) + 코드 조사 결과를 입력으로 사용자 인터뷰 진행 |
 | 4 (G2) | **prd.md 사용자 검토**: `AskUserQuestion`으로 prd.md 내용 확인/수정 |
-| 5 (G1) | **technical.md 생성 판별**: prd.md 기반으로 복잡도 판별 → 조건 충족 시 `AskUserQuestion`으로 사용자에게 technical.md 작성 여부 확인 |
-| 6 (G1) | **technical.md 작성** (조건부): §technical.md 구조에 따라 작성. prd.md + SC를 입력으로 사용자 인터뷰 진행 |
-| 7 (G2) | **technical.md 사용자 검토** (조건부): `AskUserQuestion`으로 확인/수정 |
+| 5 (G2) | **technical.md 작성 방식 선택**: prd.md 기반 복잡도 판별 + AI 권장안을 제시한 뒤, `AskUserQuestion`으로 3가지 선택지 제시 (§technical.md 작성 방식 선택 참조) |
+| 6 (G1) | **technical.md 작성** (조건부): 선택 결과에 따라 분기 — **(a)** AI 자동 생성 후 검토 **(b)** 설계 항목별 인터뷰 후 작성 + 검토 **(c)** 스킵 → plan.md Approach에 직접 기술 |
+| 7 (G2) | **technical.md 사용자 검토** (a/b 선택 시): `AskUserQuestion`으로 확인/수정 |
 | 8 (G1) | **plan.md 작성**: §plan.md 구조에 따라 작성. prd.md FR에서 Verification 초안 자동 파생. technical.md 존재 시 참조 |
 | 9 (G1) | **도메인 spec FR→Verification 보강**: Linear Documents에 spec 경로 존재 시, 해당 spec의 `requirements.md` FR 테이블에서 추가 Verification 항목 파생 |
 | 10 (G2) | **Plan 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
@@ -49,14 +49,22 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, `docs/issue/{LINEAR-
 | 12 (G3) | **Linear comment 기록**: Linear MCP로 Plan 완료 요약 comment (태스크 수, 주요 설계 결정 1~2줄) |
 | 13 (G4) | **완료 반환**: 문서 생성 완료. 리뷰는 dev-pipeline의 Post-Plan Q/A에서 처리 |
 
-### technical.md 생성 판별 (Step 5)
+### technical.md 작성 방식 선택 (Step 5)
 
-| 조건 | 행동 |
-|------|------|
-| 3+ 컴포넌트 상호작용 | 생성 권장 → `AskUserQuestion` |
-| 새 인터페이스/추상화 도입 | 생성 권장 → `AskUserQuestion` |
-| 기존 구조 재설계 | 생성 권장 → `AskUserQuestion` |
-| 해당 없음 | 스킵 — plan.md Approach에 직접 기술 |
+prd.md 기반 복잡도를 판별하고, AI 권장안과 함께 `AskUserQuestion`으로 3가지 선택지를 제시한다.
+
+| 선택지 | 설명 |
+|--------|------|
+| **(a) AI 자동 생성** | AI가 prd.md + SC 기반 초안 작성 → 사용자 검토 (Step 7) |
+| **(b) 인터뷰 기반 작성** | 설계 항목별 순차 인터뷰(`AskUserQuestion` N회) 후 작성 → 사용자 검토 (Step 7) |
+| **(c) 스킵** | technical.md 생략 → plan.md Approach에 직접 기술 |
+
+**AI 권장 기준:**
+
+| 복잡도 조건 | AI 권장 |
+|-------------|---------|
+| 3+ 컴포넌트 상호작용 / 새 인터페이스·추상화 도입 / 기존 구조 재설계 | **(b) 인터뷰 기반 작성** `(AI 권장)` |
+| 위 조건 해당 없음 | **(c) 스킵** `(AI 권장)` |
 
 ---
 
