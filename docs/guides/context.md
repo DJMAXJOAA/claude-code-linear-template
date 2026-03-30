@@ -30,6 +30,16 @@ created: 2026-03-17
 | **paths 조건부 로드** | Rules는 paths 매칭 시에만 자동 로드 |
 | **CLAUDE.md 경유** | 시작점은 항상 CLAUDE.md → Key References → 필요 문서 |
 
+### Project Memory (OMC v4.9.2+)
+
+OMC의 Project Memory는 Hook 기반으로 hot-path(자주 접근하는 파일)를 추적하여 세션 시작 시 자동으로 컨텍스트에 주입한다.
+
+| 항목 | 내용 |
+|------|------|
+| 동작 방식 | OMC Hook이 파일 접근 빈도를 추적 → 세션 시작 시 상위 hot-path 파일을 자동 주입 |
+| Progressive Disclosure 관계 | Lazy Loading의 보완 — 반복 접근 패턴을 학습하여 선제 로드. 수동 로드 규칙은 동일하게 유지 |
+| 주의사항 | Project Memory 주입은 참고용이며, plan.md Tasks / Linear 상태 등 SSOT 원칙을 대체하지 않음 |
+
 ### 단계별 로드 범위
 
 | 단계 | 로드 대상 | 로드하지 않는 것 |
@@ -72,6 +82,8 @@ created: 2026-03-17
 | 4. 다음 시작점 명시 | Handoff에 `/활성화 {LINEAR-ID}` 재개 명령 기록 |
 
 **Checkpoint = Git 저장 + Linear sync 확인 + note.md Handoff + 다음 시작점 명시**
+
+> Project Memory(v4.9.2+) 활성 시, hot-path 추적이 자동으로 세션 간 컨텍스트 연속성을 보완한다. Checkpoint의 명시적 기록 의무는 변경되지 않는다.
 
 ### 3-3. /clear 타이밍
 

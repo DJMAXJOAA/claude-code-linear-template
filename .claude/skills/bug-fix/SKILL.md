@@ -25,6 +25,7 @@ bug type Issue의 수정 프로세스를 오케스트레이션한다. Git 폴더
 |------|------|
 | 1 (G1) | **탐색**: `oh-my-claudecode:explore` 에이전트로 관련 코드 탐색. 버그 증상과 연관된 파일/모듈 식별 |
 | 2 (G1) | **분석**: `oh-my-claudecode:debugger` 에이전트로 Root Cause 분석. 재현 경로, 원인 코드 위치 특정 |
+| 2a (G1) | **인과 추적** (선택): 재현이 어렵거나 원인이 복합적인 경우 `oh-my-claudecode:tracer`로 경쟁 가설 기반 증거 추적. debugger 분석의 보완 단계 |
 | 3 (G1) | **수정 계획 제시**: Root Cause + 수정 방안을 사용자에게 제시 |
 | 4 (G2) | **사용자 승인**: `AskUserQuestion`으로 수정 계획 확인. 승인 전 코드 수정 시작 금지 |
 | 4a (G3) | **Git 폴더 + note.md 생성 (미존재 시에만)**: `docs/issue/{LINEAR-ID}/` 폴더 + note.md 초기 생성 (gen-hub 템플릿 참조). 이미 존재하면 스킵 |
@@ -66,6 +67,7 @@ bug type Issue의 수정 프로세스를 오케스트레이션한다. Git 폴더
 |------|---------|------|
 | 탐색 | `oh-my-claudecode:explore` | haiku |
 | Root Cause 분석 | `oh-my-claudecode:debugger` | sonnet |
+| 인과 추적 (선택) | `oh-my-claudecode:tracer` | sonnet — 재현 어려움/다중 원인 의심 시. debugger 전 또는 후 보완 분석 |
 | 코드 수정 | `oh-my-claudecode:executor` | sonnet |
 | 검증 | verify 스킬 (`oh-my-claudecode:verifier`) | sonnet |
 

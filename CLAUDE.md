@@ -60,6 +60,7 @@
 - 구현: plan.md Tasks 기반 Micro-tasking (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)
 - In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → issue-close → Done
 - 사후 문서화: `/정리` — 파이프라인 없이 작업 후 문서화. 상세: [.claude/skills/cleanup/SKILL.md](.claude/skills/cleanup/SKILL.md)
+- OMC 최소 요구 버전: v4.9.3 (MCP 안정성, 스킬 상태 충돌 방지)
 - 상세: [.claude/rules/pipeline.md](.claude/rules/pipeline.md)
 
 ## Framework: Context Management
