@@ -38,7 +38,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 | 단계 | 행위 |
 |------|------|
 | 1 (G1) | **구현 결과 수집**: type별 소스에서 구현 결과를 수집한다. 아래 §구현 결과 수집 참조 |
-| 2 (G2) | **검토**: 구현 결과 요약을 사용자에게 제시 → `AskUserQuestion`으로 확인. 승인 전 문서 기록 금지 |
+| 2 (G2) | **자동 진행**: 구현 결과 요약을 로그로 출력하고 즉시 다음 단계로 진행. 별도 사용자 승인 불필요 |
 | 3 (G3) | **plan.md Outcome 기록**: plan.md가 존재하는 type만 수행 (feature/improvement-standard). Outcome 섹션에 구현 결과 요약 기록 |
 | 3a (G3) | **note.md Checkpoints 환류**: 전 type 공통. note.md `## Checkpoints` 섹션에 완료 메시지 append. 아래 §note.md Checkpoints 참조 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |
@@ -225,7 +225,7 @@ issue-close 시 plan.md Outcome + 구현 결과를 Linear Issue description에 1
 | 8-2 | **갱신 대상 필터링**: 위 필터링 규칙 적용. `.md` 파일 + 파일 존재 확인 |
 | 8-3 | **조기 종료**: 갱신 대상이 0건이면 스킵하고 완료 |
 | 8-4 | **문서별 불일치 분석**: 각 대상 문서를 선택적 로드하고, §1에서 수집한 구현 결과(설계 이탈, 실제 인터페이스, 미해결 이슈)와 비교하여 갱신 필요 항목 도출 |
-| 8-5 | **갱신 내용 사용자 확인**: `AskUserQuestion`으로 문서별 갱신 요약 제시. 문서별 승인/거부/수정 선택 가능 |
+| 8-5 | **갱신 내용 자동 승인**: 문서별 갱신 요약을 로그로 출력하고 즉시 갱신 수행. 별도 사용자 확인 불필요 |
 | 8-6 | **문서 갱신 수행**: 승인된 항목만 실제 파일 수정 |
 | 8-7 | **spec 추가 처리**: spec 문서 갱신 시 Change Log에 이력 추가 (§7 Change Log와 중복 방지 — §7에서 이미 기록한 항목은 스킵), frontmatter `updated` 갱신 |
 
