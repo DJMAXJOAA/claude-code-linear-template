@@ -1,11 +1,11 @@
 ---
 name: issue-close
-description: "verify PASS 후 완료 처리(전 type 공통). 구현 결과를 Linear Changes + comments + plan.md Outcome에 기록하고, note.md Checkpoints 환류 후 Linear Issue를 Done으로 전이."
+description: "verify PASS 후 완료 처리(전 type 공통). progress.txt 기반 완료 처리. Linear comment + plan.md Outcome 기록 후 Done 전이."
 ---
 
 # issue-close — 완료 처리 (전 type 공통)
 
-verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear Changes + comments + plan.md Outcome에 기록하고, note.md Checkpoints 환류 후 Linear Issue를 Done으로 전이한다.
+verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear Changes + comments + plan.md Outcome에 기록하고, Linear Issue를 Done으로 전이한다.
 
 ## Trigger
 
@@ -18,7 +18,6 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 | Linear ID | `PRJ-N` — 완료 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, SC), type, relations |
 | plan.md | `docs/issue/{LINEAR-ID}/plan.md` — Tasks 완료 상태 확인 + Outcome 기록 대상 (**feature/improvement-standard만**) |
-| note.md | `docs/issue/{LINEAR-ID}/note.md` — Checkpoints 환류 대상 (**전 type 공통**) |
 | 검증 결과 | verify Skill 산출물 |
 | 참조 문서 목록 | Linear description Documents 섹션에서 추출한 참조 경로 목록 |
 
@@ -26,12 +25,12 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 
 ### type별 경로 분기
 
-| type | 실행 단계 | plan.md Outcome | note.md Checkpoints | description 미러링 | 후행 환류 | spec 연동 |
-|------|----------|----------------|--------------------|--------------------|----------|----------|
-| **feature** | 1→2→3→3a→4→5→5a→6→7→8 (전체) | ✅ 기록 | ✅ append | ✅ | ✅ | ✅ |
-| **improvement-standard** | 1→2→3→3a→4→5→5a→6→7→8 | ✅ 기록 | ✅ append | ✅ | ✅ | ✅ (Spec 참조 존재 시) |
-| **improvement-light** | 1→2→3→3a→4→5→**6**→8 | ❌ 없음 | ✅ append | ❌ | ✅ (blocked-by 역참조 존재 시) | ❌ |
-| **bug** | 1→2→3→3a→4→5→**6**→8 | ❌ (plan.md 없으면) | ✅ append | ❌ | ✅ (blocked-by 역참조 존재 시) | ❌ |
+| type | 실행 단계 | plan.md Outcome | description 미러링 | 후행 환류 | spec 연동 |
+|------|----------|----------------|--------------------|----------|----------|
+| **feature** | 1→2→3→4→5→5a→6→7→8 (전체) | ✅ 기록 | ✅ | ✅ | ✅ |
+| **improvement-standard** | 1→2→3→4→5→5a→6→7→8 | ✅ 기록 | ✅ | ✅ | ✅ (Spec 참조 존재 시) |
+| **improvement-light** | 1→2→4→5→**6**→8 | ❌ 없음 | ❌ | ✅ (blocked-by 역참조 존재 시) | ❌ |
+| **bug** | 1→2→4→5→**6**→8 | ❌ (plan.md 없으면) | ❌ | ✅ (blocked-by 역참조 존재 시) | ❌ |
 
 ### 단계별 프로세스
 
@@ -40,7 +39,6 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 | 1 (G1) | **구현 결과 수집**: type별 소스에서 구현 결과를 수집한다. 아래 §구현 결과 수집 참조 |
 | 2 (G2) | **자동 진행**: 구현 결과 요약을 로그로 출력하고 즉시 다음 단계로 진행. 별도 사용자 승인 불필요 |
 | 3 (G3) | **plan.md Outcome 기록**: plan.md가 존재하는 type만 수행 (feature/improvement-standard). Outcome 섹션에 구현 결과 요약 기록 |
-| 3a (G3) | **note.md Checkpoints 환류**: 전 type 공통. note.md `## Checkpoints` 섹션에 완료 메시지 append. 아래 §note.md Checkpoints 참조 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |
 | 5 (G3) | **Linear comment 기록**: Linear MCP로 완료 요약 기록. 아래 §Linear comment 참조 |
 | 5a (G3) | **Linear description 최종 미러링**: 아래 §Linear description 미러링 참조 |
@@ -53,11 +51,10 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 | 항목 | 적용 type | 내용 |
 |------|----------|------|
 | plan.md Outcome | feature, improvement-standard | `## Outcome` 섹션에 구현 결과 요약 기록 |
-| note.md Checkpoints | 전 type | `## Checkpoints` 섹션에 완료 메시지 append |
 | Linear | 전 type | State → Done |
 | Linear comment | 전 type | 완료 요약 + Git 작업 기록 |
 | Linear description | feature, improvement-standard | 최종 상태 미러링 (1회성 스냅샷) |
-| 후행 Issue | feature, improvement-standard | note.md Checkpoints 환류 메시지 + Linear comment (대상 존재 시) |
+| 후행 Issue | feature, improvement-standard | Linear comment 환류 메시지 (대상 존재 시) |
 | spec 문서 | feature, improvement-standard | Change Log 갱신 (링크된 spec 존재 시) |
 | 참조 문서 | 전 type | Documents/Reference에 등록된 .md 문서 내용 갱신 (구현 결과 반영) |
 
@@ -75,25 +72,6 @@ type에 따라 수집 소스가 다르다.
 | bug | Linear description + comment + Git 커밋 이력 | Root Cause, 수정 방법, 영향 범위 |
 
 > **bug/improvement-light**: plan.md가 없을 수 있으므로 Linear comment(수정 결과 요약)과 `git log`(관련 커밋)에서 구현 결과를 수집한다.
-
----
-
-## note.md Checkpoints
-
-전 type 공통으로 note.md `## Checkpoints` 섹션에 완료 메시지를 append한다.
-
-| 조건 | 행동 |
-|------|------|
-| note.md 존재 (전 type) | `## Checkpoints` 섹션에 완료 메시지 append |
-| note.md 미존재 | **스킵** (정상적으로는 발생하지 않음 — gen-hub에서 생성) |
-
-### Checkpoints 메시지 형식
-
-```
-- [DONE] {LINEAR-ID} 완료 — {1줄 요약}. {날짜}
-```
-
-> plan.md가 존재하는 type(feature/improvement-standard)은 plan.md `## Outcome` 섹션에도 구현 결과 요약을 기록한다.
 
 ---
 
@@ -147,7 +125,7 @@ issue-close 시 plan.md Outcome + 구현 결과를 Linear Issue description에 1
 |------|------|
 | 1회성 | issue-close 시점에 1회만 실행. 이후 Linear description 재갱신 금지 |
 | 스냅샷 성격 | "최종 처리 결과 스냅샷"으로 명시. 진행 중 상태 복제가 아님 |
-| Git이 원천 | 설계/구현 결과의 SSOT는 여전히 Git(prd.md/plan.md/note.md). Linear는 읽기 편의용 사본 |
+| Git이 원천 | 설계/구현 결과의 SSOT는 여전히 Git(spec.md/plan.md/technical.md). Linear는 읽기 편의용 사본 |
 
 ### 미러링 대상
 
@@ -155,9 +133,9 @@ issue-close 시 plan.md Outcome + 구현 결과를 Linear Issue description에 1
 |-----------------|------------|
 | Success Criteria | SC 체크 처리 (아래 §SC 체크 처리 참조) |
 | Documents | 최종 경로 확정 (미생성 → 실제 경로 + 설명) |
-| + Decisions Summary | prd.md 설계 결정 내용 요약 추가 (있을 때만) |
+| + Decisions Summary | spec.md 설계 결정 내용 요약 추가 (있을 때만) |
 | + Implementation Result | plan.md Outcome 요약 추가 |
-| + Key Notes | note.md Checkpoints에서 핵심 항목만 추가 (있을 때만) |
+| + Key Notes | progress.txt에서 핵심 항목만 추가 (있을 때만) |
 
 > 미러링 섹션은 요약 수준으로 유지. 상세 내용은 Git 문서 경로로 안내.
 
@@ -184,10 +162,7 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 |------|------|
 | 6-1 | Linear MCP로 현재 Issue의 relations 조회 → `blocked-by` 역참조 Issue 목록 수집 |
 | 6-1a | **조기 종료**: relations가 없거나 `blocked-by` 역참조가 없으면 환류 없이 완료 처리 종료 |
-| 6-2 | 각 후행 Issue의 `docs/issue/{ID}/note.md` 존재 확인 |
-| 6-3 | 존재 시: `note.md > ## Checkpoints` 섹션에 환류 메시지 append |
-| 6-4 | 환류 메시지 형식: `- [REF] {LINEAR-ID} 완료 — {1줄 요약}. [Linear]({URL})` |
-| 6-5 | Linear MCP: 후행 Issue에 comment 추가 — `Blocked-by {LINEAR-ID} 완료. 상세: docs/issue/{LINEAR-ID}/note.md` |
+| 6-2 | Linear MCP: 후행 Issue에 환류 comment 추가 — `Blocked-by {LINEAR-ID} 완료 — {1줄 요약}. docs/issue/{LINEAR-ID}/` |
 
 ---
 
@@ -228,7 +203,7 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 | 경로가 `.md` 파일 또는 spec 디렉토리 (`docs/spec/{name}/`) | 갱신 대상 ✅ |
 | 경로가 코드 파일, 외부 URL, 비존재 파일 | 스킵 ❌ |
 | spec 디렉토리 참조 | `requirements.md` + `technical.md` + `roadmap.md`(존재 시)를 개별 갱신 대상으로 전개 |
-| Index 행 (spec `_index.md`), Plan, Checklist, note.md | 스킵 (이미 다른 단계에서 처리) |
+| Index 행 (spec `_index.md`), Plan, Checklist, progress.txt | 스킵 (이미 다른 단계에서 처리) |
 
 ### 단계별 프로세스
 
@@ -276,5 +251,5 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 | 구현 결과 요약 + Git 작업 기록 comment | 전 type | 완료 처리 시 |
 | description 최종 상태 미러링 | feature, improvement-standard | 1회성 스냅샷 |
 | blocked-by 역참조 Issue 조회 | feature, improvement-standard | 후행 Issue 환류용 |
-| 후행 Issue에 환류 알림 comment | feature, improvement-standard | 대상 존재 시 |
+| 후행 Issue에 환류 comment | feature, improvement-standard | 대상 존재 시 (`Blocked-by {ID} 완료 — {요약}. docs/issue/{ID}/`) |
 | description Documents 섹션 읽기 | bug, improvement-light | 참조 문서 수집용 (§8) |

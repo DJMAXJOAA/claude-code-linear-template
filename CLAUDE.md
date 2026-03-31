@@ -55,9 +55,9 @@
 `/등록` → `/활성화` → type별 워크플로우 분기 → 완료
 - feature: Todo → Planning → In Progress → In Review → Done
 - improvement: size별 분기 — light(bug 수준, In Progress 직행) / standard(Planning → In Progress). 상세: [.claude/skills/improvement-fix/SKILL.md](.claude/skills/improvement-fix/SKILL.md)
-- bug(경량): Todo → In Progress → In Review → Done (Git 폴더 + note.md 생성)
+- bug(경량): Todo → In Progress → In Review → Done (Git 폴더 + spec.md(deep-interview) + progress.txt(ralph) 생성)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
-- 구현: plan.md Tasks 기반 Micro-tasking (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)
+- 구현: ralph 루프 기반 실행 (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)
 - In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → issue-close → Done
 - 사후 문서화: `/정리` — 파이프라인 없이 작업 후 문서화. 상세: [.claude/skills/cleanup/SKILL.md](.claude/skills/cleanup/SKILL.md)
 - OMC 최소 요구 버전: v4.9.3 (MCP 안정성, 스킬 상태 충돌 방지)
@@ -67,7 +67,7 @@
 
 - **Progressive Disclosure**: 필요한 문서만 필요한 시점에 로드
 - **50% 규칙**: 컨텍스트 50% 이상 소모 시 /clear 고려
-- **Pre-Compaction**: 압축 전 진행 상태를 note.md + Linear에 저장
+- **Pre-Compaction**: 압축 전 진행 상태를 progress.txt + Linear에 저장
 - **Linear 컨텍스트**: `/활성화` 시 Linear 1회 조회 후 세션 내 캐싱. 매 태스크마다 재조회 금지
 - 상세: [docs/guides/context.md](docs/guides/context.md)
 
@@ -87,7 +87,7 @@
 
 - Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서 (전 type). `issue_type` frontmatter로 feature/bug/improvement 구분
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
-- 폴더 내 파일: `note.md`(항상) + `prd.md`, `technical.md`(조건부), `plan.md`(Planning 시)
+- 폴더 내 파일: `spec.md`(항상) + `plan.md`, `technical.md`(Planning 시) + `prd.json`, `progress.txt`(In Progress 시)
 - Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택))
 - FR-ID: `FR-NNN` (spec-local, 각 spec 내 순차). 외부 참조: `{spec-name}:FR-NNN`. EARS 형식 요구사항
 - 상세: [.claude/rules/docs-writing.md](.claude/rules/docs-writing.md)

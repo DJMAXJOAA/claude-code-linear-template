@@ -1,11 +1,11 @@
 ---
 name: gen-hub
-description: "Linear Issue 생성 및 Git docs/issue 폴더 + note.md 초기 생성. /등록 커맨드 또는 Issue 등록 요청 시 호출."
+description: "Linear Issue 생성 및 Git docs/issue 폴더 초기 생성. /등록 커맨드 또는 Issue 등록 요청 시 호출."
 ---
 
-# gen-hub — note.md + Linear Issue 생성
+# gen-hub — Linear Issue 생성 + Git 폴더 생성
 
-`/등록` 커맨드에서 호출되어, Linear Issue를 생성하고 Git에 `docs/issue/{LINEAR-ID}/` 폴더 + `note.md`를 생성한다. **전 type(feature, improvement, bug) 모두** 폴더와 note.md를 생성한다.
+`/등록` 커맨드에서 호출되어, Linear Issue를 생성하고 Git에 `docs/issue/{LINEAR-ID}/` 폴더를 생성한다. **전 type(feature, improvement, bug) 모두** 폴더를 생성한다.
 
 ## Trigger
 
@@ -54,8 +54,7 @@ description: "Linear Issue 생성 및 Git docs/issue 폴더 + note.md 초기 생
 | 3 (G3) | **Linear Issue 생성**: Linear MCP로 Issue 생성 — title, description, labels(type + 태그), project(마일스톤), state: Todo |
 | 4 (G3) | **Linear Issue ID 획득**: 응답에서 `PRJ-N` 형식의 ID + URL 추출 |
 | 5 (G3) | **Git 폴더 생성**: `docs/issue/{LINEAR-ID}/` 디렉토리 생성 (전 type) |
-| 6 (G3) | **note.md 초기 생성**: note-template로 파일 생성. Linear API 응답의 URL을 Nav Link에 사용. Handoff 테이블은 빈 상태로 초기화 |
-| 7 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Documents` 섹션에 `docs/issue/{LINEAR-ID}/note.md` 경로 기록. 참조 문서 존재 시 해당 경로도 삽입 |
+| 6 (G3) | **Linear description에 Git 경로 삽입**: description의 `## Documents` 섹션에 참조 문서 경로 기록. Documents는 파이프라인 진행 시 동적 추가 |
 
 ## 배치 등록 모드
 
@@ -101,15 +100,11 @@ description: "Linear Issue 생성 및 Git docs/issue 폴더 + note.md 초기 생
 | 항목 | 내용 |
 |------|------|
 | Linear Issue | Todo 상태의 새 Issue (type Label 부착) |
-| Git 파일 | `docs/issue/{LINEAR-ID}/note.md` (전 type 생성) |
+| Git 폴더 | `docs/issue/{LINEAR-ID}/` (전 type 생성). Documents는 파이프라인 진행 시 동적 추가 |
 
 ---
 
 > type별 description 템플릿: [templates/issue-descriptions.md](templates/issue-descriptions.md)
-
----
-
-> note.md 템플릿: [gen-plan/templates/note-template.md](../gen-plan/templates/note-template.md)
 
 ---
 

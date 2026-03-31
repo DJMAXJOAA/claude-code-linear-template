@@ -17,7 +17,7 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, Scope, Deliverables) |
-| note.md | `docs/issue/{LINEAR-ID}/note.md` — 기존 문서 확인 |
+| spec.md / progress.txt | `docs/issue/{LINEAR-ID}/spec.md`, `progress.txt` — 존재 시 기존 문서 참조 |
 
 ## Process
 

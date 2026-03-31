@@ -14,18 +14,19 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|:----:|------|
 | `linear_id` | 문자열 (예: `PRJ-47`) | O | Linear Issue ID. 해당 Issue와 무관한 문서(ADR, shared)는 제외 |
 | `title` | 문자열 | O | 문서 제목 |
-| `type` | `prd` / `technical` / `plan` / `note` / `report` / `adr` / `shared` / `spec` / `spec-reference` | O | 문서 유형 |
-| `issue_type` | `feature` / `bug` / `improvement` | △ | Issue 유형. `prd.md`에만 필수 |
+| `type` | `spec` / `technical` / `plan` / `report` / `adr` / `shared` / `spec-reference` | O | 문서 유형 |
+| `issue_type` | `feature` / `bug` / `improvement` | △ | Issue 유형. `spec.md`에만 필수 |
 | `created` | ISO 날짜 (예: `2026-03-17`) | O | 작성일 |
 
 ### 1-2. 문서 유형별 속성
 
 | 문서 유형 | 속성 | 비고 |
 |----------|------|------|
-| `prd.md` (What/Why 원천) | `linear_id`, `title`, `type: prd`, `issue_type`, `created` | `issue_type: feature/bug/improvement`. 템플릿 SSOT: gen-plan 참조 |
+| `spec.md` (What/Why 원천) | `linear_id`, `title`, `type: spec`, `issue_type`, `created` | `issue_type: feature/bug/improvement`. deep-interview/deep-dive 산출 |
 | `technical.md` (기술 설계 원천, 조건부) | `linear_id`, `title`, `type: technical`, `created` | gen-plan 호출 시 조건부 생성 |
 | `plan.md` (실행 계획 원천) | `linear_id`, `title`, `type: plan`, `created` | title = "Plan: {Issue 제목}" |
-| `note.md` (작업 메모리 원천) | `linear_id`, `title`, `type: note`, `created` | title = "Note: {Issue 제목}" |
+| `prd.json` (실행 설정) | — | frontmatter 불필요 (JSON). ralph가 관리 |
+| `progress.txt` (실행 기록) | — | frontmatter 불필요 (텍스트 로그). ralph가 관리 |
 | ADR (`docs/adr/`) | `title`, `type: adr`, `created` | linear_id 없음 (cross-cutting) |
 | Shared (`docs/shared/`) | `title`, `type: shared`, `created` | linear_id 없음 (cross-cutting) |
 | Spec `_index.md` (`docs/spec/{name}/`) | `title`, `type: spec`, `created`, `updated` | linear_id 없음 (cross-cutting). 디렉토리 허브 (Overview + 고정 문서 목록) |
@@ -40,8 +41,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 파일 | 트리거 | 조건 |
 |------|--------|------|
-| `note.md` | `/등록` | 전 type(feature, improvement, bug) 생성 |
-| `prd.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
+| `spec.md` | Pre-Plan 완료 시 | deep-interview/deep-dive 완료 시 |
 | `technical.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 (조건부 — 기술 설계 필요 시) |
 | `plan.md` | Planning 단계 진입 | gen-plan 스킬 호출 시 |
 | `docs/spec/{name}/` | `/스펙` | 디렉토리 + `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택) 생성 |
@@ -78,9 +78,8 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 |------|------|
 | 위치 | frontmatter `---` 닫힌 직후, `#` 제목 또는 본문 직전 (빈 줄로 분리) |
 | plan.md | `> [Linear Issue]({URL})` |
-| prd.md | `> [Linear Issue]({URL})` |
+| spec.md | `> [Linear Issue]({URL})` |
 | technical.md | `> [Linear Issue]({URL})` |
-| note.md | `> [Linear Issue]({URL})` |
 | ADR | `> ← [ADR Index](../_index.md)` — ADR 인덱스 |
 | Spec `_index.md` | `> ← [Spec Index](../_index.md)` — 글로벌 spec 인덱스 |
 | Spec `requirements.md` / `technical.md` / `roadmap.md` | `> ← [_index.md](./_index.md)` — 소속 spec 인덱스 |
@@ -96,10 +95,11 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 위치 | 파일 | 이름 규칙 | 예시 |
 |------|------|----------|------|
-| `docs/issue/{LINEAR-ID}/` | PRD | `prd.md` (고정) | `PRJ-47/prd.md` |
+| `docs/issue/{LINEAR-ID}/` | Spec | `spec.md` (고정) | `PRJ-47/spec.md` |
 | | 기술 설계 (조건부) | `technical.md` (고정) | `PRJ-47/technical.md` |
 | | Plan | `plan.md` (고정) | `PRJ-47/plan.md` |
-| | 작업 노트 | `note.md` (고정) | `PRJ-47/note.md` |
+| | 실행 설정 | `prd.json` (고정) | `PRJ-47/prd.json` |
+| | 실행 기록 | `progress.txt` (고정) | `PRJ-47/progress.txt` |
 | `docs/adr/` | ADR 인덱스 | `_index.md` (고정) | `adr/_index.md` |
 | | ADR 문서 | `ADR-{NNNN}.md` (4자리 순번) | `adr/ADR-0001.md` |
 | `docs/shared/` | 도메인 지식 | `domain-{topic}.md` (kebab-case) | `shared/domain-networking.md` |
@@ -125,10 +125,10 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 원칙 | 내용 |
 |------|------|
-| prd.md = What/Why 원천 | 요구사항, 스코프, 성공 기준의 SSOT. 다른 문서는 prd.md를 참조하지 복제하지 않음 |
+| spec.md = What/Why 원천 | 요구사항, 스코프, 성공 기준의 SSOT. 다른 문서는 spec.md를 참조하지 복제하지 않음 |
 | plan.md = 실행 계획 원천 | 태스크 목록(Tasks), 검증 조건(Verification), 실행 순서의 SSOT |
 | technical.md = 기술 설계 원천 | 아키텍처, 인터페이스, 데이터 모델의 SSOT (조건부 생성) |
-| note.md = 작업 메모리 원천 | Handoff, Work Log, Checkpoints의 SSOT |
+| progress.txt = 실행 기록 원천 | ralph가 관리하는 실행 기록의 SSOT |
 | Linear = 상태 원천 | 진행 상태, 라벨, 프로젝트, relation은 Linear가 SSOT. Git에 상태 복제 금지 |
 | 중복 기술 금지 | 동일 정보를 여러 문서에 복제하지 않고 링크로 연결 |
 | Spec = 기능 명세 원천 | 기능 요구사항, 기술 명세는 spec 문서가 SSOT. plan.md는 "How" 설계, spec은 "What/Why" 명세 |
@@ -162,10 +162,10 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 
 | 다이어그램 | 허용 위치 |
 |-----------|----------|
-| `sequenceDiagram` | prd(이슈), spec(도메인), technical, plan |
-| `flowchart` | prd(이슈), spec(도메인), technical, plan |
+| `sequenceDiagram` | spec(이슈), spec(도메인), technical, plan |
+| `flowchart` | spec(이슈), spec(도메인), technical, plan |
 | `classDiagram` | technical만 |
 | `erDiagram` | technical만 |
-| `stateDiagram` | prd(이슈), spec(도메인), technical |
+| `stateDiagram` | spec(이슈), spec(도메인), technical |
 
-> prd(이슈)/spec(도메인): 역할명 사용. technical/plan: 클래스명 허용.
+> spec(이슈)/spec(도메인): 역할명 사용. technical/plan: 클래스명 허용.

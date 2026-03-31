@@ -11,7 +11,7 @@ created: 2026-03-17
 | # | 원칙 | 내용 |
 |---|------|------|
 | 1 | **3영역 SSOT** | 상태=Linear, 지식=Git, 실행=Claude Code. 교차 복제 금지 |
-| 2 | **Git = 지식 전용** | prd.md(What/Why), technical.md(설계), plan.md(실행 계획), note.md(작업 메모리). 상태/개요/SC는 Linear |
+| 2 | **Git = 지식 전용** | spec.md(What/Why), technical.md(설계), plan.md(실행 계획), progress.txt(실행 기록). 상태/개요/SC는 Linear |
 | 3 | **토큰 절약** | Progressive Disclosure, 200줄 CLAUDE.md, paths 조건부 로드 유지 |
 | 4 | **Micro-tasking** | plan.md Tasks 의존성 그래프 기반. 에이전트 당 1개 태스크. Linear Sub-issue는 가시화 목적 |
 | 5 | **4단계 게이트** | G1(계획)→G2(검토)→G3(저장)→G4(실행). G2 사용자 승인 필수. G3에서 Linear+Git dual write |
@@ -27,10 +27,10 @@ created: 2026-03-17
 
 ```
 Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
-├─ Issue State              ├─ PRD (prd.md)           ├─ 파이프라인 Skills
+├─ Issue State              ├─ Spec (spec.md)         ├─ 파이프라인 Skills
 ├─ Labels (type/tags)       ├─ Technical (technical.md) ├─ Commands
 ├─ Projects (milestones)    ├─ Plan (plan.md)         ├─ Rules
-├─ Relations                ├─ Note (note.md)         └─ plan.md Tasks 의존성 그래프
+├─ Relations                ├─ Progress (progress.txt) └─ plan.md Tasks 의존성 그래프
 ├─ Priority                 ├─ Decisions, Constraints
 ├─ Overview / SC            ├─ 구현 결과
 └─ Activity (자동 이력)     ├─ Spec (docs/spec/)
@@ -51,7 +51,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 | 연결 | 방법 |
 |------|------|
 | Linear → Git | Issue description의 `## Git Documents` 섹션에 상대경로 기록 |
-| Git → Linear | prd.md/plan.md 등 nav link blockquote에 Linear Issue URL. frontmatter `linear_id` |
+| Git → Linear | spec.md/plan.md 등 nav link blockquote에 Linear Issue URL. frontmatter `linear_id` |
 | Claude Code → Linear | 스킬의 `### Linear MCP` 섹션에 호출 패턴 정의 |
 | Claude Code → Git | 스킬이 `docs/issue/{ID}/` 하위 파일 직접 생성/갱신 |
 | Linear Document → Git spec | Document에 `docs/spec/{name}/{doc}.md#section` 앵커 링크. 디렉토리 진입점은 `docs/spec/{name}/`. 상세 결정은 Document에 작성 |
