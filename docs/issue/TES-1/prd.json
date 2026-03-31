@@ -1,0 +1,37 @@
+{
+  "linear_id": "TES-1",
+  "title": "프로젝트 README 자동 생성 기능",
+  "stories": [
+    {
+      "id": "T-TES-1-01",
+      "description": "CLAUDE.md 마크다운 테이블 파서 구현",
+      "dependencies": [],
+      "status": "todo",
+      "acceptance_criteria": [
+        "Tech Stack, Directory Overview 두 테이블에서 데이터 행을 정확히 추출",
+        "헤더/구분선 제외"
+      ]
+    },
+    {
+      "id": "T-TES-1-02",
+      "description": "README.md 템플릿 생성 및 파일 출력",
+      "dependencies": ["T-TES-1-01"],
+      "status": "todo",
+      "acceptance_criteria": [
+        "생성된 README.md에 Tech Stack, Directory 섹션 존재",
+        "파싱된 값이 포함됨"
+      ]
+    },
+    {
+      "id": "T-TES-1-03",
+      "description": "CLI 엔트리포인트 및 수동 검증",
+      "dependencies": ["T-TES-1-02"],
+      "status": "todo",
+      "acceptance_criteria": [
+        "node scripts/generate-readme.js 실행 후 README.md 생성",
+        "성공/실패 메시지 출력",
+        "에러 시 non-zero exit code"
+      ]
+    }
+  ]
+}
