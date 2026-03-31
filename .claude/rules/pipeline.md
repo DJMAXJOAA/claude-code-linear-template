@@ -137,8 +137,9 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |--------|------------|
 | 파이프라인 단계 전환 | Issue 상태 전이 (§1 상태 흐름) |
 | 태스크 시작/완료 | sub-issue 상태 갱신 |
-| Plan 완료 | comment 추가 (태스크 수, 주요 설계 결정) |
-| verify 완료 | comment 추가 (PASS/FAIL + 항목별 요약) |
+| spec.md 완료 | comment 추가 — Spec 완료 요약 (dev-pipeline) |
+| Plan 완료 | comment 추가 — 태스크 수, 주요 설계 결정 (gen-plan) |
+| 구현·검증 완료 | comment 추가 — 구현 내용 + verify 결과 통합 (implement). verify는 별도 comment 미기록 |
 | verify PASS | 상태 → In Review |
 | issue-close | 상태 → Done + 완료 comment + description 미러링 |
 | /점검 결과 기록 | comment 추가 |

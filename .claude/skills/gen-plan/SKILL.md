@@ -37,7 +37,8 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, ralplan을 통해 `d
 |------|------|
 | 1 (G1) | **Linear Issue 정보 읽기**: Linear MCP로 description(Summary, SC), type, relations 조회 |
 | 2 (G1) | **Related Issue 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/issue/{ID}/plan.md`에서 `## Outcome` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
-| 3 (G1) | **ralplan 호출**: spec.md + Linear SC + Related Issue 환류 + 코드 조사 결과 + 설계 결정을 ralplan에 전달하여 plan.md + technical.md 함께 생성 (§ralplan 호출 지시 패턴 참조) |
+| 2a (G2) | **ralplan 모드 선택**: `AskUserQuestion`으로 ralplan 실행 모드 선택 — (a) **일반 모드** (plan.md + technical.md 자동 생성, AI 권장) (b) **인터뷰 모드** (--interactive, Planner 초안 검토 + 최종 승인 포함). 태스크 4개 이상 feature → (b)에 `(AI 권장)`, 그 외 → (a)에 `(AI 권장)` |
+| 3 (G1) | **ralplan 호출**: 선택된 모드로 ralplan 호출. spec.md + Linear SC + Related Issue 환류 + 코드 조사 결과 + 설계 결정을 전달하여 plan.md + technical.md 함께 생성 (§ralplan 호출 지시 패턴 참조) |
 | 4 (G2) | **Plan 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
 | 5 (G3) | **Frontmatter 래핑 + Git 커밋**: ralplan 산출물에 frontmatter 래핑(§Frontmatter 래핑 패턴) 후 Git 커밋 + Linear Documents 갱신 |
 | 6 (G3) | **Linear comment 기록**: Linear MCP로 Plan 완료 요약 comment (태스크 수, 주요 설계 결정 1~2줄) |
