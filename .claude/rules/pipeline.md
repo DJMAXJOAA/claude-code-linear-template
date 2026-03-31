@@ -17,7 +17,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | `improvement` | 기존 기능 개선·리팩토링 | size별 분기: light(In Progress 직행) / standard(Planning → In Progress → In Review → Done) |
 | `bug` | 버그 수정 | In Progress → In Review → Done |
 
-> 전 type(feature, improvement, bug) 모두 Git 폴더(`docs/issue/{ID}/`)를 생성한다.
+> feature, improvement는 Git 폴더(`docs/issue/{ID}/`)를 생성한다. bug는 Git 폴더를 생성하지 않으며 Linear comment로 로그를 남긴다.
 
 > improvement는 dev-pipeline에서 size 판별(AskUserQuestion 1회) 후 improvement-fix 스킬로 라우팅. 상세: [improvement-fix SKILL.md](../skills/improvement-fix/SKILL.md)
 

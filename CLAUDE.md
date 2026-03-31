@@ -55,7 +55,7 @@
 `/등록` → `/활성화` → type별 워크플로우 분기 → 완료
 - feature: Todo → Planning → In Progress → In Review → Done
 - improvement: size별 분기 — light(bug 수준, In Progress 직행) / standard(Planning → In Progress). 상세: [.claude/skills/improvement-fix/SKILL.md](.claude/skills/improvement-fix/SKILL.md)
-- bug(경량): Todo → In Progress → In Review → Done (Git 폴더 + spec.md(deep-interview) + progress.txt(ralph) 생성)
+- bug(경량): Todo → In Progress → In Review → Done (Git 문서 미생성 — Linear comment로 로그. 3패턴 분류: 기본/경량/원인불명)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
 - 구현: ralph 루프 기반 실행 (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)
 - In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → issue-close → Done
@@ -85,7 +85,7 @@
 
 ## Framework: ID System
 
-- Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서 (전 type). `issue_type` frontmatter로 feature/bug/improvement 구분
+- Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서 (feature, improvement만. bug는 Git 폴더 미생성). `issue_type` frontmatter로 feature/bug/improvement 구분
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
 - 폴더 내 파일: `spec.md`(항상) + `plan.md`, `technical.md`(Planning 시) + `prd.json`, `progress.txt`(In Progress 시)
 - Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택))

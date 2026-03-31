@@ -9,7 +9,7 @@ type별 라우팅 상세. 새 파이프라인(spec v2) 기준.
 | feature | Todo→Planning→In Progress→In Review→Done | deep-interview → ralplan(gen-plan) → ralph(implement) → verify → issue-close | spec.md → plan.md+technical.md → prd.json+progress.txt |
 | improvement-standard | Todo→Planning→In Progress→In Review→Done | deep-interview → ralplan(gen-plan) → ralph(implement) → verify → issue-close | spec.md → plan.md+technical.md → prd.json+progress.txt |
 | improvement-light | Todo→In Progress→In Review→Done | deep-dive → ralph → verify → issue-close | spec.md → prd.json+progress.txt |
-| bug | Todo→In Progress→In Review→Done | deep-dive → ralph → verify → issue-close | spec.md → prd.json+progress.txt |
+| bug | Todo→In Progress→In Review→Done | 패턴별 에이전트 체인 → verify → issue-close | Linear comment (Git 문서 미생성) |
 
 ## feature
 
@@ -65,8 +65,8 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | 현재 State | 라우팅 대상 | 완료 후 State |
 |-----------|-----------|-------------|
 | (전 State 공통) | **Sub-issue 상태 확인** → 미완료 시 리마인딩 + 사용자 선택 (§Sub-issue 리마인딩) | — |
-| Todo | **deep-dive** → spec.md 산출 → bug-fix Skill 호출 | In Progress (dev-pipeline이 전이) |
-| In Progress | ralph (수정 + verify 자동 호출) — prd.json+progress.txt 갱신 | In Review |
+| Todo | **패턴 분류** (AskUserQuestion) → bug-fix Skill 호출 | In Progress (dev-pipeline이 전이) |
+| In Progress | 패턴별 에이전트 체인 실행 — progress.txt 갱신 | In Review |
 | In Review | 사용자 직접 확인 → 승인 시 issue-close 자동 호출 (축약 경로) | Done |
 | Done | 완료 안내 | — |
 
@@ -74,8 +74,11 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 
 > bug 수정 상세 프로세스: [bug-fix SKILL.md](../bug-fix/SKILL.md)
 >
-> bug-fix 스킬이 deep-dive → spec.md 산출 → ralph(수정) → verify → In Review 전이까지 오케스트레이션.
-> 복잡한 버그로 판단될 경우, 사용자 승인 하에 improvement type으로 전환하여 Plan → ralph(implement) 경로 사용 가능.
+> bug-fix 스킬이 작업 규모별 3패턴(기본/경량/원인불명)으로 분류 후, 패턴별 에이전트 체인으로 수정 → verify → In Review 전이까지 오케스트레이션.
+> - **기본**: debugger → executor → test-engineer → verifier
+> - **경량**: executor → code-reviewer → verifier
+> - **원인불명**: tracer → debugger → executor → verifier
+> 복잡한 버그로 판단될 경우, 사용자 승인 하에 improvement type으로 전환하여 Plan → implement 경로 사용 가능.
 
 ## In Review (전 type 공통)
 
@@ -90,7 +93,8 @@ size 판별(dev-pipeline 담당) 결과에 따라 light/standard 분기. improve
 | 단계 | OMC 도구/스킬 | 역할 |
 |------|-------------|------|
 | Pre-Plan (feature/standard) | deep-interview | 요구사항 인터뷰 → spec.md 산출 |
-| Pre-Plan (light/bug) | deep-dive | 원인 조사 → spec.md 산출 |
+| Pre-Plan (light) | deep-dive | 원인 조사 → spec.md 산출 |
+| bug 패턴 분류 | bug-fix (AskUserQuestion) | 기본/경량/원인불명 3패턴 분류 |
 | Planning | ralplan(gen-plan) | plan.md + technical.md 생성 |
 | In Progress | ralph(implement) | plan.md Tasks 자동 실행. prd.json+progress.txt 갱신 |
 | Verify | verify | Success Criteria + Verification 검증 |
