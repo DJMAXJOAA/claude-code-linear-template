@@ -119,7 +119,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 | Light → 새 Issue | 코드 수정 시작 후 복잡도 초과 | step 5 이후 | **새 Issue 등록** (역방향 전이 금지 원칙 준수). 기존 커밋 유지. 기존 Issue 처리: `AskUserQuestion` — (a) Done(부분 완료 기록, description에 '에스컬레이션: {새 ID}으로 계속' 추기) `(AI 권장)` (b) Canceled(미완료 중단 기록) |
 | Standard → feature | 아키텍처 변경 수준으로 판단 | 언제든 | `AskUserQuestion`: feature type 전환 제안 → 승인 시 새 Issue 등록 |
 
-> **Light → Standard 전환(코드 수정 전)**: In Progress → Planning 역전이 수행 (pipeline.md §1-4 예외 2). 기존 progress.txt 내용 보존 — 전환 시 기존 progress.txt 유지 (덮어쓰기 금지).
+> **Light → Standard 전환(코드 수정 전)**: In Progress → Planning 역전이 수행 (pipeline.md §1-4 예외 2). 기존 terminal plan 폐기 → Planning에서 plan.md 새로 생성. 기존 progress.txt 내용 보존 — 전환 시 기존 progress.txt 유지 (덮어쓰기 금지).
 > **Light → 복잡(코드 수정 후)**: 역방향 전이 금지 원칙에 따라 **새 Issue 등록**. 기존 커밋은 현재 Issue에 남고, 나머지 작업은 새 Issue에서 진행.
 > **Standard → Deep 전환**: 구현 시작 전에만 가능. 구현 시작 후에는 새 Issue 등록.
 > **모든 Label 변경**: Linear MCP `save_issue` labelIds로 수행.

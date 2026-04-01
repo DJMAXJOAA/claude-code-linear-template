@@ -54,7 +54,7 @@
 
 `/등록` → `/활성화` → type별 워크플로우 분기 → 완료
 - Intensity 선택: `/활성화` 시 AI 추천 + 사용자 선택 (Light/Standard/Deep). 상세: [.claude/skills/dev-pipeline/SKILL.md](.claude/skills/dev-pipeline/SKILL.md)
-- feature: intensity별 — Light(explore→executor) / Standard(ralplan→ralph) / Deep(deep-interview→autopilot)
+- feature: intensity별 — Light(explore→planner→executor) / Standard(ralplan→ralph) / Deep(deep-interview→autopilot)
 - improvement: intensity별 — Light(code-reviewer→executor, Git 미생성) / Standard(plan→architect→executor) / Deep(deep-interview→autopilot)
 - bug: intensity별 — Light(debugger→executor, Git 미생성) / Deep(trace→debugger→architect→executor, Git 미생성)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유

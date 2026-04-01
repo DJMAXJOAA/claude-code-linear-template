@@ -44,8 +44,30 @@ Intensity는 dev-pipeline에서 이미 선택된다. 이 스킬에서 AskUserQue
 `trace(skill)`(심층 조사) → `debugger`(근본 원인 분석) → `architect`(설계 검토) → `executor`(수정) → `qa-tester`(선택) → `verify`(검증)
 
 - `trace` = `oh-my-claudecode:trace` skill — evidence-driven 심층 조사
-- Git 문서 미생성. Linear structured comment로 root cause analysis + investigation plan + resolution summary 기록
+- Git 문서 미생성. Linear structured comment로 로그 기록 (아래 §Structured Comment 템플릿 참조)
 - `qa-tester`는 선택적 (사용자 확인 필요 시)
+
+### Deep — Linear Structured Comment 템플릿
+
+```
+🔍 Bug Deep Investigation — {LINEAR-ID}
+
+## Root Cause
+{근본 원인 1~3줄 요약}
+
+## Investigation
+- Trace: {인과 추적 핵심 발견}
+- Scope: {영향 범위 — 파일/모듈}
+
+## Resolution
+- {수정 내용 요약}
+- {변경 파일 목록}
+
+## Verify
+{PASS/FAIL} — {SC 통과 현황}
+```
+
+> Light comment와의 일관성: Light는 자유 형식 1-comment (원인 + 수정 + verify 요약). Deep은 위 structured 형식으로 섹션 구분.
 
 ---
 

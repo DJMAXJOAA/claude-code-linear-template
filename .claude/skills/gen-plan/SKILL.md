@@ -27,7 +27,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, ralplan을 통해 `d
 
 | 호출자 | intensity | 코드베이스 조사 결과 | 설계 결정 목록 | SC 확정 결과 | deep-interview 산출물 |
 |--------|-----------|-------------------|--------------|-------------|----------------------|
-| **feature Light** (dev-pipeline) | Light | Pre-Plan Q/A Phase 1 탐색 결과 | — (간소 plan, 설계 인터뷰 생략) | — | 미포함 |
+| **feature Light** (dev-pipeline) | Light | explore 탐색 결과 | planner 산출물 (간소 spec.md + plan.md) | — | 미포함 |
 | **feature Standard** (dev-pipeline) | Standard | Pre-Plan Q/A Phase 1 탐색 결과 | Pre-Plan Q/A Phase 2 항목별 인터뷰 결과 | Phase 1 Step 3c SC | 미포함 |
 | **feature Deep** (dev-pipeline) | Deep | Pre-Plan Q/A Phase 1 탐색 결과 | Pre-Plan Q/A Phase 2 항목별 인터뷰 결과 | Phase 1 Step 3c SC | deep-interview 산출물 포함 |
 | **improvement-standard** (improvement-fix) | Standard | Pre-Plan 인터뷰 4항목 중 '변경 범위' + explore 탐색 결과 | Pre-Plan 인터뷰 4항목 중 '접근방식' 결정 | Pre-Plan 인터뷰 4항목 중 'SC' | 미포함 |
@@ -41,8 +41,8 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, ralplan을 통해 `d
 |------|------|
 | 1 (G1) | **Linear Issue 정보 읽기**: Linear MCP로 description(Summary, SC), type, relations 조회 |
 | 2 (G1) | **Related Issue 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/issue/{ID}/plan.md`에서 `## Outcome` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
-| 2a (G2) | **intensity별 실행 경로 결정**: intensity 값에 따라 자동 분기 — Light: ralplan 미호출, gen-plan이 간소 plan.md 직접 생성 (technical.md 미생성). Standard: ralplan 일반 모드 호출. Deep: ralplan `--deliberate` 모드 강제 호출 (항상 interactive) |
-| 3 (G1) | **ralplan 호출 (Standard/Deep만)**: 선택된 모드로 ralplan 호출. spec.md + Linear SC + Related Issue 환류 + 코드 조사 결과 + 설계 결정을 전달하여 plan.md + technical.md 함께 생성 (§ralplan 호출 지시 패턴 참조). Light intensity는 이 단계를 스킵하고 gen-plan이 직접 plan.md 생성 |
+| 2a (G2) | **intensity별 실행 경로 결정**: intensity 값에 따라 자동 분기 — Light: ralplan 미호출, `oh-my-claudecode:planner` 호출하여 간소 spec.md + plan.md 생성 (technical.md 미생성). Standard: ralplan 일반 모드 호출. Deep: ralplan `--deliberate` 모드 강제 호출 (항상 interactive) |
+| 3 (G1) | **ralplan 호출 (Standard/Deep만)**: 선택된 모드로 ralplan 호출. spec.md + Linear SC + Related Issue 환류 + 코드 조사 결과 + 설계 결정을 전달하여 plan.md + technical.md 함께 생성 (§ralplan 호출 지시 패턴 참조). Light intensity는 이 단계를 스킵하고 planner 산출물을 사용 |
 | 4 (G2) | **Plan 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
 | 5 (G3) | **Frontmatter 래핑 + Git 커밋**: ralplan 산출물(또는 gen-plan 직접 생성 산출물)에 frontmatter 래핑(§Frontmatter 래핑 패턴) 후 Git 커밋 + Linear Documents 갱신 |
 | 6 (G3) | **Linear comment 기록**: Linear MCP로 Plan 완료 요약 comment (태스크 수, 주요 설계 결정 1~2줄) |

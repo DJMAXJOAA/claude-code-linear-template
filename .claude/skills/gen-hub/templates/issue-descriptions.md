@@ -64,10 +64,10 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 {close 시 추가. 초기 등록 시 이 섹션 없음}
 ```
 
-> - light/standard 모두 동일 템플릿 사용. Size는 Label(`Size: light`/`Size: standard`)로 관리 — description 본문에 Size 정의 불필요
+> - light/standard/deep 모두 동일 템플릿 사용. Intensity는 Label(`Intensity: Light`/`Intensity: Standard`/`Intensity: Deep`)로 관리 — description 본문에 Intensity 정의 불필요
 > - Documents는 파이프라인 진행 시 동적 추가
-> - light에서 spec.md/plan 생성 시 gen-plan이 Documents에 추가
-> - standard에서 spec.md/technical/plan 생성 시 gen-plan이 Documents에 추가
+> - Light intensity에서 spec.md/plan 생성 시 gen-plan이 Documents에 추가
+> - Standard intensity에서 spec.md/technical/plan 생성 시 gen-plan이 Documents에 추가
 > - 기타 행: 추가 참조 문서 없으면 행 자체 생략
 
 ## bug
@@ -83,7 +83,7 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 |------|------|
 | {기타} | {참조 문서, 스크립트, 설정 등 — 없으면 행 자체 생략} |
 
-> Documents는 파이프라인 진행 시 동적 추가 (spec.md는 Pre-Plan 완료 시, plan.md+technical.md는 Planning 완료 시, prd.json+progress.txt는 In Progress 시)
+> bug는 Git 폴더를 생성하지 않는다. Documents는 외부 참조 문서가 있는 경우에만 기재
 
 ---
 
@@ -97,6 +97,5 @@ gen-hub 스킬이 Linear Issue 생성 시 사용하는 description 마크다운 
 {close 시 추가. 초기 등록 시 이 섹션 없음}
 ```
 
-> - bug도 Git 폴더 생성. Documents는 파이프라인 진행 시 동적 추가
-> - plan.md 생성 시 (인터뷰 결정) gen-plan이 Documents에 추가
+> - bug는 Git 폴더를 생성하지 않는다. Linear comment로 로그 기록
 > - 기타 행: 추가 참조 문서 없으면 행 자체 생략

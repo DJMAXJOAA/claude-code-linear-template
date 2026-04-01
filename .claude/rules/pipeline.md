@@ -29,7 +29,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |------|----------|------|
 | Backlog | `backlog` | 미정리/아이디어 |
 | Todo | `unstarted` | 등록 완료, 우선순위 확정 |
-| Planning | `started` | pre-plan + plan — intensity에 따라 Light(plan(omc)), Standard(ralplan), Deep(ralplan --deliberate) |
+| Planning | `started` | pre-plan + plan — intensity에 따라 Light(planner), Standard(ralplan), Deep(ralplan --deliberate) |
 | In Progress | `started` | implement + auto-verify |
 | In Review | `started` | 사용자 직접 확인 |
 | Done | `completed` | 완료 |
