@@ -10,8 +10,13 @@ plan.md Tasks를 `oh-my-claudecode:ralph` 루프로 자동 실행한다.
 
 ## Trigger
 
-- dev-pipeline에서 In Progress 단계 진입 시 (feature / improvement-standard)
+- dev-pipeline에서 In Progress 단계 진입 시 (feature / improvement-Standard)
 - `/활성화`에서 In Progress 상태 재개 시
+
+> **참고**:
+> - improvement-Deep 및 feature-Deep은 autopilot을 통해 implement를 간접 호출할 수 있음 (autopilot이 실행을 위임)
+> - bug는 implement를 사용하지 않음 (bug-fix 스킬이 executor를 직접 실행)
+> - improvement-Light는 implement를 사용하지 않음 (improvement-fix 스킬이 executor를 직접 실행)
 
 ## Input
 
@@ -20,7 +25,8 @@ plan.md Tasks를 `oh-my-claudecode:ralph` 루프로 자동 실행한다.
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | plan.md | `docs/issue/{LINEAR-ID}/plan.md` — Tasks 목록 + Verification (검증 조건) |
 | spec.md | `docs/issue/{LINEAR-ID}/spec.md` — 요구사항 참조 (필요 시에만 읽기) |
-| type | `feature` / `improvement` (standard) — bug 및 improvement-light는 implement를 사용하지 않음 |
+| type | `feature` / `improvement` — bug 및 improvement-Light는 implement를 사용하지 않음 |
+| intensity | `Light` / `Standard` / `Deep` — 실행 방식 분기 기준 (feature-Light, improvement-Standard/Deep 적용) |
 
 ---
 
@@ -29,13 +35,23 @@ plan.md Tasks를 `oh-my-claudecode:ralph` 루프로 자동 실행한다.
 | 단계 | 행위 |
 |------|------|
 | 1 (G1) | **plan.md Tasks 상태 확인**: 모든 태스크가 `done`이면 → §완료 조건으로 직행 |
-| 2 (G4) | **ralph 루프 실행**: `oh-my-claudecode:ralph`로 plan.md Tasks 전체 자동 실행 |
+| 2 (G4) | **intensity 분기**: 아래 §intensity 분기 참조 |
 
-> ralph 호출 시 아래 §ralph 위임 지시를 프롬프트에 포함한다.
+### intensity 분기
+
+| intensity | 실행 방식 |
+|-----------|-----------|
+| **Light** (feature 전용) | executor 단독 실행. ralph 루프 없음. Single pass — plan.md Tasks를 순서대로 직접 실행 |
+| **Standard** | ralph 루프 실행: `oh-my-claudecode:ralph`로 plan.md Tasks 전체 자동 실행 (현재 동작 유지) |
+| **Deep** | autopilot 위임: ralph 대신 autopilot이 실행을 관장. implement는 autopilot의 실행 단계에서 호출됨 — §autopilot 위임 지시 참조 |
+
+> Standard: ralph 호출 시 아래 §ralph 위임 지시를 프롬프트에 포함한다.
 
 ---
 
 ## ralph 위임 지시
+
+> **적용 범위**: Standard intensity 전용
 
 implement가 ralph에게 전달하는 실행 지침:
 
@@ -50,6 +66,18 @@ implement가 ralph에게 전달하는 실행 지침:
 
 ---
 
+## autopilot 위임 지시
+
+> **적용 범위**: Deep intensity 전용
+
+| 항목 | 지시 |
+|------|------|
+| **실행 관장** | autopilot이 Phase 2(Execution)부터 실행을 관장. implement는 autopilot의 실행 단계에서 호출됨 |
+| **위임 방식** | autopilot → implement 호출. implement는 ralph 루프 없이 autopilot 지시에 따라 태스크 실행 |
+| **완료 처리** | verify + In Review 전이는 implement §완료 조건 동일하게 수행 |
+
+---
+
 ## Linear sub-issue 동기화
 
 | 트리거 | 행동 |
@@ -58,6 +86,20 @@ implement가 ralph에게 전달하는 실행 지침:
 | 태스크 시작/완료 | sub-issue state → In Progress / Done |
 | plan.md Tasks 태스크 변경 | 추가: 새 sub-issue 생성. 삭제/변경: 수동 정리 |
 | 동기화 방향 | plan.md Tasks → Linear (단방향). plan.md Tasks가 SSOT |
+
+---
+
+## verify intensity 인식
+
+verify 스킬 호출 시 intensity를 전달하여 검증 범위를 결정한다.
+
+| intensity | verify 동작 |
+|-----------|------------|
+| **feature-Light** | plan.md Verification 수행 (plan.md 존재하므로 적용) |
+| **improvement-Light** | plan.md Verification 없음 (plan.md 자체가 없으므로) |
+| **improvement-Standard / Deep** | plan.md Verification 수행 |
+
+> 이는 현재 verify의 "bug 및 improvement-light는 Verification 없음" 로직과 동일하나, 용어가 "improvement-light" → "improvement-Light (intensity)"로 통일됨.
 
 ---
 

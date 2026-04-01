@@ -53,11 +53,12 @@
 ## Framework: Pipeline
 
 `/등록` → `/활성화` → type별 워크플로우 분기 → 완료
-- feature: Todo → Planning → In Progress → In Review → Done
-- improvement: size별 분기 — light(bug 수준, In Progress 직행) / standard(Planning → In Progress). 상세: [.claude/skills/improvement-fix/SKILL.md](.claude/skills/improvement-fix/SKILL.md)
-- bug(경량): Todo → In Progress → In Review → Done (Git 문서 미생성 — Linear comment로 로그. 3패턴 분류: 기본/경량/원인불명)
+- Intensity 선택: `/활성화` 시 AI 추천 + 사용자 선택 (Light/Standard/Deep). 상세: [.claude/skills/dev-pipeline/SKILL.md](.claude/skills/dev-pipeline/SKILL.md)
+- feature: intensity별 — Light(explore→executor) / Standard(ralplan→ralph) / Deep(deep-interview→autopilot)
+- improvement: intensity별 — Light(code-reviewer→executor, Git 미생성) / Standard(plan→architect→executor) / Deep(deep-interview→autopilot)
+- bug: intensity별 — Light(debugger→executor, Git 미생성) / Deep(trace→debugger→architect→executor, Git 미생성)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
-- 구현: ralph 루프 기반 실행 (verify 완료 후 커밋, 대규모 시 중간 커밋 허용)
+- 구현: intensity별 실행 — Light(executor 단독) / Standard(ralph 루프) / Deep(autopilot)
 - In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → issue-close → Done
 - 사후 문서화: `/정리` — 파이프라인 없이 작업 후 문서화. 상세: [.claude/skills/cleanup/SKILL.md](.claude/skills/cleanup/SKILL.md)
 - OMC 최소 요구 버전: v4.9.3 (MCP 안정성, 스킬 상태 충돌 방지)
