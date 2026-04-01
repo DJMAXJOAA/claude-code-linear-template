@@ -42,24 +42,31 @@ G1 재호출/재생성 경로:
 
 > G1 출력: 기능 제목, 설명, 기존 spec 상태(신규/재호출/재생성/관련 존재), 선택된 경로 → `AskUserQuestion`으로 유저 확인
 
-### G2. 조사 확인
+### G2. 탐색 + 스코프 판정
 
 | 단계 | 행위 |
 |------|------|
 | 2-1 | **경량/전체 경로 판별**: G1에서 "재생성/마이그레이션" 경로인 경우 기존 spec 내용 + 코드 현황 delta만 확인 (경량 경로). 신규인 경우 전체 조사 (전체 경로) |
-| 2-2 | **코드베이스 조사**: `oh-my-claudecode:explore`로 관련 코드 탐색 + 기존 아키텍처 문서 참조. 경량 경로에서는 기존 spec 대비 코드 변경 사항에 집중 |
-| 2-3 | **심층 조사 (선택)**: 외부 프로토콜/기술 스펙이 필요하면 `oh-my-claudecode:scientist` 위임 |
-| 2-4 | **References 보고서 마킹 (선택)**: 2-2/2-3에서 보고서 수준의 조사 결과가 생성되었으면, `references/` 저장 대상으로 자동 마킹 |
+| 2-2 | **병렬 탐색**: `oh-my-claudecode:explore`(코드베이스 탐색) + `oh-my-claudecode:external-context`(외부 링크·참조 조사)를 **병렬** 실행. 경량 경로에서는 기존 spec 대비 코드 변경 사항에 집중 |
+| 2-3 | **References 보고서 마킹 (선택)**: 2-2에서 보고서 수준의 조사 결과가 생성되었으면, `references/` 저장 대상으로 자동 마킹 |
+| 2-4 | **스코프 판정**: 탐색 결과를 기반으로 AI가 규모를 판정하여 `AskUserQuestion`으로 제시 |
 
-> G2 출력: 조사 결과 통합 요약 (관련 코드, 기존 구조, 외부 스펙) + References 보고서 포함 여부 → `AskUserQuestion`으로 유저 확인
+스코프 판정 기준 (2-4):
 
-### G3. 기능 요구사항 확정
+| 판정 | 조건 | 행동 |
+|------|------|------|
+| **소규모** | 예상 FR 3개 이하, 단일 모듈 변경, 기존 spec에 추가 가능 | `/등록` 직행 권장 (사용자가 결정) |
+| **대규모** | 위 기준 초과 | G3 이후 전체 진행 |
+
+> G2 출력: 탐색 결과 통합 요약 (관련 코드, 기존 구조, 외부 참조) + References 보고서 포함 여부 + 스코프 판정(소규모/대규모) → `AskUserQuestion`으로 유저 확인. 소규모 판정 시 `/등록` 직행 선택지 포함
+
+### G3. 기능 요구사항 확정 — deep-interview
 
 | 단계 | 행위 |
 |------|------|
-| 3-1 | **프리필 인터뷰**: G2 조사 결과를 기반으로 인터뷰 항목을 프리필한 상태로 제시. 유저는 **리뷰/수정/보완 모드**로 확인 |
+| 3-1 | **deep-interview 실행**: `oh-my-claudecode:deep-interview`를 호출하여 소크라테스식 인터뷰로 요구사항 결정화. G2 탐색 결과를 컨텍스트로 주입 |
 
-인터뷰 항목 (순차 확인) — `requirements.md` 범위:
+deep-interview 요구사항 범위 — `requirements.md` 대응:
 
 | 순서 | 항목 | 필수 | 비고 |
 |------|------|:----:|------|
@@ -68,7 +75,9 @@ G1 재호출/재생성 경로:
 | 3 | Non-Functional Requirements | △ | 해당 시에만 |
 | 4 | UI/UX Specifications | △ | 해당 시에만 |
 
-> G3 출력: 프리필된 요구사항 전체 → `AskUserQuestion`으로 유저 확인/수정
+> deep-interview 호출 시 위 4개 항목을 인터뷰 범위로 명시하고, ambiguity threshold 통과 후 결과를 G3a로 전달한다.
+
+> G3 출력: deep-interview 결정화 결과 (요구사항 전체) → G3a 자동 진행
 
 ### G3a. Spec 품질 검증
 
@@ -93,15 +102,16 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
 > G3a 출력: 검증 결과 (5항목 PASS/WARN/FAIL) + FAIL 항목 수정 제안 → `AskUserQuestion`으로 사용자 선택
 
-### G4. 기술 설계 + 구현 로드맵 확정
+### G4. 기술 설계 + 구현 로드맵 확정 — ralplan
 
 | 단계 | 행위 |
 |------|------|
-| 4-1 | **technical.md 프리필**: G3 확정 요구사항 기반으로 계약 수준 기술 설계 초안 작성. [spec-technical-template.md](templates/spec-technical-template.md) 참조 |
-| 4-2 | **roadmap.md 프리필 (해당 시)**: G3 요구사항 규모/복잡도 기반으로 AI가 2+ Issue 분할 여부 판별 → `AskUserQuestion`으로 확인. 분할 불필요 시 스킵. roadmap.md는 **참조 문서**. Issue 분할 제안을 기록하지만 실제 Linear Issue 생성은 수행하지 않는다. 사용자가 `/등록`으로 개별 생성. [spec-roadmap-template.md](templates/spec-roadmap-template.md) 참조 |
-| 4-3 | **동시 리뷰**: technical.md + roadmap.md(해당 시) 초안을 한 번에 제시 |
+| 4-1 | **ralplan 실행**: `oh-my-claudecode:ralplan`을 `--deliberate` + interactive 모드로 호출. G3a 통과 요구사항을 입력으로 전달하여 Planner/Architect/Critic 합의 기반 기술 설계 수행 |
+| 4-2 | **technical.md 추출**: ralplan 합의 결과에서 계약 수준 기술 설계를 [spec-technical-template.md](templates/spec-technical-template.md) 양식으로 추출 |
+| 4-3 | **roadmap.md 추출 (해당 시)**: ralplan 결과에서 2+ Issue 분할이 도출된 경우 [spec-roadmap-template.md](templates/spec-roadmap-template.md) 양식으로 추출. 분할 불필요 시 스킵. roadmap.md는 **참조 문서**. Issue 분할 제안을 기록하지만 실제 Linear Issue 생성은 수행하지 않는다. 사용자가 `/등록`으로 개별 생성 |
+| 4-4 | **동시 리뷰**: technical.md + roadmap.md(해당 시) 추출 결과를 한 번에 제시 |
 
-> G4 출력: technical.md 초안 + roadmap.md 초안(해당 시) → `AskUserQuestion`으로 유저 한 번에 리뷰/수정
+> ralplan은 interactive 모드로 실행되므로 사용자가 계획 수립 과정에 참여한다. G4 출력: technical.md + roadmap.md(해당 시) → `AskUserQuestion`으로 유저 최종 리뷰/수정
 
 ### G5. 작성 + 저장 + 후속
 
@@ -137,10 +147,12 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
 ## OMC 에이전트 연동
 
-| 단계 | 에이전트 | 모델 |
-|------|---------|------|
-| 코드 탐색 (G2) | `oh-my-claudecode:explore` | haiku |
-| 심층 분석 (G2) | `oh-my-claudecode:scientist` | opus — 기술 스펙/외부 프로토콜 필요 시 |
+| 단계 | 에이전트 | 모델 | 비고 |
+|------|---------|------|------|
+| 코드 탐색 (G2) | `oh-my-claudecode:explore` | haiku | 병렬 실행 |
+| 외부 참조 조사 (G2) | `oh-my-claudecode:external-context` | sonnet | 병렬 실행 |
+| 요구사항 결정화 (G3) | `oh-my-claudecode:deep-interview` | opus | ambiguity threshold 게이팅 |
+| 기술 설계 (G4) | `oh-my-claudecode:ralplan` | opus | --deliberate, interactive |
 
 > OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
 
