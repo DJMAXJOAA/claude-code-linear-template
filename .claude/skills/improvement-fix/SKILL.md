@@ -56,7 +56,7 @@ Agent chain: `code-reviewer → plan(터미널) → executor → verify → simp
 
 ## Process: Standard
 
-상태 흐름: `Todo → In Progress → In Review → Done`
+상태 흐름: `Todo → Planning → In Progress → In Review → Done`
 
 Agent chain: `code-reviewer → plan → architect → executor → verify → simplify(skill)`
 
@@ -113,7 +113,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 
 | 방향 | 트리거 | 타이밍 | 행동 |
 |------|--------|--------|------|
-| Light → Standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전에만 가능** | `AskUserQuestion`: Standard 전환 제안 → 승인 시 `Intensity: Light` → `Intensity: Standard` Label 즉시 갱신 (`save_issue` labelIds) + **Linear State → Planning 역전이 수행** (pipeline.md §1-4 예외 2) |
+| Light → Standard | AI 판단 또는 유저 요청 (복잡도 예상 초과) | **코드 수정 전에만 가능** | `AskUserQuestion`: Standard 전환 제안 → 승인 시 `Intensity: Light` → `Intensity: Standard` Label 즉시 갱신 (`save_issue` labelIds) + **Linear State → Planning 역전이 수행** (pipeline.md §1-4 예외 2) + **Git 폴더 미존재 시 `docs/issue/{LINEAR-ID}/` 폴더 생성 + Linear description Documents 갱신** |
 | Standard → Deep | AI 판단 또는 유저 요청 (보안·아키텍처 이슈) | **구현 시작 전에만 가능** | `AskUserQuestion`: Deep 전환 제안 → 승인 시 `Intensity: Standard` → `Intensity: Deep` Label 즉시 갱신 (`save_issue` labelIds) |
 | Light → Deep | **불가** | — | Light는 반드시 Standard를 경유해야 함. Light → Deep 직접 전환 금지 |
 | Light → 새 Issue | 코드 수정 시작 후 복잡도 초과 | step 5 이후 | **새 Issue 등록** (역방향 전이 금지 원칙 준수). 기존 커밋 유지. 기존 Issue 처리: `AskUserQuestion` — (a) Done(부분 완료 기록, description에 '에스컬레이션: {새 ID}으로 계속' 추기) `(AI 권장)` (b) Canceled(미완료 중단 기록) |

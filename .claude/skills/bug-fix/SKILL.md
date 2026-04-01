@@ -67,7 +67,7 @@ Intensity는 dev-pipeline에서 이미 선택된다. 이 스킬에서 AskUserQue
 {PASS/FAIL} — {SC 통과 현황}
 ```
 
-> Light comment와의 일관성: Light는 자유 형식 1-comment (원인 + 수정 + verify 요약). Deep은 위 structured 형식으로 섹션 구분.
+> Light comment와의 일관성: Light는 자유 형식 2-comment (조사 완료 1회 + 구현·검증 완료 1회). Deep은 위 structured 형식으로 섹션 구분하여 2-comment.
 
 ---
 
@@ -86,7 +86,7 @@ Intensity는 dev-pipeline에서 이미 선택된다. 이 스킬에서 AskUserQue
 | 9 (G3) | verify PASS 시: **Linear State → In Review** + fix 요약 **Linear comment** 기록 |
 | 10 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** |
 
-> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀
+> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) improvement type 전환 (c) In Review에서 사용자 수동 확인으로 전환 선택.
 
 ---
 

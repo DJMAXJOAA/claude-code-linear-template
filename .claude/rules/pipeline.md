@@ -15,9 +15,9 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 |------|------|-----------|
 | `feature` | 새 기능 개발 | Planning → In Progress → In Review → Done |
 | `improvement` | 기존 기능 개선·리팩토링 | intensity별 분기: Light(In Progress 직행) / Standard(Planning → In Progress) / Deep(Planning → In Progress) |
-| `bug` | 버그 수정 (2단계 intensity: Light/Deep) | In Progress → In Review → Done |
+| `bug` | 버그 수정 (2단계 intensity: Light/Deep) | Todo → In Progress → In Review → Done |
 
-> feature, improvement는 Git 폴더(`docs/issue/{ID}/`)를 생성한다. bug는 Git 폴더를 생성하지 않으며 Linear comment로 로그를 남긴다.
+> feature, improvement(Standard/Deep)는 Git 폴더(`docs/issue/{ID}/`)를 생성한다. improvement-Light 및 bug는 Git 폴더를 생성하지 않으며 Linear comment로 로그를 남긴다.
 
 > 전 type은 dev-pipeline에서 intensity 선택(AskUserQuestion 1회, AI 권장 + 사용자 선택) 후 type별 스킬로 라우팅. 상세: [dev-pipeline SKILL.md](../skills/dev-pipeline/SKILL.md)
 
@@ -89,7 +89,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 ### 2-3a. progress.txt 갱신 주체 원칙
 
-> **원칙**: progress.txt는 ralph가 관리한다. 스킬별 갱신 주체 원칙 해당 없음.
+> **원칙**: progress.txt는 ralph가 관리한다. ralph 미사용 시(feature-Light, improvement-Light/Standard) progress.txt는 해당 오케스트레이터(implement/improvement-fix)가 직접 관리한다. bug는 progress.txt를 생성하지 않는다.
 
 ### 2-4. G3-terminal 스킬 패턴
 
