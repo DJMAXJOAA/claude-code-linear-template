@@ -58,7 +58,7 @@
 - improvement: intensity별 — Light(code-reviewer→executor, Git 미생성) / Standard(plan→architect→executor) / Deep(deep-interview→autopilot)
 - bug: intensity별 — Light(debugger→executor, Git 미생성) / Deep(trace→debugger→architect→executor, Git 미생성)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
-- 구현: intensity별 실행 — Light(executor 단독) / Standard(ralph 루프) / Deep(autopilot)
+- 구현: intensity별 실행 — Light(executor 단독) / Standard(feature: ralph 루프, improvement: executor) / Deep(autopilot)
 - In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → issue-close → Done
 - 사후 문서화: `/정리` — 파이프라인 없이 작업 후 문서화. 상세: [.claude/skills/cleanup/SKILL.md](.claude/skills/cleanup/SKILL.md)
 - OMC 최소 요구 버전: v4.9.3 (MCP 안정성, 스킬 상태 충돌 방지)
@@ -88,6 +88,7 @@
 
 - Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서 (feature, improvement만. bug는 Git 폴더 미생성). `issue_type` frontmatter로 feature/bug/improvement 구분
 - 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
+- feature, improvement(Standard/Deep)만 Git 폴더 생성. improvement-Light 및 bug는 Git 폴더 미생성
 - 폴더 내 파일: `spec.md`(항상) + `plan.md`, `technical.md`(Planning 시) + `prd.json`, `progress.txt`(In Progress 시)
 - Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택))
 - FR-ID: `FR-NNN` (spec-local, 각 spec 내 순차). 외부 참조: `{spec-name}:FR-NNN`. EARS 형식 요구사항

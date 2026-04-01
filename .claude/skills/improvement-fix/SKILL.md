@@ -62,6 +62,7 @@ Agent chain: `code-reviewer → plan → architect → executor → verify → s
 
 | 단계 | 행위 |
 |------|------|
+| 0 (G3) | **Linear State → Planning 전이**: 프로세스 시작 전 즉시 수행 |
 | 1 (G1) | **code-reviewer**: `oh-my-claudecode:code-reviewer` 호출. Linear description + 코드베이스 컨텍스트를 input으로 전달. 리뷰 결과를 수정 방향에 반영 |
 | 2 (G1) | **plan**: `docs/issue/{LINEAR-ID}/plan.md` 생성 (Git 문서). 변경 의도 + 대상 파일 + 태스크 목록 포함 |
 | 3 (G1) | **spec.md 생성**: `docs/issue/{LINEAR-ID}/spec.md` 생성 |

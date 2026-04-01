@@ -17,7 +17,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 |------|------|
 | Linear ID | `PRJ-N` — 완료 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, SC), type, relations |
-| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — Tasks 완료 상태 확인 + Outcome 기록 대상 (**feature/improvement-standard만**) |
+| plan.md | `docs/issue/{LINEAR-ID}/plan.md` — Tasks 완료 상태 확인 + Outcome 기록 대상 (**feature/improvement-standard/improvement-deep**) |
 | 검증 결과 | verify Skill 산출물 |
 | 참조 문서 목록 | Linear description Documents 섹션에서 추출한 참조 경로 목록 |
 
@@ -39,7 +39,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 |------|------|
 | 1 (G1) | **구현 결과 수집**: type별 소스에서 구현 결과를 수집한다. 아래 §구현 결과 수집 참조 |
 | 2 (G2) | **자동 진행**: 구현 결과 요약을 로그로 출력하고 즉시 다음 단계로 진행. 별도 사용자 승인 불필요 |
-| 3 (G3) | **plan.md Outcome 기록**: plan.md가 존재하는 type만 수행 (feature/improvement-standard). Outcome 섹션에 구현 결과 요약 기록 |
+| 3 (G3) | **plan.md Outcome 기록**: plan.md가 존재하는 type만 수행 (feature/improvement-standard/improvement-deep). Outcome 섹션에 구현 결과 요약 기록 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |
 | 5 (G3) | **Linear comment 기록**: Linear MCP로 완료 요약 기록. 아래 §Linear comment 참조 |
 | 5a (G3) | **Linear description 최종 미러링**: 아래 §Linear description 미러링 참조 |
@@ -51,12 +51,12 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 
 | 항목 | 적용 type | 내용 |
 |------|----------|------|
-| plan.md Outcome | feature, improvement-standard | `## Outcome` 섹션에 구현 결과 요약 기록 |
+| plan.md Outcome | feature, improvement-standard/deep | `## Outcome` 섹션에 구현 결과 요약 기록 |
 | Linear | 전 type | State → Done |
 | Linear comment | 전 type | 완료 요약 + Git 작업 기록 |
-| Linear description | feature, improvement-standard | 최종 상태 미러링 (1회성 스냅샷) |
-| 후행 Issue | feature, improvement-standard | Linear comment 환류 메시지 (대상 존재 시) |
-| spec 문서 | feature, improvement-standard | Change Log 갱신 (링크된 spec 존재 시) |
+| Linear description | feature, improvement-standard/deep | 최종 상태 미러링 (1회성 스냅샷) |
+| 후행 Issue | feature, improvement-standard/deep | Linear comment 환류 메시지 (대상 존재 시) |
+| spec 문서 | feature, improvement-standard/deep | Change Log 갱신 (링크된 spec 존재 시) |
 | 참조 문서 | 전 type | Documents/Reference에 등록된 .md 문서 내용 갱신 (구현 결과 반영) |
 
 ---
@@ -163,7 +163,7 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 |------|------|
 | 6-1 | Linear MCP로 현재 Issue의 relations 조회 → `blocked-by` 역참조 Issue 목록 수집 |
 | 6-1a | **조기 종료**: relations가 없거나 `blocked-by` 역참조가 없으면 환류 없이 완료 처리 종료 |
-| 6-2 | Linear MCP: 후행 Issue에 환류 comment 추가 — `Blocked-by {LINEAR-ID} 완료 — {1줄 요약}. docs/issue/{LINEAR-ID}/` |
+| 6-2 | Linear MCP: 후행 Issue에 환류 comment 추가 — **Git 폴더 존재 type(feature/improvement-standard/deep)**: `Blocked-by {LINEAR-ID} 완료 — {1줄 요약}. docs/issue/{LINEAR-ID}/` / **Git 폴더 미존재 type(bug/improvement-light)**: `Blocked-by {LINEAR-ID} 완료 — {1줄 요약}.` (docs 경로 생략) |
 
 ---
 
@@ -250,7 +250,7 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 |------|----------|------|
 | State → Done 전이 | 전 type | G3 단계 |
 | 구현 결과 요약 + Git 작업 기록 comment | 전 type | 완료 처리 시 |
-| description 최종 상태 미러링 | feature, improvement-standard | 1회성 스냅샷 |
-| blocked-by 역참조 Issue 조회 | feature, improvement-standard | 후행 Issue 환류용 |
-| 후행 Issue에 환류 comment | feature, improvement-standard | 대상 존재 시 (`Blocked-by {ID} 완료 — {요약}. docs/issue/{ID}/`) |
+| description 최종 상태 미러링 | feature, improvement-standard/deep | 1회성 스냅샷 |
+| blocked-by 역참조 Issue 조회 | 전 type (blocked-by 역참조 존재 시) | 후행 Issue 환류용 |
+| 후행 Issue에 환류 comment | 전 type (blocked-by 역참조 존재 시) | 대상 존재 시. Git 폴더 존재 type은 docs 경로 포함, 미존재 type은 경로 생략 |
 | description Documents 섹션 읽기 | bug, improvement-light | 참조 문서 수집용 (§8) |
