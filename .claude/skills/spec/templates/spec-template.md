@@ -154,7 +154,7 @@ technical.md는 **계약 수준(contract-level)** 설계만 기술한다.
 | 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2 |
 | 금지 유형 | gantt, pie, mindmap, classDiagram (erDiagram은 technical.md에서만 예외 허용) |
 | 크기 제한 | 노드 20개 이하, 엣지 30개 이하. 초과 시 분할 |
-| 사용 위치 | technical.md, roadmap.md. _index.md, requirements.md 금지. (plan.md는 별도 규칙 — [plan-template.md](../../gen-plan/templates/plan-template.md) 참조) |
+| 사용 위치 | technical.md, roadmap.md. _index.md, requirements.md 금지. (plan.md는 별도 규칙 — [gen-plan SKILL.md](../../gen-plan/SKILL.md) §plan.md 보존 구조 참조) |
 
 ### 설계 요소별 권장 Mermaid 패턴
 

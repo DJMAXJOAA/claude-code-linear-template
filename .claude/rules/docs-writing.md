@@ -143,7 +143,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 작성 스타일 | 테이블, 불릿 위주. 서술형 최소화 |
 | 설명 필요 시 | 표의 "설명" 컬럼 활용 |
 | 실행 스크립트 금지 | bash, python, JSON 스키마 등 코드 블록 포함 금지 (청사진 원칙) |
-| 예외 | frontmatter/템플릿 예시, 의사코드, Mermaid는 허용. 상세: [plan-template.md](../skills/gen-plan/templates/plan-template.md), [spec-template.md](../skills/spec/templates/spec-template.md) |
+| 예외 | frontmatter/템플릿 예시, 의사코드, Mermaid는 허용. 상세: [gen-plan SKILL.md](../skills/gen-plan/SKILL.md), [spec-template.md](../skills/spec/templates/spec-template.md) |
 
 ---
 
