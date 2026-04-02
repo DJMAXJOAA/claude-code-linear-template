@@ -64,7 +64,7 @@ Agent chain: `code-reviewer → plan → architect → executor → verify → s
 |------|------|
 | 0 (G3) | **Linear State → Planning 전이**: 프로세스 시작 전 즉시 수행 |
 | 1 (G1) | **code-reviewer**: `oh-my-claudecode:code-reviewer` 호출. Linear description + 코드베이스 컨텍스트를 input으로 전달. 리뷰 결과를 수정 방향에 반영 |
-| 2 (G1) | **plan**: `docs/issue/{LINEAR-ID}/plan.md` 생성 (Git 문서). 변경 의도 + 대상 파일 + 태스크 목록 포함 |
+| 2 (G1) | **plan + technical**: `docs/issue/{LINEAR-ID}/plan.md` + `docs/issue/{LINEAR-ID}/technical.md` 생성 (Git 문서). 변경 의도 + 대상 파일 + 태스크 목록 포함 |
 | 3 (G1) | **spec.md 생성**: `docs/issue/{LINEAR-ID}/spec.md` 생성 |
 | 4 (G1) | **Git 폴더 생성 (미존재 시에만)**: `docs/issue/{LINEAR-ID}/` 폴더 생성. 이미 존재하면 스킵 |
 | 5 (G1) | **architect 검토**: `oh-my-claudecode:architect` 호출. plan.md 기반 설계 검토. 피드백을 plan.md에 반영 |
@@ -79,7 +79,7 @@ Agent chain: `code-reviewer → plan → architect → executor → verify → s
 
 > verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 8로 복귀
 >
-> **plan = Git 문서**: `docs/issue/{LINEAR-ID}/plan.md`로 저장.
+> **plan + technical = Git 문서**: `docs/issue/{LINEAR-ID}/plan.md` + `docs/issue/{LINEAR-ID}/technical.md`로 저장.
 > **simplify(skill)**: verify 후 마지막 정리 단계. `oh-my-claudecode:simplify` 호출.
 
 ---
@@ -144,7 +144,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 | 항목 | 내용 |
 |------|------|
 | 코드 변경 | plan.md Tasks에 명시된 범위의 코드 + 테스트 |
-| Git 문서 | `docs/issue/{LINEAR-ID}/` — spec.md, plan.md, prd.json, progress.txt |
+| Git 문서 | `docs/issue/{LINEAR-ID}/` — spec.md, plan.md, technical.md, prd.json, progress.txt |
 | 커밋 | Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | Linear comment | verify 완료 후 1회 |
 | Linear | State → In Review (verify PASS 시) |
