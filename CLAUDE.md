@@ -29,7 +29,7 @@
 | `src/` | 프로젝트 소스코드 |
 | *(프로젝트별 추가)* | *(레이어/모듈 구조 등)* |
 
-> 프레임워크 고정 경로(`docs/issue/`, `docs/adr/`, `.claude/` 등)는 [ID System](#framework-id-system) 참조
+> 프레임워크 고정 경로(`docs/issue/`, `.claude/` 등)는 [ID System](#framework-id-system) 참조
 
 ## Project Rules
 
@@ -44,7 +44,7 @@
 |------|------|------|
 | 프레임워크 가이드 | [docs/guides/framework.md](docs/guides/framework.md) | 핵심 원칙, 3영역 SSOT |
 | 컨텍스트 관리 | [docs/guides/context.md](docs/guides/context.md) | Progressive Disclosure, 토큰 관리 |
-| Spec 인덱스 | [docs/spec/_index.md](docs/spec/_index.md) | 기능 명세 인덱스 |
+| Spec 인덱스 | [docs/spec/overview.md](docs/spec/overview.md) | 기능 명세 인덱스 |
 | *(프로젝트별 추가)* | *(경로)* | *(설명)* |
 
 <!-- ============ FRAMEWORK ============ -->
@@ -87,12 +87,19 @@
 ## Framework: ID System
 
 - Issue: Linear ID (`PRJ-47`) — `docs/issue/PRJ-47/` 폴더에 문서 (feature, improvement만. bug는 Git 폴더 미생성). `issue_type` frontmatter로 feature/bug/improvement 구분
-- 태스크: `T-{LINEAR-ID}-NN`, ADR: `ADR-NNNN`, 보고서: `RPT-*`
+- 태스크: `T-{LINEAR-ID}-NN`, 보고서: `RPT-*`
 - feature, improvement(Standard/Deep)만 Git 폴더 생성. improvement-Light 및 bug는 Git 폴더 미생성
 - 폴더 내 파일: `spec.md`(항상) + `plan.md`, `technical.md`(Planning 시) + `prd.json`, `progress.txt`(In Progress 시)
-- Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택))
+- Spec: `docs/spec/{spec-name}/` (kebab-case 디렉토리, `overview.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택))
 - FR-ID: `FR-NNN` (spec-local, 각 spec 내 순차). 외부 참조: `{spec-name}:FR-NNN`. EARS 형식 요구사항
 - 상세: [.claude/rules/docs-writing.md](.claude/rules/docs-writing.md)
+
+## Framework: Directory Index
+
+- 디렉토리 탐색 시 `AGENTS.md` 파일을 인덱스로 사용 (목적, 주요 파일, 하위 디렉토리, AI 작업 지침)
+- `deepinit`으로 일괄 생성/갱신. `.gitignore` 대상 (코드에서 파생 가능)
+- 코드 구현 전 관련 디렉토리의 `AGENTS.md`를 읽어 기존 유틸리티·서비스와의 중복 방지
+- Spec 허브 문서는 `overview.md` (AGENTS.md와 별도, Git 추적 대상)
 
 ## Framework: Rules Delegation
 
@@ -107,7 +114,6 @@
 
 - 운영 환경 직접 배포 금지 (CI/CD 경유)
 - Secrets / API 키 커밋 금지
-- ADR 직접 수정 금지 (새 ADR로 supersede)
 - CLAUDE.md 200줄 초과 금지
 - 문서에 실행 스크립트(bash/python/JSON) 포함 금지
 - 상태의 Git 중복 기록 금지 (Linear SSOT)

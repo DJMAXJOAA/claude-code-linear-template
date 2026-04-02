@@ -15,7 +15,7 @@ created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 ---
 
-> ← [_index.md](./_index.md)
+> ← [overview.md](./overview.md)
 
 ## Functional Requirements
 
@@ -56,7 +56,7 @@ updated: {YYYY-MM-DD}
 | Non-Functional Requirements | △ | 성능, 보안, 호환성 등. 측정 가능한 기준 |
 | UI/UX Specifications | △ | 화면 구성, 인터랙션 |
 
-> **Out of Scope는 이 문서에 포함하지 않는다.** Out of Scope는 `_index.md`에만 위치 (SSOT 단일화).
+> **Out of Scope는 이 문서에 포함하지 않는다.** Out of Scope는 `overview.md`에만 위치 (SSOT 단일화).
 
 > **금지**: 특정 라이브러리명, 함수명, 구현 패턴 언급. 이는 technical.md 또는 Issue plan.md 영역.
 

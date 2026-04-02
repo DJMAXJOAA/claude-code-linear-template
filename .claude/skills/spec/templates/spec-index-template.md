@@ -1,4 +1,4 @@
-# spec `_index.md` 템플릿
+# spec `overview.md` 템플릿
 
 spec 디렉토리의 진입점. Overview, Out of Scope, 문서 목록, 관련 이슈, 변경 이력을 포함한다.
 
@@ -14,7 +14,7 @@ created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 ---
 
-> ← [Spec Index](../_index.md)
+> ← [Spec Index](../overview.md)
 
 ## Overview
 
@@ -65,7 +65,7 @@ updated: {YYYY-MM-DD}
 | 섹션 | 필수 | 비고 |
 |------|:----:|------|
 | Overview | O | What + Why + Scope. 각 1문장 |
-| Out of Scope | O | 경계 명확화. 불릿 목록. **이 섹션은 _index.md에만 존재** (SSOT 단일화) |
+| Out of Scope | O | 경계 명확화. 불릿 목록. **이 섹션은 overview.md에만 존재** (SSOT 단일화) |
 | Documents | O | 고정 3파일 + roadmap 선택 표기 |
 | References | △ | G2 보고서 존재 시에만 |
 | Decisions | △ | 설계 결정 테이블. 4-컬럼: ID / 결정 / 근거 / 대안. Constraints는 `requirements.md`로 링크 (SSOT) |

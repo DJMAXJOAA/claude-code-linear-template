@@ -175,12 +175,12 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 |------|------|
 | 7-1 | Linear description Documents 섹션에서 Spec 행 확인. 없으면 스킵 |
 | 7-2 | spec 디렉토리 (`docs/spec/{spec-name}/`) 존재 확인. 경로/링크 없으면 무시 (필수 아님) |
-| 7-3 | spec `_index.md`의 `## Change Log`에 변경 이력 추가. 확장된 4-컬럼 형식(날짜/FR-ID/변경유형/변경내용) 사용, 영향 FR-ID 특정 (spec-template.md 참조) |
+| 7-3 | spec `overview.md`의 `## Change Log`에 변경 이력 추가. 확장된 4-컬럼 형식(날짜/FR-ID/변경유형/변경내용) 사용, 영향 FR-ID 특정 (spec-template.md 참조) |
 | 7-4 | spec frontmatter `updated` 날짜 갱신 |
-| 7-5 | `docs/spec/_index.md` 글로벌 목록 테이블 자동 갱신 |
+| 7-5 | `docs/spec/overview.md` 글로벌 목록 테이블 갱신 |
 
 > spec 본문 갱신(`requirements.md`, `technical.md` 등)은 §8 참조 문서 내용 동기화에서 통합 처리. §7은 메타데이터(Change Log, frontmatter) 전용.
-> spec 전체 로드 대신 `_index.md`의 Change Log 섹션만 선택적 로드 (컨텍스트 절약). 경로/링크 없으면 무시.
+> spec 전체 로드 대신 `overview.md`의 Change Log 섹션만 선택적 로드 (컨텍스트 절약). 경로/링크 없으면 무시.
 
 ---
 
@@ -204,7 +204,7 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 | 경로가 `.md` 파일 또는 spec 디렉토리 (`docs/spec/{name}/`) | 갱신 대상 ✅ |
 | 경로가 코드 파일, 외부 URL, 비존재 파일 | 스킵 ❌ |
 | spec 디렉토리 참조 | `requirements.md` + `technical.md` + `roadmap.md`(존재 시)를 개별 갱신 대상으로 전개 |
-| Index 행 (spec `_index.md`), Plan, Checklist, progress.txt | 스킵 (이미 다른 단계에서 처리) |
+| Index 행 (spec `overview.md`), Plan, Checklist, progress.txt | 스킵 (이미 다른 단계에서 처리) |
 
 ### 단계별 프로세스
 

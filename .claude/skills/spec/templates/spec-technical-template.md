@@ -15,7 +15,7 @@ created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 ---
 
-> ← [_index.md](./_index.md)
+> ← [overview.md](./overview.md)
 
 <!--
   계약 수준 경계:

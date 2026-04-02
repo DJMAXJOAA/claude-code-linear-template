@@ -34,7 +34,7 @@ Linear (상태 SSOT)          Git (지식 SSOT)           Claude Code (실행)
 ├─ Priority                 ├─ Decisions, Constraints
 ├─ Overview / SC            ├─ 구현 결과
 └─ Activity (자동 이력)     ├─ Spec (docs/spec/)
-                            └─ ADR, 도메인 지식
+                            └─ 도메인 지식 (docs/shared/)
 ```
 
 ### 교차 복제 금지 규칙

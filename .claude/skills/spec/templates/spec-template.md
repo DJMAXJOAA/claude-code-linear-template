@@ -2,7 +2,7 @@
 
 이 파일이 spec 문서의 **공통 규칙 SSOT**이다. 개별 문서 템플릿은 별도 파일로 분리되어 있다.
 
-- `_index.md` 템플릿: [spec-index-template.md](./spec-index-template.md)
+- `overview.md` 템플릿: [spec-index-template.md](./spec-index-template.md)
 - `requirements.md` 템플릿: [spec-requirements-template.md](./spec-requirements-template.md)
 - `technical.md` 템플릿: [spec-technical-template.md](./spec-technical-template.md)
 - `roadmap.md` 템플릿: [spec-roadmap-template.md](./spec-roadmap-template.md)
@@ -16,12 +16,12 @@
 |------|------|
 | 생성 시점 | `/스펙` 커맨드 호출 시 항상 생성 |
 | 디렉토리 위치 | `docs/spec/{spec-name}/` — kebab-case |
-| 디렉토리 구성 | `_index.md` + `requirements.md` + `technical.md` (필수) + `roadmap.md` (선택) + `references/` (선택) |
+| 디렉토리 구성 | `overview.md` + `requirements.md` + `technical.md` (필수) + `roadmap.md` (선택) + `references/` (선택) |
 | references 디렉토리 | (선택) `docs/spec/{name}/references/` — G2 조사에서 보고서 생성 시에만. 보고서 없으면 디렉토리 자체 미생성 |
 | 깊이 제한 | 2depth (`docs/spec/{name}/{doc}.md`), references는 예외 (`docs/spec/{name}/references/{report}.md`) |
 | 생명주기 | Living document — 갱신 가능하나 갱신 필수 아님 |
 | 갱신 주체 | `/스펙`(초기 생성/재호출), issue-close(Issue 완료 시 연동 갱신 — 경로/링크 없으면 무시) |
-| 글로벌 _index.md 갱신 | spec 생성/갱신 시 `docs/spec/_index.md` 자동 갱신 |
+| 글로벌 overview.md 갱신 | spec 생성/갱신 시 `docs/spec/overview.md` 자동 갱신 |
 | 앵커 참조 | 각 문서의 `##` 헤딩이 Linear Document에서 앵커로 링크 가능 (GitHub 호환) |
 
 ## 문서 분할 원칙
@@ -30,7 +30,7 @@
 
 | 문서 | 필수 | 성격 | 핵심 질문 | 금지 |
 |------|:----:|------|----------|------|
-| `_index.md` | O | 허브 / Overview / Decisions | 이 기능은 무엇이고 왜 필요한가? 어떤 결정을 내렸는가? | 상세 명세 |
+| `overview.md` | O | 허브 / Overview / Decisions | 이 기능은 무엇이고 왜 필요한가? 어떤 결정을 내렸는가? | 상세 명세 |
 | `requirements.md` | O | 기능 요구사항 | 시스템이 무엇을 해야 하는가? | How(구현), 라이브러리명, 인터페이스 설계 |
 | `technical.md` | O | 기술 설계 | 어떤 구조로 만들 것인가? | 내부 로직/알고리즘 상세 |
 | `roadmap.md` | △ | 구현 로드맵 | 어떤 순서로 나눠서 만들 것인가? | 태스크 수준 상세 계획 |
@@ -39,13 +39,13 @@
 
 ## 문서 유형
 
-### 1. `_index.md` — 디렉토리 허브
+### 1. `overview.md` — 디렉토리 허브
 
 | 항목 | 규칙 |
 |------|------|
 | 역할 | Overview + Out of Scope + 문서 목록 + Decisions(선택) + 변경 이력. standalone readable |
 | frontmatter | `title`, `type: spec`, `created`, `updated` |
-| Nav Link | `> ← [Spec Index](../_index.md)` |
+| Nav Link | `> ← [Spec Index](../overview.md)` |
 | 템플릿 | [spec-index-template.md](./spec-index-template.md) |
 
 ### 2. `requirements.md` — 기능 요구사항
@@ -54,7 +54,7 @@
 |------|------|
 | 역할 | 기능적 요구사항 명세 (What/Why). 정책, 시나리오 |
 | frontmatter | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` |
-| Nav Link | `> ← [_index.md](./_index.md)` |
+| Nav Link | `> ← [overview.md](./overview.md)` |
 | 포함 | FR(EARS), Constraints & Dependencies, NFR(선택), UI/UX(선택) |
 | 템플릿 | [spec-requirements-template.md](./spec-requirements-template.md) |
 
@@ -64,7 +64,7 @@
 |------|------|
 | 역할 | 계약 수준 기술 설계. 상세 구현 X |
 | frontmatter | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` |
-| Nav Link | `> ← [_index.md](./_index.md)` |
+| Nav Link | `> ← [overview.md](./overview.md)` |
 | 포함 | 설계 원칙, 인터페이스, API/함수 시그니처, 데이터 모델 |
 | 상세도 | 시그니처 + 역할 수준. 내부 로직은 각 Issue plan.md에서 처리 |
 | 템플릿 | [spec-technical-template.md](./spec-technical-template.md) |
@@ -76,7 +76,7 @@
 | 역할 | Feature를 Issue로 분할하는 전략. 의존성, 우선순위, 리스크 |
 | 생성 조건 | 2+ Issue 분할 예상 시에만 |
 | frontmatter | `title`, `type: spec`, `parent-spec: {spec-name}`, `created`, `updated` |
-| Nav Link | `> ← [_index.md](./_index.md)` |
+| Nav Link | `> ← [overview.md](./overview.md)` |
 | 상세도 | Issue 단위 개요. 각 Issue의 상세 계획은 해당 Issue plan.md에서 처리 |
 | 템플릿 | [spec-roadmap-template.md](./spec-roadmap-template.md) |
 
@@ -90,7 +90,7 @@
 | 위치 | `docs/spec/{spec-name}/references/` |
 | 생성 조건 | G2 조사에서 보고서 수준 결과 생성 시에만 |
 | frontmatter | `title`, `type: spec-reference`, `parent-spec: {spec-name}`, `created` |
-| Nav Link | `> ← [_index.md](../_index.md)` |
+| Nav Link | `> ← [overview.md](../overview.md)` |
 | 불변 원칙 | 완료된 보고서는 수정 금지 — 새 보고서로 대체 |
 | 템플릿 | [spec-reference-template.md](./spec-reference-template.md) |
 
@@ -145,7 +145,7 @@ technical.md는 **계약 수준(contract-level)** 설계만 기술한다.
 
 ## Constraints 소속 규칙
 
-> **Constraints & Dependencies는 `requirements.md`에만 위치 (SSOT)**. `_index.md`의 Decisions에서 Constraints를 참조할 때는 `requirements.md`로의 링크를 사용한다. `_index.md`에 Constraints를 중복 기재하지 않는다.
+> **Constraints & Dependencies는 `requirements.md`에만 위치 (SSOT)**. `overview.md`의 Decisions에서 Constraints를 참조할 때는 `requirements.md`로의 링크를 사용한다. `overview.md`에 Constraints를 중복 기재하지 않는다.
 
 ## Mermaid 가이드라인
 
@@ -154,7 +154,7 @@ technical.md는 **계약 수준(contract-level)** 설계만 기술한다.
 | 허용 유형 | flowchart, sequenceDiagram, stateDiagram-v2 |
 | 금지 유형 | gantt, pie, mindmap, classDiagram (erDiagram은 technical.md에서만 예외 허용) |
 | 크기 제한 | 노드 20개 이하, 엣지 30개 이하. 초과 시 분할 |
-| 사용 위치 | technical.md, roadmap.md. _index.md, requirements.md 금지. (plan.md는 별도 규칙 — [gen-plan SKILL.md](../../gen-plan/SKILL.md) §plan.md 보존 구조 참조) |
+| 사용 위치 | technical.md, roadmap.md. overview.md, requirements.md 금지. (plan.md는 별도 규칙 — [gen-plan SKILL.md](../../gen-plan/SKILL.md) §plan.md 보존 구조 참조) |
 
 ### 설계 요소별 권장 Mermaid 패턴
 

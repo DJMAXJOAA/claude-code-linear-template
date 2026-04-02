@@ -38,7 +38,7 @@ G1 재호출/재생성 경로:
 |------|------|------|
 | **덮어쓰기** | 동일 이름 디렉토리 존재 | 기존 파일 목록 diff 제시 → 유저 확인 후 덮어쓰기 |
 | **새 디렉토리로 재생성** | 기존 spec 내용을 기반으로 새 구조로 재작성 | 새 kebab-case 디렉토리명 결정 → 기존 spec과 독립된 문서 생성. 기존 spec은 유지/삭제 유저 선택 |
-| **마이그레이션** | 기존 spec이 도메인별 분할(레거시) | 새 고정 구조로 내용 재분류. 기존 _index.md의 Change Log 보존 |
+| **마이그레이션** | 기존 spec이 도메인별 분할(레거시) | 새 고정 구조로 내용 재분류. 기존 overview.md의 Change Log 보존 |
 
 > G1 출력: 기능 제목, 설명, 기존 spec 상태(신규/재호출/재생성/관련 존재), 선택된 경로 → `AskUserQuestion`으로 유저 확인
 
@@ -86,7 +86,7 @@ deep-interview 요구사항 범위 — `requirements.md` 대응:
 | 3a-1 | **자동 검증 실행**: G3 확정 요구사항에 대해 5개 검증 항목 자동 평가 |
 | 3a-2 | **결과 제시**: 검증 결과를 PASS/WARN/FAIL로 제시 |
 | 3a-3 | **전체 PASS 시**: 검증 결과를 출력하고 G4로 자동 진행. `AskUserQuestion` 불필요 |
-| 3a-4 | **FAIL 존재 시 사용자 선택**: `AskUserQuestion`으로 (a) 자동 수정 적용 (AI 권장) → 수정 적용 후 **G3a 재검증 1회 자동 수행**. 재검증 전체 PASS → G4 진행. 재검증 FAIL → 사용자 선택으로 복귀. **재검증 루프 상한: 2회** (자동 수정 2회 소진 시 사용자에게 수동 수정/무시 선택) (b) 수동 수정 (c) 무시하고 진행 (사유 기록 필수 — `_index.md` Notes에 `G3a override: {사유}` 자동 기입) |
+| 3a-4 | **FAIL 존재 시 사용자 선택**: `AskUserQuestion`으로 (a) 자동 수정 적용 (AI 권장) → 수정 적용 후 **G3a 재검증 1회 자동 수행**. 재검증 전체 PASS → G4 진행. 재검증 FAIL → 사용자 선택으로 복귀. **재검증 루프 상한: 2회** (자동 수정 2회 소진 시 사용자에게 수동 수정/무시 선택) (b) 수동 수정 (c) 무시하고 진행 (사유 기록 필수 — `overview.md` Notes에 `G3a override: {사유}` 자동 기입) |
 
 G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
@@ -119,14 +119,14 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 |------|------|
 | 5-1 | **spec 문서 작성**: 각 템플릿 기반으로 고정 구조 문서 작성. EARS 최종 적용. G2 보고서가 있으면 `references/` 하위에 보고서 파일도 작성 |
 | 5-2 | **spec 디렉토리 저장**: `docs/spec/{spec-name}/` 디렉토리 + 전체 문서 저장 (kebab-case) |
-| 5-3 | **글로벌 _index.md 갱신**: `docs/spec/_index.md` 목록 테이블에 신규 행 추가 |
+| 5-3 | **글로벌 overview.md 갱신**: `docs/spec/overview.md` 목록 테이블에 신규 행 추가 |
 | 5-4 | **Linear Document 생성 (선택)**: 승인 시 Linear MCP로 Document 생성 |
 
 생성 파일 목록:
 
 | 파일 | 필수 | 템플릿 |
 |------|:----:|--------|
-| `_index.md` | O | [spec-index-template.md](templates/spec-index-template.md) |
+| `overview.md` | O | [spec-index-template.md](templates/spec-index-template.md) |
 | `requirements.md` | O | [spec-requirements-template.md](templates/spec-requirements-template.md) |
 | `technical.md` | O | [spec-technical-template.md](templates/spec-technical-template.md) |
 | `roadmap.md` | △ | [spec-roadmap-template.md](templates/spec-roadmap-template.md) |
@@ -138,9 +138,9 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
 | 항목 | 내용 |
 |------|------|
-| spec 디렉토리 | `docs/spec/{spec-name}/` — `_index.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택, 참조 문서 — 실제 Issue 생성은 `/등록` 경유) |
+| spec 디렉토리 | `docs/spec/{spec-name}/` — `overview.md` + `requirements.md` + `technical.md` + `roadmap.md`(선택, 참조 문서 — 실제 Issue 생성은 `/등록` 경유) |
 | references 디렉토리 | (선택) `docs/spec/{spec-name}/references/` — 조사 보고서. G2에서 보고서 생성 시에만 |
-| spec 글로벌 인덱스 | `docs/spec/_index.md` 자동 갱신 |
+| spec 글로벌 인덱스 | `docs/spec/overview.md` 갱신 |
 | Linear Document | (선택) `[Spec] {제목}` — spec Git 링크 + 문서별 앵커 포함 |
 
 ---
@@ -197,8 +197,8 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
 | 규칙 | 내용 |
 |------|------|
-| **전 경로 공통** | **기존 `_index.md`의 Change Log는 보존한다 (덮어쓰기/마이그레이션 모두 적용)** |
+| **전 경로 공통** | **기존 `overview.md`의 Change Log는 보존한다 (덮어쓰기/마이그레이션 모두 적용)** |
 | 구조 변환 | 기존 도메인별 하위 문서 → 고정 구조(requirements.md, technical.md)로 내용 재분류 |
 | roadmap 스킵 | 기존 하위 문서에서 roadmap에 해당하는 내용이 없으면 roadmap.md 생성 스킵 |
-| _index.md 유지 | 기존 _index.md의 Change Log는 보존 |
+| overview.md 유지 | 기존 overview.md의 Change Log는 보존 |
 | references 유지 | 기존 references/ 디렉토리가 있으면 그대로 유지 |

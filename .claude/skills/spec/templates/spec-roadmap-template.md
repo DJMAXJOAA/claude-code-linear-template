@@ -17,7 +17,7 @@ created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 ---
 
-> ← [_index.md](./_index.md)
+> ← [overview.md](./overview.md)
 
 ## Issue 분할 전략
 

@@ -15,7 +15,7 @@ parent-spec: {spec-name}
 created: {YYYY-MM-DD}
 ---
 
-> ← [_index.md](../_index.md)
+> ← [overview.md](../overview.md)
 
 ## 조사 배경
 
