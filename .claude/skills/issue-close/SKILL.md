@@ -16,7 +16,7 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 | 항목 | 설명 |
 |------|------|
 | Linear ID | `PRJ-N` — 완료 대상 Issue 식별자 |
-| Linear Issue 정보 | description (Overview, SC), type, relations |
+| Linear Issue 정보 | description (Overview, SC), type, relations — `linear_payload` 전달 시 해당 정보 사용 (Linear MCP 조회 스킵). 미전달 시 Linear MCP로 직접 조회 |
 | plan.md | `docs/issue/{LINEAR-ID}/plan.md` — Tasks 완료 상태 확인 + Outcome 기록 대상 (**feature/improvement-standard/improvement-deep**) |
 | 검증 결과 | verify Skill 산출물 |
 | 참조 문서 목록 | Linear description Documents 섹션에서 추출한 참조 경로 목록 |
@@ -240,7 +240,7 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 
 > issue-close 자체는 에이전트 연동 없음.
 
-> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
+> OMC 비활성 시: pipeline.md §7 참조.
 
 ---
 

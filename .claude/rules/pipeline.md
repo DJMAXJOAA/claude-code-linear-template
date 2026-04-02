@@ -146,6 +146,15 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 
 > 구체적 MCP 파라미터는 각 스킬의 `### Linear MCP` 섹션에 명시.
 
+### 4-1a. Issue 생성 공통 규칙
+
+| 규칙 | 내용 |
+|------|------|
+| **gen-hub 경유 필수** | 모든 Linear Issue 생성(신규 Issue, sub-issue 포함)은 반드시 gen-hub 스킬을 호출하여 수행한다. `save_issue` MCP를 직접 호출하여 Issue를 생성하지 않는다 |
+| description 템플릿 필수 | gen-hub G2의 type별 description 템플릿([templates/issue-descriptions.md](../skills/gen-hub/templates/issue-descriptions.md))을 반드시 적용한다. 템플릿 없이 자유 형식 description 생성 금지 |
+| 호출 패턴 | 외부 스킬이 gen-hub를 호출할 때: (1) 이미 확보된 정보(title, type, description 초안, parentId 등)를 파라미터로 전달, (2) gen-hub가 중복 단계(사용자 입력 수집 등)를 자동 생략, (3) 템플릿 적용·Linear 생성·Git 폴더 생성은 gen-hub가 수행 |
+| 적용 대상 | triage G4b(L3/backlog sub-issue), 배치 등록, 단건 등록 등 모든 Issue 생성 경로 |
+
 ### 4-2. 장애 시 fallback
 
 | 상황 | 행동 |

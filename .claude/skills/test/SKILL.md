@@ -73,7 +73,7 @@ description: "테스트 전략 수립 및 실행. 사용자 요청 시 또는 im
 |------|---------|------|
 | 테스트 작성/실행 | `oh-my-claudecode:test-engineer` | sonnet |
 
-> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
+> OMC 비활성 시: pipeline.md §7 참조.
 
 ---
 

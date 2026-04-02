@@ -39,7 +39,7 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, ralplan을 통해 `d
 
 | 단계 | 행위 |
 |------|------|
-| 1 (G1) | **Linear Issue 정보 읽기**: Linear MCP로 description(Summary, SC), type, relations 조회 |
+| 1 (G1) | **Linear Issue 정보 읽기**: `linear_payload` 전달 시 해당 정보 사용 (Linear MCP 조회 스킵). 미전달 시 Linear MCP로 description(Summary, SC), type, relations 조회 |
 | 2 (G1) | **Related Issue 교차 참조**: Linear relations에서 related/blocked-by Issue 목록 수집 → 해당 Issue의 `docs/issue/{ID}/plan.md`에서 `## Outcome` 섹션 읽기 → 설계 이탈, 미해결 이슈 확인 |
 | 2a (G2) | **intensity별 실행 경로 결정**: intensity 값에 따라 자동 분기 — Light: ralplan 미호출, `oh-my-claudecode:planner` 호출하여 간소 spec.md + plan.md 생성 (technical.md 미생성). Standard: ralplan 일반 모드 호출. Deep: ralplan `--deliberate` 모드 강제 호출 (항상 interactive) |
 | 3 (G1) | **ralplan 호출 (Standard/Deep만)**: 선택된 모드로 ralplan 호출. spec.md + Linear SC + Related Issue 환류 + 코드 조사 결과 + 설계 결정을 전달하여 plan.md + technical.md 함께 생성 (§ralplan 호출 지시 패턴 참조). Light intensity는 이 단계를 스킵하고 planner 산출물을 사용 |

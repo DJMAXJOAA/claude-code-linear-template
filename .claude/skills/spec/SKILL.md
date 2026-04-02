@@ -154,7 +154,7 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 | 요구사항 결정화 (G3) | `oh-my-claudecode:deep-interview` | opus | ambiguity threshold 게이팅 |
 | 기술 설계 (G4) | `oh-my-claudecode:ralplan` | opus | --deliberate, interactive |
 
-> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
+> OMC 비활성 시: pipeline.md §7 참조.
 
 ---
 

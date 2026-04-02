@@ -17,7 +17,7 @@ bug type Issue의 수정 프로세스를 오케스트레이션한다. dev-pipeli
 | 항목 | 설명 |
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
-| Linear Issue 정보 | description (Summary, Success Criteria) |
+| Linear Issue 정보 | description (Summary, Success Criteria) — `linear_payload` 전달 시 해당 정보 사용 (Linear MCP 조회 스킵). 미전달 시 Linear MCP로 직접 조회 |
 | Intensity | `Light` 또는 `Deep` — dev-pipeline에서 결정됨 |
 
 ## Intensity 기반 프로세스 분기
@@ -148,7 +148,7 @@ Git 문서 대신 **Linear comment**로 전 과정을 기록한다.
 | Deep | `oh-my-claudecode:qa-tester` (선택) | sonnet |
 | Deep | `oh-my-claudecode:verify` | sonnet |
 
-> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
+> OMC 비활성 시: pipeline.md §7 참조.
 
 ---
 

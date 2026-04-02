@@ -148,7 +148,7 @@ cleanup 스킬은 "사후 문서화" 컨텍스트에서 다음 섹션의 생성/
 | diff 분석 + 의도 추론 | 직접 수행 | sonnet |
 | 대규모 변경 시 분석 | `oh-my-claudecode:explore` | haiku |
 
-> OMC 비활성 시 기본 모델로 직접 수행. 비활성 감지 시 사용자에게 알림.
+> OMC 비활성 시: pipeline.md §7 참조.
 
 ---
 

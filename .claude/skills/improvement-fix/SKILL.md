@@ -21,7 +21,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. in
 | 항목 | 설명 |
 |------|------|
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
-| Linear Issue 정보 | description (Overview, Change Scope, Success Criteria) |
+| Linear Issue 정보 | description (Overview, Change Scope, Success Criteria) — `linear_payload` 전달 시 해당 정보 사용 (Linear MCP 조회 스킵). 미전달 시 Linear MCP로 직접 조회 |
 | intensity | `Light` / `Standard` / `Deep` — dev-pipeline에서 판별하여 전달 |
 
 ---
@@ -46,7 +46,7 @@ Agent chain: `code-reviewer → plan(터미널) → executor → verify → simp
 | 10 (G3) | verify PASS 시: **Linear State → In Review** + 변경 요약 **Linear comment** 기록 |
 | 11 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** |
 
-> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀
+> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) improvement type 전환 (c) In Review에서 사용자 수동 확인으로 전환 선택.
 >
 > **Git 폴더 미생성**: Light는 spec.md, plan.md, Git 폴더를 생성하지 않는다. Linear comment로 로그를 남긴다.
 > **plan(터미널)**: 실행 전 터미널에 수정 계획 간략 출력만 (Git 문서 아님).
@@ -77,7 +77,7 @@ Agent chain: `code-reviewer → plan → architect → executor → verify → s
 | 12 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | 13 | verify → **Linear State → In Review** → **issue-close 자동 호출** |
 
-> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 8로 복귀
+> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 8로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) In Review에서 사용자 수동 확인으로 전환 선택.
 >
 > **plan + technical = Git 문서**: `docs/issue/{LINEAR-ID}/plan.md` + `docs/issue/{LINEAR-ID}/technical.md`로 저장.
 > **simplify(skill)**: verify 후 마지막 정리 단계. `oh-my-claudecode:simplify` 호출.
@@ -103,7 +103,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 | 9 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | 10 | verify → **Linear State → In Review** → **issue-close 자동 호출** |
 
-> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 7로 복귀
+> verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 7로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) In Review에서 사용자 수동 확인으로 전환 선택.
 >
 > **Git 폴더 생성**: spec.md + plan.md + technical.md 전체 생성.
 > **simplify(skill) 없음**: Deep은 autopilot 내부에서 처리.
@@ -185,7 +185,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 > - Light: executor 비활성 → sonnet 직접 수행. code-reviewer 비활성 → 자체 리뷰 수행. simplify 비활성 → 수동 정리.
 > - Standard: architect 비활성 → Post-Plan Q/A로 대체. executor 비활성 → sonnet 직접 수행. simplify 비활성 → 수동 정리.
 > - Deep: security-reviewer 비활성 → 보안 체크리스트 수동 수행 + 사용자 알림. deep-interview 비활성 → 4항목 인터뷰 `AskUserQuestion` 직접 수행. ralplan 비활성 → Post-Plan Q/A로 대체. autopilot 비활성 → `oh-my-claudecode:ralph`로 대체.
-> 비활성 감지 시 사용자에게 알림.
+> 기본 원칙: pipeline.md §7 참조.
 
 ---
 
