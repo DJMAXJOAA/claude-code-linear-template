@@ -145,10 +145,10 @@ G3a 검증 항목 — `requirements.md` 범위에만 적용:
 
 ---
 
-## OMC 에이전트 연동
+## OMC 스킬 연동
 
-| 단계 | 에이전트 | 모델 | 비고 |
-|------|---------|------|------|
+| 단계 | 스킬 | 모델 | 비고 |
+|------|------|------|------|
 | 코드 탐색 (G2) | `oh-my-claudecode:explore` | haiku | 병렬 실행 |
 | 외부 참조 조사 (G2) | `oh-my-claudecode:external-context` | sonnet | 병렬 실행 |
 | 요구사항 결정화 (G3) | `oh-my-claudecode:deep-interview` | opus | ambiguity threshold 게이팅 |
