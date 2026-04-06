@@ -162,6 +162,12 @@ intensity 인자를 포함하여 type별 스킬로 라우팅:
 | improvement | Light/Standard/Deep | 이후 단계 | improvement-fix 스킬 위임 (intensity별 에이전트 — [improvement-fix SKILL.md](../improvement-fix/SKILL.md) 참조) |
 | bug | Light/Deep | 패턴 분류 + 수정 | bug-fix 스킬 위임 (intensity별 에이전트 체인 — [bug-fix SKILL.md](../bug-fix/SKILL.md) 참조) |
 
+### 프레임워크 에이전트
+
+| Agent | 역할 | 호출 시점 |
+|-------|------|----------|
+| `linear-comment-writer` | Spec 완료 comment 작성 (spec-completion) | Pre-Plan Q/A Step 2b-1 — spec.md 저장 + SC 갱신 직후 |
+
 > OMC 비활성 시: pipeline.md §7 참조.
 
 ---
@@ -177,4 +183,4 @@ intensity 인자를 포함하여 type별 스킬로 라우팅:
 | State → Planning 전이 | Pre-Plan Q/A 시작 전 즉시 |
 | State → In Progress 전이 | bug/Light intensity 라우팅 시 |
 | Label 기반 관련 Issue 검색 | 컨텍스트 수집용 (다수) |
-| spec.md 완료 comment | Pre-Plan Q/A Step 2b-1 (spec.md 저장 + SC 갱신 직후) |
+| spec.md 완료 comment | Pre-Plan Q/A Step 2b-1 (에이전트 위임) |

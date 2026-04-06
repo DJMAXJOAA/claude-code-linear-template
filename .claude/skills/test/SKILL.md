@@ -73,6 +73,10 @@ description: "테스트 전략 수립 및 실행. 사용자 요청 시 또는 im
 |------|---------|------|
 | 테스트 작성/실행 | `oh-my-claudecode:test-engineer` | sonnet |
 
+### 프레임워크 에이전트
+
+> 해당 없음 — 프레임워크 에이전트 호출 없음.
+
 > OMC 비활성 시: pipeline.md §7 참조.
 
 ---

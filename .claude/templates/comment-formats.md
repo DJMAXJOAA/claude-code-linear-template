@@ -12,6 +12,9 @@ Linear comment 유형별 표준 형식 정의. `linear-comment-writer` 에이전
 | `plan-summary` | Planning 완료 요약 | gen-plan |
 | `investigation` | 조사 완료 보고 | bug-fix (Deep) |
 | `triage-log` | 분류 결과 기록 | triage |
+| `implement-in-review` | 구현·검증 완료 → In Review 통합 comment | implement |
+| `spec-completion` | Spec 완료 요약 | dev-pipeline |
+| `limitation` | Known Limitation 기록 | feedback, triage |
 
 ---
 
@@ -143,3 +146,46 @@ Bug 수정 시작 — Intensity: Light. Root Cause: {1줄 요약}. 수정 방안
 ### 라우팅
 {라우팅 판단 — 어떤 프로세스로 전달되는지}
 ```
+
+---
+
+## implement-in-review
+
+implement에서 verify PASS 후 In Review 전이 시 사용. 구현 + 검증 결과를 통합한 간략 comment.
+
+### 형식
+
+```
+구현·검증 완료 → In Review
+
+변경 파일 {N}개. 주요: {핵심 변경 1줄 요약}.
+verify {PASS/FAIL} — SC {통과}/{전체}, Verification {통과}/{전체}.
+수동 테스트 {M}개 항목 확인 필요.
+```
+
+---
+
+## spec-completion
+
+Pre-Plan Q/A에서 spec.md 저장 + SC 갱신 직후 사용. 1줄 요약 comment.
+
+### 형식
+
+```
+Spec 완료 — {1줄 요약}. docs/issue/{ID}/spec.md
+```
+
+---
+
+## limitation
+
+Issue 진행 중 Known Limitation 기록 시 사용. feedback(limitation 유형), triage(limitation 분류)에서 호출.
+
+### 형식
+
+```
+## Known Limitation
+{limitation 내용}
+```
+
+> progress.txt 존재 시 동일 내용을 progress.txt에도 append한다.

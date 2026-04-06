@@ -113,3 +113,58 @@ docs/issue/{LINEAR-ID}/
 ```
 
 > feature, improvement(Standard/Deep)만 Git 폴더 생성. improvement-Light 및 bug는 Git 폴더 미생성.
+
+---
+
+## progress.txt
+
+> **원본은 OMC**(`src/hooks/ralph/progress.ts`)이며, 프레임워크에서는 관찰된 형식으로 기술한다. progress.txt의 생성·갱신은 ralph가 자체 관리한다.
+
+ralph 실행 루프의 append-only 진행 기록. 이전 iteration의 학습 내용과 코드베이스 패턴을 다음 iteration에 전달하여 메모리 지속성을 제공한다.
+
+### 파일 구조
+
+```
+# Ralph Progress Log
+Started: {ISO timestamp}
+
+## Codebase Patterns
+- {패턴 설명}
+- {패턴 설명}
+
+---
+
+## [{YYYY-MM-DD HH:MM}] - {storyId}
+
+**What was implemented:**
+- {구현 항목}
+
+**Files changed:**
+- {파일 경로}
+
+**Learnings for future iterations:**
+- {학습 내용}
+
+---
+```
+
+### 섹션 설명
+
+| 섹션 | 설명 |
+|------|------|
+| `# Ralph Progress Log` | 파일 헤더. `Started: {ISO timestamp}`로 시작 시각 기록 |
+| `## Codebase Patterns` | 코드베이스에서 발견된 패턴 목록 (append-only). 초기값: `(No patterns discovered yet)` |
+| `## [{date} {time}] - {storyId}` | 엔트리 헤더. story(태스크) 단위 진행 기록 |
+| `**What was implemented:**` | 구현 내용 목록 |
+| `**Files changed:**` | 변경 파일 목록 |
+| `**Learnings for future iterations:**` | 다음 iteration을 위한 학습 내용 |
+| `---` | 엔트리 구분자 (Codebase Patterns 섹션 종료 + 엔트리 간 구분) |
+
+### 갱신 주체
+
+| 주체 | 행동 |
+|------|------|
+| ralph | 생성, 엔트리 추가, 패턴 추가 (자체 관리) |
+| implement | ralph 미사용 시(feature-Light, improvement-Light/Standard) 직접 관리 |
+| triage/feedback | limitation 기록 시 append (progress.txt 존재 시) |
+| bug | progress.txt 미생성 |

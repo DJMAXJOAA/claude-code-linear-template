@@ -54,6 +54,10 @@ Issue 또는 주제에 대한 조사를 수행한다. 모든 type의 Issue에서
 | 심층 분석 | `oh-my-claudecode:scientist` | opus — 조사 범위가 넓거나 기술적 판단이 필요할 때 호출. Process 2 단계에서 explore 결과를 전달하여 분석 수행 |
 | 인과 추적 (선택) | `oh-my-claudecode:tracer` | sonnet — 인과관계 규명이 핵심인 조사에서 경쟁 가설 기반 증거 추적 |
 
+### 프레임워크 에이전트
+
+> 해당 없음 — 프레임워크 에이전트 호출 없음.
+
 > OMC 비활성 시: pipeline.md §7 참조.
 
 ---
