@@ -43,7 +43,7 @@ Agent chain: `code-reviewer → plan(터미널) → executor → verify → simp
 | 7 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — Linear SC 기반) |
 | 8 (G4) | verify PASS 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
 | 9 (G4) | **커밋**: `refactor: ...` or `chore: ...` (Conventional Commits) |
-| 10 (G3) | verify PASS 시: **Linear State → In Review** + 변경 요약 **Linear comment** 기록 |
+| 10 (G3) | verify PASS 시: **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion-light, issue_type=improvement, intensity=light, payload={변경 요약, 수정 파일 수, verify 결과} |
 | 11 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** |
 
 > verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) improvement type 전환 (c) In Review에서 사용자 수동 확인으로 전환 선택.
@@ -75,7 +75,7 @@ Agent chain: `code-reviewer → plan → architect → executor → verify → s
 | 10 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification 기반) |
 | 11 (G4) | verify PASS 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
 | 12 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
-| 13 | verify → **Linear State → In Review** → **issue-close 자동 호출** |
+| 13 | verify → **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion, issue_type=improvement, intensity=standard, payload={구현 결과 요약, 설계 이탈, 미해결 이슈} → **issue-close 자동 호출** |
 
 > verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 8로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) In Review에서 사용자 수동 확인으로 전환 선택.
 >
@@ -101,7 +101,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 | 7 (G4) | **autopilot**: `oh-my-claudecode:autopilot` 호출. plan.md Tasks 기반 전체 구현 |
 | 8 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification + SC 기반) |
 | 9 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
-| 10 | verify → **Linear State → In Review** → **issue-close 자동 호출** |
+| 10 | verify → **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion, issue_type=improvement, intensity=deep, payload={구현 결과 요약, 설계 이탈, 미해결 이슈} → **issue-close 자동 호출** |
 
 > verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 7로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) In Review에서 사용자 수동 확인으로 전환 선택.
 >
@@ -163,6 +163,14 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 
 ## OMC 에이전트 연동
 
+### 프레임워크 에이전트
+
+| Agent | 역할 | 호출 시점 |
+|-------|------|----------|
+| `linear-comment-writer` | 완료 comment 작성 | Light/Standard/Deep 완료 시 |
+
+### intensity별 에이전트
+
 | intensity | 단계 | 에이전트 | 모델 |
 |-----------|------|---------|------|
 | Light | 코드 리뷰 | `oh-my-claudecode:code-reviewer` | sonnet |
@@ -197,10 +205,10 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 | Intensity Label 부착 (`Intensity: Light` / `Intensity: Standard` / `Intensity: Deep`) | 공통 | dev-pipeline에서 판별 후 Label 부착 |
 | description 변경 의도 기록 | Light | G3 단계 |
 | State → In Review 전이 | Light | verify PASS 시 |
-| 변경 요약 comment | Light | verify PASS 후 |
+| 변경 요약 comment (에이전트 위임) | Light | verify PASS 후 |
 | State → Planning 전이 | Standard, Deep | 프로세스 시작 전 |
 | State → Planning 전이 (에스컬레이션) | Light→Standard | 전환 승인 시 |
 | Intensity Label 갱신 | 에스컬레이션 시 | 전환 승인 시 `save_issue` labelIds로 교체 |
 | State → In Progress 전이 | Standard, Deep | Post-Plan 후 |
-| verify 결과 comment | Standard, Deep | 구현 완료 후 |
+| verify 결과 comment (에이전트 위임) | Standard, Deep | 구현 완료 후 |
 | Sub-issue 동기화 | Deep | autopilot 내부 처리 |

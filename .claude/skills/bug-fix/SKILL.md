@@ -49,25 +49,7 @@ Intensity는 dev-pipeline에서 이미 선택된다. 이 스킬에서 AskUserQue
 
 ### Deep — Linear Structured Comment 템플릿
 
-```
-🔍 Bug Deep Investigation — {LINEAR-ID}
-
-## Root Cause
-{근본 원인 1~3줄 요약}
-
-## Investigation
-- Trace: {인과 추적 핵심 발견}
-- Scope: {영향 범위 — 파일/모듈}
-
-## Resolution
-- {수정 내용 요약}
-- {변경 파일 목록}
-
-## Verify
-{PASS/FAIL} — {SC 통과 현황}
-```
-
-> Light comment와의 일관성: Light는 자유 형식 2-comment (조사 완료 1회 + 구현·검증 완료 1회). Deep은 위 structured 형식으로 섹션 구분하여 2-comment.
+`.claude/templates/comment-formats.md`의 `completion-deep` 형식을 SSOT로 참조한다. `linear-comment-writer` 에이전트가 해당 형식을 적용.
 
 ---
 
@@ -78,12 +60,12 @@ Intensity는 dev-pipeline에서 이미 선택된다. 이 스킬에서 AskUserQue
 | 1 (G1) | **원인 조사**: intensity별 에이전트 체인으로 조사 실행 (§Intensity 기반 프로세스 분기 참조) |
 | 2 (G1) | **수정 계획 제시**: Root Cause + 수정 방안을 사용자에게 제시 |
 | 3 (G2) | **사용자 승인**: `AskUserQuestion`으로 수정 계획 확인. 승인 전 코드 수정 시작 금지 |
-| 4 (G3) | **Linear comment 기록**: intensity + Root Cause 요약 comment |
+| 4 (G3) | **Linear comment 기록**: `linear-comment-writer` 에이전트를 호출하여 조사 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=investigation, issue_type=bug, intensity={light/deep}, payload={root_cause, reproduction(Deep), impact_scope(Deep), fix_plan(Deep)} |
 | 5 (G4) | **코드 수정**: intensity별 에이전트 체인으로 수정 구현 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
 | 7 (G4) | **verify 자동 호출**: verify 스킬로 Success Criteria 검증 |
 | 8 (G4) | verify PASS 시 **커밋**: `fix: ...` (Conventional Commits) |
-| 9 (G3) | verify PASS 시: **Linear State → In Review** + fix 요약 **Linear comment** 기록 |
+| 9 (G3) | verify PASS 시: **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion-light (Light) 또는 completion-deep (Deep), issue_type=bug, intensity={light/deep}, payload={수정 요약, Root Cause(Deep)} |
 | 10 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** |
 
 > verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → 단계 5로 복귀. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) improvement type 전환 (c) In Review에서 사용자 수동 확인으로 전환 선택.
@@ -96,17 +78,19 @@ Git 문서 대신 **Linear comment**로 전 과정을 기록한다.
 
 ### Light
 
-| 시점 | Linear comment 내용 |
-|------|-------------------|
-| 조사 완료 후 | `Bug 수정 시작 — Intensity: Light. Root Cause: {1줄 요약}. 수정 방안: {1줄 요약}` |
-| 구현·검증 완료 후 | `Fix 완료 — {변경 파일 수}개 파일 수정. verify {PASS/FAIL}` |
+| 시점 | comment_type |
+|------|-------------|
+| 조사 완료 후 | `investigation` (intensity=light) |
+| 구현·검증 완료 후 | `completion-light` |
 
 ### Deep
 
-| 시점 | Linear structured comment 내용 |
-|------|-------------------------------|
-| 조사 완료 후 | Root cause analysis + investigation plan 요약 |
-| 구현·검증 완료 후 | Resolution summary + verify 결과 |
+| 시점 | comment_type |
+|------|-------------|
+| 조사 완료 후 | `investigation` (intensity=deep) |
+| 구현·검증 완료 후 | `completion-deep` |
+
+> 형식은 `.claude/templates/comment-formats.md` 참조. `linear-comment-writer` 에이전트가 적용.
 
 > Git 폴더(`docs/issue/{ID}/`)를 생성하지 않는다. Light·Deep 모두 동일. 코드 변경은 git commit(`fix: ...`)으로 기록.
 
@@ -136,6 +120,12 @@ Git 문서 대신 **Linear comment**로 전 과정을 기록한다.
 
 ## OMC 에이전트 연동
 
+### 프레임워크 에이전트
+
+| Agent | 역할 | 호출 시점 |
+|-------|------|----------|
+| `linear-comment-writer` | 조사/완료 comment 작성 | 단계 4, 9 (G3) |
+
 | Intensity | 에이전트 | 모델 |
 |-----------|---------|------|
 | Light | `oh-my-claudecode:debugger` | sonnet |
@@ -157,6 +147,6 @@ Git 문서 대신 **Linear comment**로 전 과정을 기록한다.
 | 행동 | 상세 |
 |------|------|
 | Issue description에서 SC 조회 | 수정 시작 전 1회 |
-| 조사 완료 comment | 조사 완료 후 — intensity + Root Cause 요약 |
-| 구현·검증 완료 comment | verify PASS 후 — fix 요약 |
+| 조사 완료 comment | 조사 완료 후 — intensity + Root Cause 요약 (에이전트 위임) |
+| 구현·검증 완료 comment | verify PASS 후 — fix 요약 (에이전트 위임) |
 | State → In Review 전이 | verify PASS 시 |

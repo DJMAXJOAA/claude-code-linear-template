@@ -39,9 +39,9 @@ verify PASS 후(feature/improvement/bug) 호출되어, 구현 결과를 Linear C
 |------|------|
 | 1 (G1) | **구현 결과 수집**: type별 소스에서 구현 결과를 수집한다. 아래 §구현 결과 수집 참조 |
 | 2 (G2) | **자동 진행**: 구현 결과 요약을 로그로 출력하고 즉시 다음 단계로 진행. 별도 사용자 승인 불필요 |
-| 3 (G3) | **plan.md Outcome 기록**: plan.md가 존재하는 type만 수행 (feature/improvement-standard/improvement-deep). Outcome 섹션에 구현 결과 요약 기록 |
+| 3 (G3) | **plan.md Outcome 기록**: plan.md가 존재하는 type만 수행 (feature/improvement-standard/improvement-deep). `.claude/templates/git-doc-formats.md`의 outcome 양식 + `templates/implementation-result.md`를 참조하여 Outcome 섹션에 구현 결과 요약 기록 |
 | 4 (G3) | **Linear 상태 전이**: Linear MCP로 State → Done |
-| 5 (G3) | **Linear comment 기록**: Linear MCP로 완료 요약 기록. 아래 §Linear comment 참조 |
+| 5 (G3) | **Linear comment 기록**: `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion (feature/improvement-standard) 또는 completion-light (bug/improvement-light), issue_type={type}, payload={§1에서 수집한 구현 결과}, git_log={Git 로그 마크다운} |
 | 5a (G3) | **Linear description 최종 미러링**: 아래 §Linear description 미러링 참조 |
 | 6 (G3) | **후행 Issue 참조 환류**: 아래 §후행 Issue 환류 참조 |
 | 7 (G3) | **spec 메타데이터 연동 갱신**: 아래 §spec 연동 갱신 참조 |
@@ -78,39 +78,20 @@ type에 따라 수집 소스가 다르다.
 
 ## Linear comment
 
-전 type 공통으로 Linear comment에 완료 요약을 기록한다.
+전 type 공통으로 `linear-comment-writer` 에이전트를 호출하여 완료 요약을 기록한다.
 
-### comment 포함 내용
+### comment_type 분기
 
-| 항목 | 적용 type | 설명 |
-|------|----------|------|
-| 구현 결과 요약 | 전 type | 1~3줄 요약 |
-| 설계 이탈 유무 | feature, improvement-standard | plan.md 대비 차이점 |
-| 미해결 이슈 유무 | 전 type | 후속 작업 필요 여부 |
-| **Git 작업 기록** | 전 type | 관련 커밋 목록 (hash + message). `git log --oneline`에서 해당 Issue 관련 커밋 추출 |
+| type | comment_type | 비고 |
+|------|-------------|------|
+| feature, improvement-standard/deep | `completion` | 설계 이탈 포함 |
+| bug, improvement-light | `completion-light` | 경량 형식 |
+
+> comment 포함 항목 및 형식은 `.claude/templates/comment-formats.md` 참조. 에이전트가 SSOT에서 형식을 적용.
 
 ### Git 작업 기록 수집
 
-| 단계 | 행위 |
-|------|------|
-| 1 | `git log --oneline`에서 Linear ID 또는 관련 키워드가 포함된 커밋 필터링 |
-| 2 | 커밋이 없으면 현재 브랜치의 최근 커밋 중 파이프라인 진행 기간 내 커밋을 수집 |
-| 3 | comment에 `### Git Log` 섹션으로 포함 (최대 10건) |
-
-### comment 형식 예시
-
-```
-## 완료 요약
-{구현 결과 1~3줄 요약}
-
-- 설계 이탈: {유/무 + 요약}
-- 미해결 이슈: {유/무 + 목록}
-
-### Git Log
-- `abc1234` feat: add user authentication
-- `def5678` test: add auth unit tests
-- `ghi9012` fix: handle edge case in token refresh
-```
+pipeline.md "Git Log Format" 섹션을 참조하여 Git 로그를 추출하라. 산출물을 `linear-comment-writer`에 `git_log` 파라미터로 전달.
 
 ---
 
@@ -238,9 +219,13 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 
 ## OMC 에이전트 연동
 
-> issue-close 자체는 에이전트 연동 없음.
-
 > OMC 비활성 시: pipeline.md §7 참조.
+
+### 프레임워크 에이전트
+
+| Agent | 역할 | 호출 시점 |
+|-------|------|----------|
+| `linear-comment-writer` | 완료 comment 작성 | 단계 5 (G3) — Linear comment 기록 시 |
 
 ---
 
@@ -249,7 +234,7 @@ issue-close 시 Linear Issue description의 Success Criteria 체크박스를 최
 | 행동 | 적용 type | 상세 |
 |------|----------|------|
 | State → Done 전이 | 전 type | G3 단계 |
-| 구현 결과 요약 + Git 작업 기록 comment | 전 type | 완료 처리 시 |
+| 구현 결과 요약 + Git 작업 기록 comment | 전 type | 완료 처리 시 (에이전트 위임) |
 | description 최종 상태 미러링 | feature, improvement-standard/deep | 1회성 스냅샷 |
 | blocked-by 역참조 Issue 조회 | 전 type (blocked-by 역참조 존재 시) | 후행 Issue 환류용 |
 | 후행 Issue에 환류 comment | 전 type (blocked-by 역참조 존재 시) | 대상 존재 시. Git 폴더 존재 type은 docs 경로 포함, 미존재 type은 경로 생략 |

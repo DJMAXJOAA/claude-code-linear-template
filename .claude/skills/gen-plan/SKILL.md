@@ -44,43 +44,15 @@ dev-pipeline에서 Planning 단계 진입 시 호출되어, ralplan을 통해 `d
 | 2a (G2) | **intensity별 실행 경로 결정**: intensity 값에 따라 자동 분기 — Light: ralplan 미호출, `oh-my-claudecode:planner` 호출하여 간소 spec.md + plan.md 생성 (technical.md 미생성). Standard: ralplan 일반 모드 호출. Deep: ralplan `--deliberate` 모드 강제 호출 (항상 interactive) |
 | 3 (G1) | **ralplan 호출 (Standard/Deep만)**: 선택된 모드로 ralplan 호출. spec.md + Linear SC + Related Issue 환류 + 코드 조사 결과 + 설계 결정을 전달하여 plan.md + technical.md 함께 생성 (§ralplan 호출 지시 패턴 참조). Light intensity는 이 단계를 스킵하고 planner 산출물을 사용 |
 | 4 (G2) | **Plan 사용자 검토**: Post-Plan Q/A에서 `AskUserQuestion`으로 사용자 승인 (dev-pipeline 위임) |
-| 5 (G3) | **Frontmatter 래핑 + Git 커밋**: ralplan 산출물(또는 gen-plan 직접 생성 산출물)에 frontmatter 래핑(§Frontmatter 래핑 패턴) 후 Git 커밋 + Linear Documents 갱신 |
-| 6 (G3) | **Linear comment 기록**: Linear MCP로 Plan 완료 요약 comment (태스크 수, 주요 설계 결정 1~2줄) |
+| 5 (G3) | **Frontmatter 래핑 + Git 커밋**: `.claude/templates/git-doc-formats.md`를 참조하여 ralplan 산출물(또는 gen-plan 직접 생성 산출물)에 frontmatter 래핑 후 Git 커밋 + Linear Documents 갱신 |
+| 6 (G3) | **Linear comment 기록**: `linear-comment-writer` 에이전트를 호출하여 Plan 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=plan-summary, issue_type={type}, payload={task_count: 태스크 수, key_decisions: 주요 설계 결정 1~2줄} |
 | 7 (G4) | **완료 반환**: 문서 생성 완료. 리뷰는 dev-pipeline의 Post-Plan Q/A에서 처리 |
 
 ---
 
 ## Frontmatter 래핑 패턴
 
-ralplan 산출물 상단에 프레임워크 frontmatter를 삽입한다.
-
-### plan.md 래핑
-
-```markdown
----
-linear_id: {LINEAR-ID}
-title: "Plan: {Issue 제목}"
-type: plan
-created: {YYYY-MM-DD}
----
-> [Linear Issue]({URL})
-
-(이하 OMC ralplan 네이티브 콘텐츠)
-```
-
-### technical.md 래핑
-
-```markdown
----
-linear_id: {LINEAR-ID}
-title: "Technical: {Issue 제목}"
-type: technical
-created: {YYYY-MM-DD}
----
-> [Linear Issue]({URL})
-
-(이하 OMC ralplan 네이티브 콘텐츠)
-```
+`.claude/templates/git-doc-formats.md`를 SSOT로 참조한다. plan.md와 technical.md의 frontmatter 구조 및 doc_type별 필수 섹션은 해당 템플릿에 정의되어 있다.
 
 ---
 
@@ -157,6 +129,12 @@ ralplan이 생성하는 plan.md에 프레임워크가 요구하는 필수 구조
 
 ## OMC 에이전트 연동
 
+### 프레임워크 에이전트
+
+| Agent | 역할 | 호출 시점 |
+|-------|------|----------|
+| `linear-comment-writer` | Plan 완료 comment 작성 | 단계 6 (G3) — Linear comment 기록 시 |
+
 > gen-plan은 intensity에 따라 ralplan 호출 방식을 결정한다:
 > - **Light**: ralplan을 호출하지 않는다. gen-plan이 기본 모델로 직접 간소 plan.md를 생성한다.
 > - **Standard**: `oh-my-claudecode:ralplan` 일반 모드로 호출하여 plan.md + technical.md를 생성한다.
@@ -173,5 +151,5 @@ ralplan이 생성하는 plan.md에 프레임워크가 요구하는 필수 구조
 | 행동 | 상세 |
 |------|------|
 | Issue description·type·relations 조회 | 플랜 작성 전 1회 |
-| Plan 완료 요약 comment | 태스크 수 + 주요 설계 결정 1~2줄 (intensity 표기 포함) |
+| Plan 완료 요약 comment | 태스크 수 + 주요 설계 결정 1~2줄 (intensity 표기 포함) (에이전트 위임) |
 | description Documents 갱신 | 생성된 문서 경로 추가 (Light는 plan.md만, Standard/Deep는 plan.md + technical.md) |

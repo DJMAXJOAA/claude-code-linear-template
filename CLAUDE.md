@@ -27,6 +27,8 @@
 | 경로 | 역할 |
 |------|------|
 | `src/` | 프로젝트 소스코드 |
+| `.claude/agents/` | 프레임워크 전용 에이전트 정의 (on-demand 로드) |
+| `.claude/templates/` | 공유 템플릿 — 범용 포맷 SSOT (on-demand 부분 로드) |
 | *(프로젝트별 추가)* | *(레이어/모듈 구조 등)* |
 
 > 프레임워크 고정 경로(`docs/issue/`, `.claude/` 등)는 [ID System](#framework-id-system) 참조
@@ -42,9 +44,11 @@
 
 | 문서 | 경로 | 설명 |
 |------|------|------|
-| 프레임워크 가이드 | [docs/guides/framework.md](docs/guides/framework.md) | 핵심 원칙, 3영역 SSOT |
-| 컨텍스트 관리 | [docs/guides/context.md](docs/guides/context.md) | Progressive Disclosure, 토큰 관리 |
+| 프레임워크 가이드 | [.claude/templates/framework.md](.claude/templates/framework.md) | 핵심 원칙, 3영역 SSOT |
+| 컨텍스트 관리 | [.claude/templates/context.md](.claude/templates/context.md) | Progressive Disclosure, 토큰 관리 |
 | Spec 인덱스 | [docs/spec/overview.md](docs/spec/overview.md) | 기능 명세 인덱스 |
+| Agent Writing Guide | [.claude/templates/agent-writing-guide.md](.claude/templates/agent-writing-guide.md) | 에이전트 작성 가이드 |
+| Skill Writing Guide | [.claude/templates/skill-writing-guide.md](.claude/templates/skill-writing-guide.md) | 스킬 작성 가이드 |
 | *(프로젝트별 추가)* | *(경로)* | *(설명)* |
 
 <!-- ============ FRAMEWORK ============ -->
@@ -70,7 +74,7 @@
 - **50% 규칙**: 컨텍스트 50% 이상 소모 시 /clear 고려
 - **Pre-Compaction**: 압축 전 진행 상태를 progress.txt + Linear에 저장
 - **Linear 컨텍스트**: `/활성화` 시 Linear 1회 조회 후 세션 내 캐싱. 매 태스크마다 재조회 금지
-- 상세: [docs/guides/context.md](docs/guides/context.md)
+- 상세: [.claude/templates/context.md](.claude/templates/context.md)
 
 ## Framework: Commands
 
@@ -82,7 +86,7 @@
 
 **3영역 SSOT**: Linear(상태) · Git(지식) · Claude Code(실행). 교차 복제 금지.
 - MCP 도구 호출 패턴은 각 스킬의 `## Linear MCP` 섹션 참조
-- 상세: [docs/guides/framework.md](docs/guides/framework.md)
+- 상세: [.claude/templates/framework.md](.claude/templates/framework.md)
 
 ## Framework: ID System
 

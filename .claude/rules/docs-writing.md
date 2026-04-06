@@ -111,7 +111,7 @@ description: 문서 작성 규칙 — Frontmatter, 템플릿, Lazy-creation, 링
 | 경로 | 규칙 |
 |------|------|
 | `docs/issue/{LINEAR-ID}/` | Linear ID 그대로 (대소문자 유지) |
-| `docs/shared/`, `docs/spec/`, `docs/guides/` | 고정 (변경 불가) |
+| `docs/shared/`, `docs/spec/`, `.claude/templates/` | 고정 (변경 불가) |
 | `docs/spec/{spec-name}/` | kebab-case, 2depth 제한 |
 | `docs/spec/{spec-name}/references/` | 고정 (선택적 — 보고서 존재 시에만 생성) |
 
