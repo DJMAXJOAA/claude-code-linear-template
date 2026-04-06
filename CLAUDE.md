@@ -46,7 +46,6 @@
 |------|------|------|
 | 프레임워크 가이드 | [.claude/templates/framework.md](.claude/templates/framework.md) | 핵심 원칙, 3영역 SSOT |
 | 컨텍스트 관리 | [.claude/templates/context.md](.claude/templates/context.md) | Progressive Disclosure, 토큰 관리 |
-| Spec 인덱스 | [docs/spec/overview.md](docs/spec/overview.md) | 기능 명세 인덱스 |
 | Agent Writing Guide | [.claude/templates/agent-writing-guide.md](.claude/templates/agent-writing-guide.md) | 에이전트 작성 가이드 |
 | Skill Writing Guide | [.claude/templates/skill-writing-guide.md](.claude/templates/skill-writing-guide.md) | 스킬 작성 가이드 |
 | *(프로젝트별 추가)* | *(경로)* | *(설명)* |
