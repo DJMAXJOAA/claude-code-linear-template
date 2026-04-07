@@ -69,14 +69,4 @@ triage_round: {N}
 | limitation | Linear comment | 코멘트 기록 |
 | reminder | Linear comment | 코멘트 기록 |
 
-## Phase 분류 가이드
-
-planner agent가 Phase를 분류할 때의 우선순위 기준:
-
-| 우선순위 | 기준 | 예시 |
-|---------|------|------|
-| 1 (최우선) | 구조 변경, 다른 항목에 영향 | P1 계획 수정, rework 재구현 |
-| 2 | in-scope defect 수정 | L1 버그 수정 |
-| 3 | in-scope improvement | L2 개선 |
-| 4 | out-scope 등록 (병렬 가능) | L3/backlog 서브이슈 생성 |
-| 5 | 지침/기록 (병렬 가능) | directive, limitation, reminder |
+> Phase 분류 기준은 [references/post-pipeline.md](../references/post-pipeline.md) §프롬프트 패턴의 Phase 분류 기준 테이블을 참조한다.
