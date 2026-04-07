@@ -73,7 +73,7 @@
 - **50% 규칙**: 컨텍스트 50% 이상 소모 시 /clear 고려
 - **Pre-Compaction**: 압축 전 진행 상태를 progress.txt + Linear에 저장
 - **Linear 컨텍스트**: `/활성화` 시 Linear 1회 조회 후 세션 내 캐싱. 매 태스크마다 재조회 금지
-- 상세: [.claude/templates/context.md](.claude/templates/context.md)
+- 상세: [docs/guides/context.md](docs/guides/context.md)
 
 ## Framework: Commands
 
@@ -85,7 +85,7 @@
 
 **3영역 SSOT**: Linear(상태) · Git(지식) · Claude Code(실행). 교차 복제 금지.
 - MCP 도구 호출 패턴은 각 스킬의 `## Linear MCP` 섹션 참조
-- 상세: [.claude/templates/framework.md](.claude/templates/framework.md)
+- 상세: [docs/guides/framework.md](docs/guides/framework.md)
 
 ## Framework: ID System
 
