@@ -1,11 +1,11 @@
 ---
 name: verify
-description: "구현 완료 후 Success Criteria, plan.md Verification 검증 조건, 코드 품질을 종합 검증. PASS/FAIL 결과 반환."
+description: "구현 완료 후 Success Criteria, plan.md Verification 검증 조건, 코드 품질을 종합 검증. PASS/FAIL/SKIP 결과 반환."
 ---
 
 # verify — 구현 완전성 검증
 
-구현 완료 후 Success Criteria, plan.md Verification 검증 조건, 코드 품질을 종합 검증한다. 검증 결과(PASS/FAIL)를 반환하며, 후속 처리는 dev-pipeline이 결정한다.
+구현 완료 후 Success Criteria, plan.md Verification 검증 조건, 코드 품질을 종합 검증한다. 검증 결과(PASS/FAIL/SKIP)를 반환하며, 후속 처리는 dev-pipeline이 결정한다.
 
 ## Trigger
 
@@ -51,6 +51,8 @@ verify_mode에 따라 프로세스가 분기된다.
 | 7a (G4) | **PASS**: Auto Mode 5a와 동일 |
 | 7b (G4) | **FAIL**: Auto Mode 5b와 동일 |
 
+> **스킵 선택 시 반환**: 검증을 실행하지 않고 즉시 `SKIP` 결과를 반환한다. 반환값: `{ result: "SKIP", pending_manual_review: ["사용자 스킵 — 전체 검증 생략"], sc_results: null }`. 호출자(implement 등)가 SKIP을 수신하면 PASS와 동일하게 In Review로 전이하되, pending_manual_review 목록을 함께 전달한다.
+
 ---
 
 ## 검증 계획 출력 양식 (Manual Mode)
@@ -92,8 +94,9 @@ Manual Mode 단계 3에서 터미널에 출력하는 양식:
 
 | 항목 | 내용 |
 |------|------|
-| 검증 결과 | PASS/FAIL 판정 + 항목별 근거 |
-| SC별 판정 | SC 항목별 PASS/FAIL 매핑 + 근거 (issue-close SC 체크 입력용) |
+| 검증 결과 | `PASS` / `FAIL` / `SKIP` 판정 + 항목별 근거. SKIP은 Manual Mode 스킵 선택 시에만 발생 |
+| SC별 판정 | SC 항목별 PASS/FAIL 매핑 + 근거 (issue-close SC 체크 입력용). SKIP 시 `null` (미수행) |
+| pending_manual_review | 수동 확인 필요 항목 목록. SKIP 시 `["사용자 스킵 — 전체 검증 생략"]` 포함 |
 
 > verify는 Linear 상태 전이 및 Linear comment 기록을 수행하지 않는다. 호출자(implement/dev-pipeline)가 PASS 시 In Review 전이 + 구현·검증 통합 comment를 기록.
 

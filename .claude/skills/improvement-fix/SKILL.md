@@ -42,7 +42,8 @@ Agent chain: `code-reviewer → plan(터미널) → executor → verify → simp
 | 5 (G4) | **코드 수정**: `oh-my-claudecode:executor` 호출로 수정 구현 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
 | 7 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — Linear SC 기반). `verify_mode` 전달 |
-| 8 (G4) | verify PASS 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
+| 7a (G4) | verify **SKIP** 시 (Manual Mode 스킵 선택): PASS와 동일 흐름. `pending_manual_review`에 '사용자 스킵' 포함 |
+| 8 (G4) | verify PASS/SKIP 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
 | 9 (G4) | **커밋**: `refactor: ...` or `chore: ...` (Conventional Commits) |
 | 10 (G3) | verify PASS 시: **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion-light, issue_type=improvement, intensity=light, payload={변경 요약, 수정 파일 수, verify 결과} |
 | 11 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** |
@@ -74,7 +75,8 @@ Agent chain: `code-reviewer → plan → architect → executor → verify → s
 | 8 (G4) | **코드 수정**: `oh-my-claudecode:executor` 호출. plan.md Tasks 기반 micro-tasking |
 | 9 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
 | 10 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification 기반). `verify_mode` 전달 |
-| 11 (G4) | verify PASS 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
+| 10a (G4) | verify **SKIP** 시 (Manual Mode 스킵 선택): PASS와 동일 흐름. `pending_manual_review`에 '사용자 스킵' 포함 |
+| 11 (G4) | verify PASS/SKIP 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
 | 12 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | 13 | verify → **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion, issue_type=improvement, intensity=standard, payload={구현 결과 요약, 설계 이탈, 미해결 이슈} → **issue-close 자동 호출** |
 
@@ -101,6 +103,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 | 6 (G3) | **Linear State → In Progress** + description 갱신 |
 | 7 (G4) | **autopilot**: `oh-my-claudecode:autopilot` 호출. plan.md Tasks 기반 전체 구현 |
 | 8 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification + SC 기반). `verify_mode` 전달 |
+| 8a (G4) | verify **SKIP** 시 (Manual Mode 스킵 선택): PASS와 동일 흐름. `pending_manual_review`에 '사용자 스킵' 포함 |
 | 9 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | 10 | verify → **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion, issue_type=improvement, intensity=deep, payload={구현 결과 요약, 설계 이탈, 미해결 이슈} → **issue-close 자동 호출** |
 
