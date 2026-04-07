@@ -63,6 +63,7 @@
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
 - 구현: intensity별 실행 — Light(executor 단독) / Standard(feature: ralph 루프, improvement: executor) / Deep(autopilot)
 - In Progress 완료 후 verify 호출(auto/manual 모드 선택) → In Review(사용자 확인) → issue-close → Done
+- 점검 후처리: `/점검` 분류 후 3-Mode 선택(인터뷰/자동계획/스킵) → planner agent가 triage-plan 생성 → Phase별 유형 라우팅 실행. 상세: pipeline.md §10
 - 사후 문서화: `/정리` — 파이프라인 없이 작업 후 문서화. 상세: [.claude/skills/cleanup/SKILL.md](.claude/skills/cleanup/SKILL.md)
 - OMC 최소 요구 버전: v4.9.3 (MCP 안정성, 스킬 상태 충돌 방지)
 - 상세: [.claude/rules/pipeline.md](.claude/rules/pipeline.md)
