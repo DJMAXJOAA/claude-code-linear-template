@@ -62,7 +62,7 @@
 - bug: intensity별 — Light(debugger→executor, Git 미생성) / Deep(trace→debugger→architect→executor, Git 미생성)
 - 각 단계: 4단계 게이트(계획→검토→저장→실행) 경유
 - 구현: intensity별 실행 — Light(executor 단독) / Standard(feature: ralph 루프, improvement: executor) / Deep(autopilot)
-- In Progress 완료 후 verify 자동 호출 → In Review(사용자 확인) → issue-close → Done
+- In Progress 완료 후 verify 호출(auto/manual 모드 선택) → In Review(사용자 확인) → issue-close → Done
 - 사후 문서화: `/정리` — 파이프라인 없이 작업 후 문서화. 상세: [.claude/skills/cleanup/SKILL.md](.claude/skills/cleanup/SKILL.md)
 - OMC 최소 요구 버전: v4.9.3 (MCP 안정성, 스킬 상태 충돌 방지)
 - 상세: [.claude/rules/pipeline.md](.claude/rules/pipeline.md)

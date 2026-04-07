@@ -27,6 +27,7 @@ plan.md Tasks를 `oh-my-claudecode:ralph` 루프로 자동 실행한다.
 | spec.md | `docs/issue/{LINEAR-ID}/spec.md` — 요구사항 참조 (필요 시에만 읽기) |
 | type | `feature` / `improvement` — bug 및 improvement-Light는 implement를 사용하지 않음 |
 | intensity | `Light` / `Standard` / `Deep` — 실행 방식 분기 기준 (feature-Light, improvement-Standard/Deep 적용) |
+| verify_mode | `auto` / `manual` — dev-pipeline에서 선택하여 전달. verify 호출 시 그대로 전달 |
 
 ---
 
@@ -109,7 +110,7 @@ verify 스킬 호출 시 intensity를 전달하여 검증 범위를 결정한다
 |------|------|
 | 4-1 | plan.md Tasks 모든 태스크 상태 = `done` 확인. **블로킹 리셋된 태스크 존재 시 pipeline.md §4-4a 대기 상태로 전환 (verify 미호출)** |
 | 4-2 | 최종 빌드/테스트 통과 확인 (전체 테스트 스위트) |
-| 4-3 | **verify 자동 호출**: verify 스킬 호출하여 SC + plan.md Verification 검증 수행 |
+| 4-3 | **verify 호출**: verify 스킬 호출하여 SC + plan.md Verification 검증 수행. `verify_mode` 파라미터를 그대로 전달 (auto: 자동 실행, manual: 검증 계획 출력 후 사용자 확인) |
 | 4-4 | verify PASS 시: 미커밋 변경사항 Git 커밋 + §In Review 출력 양식 실행 |
 | 4-5 | verify FAIL 시: 실패 항목 목록 + 수정 방안 제시 → intensity별 복귀: **Light** — executor 재실행, **Standard** — ralph 루프 복귀, **Deep** — autopilot 재호출. **verify FAIL 2회 연속 시** `AskUserQuestion`으로 (a) 재시도 (b) In Review에서 사용자 수동 확인으로 전환 선택 |
 | 4-6 | **OMC 잔여 상태 정리**: verify PASS 후 In Review 전이 전에 OMC 활성 상태(ralph, deep-interview, ralplan 등)를 `state_clear`로 정리. skill-active-state.json 포함 |

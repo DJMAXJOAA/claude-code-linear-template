@@ -23,6 +23,7 @@ improvement type Issue의 수정 프로세스를 오케스트레이션한다. in
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Overview, Change Scope, Success Criteria) — `linear_payload` 전달 시 해당 정보 사용 (Linear MCP 조회 스킵). 미전달 시 Linear MCP로 직접 조회 |
 | intensity | `Light` / `Standard` / `Deep` — dev-pipeline에서 판별하여 전달 |
+| verify_mode | `auto` / `manual` — dev-pipeline에서 선택하여 전달. verify 호출 시 그대로 전달 |
 
 ---
 
@@ -40,7 +41,7 @@ Agent chain: `code-reviewer → plan(터미널) → executor → verify → simp
 | 4 (G3) | **Linear description 갱신**: 변경 의도 1~2줄을 description에 기록 |
 | 5 (G4) | **코드 수정**: `oh-my-claudecode:executor` 호출로 수정 구현 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
-| 7 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — Linear SC 기반) |
+| 7 (G4) | **verify 호출**: verify 스킬로 검증 (bug-like fallback — Linear SC 기반). `verify_mode` 전달 |
 | 8 (G4) | verify PASS 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
 | 9 (G4) | **커밋**: `refactor: ...` or `chore: ...` (Conventional Commits) |
 | 10 (G3) | verify PASS 시: **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion-light, issue_type=improvement, intensity=light, payload={변경 요약, 수정 파일 수, verify 결과} |
@@ -72,7 +73,7 @@ Agent chain: `code-reviewer → plan → architect → executor → verify → s
 | 7 (G3) | **Linear description 갱신** + **State 유지 (In Progress)** |
 | 8 (G4) | **코드 수정**: `oh-my-claudecode:executor` 호출. plan.md Tasks 기반 micro-tasking |
 | 9 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
-| 10 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification 기반) |
+| 10 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification 기반). `verify_mode` 전달 |
 | 11 (G4) | verify PASS 시 **simplify(skill)**: `oh-my-claudecode:simplify` 호출로 최종 정리 |
 | 12 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | 13 | verify → **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion, issue_type=improvement, intensity=standard, payload={구현 결과 요약, 설계 이탈, 미해결 이슈} → **issue-close 자동 호출** |
@@ -99,7 +100,7 @@ Agent chain: `code-reviewer + security-reviewer → deep-interview(skill) → ra
 | 5 (G2) | **Post-Plan 확인**: plan 요약 + 보안 검토 결과 제시 → `AskUserQuestion` (바로 구현 / Q&A) |
 | 6 (G3) | **Linear State → In Progress** + description 갱신 |
 | 7 (G4) | **autopilot**: `oh-my-claudecode:autopilot` 호출. plan.md Tasks 기반 전체 구현 |
-| 8 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification + SC 기반) |
+| 8 (G4) | **verify 호출**: verify 스킬로 검증 (plan.md Verification + SC 기반). `verify_mode` 전달 |
 | 9 (G4) | **커밋**: Conventional Commits (verify 완료 후 + 대규모 시 중간 커밋) |
 | 10 | verify → **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion, issue_type=improvement, intensity=deep, payload={구현 결과 요약, 설계 이탈, 미해결 이슈} → **issue-close 자동 호출** |
 

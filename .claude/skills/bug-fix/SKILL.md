@@ -19,6 +19,7 @@ bug type Issue의 수정 프로세스를 오케스트레이션한다. dev-pipeli
 | Linear ID | `PRJ-N` — 대상 Issue 식별자 |
 | Linear Issue 정보 | description (Summary, Success Criteria) — `linear_payload` 전달 시 해당 정보 사용 (Linear MCP 조회 스킵). 미전달 시 Linear MCP로 직접 조회 |
 | Intensity | `Light` 또는 `Deep` — dev-pipeline에서 결정됨 |
+| verify_mode | `auto` / `manual` — dev-pipeline에서 선택하여 전달. verify 호출 시 그대로 전달 |
 
 ## Intensity 기반 프로세스 분기
 
@@ -63,7 +64,7 @@ Intensity는 dev-pipeline에서 이미 선택된다. 이 스킬에서 AskUserQue
 | 4 (G3) | **Linear comment 기록**: `linear-comment-writer` 에이전트를 호출하여 조사 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=investigation, issue_type=bug, intensity={light/deep}, payload={root_cause, reproduction(Deep), impact_scope(Deep), fix_plan(Deep)} |
 | 5 (G4) | **코드 수정**: intensity별 에이전트 체인으로 수정 구현 |
 | 6 (G4) | **빌드 확인**: 린트 + 타입체크 + 테스트 통과 |
-| 7 (G4) | **verify 자동 호출**: verify 스킬로 Success Criteria 검증 |
+| 7 (G4) | **verify 호출**: verify 스킬로 Success Criteria 검증. `verify_mode` 전달 |
 | 8 (G4) | verify PASS 시 **커밋**: `fix: ...` (Conventional Commits) |
 | 9 (G3) | verify PASS 시: **Linear State → In Review** + `linear-comment-writer` 에이전트를 호출하여 완료 코멘트를 작성하라. Input: linear_id={LINEAR-ID}, comment_type=completion-light (Light) 또는 completion-deep (Deep), issue_type=bug, intensity={light/deep}, payload={수정 요약, Root Cause(Deep)} |
 | 10 | **In Review → Done**: 사용자 직접 확인 → 승인 시 **issue-close 자동 호출** |

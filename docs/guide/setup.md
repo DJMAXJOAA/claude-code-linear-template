@@ -46,7 +46,7 @@ Team Settings → **Workflow** 에서 아래 6개 상태를 구성한다.
 | `Backlog` | `backlog` | 미정리/아이디어 |
 | `Todo` | `unstarted` | 등록 완료, 우선순위 확정 |
 | `Planning` | `started` | 설계/계획 단계 |
-| `In Progress` | `started` | 구현 진행 중 + auto-verify |
+| `In Progress` | `started` | 구현 진행 중 + verify (auto/manual) |
 | `In Review` | `started` | 사용자 직접 확인 |
 | `Done` | `completed` | 완료 |
 

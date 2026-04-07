@@ -30,7 +30,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | Backlog | `backlog` | 미정리/아이디어 |
 | Todo | `unstarted` | 등록 완료, 우선순위 확정 |
 | Planning | `started` | pre-plan + plan — intensity에 따라 Light(planner), Standard(ralplan), Deep(ralplan --deliberate) |
-| In Progress | `started` | implement + auto-verify |
+| In Progress | `started` | implement + verify (auto/manual) |
 | In Review | `started` | 사용자 직접 확인 |
 | Done | `completed` | 완료 |
 | Canceled / (Duplicate) | `canceled` | 취소/중복 |
@@ -47,7 +47,7 @@ description: 파이프라인 규칙 — type별 워크플로우, 게이트, Micr
 | 스킵 자동화 | type에 `—`인 상태는 dev-pipeline이 자동으로 다음 상태로 건너뜀 |
 | 전이 시 행동 | 모든 상태 전이는 §4 Linear sync 프로토콜을 경유 |
 | 전이 트리거 | 스킬 완료 시 자동 전이. 사용자가 수동 전이하지 않음 |
-| auto-verify | In Progress 완료 후 verify 스킬 자동 호출. 별도 상태 없음 |
+| verify | In Progress 완료 후 verify 스킬 호출. `verify_mode`에 따라 자동 실행(auto) 또는 검증 계획 확인 후 실행(manual). 별도 상태 없음 |
 | In Review 전이 | verify PASS 후 호출 스킬(implement/dev-pipeline)이 In Review로 전이. `pending_manual_review` 항목 존재 시 In Review에서 사용자가 수동 확인 수행 |
 | 사용자 점검 게이트 | In Review에서 사용자가 수동 확인 수행. 승인 시 triage → issue-close. 문제 발견 시 triage로 분류 후 rework 또는 새 Issue 등록 |
 
