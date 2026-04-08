@@ -1,3 +1,9 @@
+---
+name: spec-reference-template
+description: "spec Reference 보고서 템플릿. G2 조사 보고서 — docs/spec/{name}/references/ 하위 저장."
+type: template
+---
+
 # spec-reference-template.md — Reference 보고서 템플릿
 
 spec G2 조사에서 보고서 수준의 결과가 생성될 때 사용하는 템플릿.

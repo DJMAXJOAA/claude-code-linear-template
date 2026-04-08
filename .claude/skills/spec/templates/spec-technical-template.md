@@ -1,3 +1,9 @@
+---
+name: spec-technical-template
+description: "spec technical.md 템플릿. 계약 수준(contract-level) 기술 설계 — 시그니처 + 역할 수준."
+type: template
+---
+
 # spec `technical.md` 템플릿
 
 계약 수준(contract-level) 기술 설계. 시그니처 + 역할 수준만 기술하며, 내부 로직/알고리즘 상세는 각 Issue plan.md에서 확정한다.

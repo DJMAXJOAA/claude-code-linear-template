@@ -1,3 +1,9 @@
+---
+name: spec-roadmap-template
+description: "spec roadmap.md 템플릿 (선택). Feature→Issue 분할 전략 문서 — 2개 이상 Issue 분할 시만 생성."
+type: template
+---
+
 # spec `roadmap.md` 템플릿 (선택)
 
 Feature를 Issue로 분할하는 전략 문서. **2개 이상 Issue로 분할이 예상되는 기능에만 생성**한다. 단일 Issue로 충분한 기능이면 이 문서를 생성하지 않는다.

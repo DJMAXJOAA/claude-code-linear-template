@@ -1,3 +1,9 @@
+---
+name: spec-template
+description: "spec 문서 공통 규칙 SSOT. 개별 템플릿이 참조하는 최상위 규칙 정의."
+type: template
+---
+
 # spec 문서 템플릿 — 공통 규칙 (SSOT)
 
 이 파일이 spec 문서의 **공통 규칙 SSOT**이다. 개별 문서 템플릿은 별도 파일로 분리되어 있다.

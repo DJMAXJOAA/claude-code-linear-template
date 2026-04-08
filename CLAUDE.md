@@ -44,8 +44,8 @@
 
 | 문서 | 경로 | 설명 |
 |------|------|------|
-| 프레임워크 가이드 | [.claude/templates/framework.md](.claude/templates/framework.md) | 핵심 원칙, 3영역 SSOT |
-| 컨텍스트 관리 | [.claude/templates/context.md](.claude/templates/context.md) | Progressive Disclosure, 토큰 관리 |
+| 프레임워크 가이드 | [docs/guide/framework.md](docs/guide/framework.md) | 핵심 원칙, 3영역 SSOT |
+| 컨텍스트 관리 | [docs/guide/context.md](docs/guide/context.md) | Progressive Disclosure, 토큰 관리 |
 | Agent Writing Guide | [.claude/templates/agent-writing-guide.md](.claude/templates/agent-writing-guide.md) | 에이전트 작성 가이드 |
 | Skill Writing Guide | [.claude/templates/skill-writing-guide.md](.claude/templates/skill-writing-guide.md) | 스킬 작성 가이드 |
 | *(프로젝트별 추가)* | *(경로)* | *(설명)* |
@@ -74,7 +74,7 @@
 - **50% 규칙**: 컨텍스트 50% 이상 소모 시 /clear 고려
 - **Pre-Compaction**: 압축 전 진행 상태를 progress.txt + Linear에 저장
 - **Linear 컨텍스트**: `/활성화` 시 Linear 1회 조회 후 세션 내 캐싱. 매 태스크마다 재조회 금지
-- 상세: [docs/guides/context.md](docs/guides/context.md)
+- 상세: [docs/guide/context.md](docs/guide/context.md)
 
 ## Framework: Commands
 
@@ -86,7 +86,7 @@
 
 **3영역 SSOT**: Linear(상태) · Git(지식) · Claude Code(실행). 교차 복제 금지.
 - MCP 도구 호출 패턴은 각 스킬의 `## Linear MCP` 섹션 참조
-- 상세: [docs/guides/framework.md](docs/guides/framework.md)
+- 상세: [docs/guide/framework.md](docs/guide/framework.md)
 
 ## Framework: ID System
 

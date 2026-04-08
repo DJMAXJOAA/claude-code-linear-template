@@ -1,3 +1,9 @@
+---
+name: spec-requirements-template
+description: "spec requirements.md 템플릿. EARS 형식 기능적 요구사항 명세 — What/Why만 기술."
+type: template
+---
+
 # spec `requirements.md` 템플릿
 
 기능적 요구사항 명세. What/Why만 기술하며, How(구현)는 금지한다.

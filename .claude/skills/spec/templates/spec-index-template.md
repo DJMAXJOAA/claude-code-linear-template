@@ -1,3 +1,9 @@
+---
+name: spec-index-template
+description: "spec overview.md 템플릿. spec 디렉토리 진입점 — Overview, Out of Scope, 문서 목록, 관련 이슈, 변경 이력."
+type: template
+---
+
 # spec `overview.md` 템플릿
 
 spec 디렉토리의 진입점. Overview, Out of Scope, 문서 목록, 관련 이슈, 변경 이력을 포함한다.
