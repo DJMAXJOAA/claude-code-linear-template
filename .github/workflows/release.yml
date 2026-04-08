@@ -26,9 +26,9 @@ jobs:
             "README.md"
             ".claude/rules/pipeline.md"
             ".claude/rules/docs-writing.md"
-            ".claude/templates/framework.md"
-            ".claude/templates/context.md"
-            ".claude/templates/setup.md"
+            "docs/guide/framework.md"
+            "docs/guide/context.md"
+            "docs/guide/setup.md"
           )
           for f in "${REQUIRED_FILES[@]}"; do
             test -f "$f" || { echo "FAIL: $f not found"; FAIL=1; }
